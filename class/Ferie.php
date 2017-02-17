@@ -8,9 +8,10 @@
  */
 class Ferie
 {
-    private $idFerie;
-    private $typeFerie;
-    private $dateFerie;
+
+    private $nomFerie;
+    private $dateDebFerie;
+    private $dateFinFerie;
 
     /**
      * Ferie constructor.
@@ -22,50 +23,51 @@ class Ferie
     /**
      * @return mixed
      */
-    public function getIdFerie()
+    public function getNomFerie()
     {
-        return $this->idFerie;
+        return $this->nomFerie;
     }
 
     /**
-     * @param mixed $idFerie
+     * @param mixed $nomFerie
      */
-    public function setIdFerie($idFerie)
+    public function setNomFerie($nomFerie)
     {
-        $this->idFerie = $idFerie;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTypeFerie()
-    {
-        return $this->typeFerie;
-    }
-
-    /**
-     * @param mixed $typeFerie
-     */
-    public function setTypeFerie($typeFerie)
-    {
-        $this->typeFerie = $typeFerie;
+        $this->nomFerie = $nomFerie;
     }
 
     /**
      * @return mixed
      */
-    public function getDateFerie()
+    public function getDateDebutFerie()
     {
-        return $this->dateFerie;
+        return $this->dateDebFerie;
     }
 
     /**
-     * @param mixed $dateFerie
+     * @param mixed $dateDebutFerie
      */
-    public function setDateFerie($dateFerie)
+    public function setDateDebutFerie($dateDebutFerie)
     {
-        $this->dateFerie = $dateFerie;
+        $this->dateDebFerie = $dateDebutFerie;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDateFinFerie()
+    {
+        return $this->dateFinFerie;
+    }
+
+    /**
+     * @param mixed $dateFinFerie
+     */
+    public function setDateFinFerie($dateFinFerie)
+    {
+        $this->dateFinFerie = $dateFinFerie;
+    }
+
 
 
 }

@@ -8,8 +8,7 @@
  */
 class Vacances
 {
-    private $idVac;
-    private $typeVac;
+    private $nomVac;
     private $dateDebVac;
     private $dateFinVac;
 
@@ -23,35 +22,19 @@ class Vacances
     /**
      * @return mixed
      */
-    public function getIdVac()
+    public function getNomVac()
     {
-        return $this->idVac;
+        return $this->nomVac;
     }
 
     /**
-     * @param mixed $idVac
+     * @param mixed $nomVac
      */
-    public function setIdVac($idVac)
+    public function setNomVac($nomVac)
     {
-        $this->idVac = $idVac;
+        $this->nomVac = $nomVac;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getTypeVac()
-    {
-        return $this->typeVac;
-    }
-
-    /**
-     * @param mixed $typeVac
-     */
-    public function setTypeVac($typeVac)
-    {
-        $this->typeVac = $typeVac;
-    }
-
+    
     /**
      * @return mixed
      */
