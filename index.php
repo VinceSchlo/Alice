@@ -2,7 +2,6 @@
 
 session_start(); // Utilisation des variables $_SESSION
 
-require_once('include/alice_dao.inc.php');
 require_once('class/Agent.php');
 require_once('class/PlanStd.php');
 require_once('include/alice_fonctions.php');
@@ -23,7 +22,6 @@ $t = 10;
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap/css/test.css" rel="stylesheet">
     <link href="css/alice.css" rel="stylesheet">
     <title>ALICE</title>
 </head>

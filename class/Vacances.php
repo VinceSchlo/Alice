@@ -1,5 +1,5 @@
 <?php
-
+require_once ('../include/alice_dao.inc.php');
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -67,5 +67,20 @@ class Vacances
         $this->dateFinVac = $dateFinVac;
     }
 
+    function selectVacances() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL 
+        $sql = "SELECT * FROM vacances";
+        $resu = $dao->executeRequete($sql);
+        return $resu->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function updateVacances() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        $sql = "UPDATE vacances SET dateDebVac='$this->dateDebVac', dateFinVac='$this->dateFinVac' WHERE nomVacances='$this->nomVacances'";
+        $resu = $dao->executeRequete($sql);
+    }
 
 }
