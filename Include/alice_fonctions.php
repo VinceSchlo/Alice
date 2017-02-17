@@ -72,6 +72,23 @@ function convertDateUsFr($uneDate) {
     return $uneDate;
 }
 
+// Fonction pour retourner la date exacte des jours du dimanche au samedi en fonction de la semaine et de l'année
+function datesJourSemaine($week, $year)
+{
+	$tabDatesJoursSemaines = array();
+	$firstDayInYear=date("N",mktime(0,0,0,1,1,$year));
+	if ($firstDayInYear<5)
+		$shift=-($firstDayInYear-1)*86400;
+	else
+		$shift=(8-$firstDayInYear)*86400;
+	if ($week>1) $weekInSeconds=($week-1)*604800; else $weekInSeconds=0;
+	for ($i=0; $i<=6; $i++) {
+		$timestamp = mktime(0,0,0,1,$i,$year)+$weekInSeconds+$shift;
+		$tabDatesJoursSemaines[$i] = date("Y-m-d",$timestamp);
+	}
+	
+    return $tabDatesJoursSemaines;
+}
 
 function lireDonnee($nomDonnee, $valDefaut = "") {
     if (isset($_GET[$nomDonnee])) {

@@ -1,0 +1,37 @@
+.logo
+{
+    float:left;
+    height:15%;
+    width:15%;
+    padding:0px;
+}
+
+
+h2, h3, h4, p
+{
+    text-align: center;
+}
+
+.leftArrow {
+background:url(../images/back.png);
+border:none;
+width: 64px; /* largeur à spécifier */
+height: 64px; /* longueur à spécifier */
+cursor: pointer;
+}
+
+.rightArrow {
+background:url(../images/next.png);
+border:none;
+width: 64px; /* largeur à spécifier */
+height: 64px; /* longueur à spécifier */
+cursor: pointer;
+}
+
+.house {
+background:url(../images/house.png);
+border:none;
+width: 64px; /* largeur à spécifier */
+height: 64px; /* longueur à spécifier */
+cursor: pointer;
+}
