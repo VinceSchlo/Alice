@@ -105,7 +105,7 @@ class PlanStd
     {
         $dao = new Dao();
 
-        $sql = "SELECT a.idAgent, prenom, idJour, libPoste, poste.idPoste, g.coulGroupe
+        $sql = "SELECT a.idAgent, prenom, idJour, libPoste, poste.idPoste, g.coulGroupe, plan.horaireDeb, plan.horaireFin
                 FROM agent as a
                 JOIN planstd as plan
                 JOIN poste as poste
