@@ -6,66 +6,60 @@
  * Date: 15/02/2017
  * Time: 16:05
  */
-class Ferie
-{
-    private $idFerie;
-    private $typeFerie;
-    private $dateFerie;
+class Ferie {
+
+    private $nomFerie;
+    private $dateDebFerie;
+    private $dateFinFerie;
 
     /**
      * Ferie constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
+ 
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIdFerie()
-    {
-        return $this->idFerie;
+    // Génération des Getters
+    function getNomFerie() {
+        return $this->nomFerie;
     }
 
-    /**
-     * @param mixed $idFerie
-     */
-    public function setIdFerie($idFerie)
-    {
-        $this->idFerie = $idFerie;
+    function getDateDebFerie() {
+        return $this->dateDebFerie;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTypeFerie()
-    {
-        return $this->typeFerie;
+    function getDateFinFerie() {
+        return $this->dateFinFerie;
     }
 
-    /**
-     * @param mixed $typeFerie
-     */
-    public function setTypeFerie($typeFerie)
-    {
-        $this->typeFerie = $typeFerie;
+    // Génération des Setters
+    function setNomFerie($nomFerie) {
+        $this->nomFerie = $nomFerie;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDateFerie()
-    {
-        return $this->dateFerie;
+    function setDateDebFerie($dateDebFerie) {
+        $this->dateDebFerie = $dateDebFerie;
     }
 
-    /**
-     * @param mixed $dateFerie
-     */
-    public function setDateFerie($dateFerie)
-    {
-        $this->dateFerie = $dateFerie;
+    function setDateFinFerie($dateFinFerie) {
+        $this->dateFinFerie = $dateFinFerie;
     }
 
+    
+    function selectFerie() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL 
+        $sql = "SELECT * FROM ferie ORDER BY 2";
+        $resu = $dao->executeRequete($sql);
+        return $resu->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function updateFerie() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        $sql = "UPDATE ferie SET dateDebFerie='$this->dateDebFerie', dateFinFerie='$this->dateFinFerie' WHERE nomFerie='$this->nomFerie'";
+        $resu = $dao->executeRequete($sql);
+    }
 
 }
