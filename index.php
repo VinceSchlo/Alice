@@ -3,15 +3,74 @@
 session_start(); // Utilisation des variables $_SESSION
 
 require_once('include/alice_dao.inc.php');
+require_once('include/alice_fonctions.php');
 require_once('class/Agent.php');
 require_once('class/PlanStd.php');
-require_once('include/alice_fonctions.php');
+require_once('class/PlanReel.php');
 
 $plan = new PlanStd();
 $user = $plan->selectUser();
 $poste = $plan->selectPlanStd();
-$j = 0;
+$compte = 0;
 $t = 10;
+
+if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
+    $_SESSION['weekNumber'] = date("W");
+    $_SESSION['year'] = date("Y");
+}
+
+
+if (isset($_POST['precedente'])) {
+    $_SESSION['weekNumber']--;
+    if ($_SESSION['weekNumber'] < 1) {
+        $_SESSION['weekNumber'] = 52;
+        $_SESSION['year']--;
+    }
+}
+if (isset($_POST['home'])) {
+    $_SESSION['weekNumber'] = date("W");
+}
+if (isset($_POST['suivante'])) {
+    $_SESSION['weekNumber']++;
+    if ($_SESSION['weekNumber'] > 52) {
+        $_SESSION['weekNumber'] = 1;
+        $_SESSION['year']++;
+    }
+}
+
+// Tableau des dates réelles du dimanche au samedi au format américain
+$tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
+
+// Selection des plannings réél de la semaine
+$oPlanReel = new PlanReel();
+$planReel = $oPlanReel->selectReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
+//var_dump($poste);
+//var_dump($planReel);
+
+if(isset($planReel)){
+    for ($i = 0; $i < count($planReel); $i++) {
+        $planReel[$i]['dateReel'] = array_search($planReel[$i]['dateReel'], $tabDatesJoursSemaines);
+    }
+//    var_dump($planReel);
+    for($j = 0; $j<count($poste) ; $j++){
+        for($k = 0 ; $k<count($planReel) ; $k++){
+            if($poste[$j]['idAgent'] == $planReel[$k]['idAgent']
+                && $poste[$j]['idJour'] == $planReel[$k]['dateReel']
+                && $poste[$j]['horaireDeb'] == $planReel[$k]['horaireDeb']
+                && $poste[$j]['horaireFin'] == $planReel[$k]['horaireFin']){
+//                var_dump($poste[$j]);
+
+                    $poste[$j]['libPoste'] = $planReel[$k]['libPoste'];
+                    $poste[$j]['idPoste'] = $planReel[$k]['idPoste'];
+                    $poste[$j]['coulGroupe'] = $planReel[$k]['coulGroupe'];
+//                var_dump($poste[$j]);
+                $k = count($planReel);
+            }
+        }
+    }
+}
+//var_dump($poste);
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +82,6 @@ $t = 10;
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap/css/test.css" rel="stylesheet">
     <link href="css/alice.css" rel="stylesheet">
     <title>ALICE</title>
 </head>
@@ -32,34 +90,6 @@ $t = 10;
     <div>
         <img class="logo" src="images/logo_sna_quadri.png"/>
     </div>
-
-    <?php
-
-
-    if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
-        $_SESSION['weekNumber'] = date("W");
-        $_SESSION['year'] = date("Y");
-    }
-
-
-    if (isset($_POST['precedente'])) {
-        $_SESSION['weekNumber']--;
-        if ($_SESSION['weekNumber'] < 1) {
-            $_SESSION['weekNumber'] = 52;
-            $_SESSION['year']--;
-        }
-    }
-    if (isset($_POST['home'])) {
-        $_SESSION['weekNumber'] = date("W");
-    }
-    if (isset($_POST['suivante'])) {
-        $_SESSION['weekNumber']++;
-        if ($_SESSION['weekNumber'] > 52) {
-            $_SESSION['weekNumber'] = 1;
-            $_SESSION['year']++;
-        }
-    }
-    ?>
     <table>
         <tr>
             <td>
@@ -82,8 +112,6 @@ $t = 10;
 
     <h2>
         <?php
-        // Tableau des dates réelles du dimanche au samedi au format américain
-        $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
         // var_dump($tabDatesJoursSemaines);
         echo "Semaine n°" . $_SESSION['weekNumber'];
         echo "<br />";
@@ -94,7 +122,7 @@ $t = 10;
 </div>
 <div class="container">
 
-    <div class="col-lg-2">
+    <div class="col-lg-2" >
         <table class="table table-bordered">
             <tr>
                 <th>Personnel</th>
@@ -124,11 +152,11 @@ $t = 10;
                     echo "<td style='background-color:$couleur'>";
                     echo $poste[$i]['libPoste'];
                     echo "</td>";
-                    $j++;
-                    if ($j == 13) {
+                    $compte++;
+                    if ($compte == 13) {
                         echo "</tr>";
                         echo "<tr>";
-                        $j = 0;
+                        $compte = 0;
                     }
                 } ?>
             </tr>
