@@ -9,7 +9,6 @@
 class Horaire
 {
     private $idHoraire;
-    private $typeHoraire;
     private $LibHoraire;
 
     /**
@@ -33,22 +32,6 @@ class Horaire
     public function setIdHoraire($idHoraire)
     {
         $this->idHoraire = $idHoraire;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTypeHoraire()
-    {
-        return $this->typeHoraire;
-    }
-
-    /**
-     * @param mixed $typeHoraire
-     */
-    public function setTypeHoraire($typeHoraire)
-    {
-        $this->typeHoraire = $typeHoraire;
     }
 
     /**

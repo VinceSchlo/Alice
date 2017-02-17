@@ -34,7 +34,7 @@ function detecTiret($uneChaine) {
             $uneChaine[$i + 1] = ucfirst($uneChaine[$i + 1]);
         }
     }
-    return $uneChaine;
+   return $uneChaine;
 }
 
 // Fonction pour fabriquer un login avec les premières lettres du prénom + le nom,

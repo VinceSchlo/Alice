@@ -5,8 +5,8 @@ class Database {
     //attributs private
     private $serveur = "localhost";
     private $nomBdd = "alice";
-    /*private $username = " ";
-    private $password = " ";*/
+    private $username = "root";
+    private $password = "";
     private $dbh = null;
 
     //Méthode connect 

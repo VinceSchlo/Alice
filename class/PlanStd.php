@@ -101,5 +101,39 @@ class PlanStd
         $this->idPoste = $idPoste;
     }
 
+    public function selectPlanStd()
+    {
+        $dao = new Dao();
 
+        $sql = "SELECT a.idAgent, prenom, idJour, libPoste, poste.idPoste, g.coulGroupe
+                FROM agent as a
+                JOIN planstd as plan
+                JOIN poste as poste
+                JOIN groupe as g
+                ON a.idAgent = plan.idAgent
+                AND plan.idPoste = poste.idPoste
+                AND g.idGroupe = poste.idGroupe
+                ORDER BY a.idAgent, plan.idJour, plan.horaireDeb";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+    }
+
+    public function selectUser(){
+        $dao = new Dao();
+
+        $sql = "SELECT prenom 
+                FROM agent as a
+                ORDER BY idAgent ASC";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+
+    }
 }
