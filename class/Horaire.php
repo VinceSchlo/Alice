@@ -1,5 +1,4 @@
 <?php
-require_once ('../include/alice_dao.inc.php');
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -50,5 +49,16 @@ class Horaire
         $this->LibHoraire = $LibHoraire;
     }
 
+    public function selectHoraire(){
+        $dao = new Dao();
+
+        $sql = "SELECT * FROM horaire";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+    }
 
 }
