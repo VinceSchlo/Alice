@@ -76,7 +76,7 @@ require_once('../include/alice_fonctions.php');
             <br />
 
             <?php for ($i = 0; $i < count($tabVacances); $i++) { ?>
-                <form class="form-horizontal" method="POST" action="vacancesJF.php">
+                <form class="form-horizontal" method="POST" action="mod_VacancesJF.php">
                     <tr>
                     <input type="hidden" name="idVacForm<?php echo $i; ?>" value="<?php echo $tabVacances[$i]['idVac']; ?>">
                     <td>

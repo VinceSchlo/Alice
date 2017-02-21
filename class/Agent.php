@@ -1,4 +1,5 @@
 <?php
+require_once ('../include/alice_dao.inc.php');
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -13,7 +14,7 @@ class Agent
     private $login;
     private $mdp;
     private $statut;
-    private $idBibilo;
+    private $idBiblio;
 
     /**
      * Agent constructor.
@@ -122,18 +123,41 @@ class Agent
     /**
      * @return mixed
      */
-    public function getIdBibilo()
+    public function getIdBiblio()
     {
-        return $this->idBibilo;
+        return $this->idBiblio;
     }
 
     /**
-     * @param mixed $idBibilo
+     * @param mixed $idBiblio
      */
-    public function setIdBibilo($idBibilo)
+    public function setIdBiblio($idBiblio)
     {
-        $this->idBibilo = $idBibilo;
+        $this->idBiblio = $idBiblio;
     }
     
+    function selectAllAgent() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL 
+        $sql = "SELECT * FROM agent ORDER BY 1";
+        $resu = $dao->executeRequete($sql);
+        return $resu->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function updateAgent() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL
+        $sql = "UPDATE agent SET nom='$this->nom', prenom='$this->prenom', login='$this->login', mdp='$this->mdp', statut='$this->statut' WHERE idAgent='$this->idAgent'";
+        $resu = $dao->executeRequete($sql);
+    }
     
+    function deleteAgent() {
+         // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL
+        $sql = "delete from agent WHERE idAgent='$this->idAgent'";
+        $dao->executeRequete($sql);
+    }
 }

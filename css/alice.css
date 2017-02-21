@@ -12,9 +12,27 @@ h2, h3, h4, p
     text-align: center;
 }
 
+
 .thCentre
 {
     text-align: center;
+}
+
+.checkBox
+{
+    padding: 10px 10px 10px 10px;
+    text-align:center;
+   
+}
+
+.croixRouge {
+background:url(../images/Supprimer24x24.png);
+border:none;
+width: 24px; /* largeur à spécifier */
+height: 24px; /* longueur à spécifier */
+display: block;
+margin: auto;
+cursor: pointer;
 }
 
 .leftArrow {

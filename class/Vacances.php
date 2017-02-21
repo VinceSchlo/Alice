@@ -96,6 +96,7 @@ class Vacances
     function updateVacances() {
         // Connexion à la base de données
         $dao = new Dao();
+        //Requête SQL
         $sql = "UPDATE vacances SET dateDebVac='$this->dateDebVac', dateFinVac='$this->dateFinVac' WHERE idVac='$this->idVac'";
         $resu = $dao->executeRequete($sql);
     }

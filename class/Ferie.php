@@ -1,4 +1,5 @@
 <?php
+require_once ('../include/alice_dao.inc.php');
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -67,6 +68,7 @@ class Ferie {
     function updateFerie() {
         // Connexion à la base de données
         $dao = new Dao();
+        //Requête SQL
         $sql = "UPDATE ferie SET dateDebFerie='$this->dateDebFerie', dateFinFerie='$this->dateFinFerie' WHERE idFerie='$this->idFerie'";
         $resu = $dao->executeRequete($sql);
     }
