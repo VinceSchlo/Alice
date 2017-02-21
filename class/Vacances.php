@@ -8,6 +8,7 @@ require_once ('../include/alice_dao.inc.php');
  */
 class Vacances
 {
+    private $idVac;
     private $nomVac;
     private $dateDebVac;
     private $dateFinVac;
@@ -19,6 +20,22 @@ class Vacances
     {
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIdVac()
+    {
+        return $this->idVac;
+    }
+
+    /**
+     * @param mixed $idVac
+     */
+    public function setIdVac($idVac)
+    {
+        $this->idVac = $idVac;
+    }
+    
     /**
      * @return mixed
      */
@@ -79,7 +96,7 @@ class Vacances
     function updateVacances() {
         // Connexion à la base de données
         $dao = new Dao();
-        $sql = "UPDATE vacances SET dateDebVac='$this->dateDebVac', dateFinVac='$this->dateFinVac' WHERE nomVacances='$this->nomVacances'";
+        $sql = "UPDATE vacances SET dateDebVac='$this->dateDebVac', dateFinVac='$this->dateFinVac' WHERE idVac='$this->idVac'";
         $resu = $dao->executeRequete($sql);
     }
 

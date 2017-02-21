@@ -8,6 +8,7 @@ require_once ('../include/alice_dao.inc.php');
  */
 class Ferie {
 
+    private $idFerie;
     private $nomFerie;
     private $dateDebFerie;
     private $dateFinFerie;
@@ -20,6 +21,11 @@ class Ferie {
     }
 
     // Génération des Getters
+    
+    function getIdFerie() {
+        return $this->idFerie;
+    }
+    
     function getNomFerie() {
         return $this->nomFerie;
     }
@@ -33,6 +39,10 @@ class Ferie {
     }
 
     // Génération des Setters
+    function setIdFerie($idFerie) {
+        $this->idFerie = $idFerie;
+    }
+    
     function setNomFerie($nomFerie) {
         $this->nomFerie = $nomFerie;
     }
@@ -50,7 +60,7 @@ class Ferie {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL 
-        $sql = "SELECT * FROM ferie ORDER BY 2";
+        $sql = "SELECT * FROM ferie";
         $resu = $dao->executeRequete($sql);
         return $resu->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -58,7 +68,7 @@ class Ferie {
     function updateFerie() {
         // Connexion à la base de données
         $dao = new Dao();
-        $sql = "UPDATE ferie SET dateDebFerie='$this->dateDebFerie', dateFinFerie='$this->dateFinFerie' WHERE nomFerie='$this->nomFerie'";
+        $sql = "UPDATE ferie SET dateDebFerie='$this->dateDebFerie', dateFinFerie='$this->dateFinFerie' WHERE idFerie='$this->idFerie'";
         $resu = $dao->executeRequete($sql);
     }
 

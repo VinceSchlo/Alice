@@ -21,37 +21,47 @@ require_once('../include/alice_fonctions.php');
             <img class="logo" src="../images/logo_sna_quadri.png" />
         </div>
 
-
         <?php
-        if (isset($_POST['enregistrerVac'])) {
-            $vacances->setNomVac($_POST['nomVacMod']);
-            $vacances->setDateDebVac(convertDateFrUs($_POST['dateDebVacMod']));
-            $vacances->setDateFinVac(convertDateFrUs($_POST['dateFinVacMod']));
-            // On met à jour la BDD vacances
-            $vacances->updateVacances();
-        }
-        if (isset($_POST['enregistrerFerie'])) {
-            $ferie->setNomFerie($_POST['nomFerieMod']);
-            $ferie->setDateDebFerie(convertDateFrUs($_POST['dateDebFerieMod']));
-            if (isset($_POST['dateFinFerieMod'])) {
-                $ferie->setDateFinFerie(convertDateFrUs($_POST['dateFinFerieMod']));
-            }
-            // On met à jour la BDD ferie
-            $ferie->updateFerie();
-        }
-        if (isset($_POST['annuler'])) {
-            // Retour à la page d'accueil administrateur sans modification
-            // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
-        }
-
         // Création des objets jours fériés et Vacances
         $ferie = new Ferie();
         $vacances = new Vacances();
-        // Création des tableaux issus des select en BDD
+        // Création des tableaux issus des select en BDD pour l'affichage
         $tabFerie = $ferie->selectFerie();
         $tabVacances = $vacances->selectVacances();
-        // var_dump($tabFerie);
-        // var_dump($tabVacances);
+        /* var_dump($tabFerie);
+          var_dump($tabVacances);
+          exit;
+         */
+        if (isset($_POST['updateVac'])) { // Cas du bouton orange "enregistrer"
+            // var_dump($_POST);
+            // exit;
+            for ($i = 0; $i < count($tabVacances); $i++) {
+                $vacances->setIdVac($_POST['idVacForm' . $i]);
+                $vacances->setDateDebVac(convertDateFrUs($_POST['dateDebForm' . $i]));
+                $vacances->setDateFinVac(convertDateFrUs($_POST['dateFinForm' . $i]));
+                // On met à jour la BDD vacances
+                $vacances->updateVacances();
+                // On rafraîchit le select pour afficher les mdifs faites en BDD
+                $tabVacances = $vacances->selectVacances();
+            }
+        }
+        if (isset($_POST['updateFerie'])) { // Cas du bouton orange "enregistrer"
+            var_dump($_POST);
+            exit;
+            for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
+                $ferie->setIdFerie($_POST['idFerieForm' . $i]);
+                $ferie->setDateDebFerie(convertDateFrUs($_POST['dateDebForm' . $i]));
+                $ferie->setDateFinFerie(convertDateFrUs($_POST['dateFinForm']));
+                // On met à jour la BDD ferie
+                $ferie->updateFerie();
+                // On rafraîchit le select pour afficher les mdifs faites en BDD
+                $tabFerie = $ferie->selectFerie();
+            }
+        }
+        if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
+            // Retour à la page d'accueil administrateur sans modification
+            // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
+        }
         ?>
         <!-- Affichage du titre de la page -->
         <h2>Modification des dates des vacances scolaires et des jours fériés</h2>
@@ -65,26 +75,25 @@ require_once('../include/alice_fonctions.php');
             </tr>
             <br />
 
-            <?php foreach ($tabVacances as $cle => $valeur) { ?>
+            <?php for ($i = 0; $i < count($tabVacances); $i++) { ?>
                 <form class="form-horizontal" method="POST" action="vacancesJF.php">
                     <tr>
-                        <td>
-                            <input disabled type="text" name="nomVacMod" value="<?php echo $tabVacances[$cle]['nomVac']; ?>">
-                        </td>
-                        <td> 
-                            <input type="text" name="dateDebVacMod" value="<?php echo convertDateUsFr($tabVacances[$cle]['dateDebVac']); ?>">
-                        </td>
-                        <td> 
-                            <input type="text" name="dateFinVacMod" value="<?php echo convertDateUsFr($tabVacances[$cle]['dateFinVac']); ?>">
-                        </td>
-                        <td>
-                            <!-- Affichage de 2 boutons -->
-                            <button type="submit" name="annuler" class="btn btn-success">Annuler</button>
-                            <button type="submit" name="enregistrerVac" class="btn btn-warning">Enregistrer</button>
-                        </td>
+                    <input type="hidden" name="idVacForm<?php echo $i; ?>" value="<?php echo $tabVacances[$i]['idVac']; ?>">
+                    <td>
+                        <input disabled type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabVacances[$i]['nomVac']; ?>">
+                    </td>
+                    <td> 
+                        <input type="text" name="dateDebForm<?php echo $i; ?>" value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>">
+                    </td>
+                    <td> 
+                        <input type="text" name="dateFinForm<?php echo $i; ?>" value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>">
+                    </td>
                     </tr>
-                </form>
-            <?php } ?>
+                <?php } ?>
+                <!-- Affichage de 2 boutons -->
+                <button type="submit" name="annuler" class="btn btn-success">Annuler</button>
+                <button type="submit" name="updateVac" class="btn btn-warning">Enregistrer</button>
+            </form>
         </table>
         <hr />
 
@@ -97,21 +106,38 @@ require_once('../include/alice_fonctions.php');
             </tr>
             <br />
 
-            <?php foreach ($tabFerie as $cle => $valeur) { ?>
+            <?php
+            $j = 0;
+            for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
+                ?>
                 <form class="form-horizontal" method="POST" action="vacancesJF.php">
                     <tr>
-                        <td>
-                            <input disabled type="text" name="nomVacMod" value="<?php echo $tabFerie[$cle]['nomFerie']; ?>">
-                        </td>
-                        <td> 
-                            <input type="text" name="dateDebVacMod" value="<?php echo convertDateUsFr($tabFerie[$cle]['dateDebFerie']); ?>">
-                        </td>
-                        <td> 
-                            <input type="text" name="dateFinVacMod" value="<?php echo convertDateUsFr($tabFerie[$cle]['dateFinFerie']); ?>">
-                        </td>
+                    <input type="hidden" name="idFerieForm<?php echo $i; ?>" value="<?php echo $tabFerie[$j]['idFerie']; ?>">
+                    <td>
+                        <input disabled type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabFerie[$j]['nomFerie']; ?>">
+                    </td>
+                    <td> 
+                        <input type="text" name="dateDebForm<?php echo $i; ?>" value="<?php echo convertDateUsFr($tabFerie[$j]['dateDebFerie']); ?>">
+                    </td>
+                    <td> 
+                        <input type="text" name="dateFinForm<?php echo $i; ?>" value="<?php
+            if (empty($tabFerie[$j]['dateFinFerie'])) {
+                echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
+            } else {
+                echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
+            }
+                ?>">
+
+                    </td>
                     </tr>
-                </form>
-            <?php } ?>
+                    <?php
+                    $j++;
+                }
+                ?>
+                <!-- Affichage de 2 boutons -->
+                <button type="submit" name="annuler" class="btn btn-success">Annuler</button>
+                <button type="submit" name="updateFerie" class="btn btn-warning">Enregistrer</button>
+            </form>
         </table>
 
     </body>
