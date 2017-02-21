@@ -1,5 +1,4 @@
 <?php
-require_once ('../include/alice_dao.inc.php');
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -56,7 +55,7 @@ class Ferie {
     }
 
     
-    function selectFerie() {
+    function selectAllFerie() {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL 
@@ -71,5 +70,17 @@ class Ferie {
         $sql = "UPDATE ferie SET dateDebFerie='$this->dateDebFerie', dateFinFerie='$this->dateFinFerie' WHERE idFerie='$this->idFerie'";
         $resu = $dao->executeRequete($sql);
     }
+
+    public function selectFerie($debutSemaine, $finSemaine){
+        $dao = new Dao();
+
+        $sql = "SELECT * FROM ferie WHERE dateDebFerie BETWEEN '$debutSemaine' AND '$finSemaine'";
+
+        $resu = $dao->executeRequete($sql);
+
+        return $resu->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 
 }
