@@ -84,7 +84,7 @@ class Vacances
         $this->dateFinVac = $dateFinVac;
     }
 
-    function selectVacances() {
+    function selectAllVacances() {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL 

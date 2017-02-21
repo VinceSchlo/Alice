@@ -26,8 +26,8 @@ require_once('../include/alice_fonctions.php');
         $ferie = new Ferie();
         $vacances = new Vacances();
         // Création des tableaux issus des select en BDD pour l'affichage
-        $tabFerie = $ferie->selectFerie();
-        $tabVacances = $vacances->selectVacances();
+        $tabFerie = $ferie->selectAllFerie();
+        $tabVacances = $vacances->selectAllVacances();
         /* var_dump($tabFerie);
           var_dump($tabVacances);
           exit;
@@ -42,20 +42,20 @@ require_once('../include/alice_fonctions.php');
                 // On met à jour la BDD vacances
                 $vacances->updateVacances();
                 // On rafraîchit le select pour afficher les mdifs faites en BDD
-                $tabVacances = $vacances->selectVacances();
+                $tabVacances = $vacances->selectAllVacances();
             }
         }
         if (isset($_POST['updateFerie'])) { // Cas du bouton orange "enregistrer"
-            var_dump($_POST);
-            exit;
+            // var_dump($_POST);
+            // exit;
             for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
                 $ferie->setIdFerie($_POST['idFerieForm' . $i]);
                 $ferie->setDateDebFerie(convertDateFrUs($_POST['dateDebForm' . $i]));
-                $ferie->setDateFinFerie(convertDateFrUs($_POST['dateFinForm']));
+                $ferie->setDateFinFerie(convertDateFrUs($_POST['dateFinForm' . $i]));
                 // On met à jour la BDD ferie
                 $ferie->updateFerie();
                 // On rafraîchit le select pour afficher les mdifs faites en BDD
-                $tabFerie = $ferie->selectFerie();
+                $tabFerie = $ferie->selectAllFerie();
             }
         }
         if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
@@ -121,12 +121,12 @@ require_once('../include/alice_fonctions.php');
                     </td>
                     <td> 
                         <input type="text" name="dateFinForm<?php echo $i; ?>" value="<?php
-            if (empty($tabFerie[$j]['dateFinFerie'])) {
-                echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
-            } else {
-                echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
-            }
-                ?>">
+                        if (empty($tabFerie[$j]['dateFinFerie'])) {
+                            echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
+                        } else {
+                            echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
+                        }
+                        ?>">
 
                     </td>
                     </tr>
