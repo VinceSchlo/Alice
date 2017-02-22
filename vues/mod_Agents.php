@@ -1,5 +1,6 @@
 <?php
 session_start(); // Utilisation des variables $_SESSION
+header('Content-Type:text/html; charset=UTF8');
 
 require_once ('../class/agent.php');
 require_once('../include/alice_fonctions.php');
@@ -9,7 +10,7 @@ require_once('../include/alice_fonctions.php');
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="X-UA" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/alice.css" rel="stylesheet">
@@ -37,8 +38,9 @@ require_once('../include/alice_fonctions.php');
                 $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm' . $i])));
                 $agent->setLogin(addslashes(trim($_POST['loginForm' . $i])));
                 $agent->setMdp(trim($_POST['mdpForm' . $i]));
-                // Dans le cas où le statut n'existe pas : ni A, ni I
-                if (isset($_POST['statutForm' . $i])) {
+                // Dans le cas où le statut n'existe pas : ni A, ni I, 
+                // on passe par une autre variable vide pour remplir l'objet 
+                if (!isset($_POST['statutForm' . $i])) {
                     $statut = " ";
                 } else {
                     $statut = $_POST['statutForm' . $i];

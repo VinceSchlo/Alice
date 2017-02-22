@@ -140,7 +140,7 @@ class Agent
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL 
-        $sql = "SELECT * FROM agent ORDER BY 1";
+        $sql = "SELECT * FROM agent ORDER BY 2";
         $resu = $dao->executeRequete($sql);
         return $resu->fetchAll(PDO::FETCH_ASSOC);
     }
