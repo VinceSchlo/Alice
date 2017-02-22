@@ -1,19 +1,13 @@
 .logo
 {
     float:left;
-    height:10%;
-    width:10%;
+    height:90%;
+    width:90%;
     padding:0px;
 }
 
 
-h2, h3, h4, p
-{
-    text-align: center;
-}
-
-
-.thCentre
+h2, h3, h4, p, .thCentre
 {
     text-align: center;
 }
@@ -57,4 +51,43 @@ border:none;
 width: 64px; /* largeur à spécifier */
 height: 64px; /* longueur à spécifier */
 cursor: pointer;
+}
+
+.marge-two{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.color-grey{
+    background-color: rgba(116, 116, 116, 0.87);
+}
+
+.text-size{
+    font-size: 1.7em;
+}
+
+.poste-size{
+    font-size: 1.2em;
+}
+
+.name-size{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.border-black{
+    border-color: black;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+    border: 0.8px solid #000000;
+}
+
+.top-marge{
+    margin-left: 6%;
 }
