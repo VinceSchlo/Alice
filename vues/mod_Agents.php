@@ -1,7 +1,7 @@
 <?php
 session_start(); // Utilisation des variables $_SESSION
 
-require_once ('../class/agent.php');
+require_once('../class/agent.php');
 require_once('../include/alice_fonctions.php');
 require_once('../include/alice_dao.inc.php');
 
@@ -9,17 +9,19 @@ require_once('../include/alice_dao.inc.php');
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/alice.css" rel="stylesheet">
-        <title>Modification des agents</title>
-    </head>
-    <body>
-        <div>
-            <img class="logo" src="../images/logo_sna_quadri.png" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/alice.css" rel="stylesheet">
+    <title>Modification des agents</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+            <img class="logo" src="../images/logo_sna_quadri.png"/>
         </div>
 
         <?php
@@ -60,51 +62,56 @@ require_once('../include/alice_dao.inc.php');
         ?>
         <!-- Affichage du titre de la page -->
         <h2>Modification des agents</h2>
+    </div>
+</div>
+<!-- Affichage des agents -->
+<div class="container-flui col-lg-8">
+<table class="table table-bordered">
+    <tr class="color-grey">
+        <th class="thCentre">Nom</th>
+        <th class="thCentre">Prénom</th>
+        <th class="thCentre">Login</th>
+        <th class="thCentre">Mot de passe</th>
+        <th class="thCentre">Statut</th>
+        <th class="thCentre">Supprimer</th>
+    </tr>
+    <br/>
 
-        <!-- Affichage des agents -->
-        <table>
-            <tr>
-                <th class="thCentre">Nom</th>
-                <th class="thCentre">Prénom</th>
-                <th class="thCentre">Login</th>
-                <th class="thCentre">Mot de passe</th>
-                <th class="thCentre">Statut</th>
-                <th class="thCentre">Supprimer</th>
-            </tr>
-            <br />
+    <?php for ($i = 0;
+    $i < count($tabAgent);
+    $i++) { ?>
+    <form class="form-horizontal" method="POST" action="mod_Agents.php">
+        <tr>
+            <input type="hidden" name="idAgentForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['idAgent']; ?>">
+            <td>
+                <input class="form-control" type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['nom']; ?>">
+            </td>
+            <td>
+                <input class="form-control" type="text" name="prenomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['prenom']; ?>">
+            </td>
+            <td>
+                <input class="form-control" type="text" name="loginForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['login']; ?>">
+            </td>
+            <td>
+                <input class="form-control" type="text" name="mdpForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['mdp']; ?>">
+            </td>
+            <td>
+                <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A">Administrateur
+                <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxI" value="I">Inactif
+            </td>
+            <td>
+                <!-- Bouton Supprimer -->
+                <button id="Valide" name="Valide" class="croixRouge"></button>
+            </td>
+        </tr>
+        <?php } ?>
+        <!-- Affichage de 2 boutons -->
+        <button type="submit" name="annuler" class="btn btn-success">Annuler</button>
+        <button type="submit" name="updateAgent" class="btn btn-warning">Enregistrer</button>
+    </form>
+</table>
+</div>
+<hr/>
 
-            <?php for ($i = 0; $i < count($tabAgent); $i++) { ?>
-                <form class="form-horizontal" method="POST" action="mod_Agents.php">
-                    <tr>
-                    <input type="hidden" name="idAgentForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['idAgent']; ?>">
-                    <td>
-                        <input type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['nom']; ?>">
-                    </td>
-                    <td>
-                        <input type="text" name="prenomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['prenom']; ?>">
-                    </td>
-                    <td>
-                        <input type="text" name="loginForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['login']; ?>">
-                    </td>
-                    <td> 
-                        <input type="text" name="mdpForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['mdp']; ?>">
-                    </td>
-                    <td> 
-                        <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A">Administrateur
-                        <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxI" value="I">Inactif
-                    </td>
-                    <td> 
-                        <!-- Bouton Supprimer -->
-                        <button id="Valide" name="Valide" class="croixRouge"></button>
-                    </td>
-                    </tr>
-                <?php } ?>
-                <!-- Affichage de 2 boutons -->
-                <button type="submit" name="annuler" class="btn btn-success">Annuler</button>
-                <button type="submit" name="updateAgent" class="btn btn-warning">Enregistrer</button>
-            </form>
-        </table>
-        <hr />
-
-    </body>
+</body>
 </html>
