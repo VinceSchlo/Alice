@@ -3,6 +3,8 @@ session_start(); // Utilisation des variables $_SESSION
 
 require_once ('../class/agent.php');
 require_once('../include/alice_fonctions.php');
+require_once('../include/alice_dao.inc.php');
+
 ?>
 
 <!DOCTYPE html>

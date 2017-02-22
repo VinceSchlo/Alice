@@ -107,51 +107,65 @@ $time = $oHoraire->selectHoraire();
 </head>
 <body>
 <div class="container-fluid">
-    <div>
-        <img class="logo" src="images/logo_sna_quadri.png"/>
+    <div class="row">
+        <div class="col-lg-2">
+            <img class="logo" src="images/logo_sna_quadri.png"/>
+        </div>
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-offset-5 col-lg-3">
+                    <table class="table top-marge">
+                        <tr>
+                            <td>
+                                <form action="" method="post">
+                                    <input type="submit" value=" " name="precedente" class="leftArrow">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="" method="post">
+                                    <input type="submit" value=" " name="home" class="house">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="" method="post">
+                                    <input type="submit" value=" " name="suivante" class="rightArrow">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <h2 class="col-lg-2">
+                    <?php
+                    echo "<br />";
+                    echo "Semaine n°" . $_SESSION['weekNumber'];
+                    ?>
+                </h2>
+            </div>
+            <div class="row">
+                <h2 class="col-lg-offset-5 col-lg-3">
+                    <?php
+                    echo "<br />";
+                    echo "<br />";
+                    echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+                    echo "<br />";
+                    ?>
+                </h2>
+            </div>
+        </div>
     </div>
-    <table>
-        <tr>
-            <td>
-                <form action="" method="post">
-                    <input type="submit" value=" " name="precedente" class="leftArrow">
-                </form>
-            </td>
-            <td>
-                <form action="" method="post">
-                    <input type="submit" value=" " name="home" class="house">
-                </form>
-            </td>
-            <td>
-                <form action="" method="post">
-                    <input type="submit" value=" " name="suivante" class="rightArrow">
-                </form>
-            </td>
-        </tr>
-    </table>
-
-    <h2>
-        <?php
-        // var_dump($tabDatesJoursSemaines);
-        echo "Semaine n°" . $_SESSION['weekNumber'];
-        echo "<br />";
-        echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-        echo "<br />";
-        ?>
-    </h2>
 </div>
 <div class="container-fluid">
 
     <div class="col-lg-1">
-        <table class="table table-bordered">
+        <table class="table table-bordered color-grey border-black">
             <tr>
-                <th class="text-center">Alice</th>
+                <th class="text-center text-size">Alice</th>
             </tr>
             <tr>
-                <th>Personnel</th>
+                <th class="text-center poste-size">Personnel</th>
             </tr>
             <?php foreach ($user as $cle => $valeur) { ?>
-                <tr>
+                <tr class="name-size">
                     <td><?php echo $user[$cle]['prenom'] ?></td>
                 </tr>
 
@@ -159,10 +173,10 @@ $time = $oHoraire->selectHoraire();
         </table>
     </div>
 
-    <div class="col-lg-10">
+    <div class="col-lg-10 marge-two">
         <table class="table table-bordered">
             <!--            Affichage des jours-->
-            <tr>
+            <tr class="color-grey text-size">
                 <th class="text-center" colspan="2">Lundi</th>
                 <th class="text-center" colspan="2">Mardi</th>
                 <th class="text-center" colspan="3">Mercredi</th>
@@ -171,7 +185,7 @@ $time = $oHoraire->selectHoraire();
                 <th class="text-center" colspan="2">Samedi</th>
             </tr>
             <!--            Affichage des horraires -->
-            <tr>
+            <tr class="color-grey name-size">
                 <?php
                 for ($i = 0; $i < 4; $i++) {
                     if ($i % 2 == 0) {
@@ -224,7 +238,7 @@ $time = $oHoraire->selectHoraire();
                 ?>
             </tr>
             <!--            Affichage du planing -->
-            <tr>
+            <tr class="poste-size">
                 <?php
                 for ($i = 0; $i < count($poste); $i++) {
                     $couleur = $poste[$i]['coulGroupe'];
@@ -234,7 +248,7 @@ $time = $oHoraire->selectHoraire();
                     $compte++;
                     if ($compte == 13) {
                         echo "</tr>";
-                        echo "<tr>";
+                        echo "<tr class='poste-size'>";
                         $compte = 0;
                     }
                 }
