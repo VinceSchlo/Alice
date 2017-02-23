@@ -141,7 +141,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
         </div>
         <div class="col-lg-8">
             <div class="row">
-                <div class="col-lg-offset-5 col-lg-3">
+                <div class="col-lg-offset-4 col-lg-3">
                     <table class="table top-marge">
                         <tr>
                             <td>
@@ -170,7 +170,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 </h2>
             </div>
             <div class="row">
-                <h2 class="col-lg-offset-5 col-lg-3">
+                <h2 class="col-lg-offset-4 col-md-4">
                     <?php
                     echo "<br />";
                     echo "<br />";

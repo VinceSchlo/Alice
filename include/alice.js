@@ -23,6 +23,7 @@ function verif2MdpForm() {
 
     if (mdp1 != mdp2) {
         var msg = confirm("Les 2 mots de passe sont différents. Si vous voulez qu'ils soient identiques, appuyez sur OK");
+        return msg;
         if (msg) {
             document.getElementById("mdp2").value=document.getElementById("mdp1").value;
         }
