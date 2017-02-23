@@ -64,6 +64,7 @@ require_once('../include/alice_dao.inc.php');
             $agent->insertAgent();
             // Retour à la page de modification des agents
             header("Location: mod_Agent.php");
+            //
         } else if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
             // Retour à la page de modification des agents
             die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
