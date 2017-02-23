@@ -143,19 +143,19 @@ require_once('../include/alice_fonctions.php');
                             </td>
                             <td>
                                 <input class="form-control" type="text" name="dateFinForm<?php echo $i; ?>" value="<?php
-                    if (empty($tabFerie[$j]['dateFinFerie'])) {
-                        echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
-                    } else {
-                        echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
-                    }
-                        ?>">
+                                if (empty($tabFerie[$j]['dateFinFerie'])) {
+                                    echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
+                                } else {
+                                    echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
+                                }
+                                ?>">
 
                             </td>
                             </tr>
-    <?php
-    $j++;
-}
-?>
+                            <?php
+                            $j++;
+                        }
+                        ?>
                         <!-- Affichage de 2 boutons -->
                         <button type="submit" name="annuler" class="btn btn-success">Annuler</button>
                         <button type="submit" name="updateFerie" class="btn btn-warning">Enregistrer</button>

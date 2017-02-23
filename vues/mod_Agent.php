@@ -166,7 +166,6 @@ require_once('../include/alice_dao.inc.php');
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bootstrap/js/metisMenu.min.js"></script>
-    >>>>>>> 11e7553f03d9bb92c01c34b651e8152d9b16dd18
 
     <!-- Custom Theme JavaScript -->
     <script src="../bootstrap/js/sb-admin-2.js"></script>
