@@ -13,7 +13,9 @@ require_once('../include/alice_dao.inc.php');
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <!-- Bootstrap Core CSS -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+          <!-- Alice CSS -->
         <link href="../css/alice.css" rel="stylesheet">
         <!-- Chemin vers les librairies JavaScript -->
         <script src="../include/alice.js"></script>
@@ -26,6 +28,40 @@ require_once('../include/alice_dao.inc.php');
                     <img class="logo" src="../images/logo_sna_quadri.png"/>
                 </div>
 
+                <?php
+                if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['insertAgent'])) { // Cas du bouton orange "enregistrer"
+                    // var_dump($_POST);
+                    // exit;
+                    // Création d'un objet agent
+                    $agent = new Agent();
+                    $agent->setNom(addslashes(detecTiret($_POST['nomForm'])));
+                    $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm'])));
+                    // Dans le cas où le statut n'existe pas : ni A, ni I, 
+                    // on passe par une autre variable vide pour remplir l'objet 
+                    /*
+                      if (!isset($_POST['statutForm'])) {
+                      $statut = " ";
+                      } else {
+                      $statut = $_POST['statutForm'];
+                      }
+                     * */
+                    $agent->setStatut($_POST['statutForm']);
+                    if (trim($_POST['mdp1Form']) == trim($_POST['mdp2Form'])) {
+                        $agent->setLogin(addslashes(trim($_POST['loginForm'])));
+                        $agent->setMdp(addslashes(trim($_POST['mdp2Form'])));
+                    }
+                    // Tous les agents appartiennent à la bibliothèque de VERNON -> A MODIFIER sur UNE MISE A JOUR
+                    $agent->setIdBiblio("V");
+                    // On met à jour la BDD agent
+                    $agent->insertAgent();
+                    // Retour à la page de modification des agents
+                    header("Location: mod_Agent.php");
+                    
+                } else if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
+                    // Retour à la page de modification des agents
+                    die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
+                }
+                ?>
 
                 <!-- Affichage du titre de la page -->
                 <h2>Ajout d'un agent</h2>
@@ -33,122 +69,70 @@ require_once('../include/alice_dao.inc.php');
         </div>
         <!-- Affichage des agents -->
         <div class="container-flui col-lg-8">
-            <table class="table table-bordered">
-                <!-- Formulaire des coordonnées d'un nouvel agent -->
-                <form class="form-horizontal" action="add_Agent.php" method="POST">
-                    <fieldset>
-                        <!-- Nom de l'agent-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="nom">Nom</label>  
-                            <div class="col-md-4">
-                                <input size="20" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" required="" type="text">
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <!-- Prénom de l'agent-->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="prenom">Prénom</label>  
-                            <div class="col-md-4">
-                                <input size="20" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md" required="" type="text">
 
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <!-- 2 Checkboxes statut -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="checkboxes">Statut</label>
-                            <div class="col-md-4">
-                                <label class="checkbox-inline" for="checkboxes-0">
-                                    <input name="statutForm" id="checkboxA" value="A" type="checkbox">
-                                    Administrateur
-                                </label>
-                                <label class="checkbox-inline" for="checkboxes-1">
-                                    <input name="statutForm" id="checkboxI" value="I" type="checkbox">
-                                    Inactif
-                                </label>
-                            </div>
-                        </div>
-                        <br />
-                        <br />
-                        <!-- Button (Double) -->
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="button1id"></label>
-                            <div class="col-md-8">
-                                <button name="annuler" class="btn btn-info">Retour</button>
-                                <button name="insertAgent" class="btn btn-success">Validez</button>
-                            </div>
-                        </div>
-
-                    </fieldset>
-                </form>
-            </table>
-        </div>
-        <?php
-        if (isset($_POST['insertAgent']) && ($_POST['statutForm'] == 'A')) { // Cas du bouton orange "enregistrer"
-            //var_dump($_POST);
-            //exit;
-            ?>
-            <!-- Formulaire du login et du mot de passe -->
+            <!-- Formulaire des coordonnées d'un nouvel agent -->
             <form class="form-horizontal" action="add_Agent.php" method="POST">
-                <!-- Saisie du login -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="mdp">Identifiant de connexion</label>  
-                    <div class="col-md-4">
-                        <input size="20" type="text" id="login" name="loginForm" placeholder="Login" required="">
+                <fieldset>
+                    <!-- Nom de l'agent-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="nom">Nom</label>  
+                        <div class="col-md-4">
+                            <input size="20" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" required="" type="text">
+                        </div>
                     </div>
-                </div>
-                <br />
-                <br />
-                <!-- Saisie du MDP -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="mdp">Mot de passe</label>  
-                    <div class="col-md-4">
-                        <input size="20" type="text" id="mdp1" name="mdp1Form" required="">
+                    <!-- Prénom de l'agent-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="prenom">Prénom</label>  
+                        <div class="col-md-4">
+                            <input size="20" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md" required="" type="text">
+                        </div>
                     </div>
-                </div>
-                <br />
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="mdp">Confirmez le de passe</label>  
-                    <div class="col-md-4">
-                        <input size="20" type="text" id="mdp2" name="mdp2Form" required="">
+                    <!-- 2 Checkboxes statut -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Statut</label>
+                        <div class="col-md-4">
+                            <label class="checkbox-inline">
+                                <input name="statutForm" id="checkboxA" value="A" type="checkbox" onclick="activeLoginMdpForm()">
+                                Administrateur
+                            </label>
+                            <label class="checkbox-inline">
+                                <input name="statutForm" id="checkboxI" value="I" type="checkbox">
+                                Inactif
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <br />
-            </form>
-            <?php
-        }
-        if (isset($_POST['insertAgent']) && !isset($_POST['statutForm'])) { // Cas du bouton orange "enregistrer"
-            // var_dump($_POST);
-            // exit;
-            // Création d'un objet agent
-            $agent = new Agent();
-            $agent->setIdAgent($_POST['idAgentForm' . $i]);
-            $agent->setNom(addslashes(detecTiret($_POST['nomForm' . $i])));
-            $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm' . $i])));
-            $agent->setLogin(addslashes(trim($_POST['loginForm' . $i])));
-            $agent->setMdp(addslashes(trim($_POST['mdpForm' . $i])));
-            // Dans le cas où le statut n'existe pas : ni A, ni I, 
-            // on passe par une autre variable vide pour remplir l'objet 
-            if (!isset($_POST['statutForm' . $i])) {
-                $statut = " ";
-            } else {
-                $statut = $_POST['statutForm' . $i];
-            }
-            $agent->setStatut($statut);
-            // On met à jour la BDD agent
-            $agent->updateAgent();
-            // On rafraîchit le select pour afficher les mdifs faites en BDD
-            $tabAgent = $agent->selectAllAgent();
-            // Retour à la page de modification des agents
-            header("Location: mod_Agents.php");
-        }
+                    <!-- Saisie du login -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>  
+                        <div class="col-md-4" id="divLogin" style='display:none;'>
+                            <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion" class="form-control input-md">
+                        </div>
+                    </div>
+                    <!-- Saisie du MDP -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>  
+                        <div class="col-md-4" id="divMdp1" style='display:none;'>
+                            <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe" class="form-control input-md">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>  
+                        <div class="col-md-4" id="divMdp2" style='display:none;'>
+                            <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe" class="form-control input-md">
+                        </div>
+                    </div>
+                    <!-- Button (Double) -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-8">
+                            <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span> Annuler</button>
+                            <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open"></span> Enregistrer</button>
+                        </div>
+                    </div>
 
-        if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
-            // Retour à la page de modification des agents
-            die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
-        }
-        ?>
+                </fieldset>
+            </form>
+        </div>
+
     </body>
 </html>

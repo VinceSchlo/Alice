@@ -1,17 +1,18 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//fonction pour activer une fenétre de suppression
+function confirmer(){
+    return confirm("Etes-vous sur de vouloir supprimer ?");
+}
 
-function activeDesactiveTypeVehicule() {
-    var agent = document.getElementById("$_POST['deleteAgent']").value;
+function activeLoginMdpForm() {
+    var statut = document.getElementById("divLogin").style.display;
 
-    if (monIdLFF == "KM") {
-        document.getElementById("divPuissanceFiscale").style.display = "block";
+    if (statut == "none") {
+        document.getElementById("divLogin").style.display = "block";
+        document.getElementById("divMdp1").style.display = "block";
+        document.getElementById("divMdp2").style.display = "block";
     } else {
-        document.getElementById("divPuissanceFiscale").style.display = "none";
+        document.getElementById("divLogin").style.display = "none";
+        document.getElementById("divMdp1").style.display = "none";
+        document.getElementById("divMdp2").style.display = "none";
     }
-
-    //alert(monIdLFF);
 }

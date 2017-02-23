@@ -13,7 +13,9 @@ require_once('../include/alice_dao.inc.php');
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap Core CSS -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+         <!-- Alice CSS -->
         <link href="../css/alice.css" rel="stylesheet">
         <!-- Chemin vers les librairies JavaScript -->
         <script src="../include/alice.js"></script>
@@ -59,14 +61,6 @@ require_once('../include/alice_dao.inc.php');
                 }
 
                 if (isset($_POST['deleteAgent'])) {
-                    /*
-                     * ?>
-                      <script type="text/javascript">
-                      confirm("Attention, vous allez supprimer un agent");
-                      </script>
-                      <?php
-                     * 
-                     */
                     $agent->setIdAgent($_POST['deleteAgent']);
                     // On met à jour la BDD agent
                     $agent->deleteAgent();
@@ -116,7 +110,7 @@ require_once('../include/alice_dao.inc.php');
                             <input class="form-control" type="text" name="loginForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['login']; ?>">
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="mdpForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['mdp']; ?>">
+                            <input class="form-control" type="password" name="mdpForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['mdp']; ?>">
                         </td>
                         <td>
                             <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A"
@@ -134,14 +128,15 @@ require_once('../include/alice_dao.inc.php');
                         </td>
                         <td>
                             <!-- Bouton Supprimer -->
-                            <button type="submit" name="deleteAgent" class="croixRouge" value="<?php echo $tabAgent[$i]['idAgent']; ?>"></button>
+                            <button type="submit" name="deleteAgent" class="btn btn-danger" value="<?php echo $tabAgent[$i]['idAgent']; ?>"
+                                    onclick="return confirmer()"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
                         </td>
                         </tr>
                     <?php } ?>
                     <!-- Affichage de 4 boutons -->
-                    <button type="submit" name="annuler" class="btn btn-success">Annuler</button>
-                    <button type="submit" name="updateAgent" class="btn btn-warning">Enregistrer</button>
-                    <button type="submit" name="insertAgent" class="btn btn-primary">Nouvel Agent</button>
+                    <button type="submit" name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span> Annuler</button>
+                    <button type="submit" name="updateAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open"></span> Enregistrer</button>
+                    <button type="submit" name="insertAgent" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Nouvel Agent</button>
                     </td>
                 </form>
             </table>

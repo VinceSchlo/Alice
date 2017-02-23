@@ -159,4 +159,14 @@ class Agent
         $sql = "delete from agent WHERE idAgent='$this->idAgent'";
         $dao->executeRequete($sql);
     }
+    
+    function insertAgent() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL 
+        $sql = "INSERT INTO agent (nom, prenom, login, mdp, statut, idBiblio) VALUES ('" . $this->nom . "',  '" . $this->prenom . "',  '" . $this->login . "',  '" . $this->mdp . "',  '" . $this->statut . "',  '" . $this->idBiblio . "' )";
+        $resu = $dao->executeRequete($sql);
+        return $resu; // retourne un string contenant la ligne de commande SQL
+    }
+    
 }
