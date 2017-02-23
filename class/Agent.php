@@ -148,7 +148,7 @@ class Agent
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL
-        $sql = "UPDATE agent SET nom='$this->nom', prenom='$this->prenom', login='$this->login', mdp='$this->mdp', statut='$this->statut' WHERE idAgent='$this->idAgent'";
+        $sql = "UPDATE agent SET login='$this->login', mdp='$this->mdp', statut='$this->statut' WHERE idAgent='$this->idAgent'";
         $resu = $dao->executeRequete($sql);
     }
     

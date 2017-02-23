@@ -35,12 +35,12 @@ require_once('../include/alice_dao.inc.php');
                 // exit;
 
                 if (isset($_POST['updateAgent'])) { // Cas du bouton orange "enregistrer"
-                    var_dump($_POST);
-                    exit;
+                    // var_dump($_POST);
+                    // exit;
                     for ($i = 0; $i < count($tabAgent); $i++) {
                         $agent->setIdAgent($_POST['idAgentForm' . $i]);
-                        $agent->setNom(addslashes(detecTiret($_POST['nomForm' . $i])));
-                        $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm' . $i])));
+                        // $agent->setNom(addslashes(detecTiret($_POST['nomForm' . $i])));
+                        // $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm' . $i])));
                         $agent->setLogin(addslashes(trim($_POST['loginForm' . $i])));
                         $agent->setMdp(addslashes(trim($_POST['mdpForm' . $i])));
                         // Dans le cas où le statut n'existe pas : ni A, ni I, 
@@ -88,7 +88,7 @@ require_once('../include/alice_dao.inc.php');
             </div>
         </div>
         <!-- Affichage des agents -->
-        <div class="container-flui col-lg-8">
+        <div class="container-flui col-lg-10">
             <table class="table table-bordered">
                 <tr class="color-grey">
                     <th class="thCentre">Nom</th>
@@ -107,10 +107,10 @@ require_once('../include/alice_dao.inc.php');
                         <tr>
                         <input type="hidden" name="idAgentForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['idAgent']; ?>">
                         <td>
-                            <input class="form-control" type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['nom']; ?>">
+                            <input disabled class="form-control" type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['nom']; ?>">
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="prenomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['prenom']; ?>">
+                            <input disabled class="form-control" type="text" name="prenomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['prenom']; ?>">
                         </td>
                         <td>
                             <input class="form-control" type="text" name="loginForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['login']; ?>">

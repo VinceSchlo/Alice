@@ -87,14 +87,14 @@ require_once('../include/alice_dao.inc.php');
         </div>
         <?php
         if (isset($_POST['insertAgent']) && ($_POST['statutForm'] == 'A')) { // Cas du bouton orange "enregistrer"
-            var_dump($_POST);
-            exit;
+            //var_dump($_POST);
+            //exit;
             ?>
             <!-- Formulaire du login et du mot de passe -->
             <form class="form-horizontal" action="add_Agent.php" method="POST">
                 <!-- Saisie du login -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="mdp">L'identifiant de connexion</label>  
+                    <label class="col-md-4 control-label" for="mdp">Identifiant de connexion</label>  
                     <div class="col-md-4">
                         <input size="20" type="text" id="login" name="loginForm" placeholder="Login" required="">
                     </div>
@@ -103,7 +103,7 @@ require_once('../include/alice_dao.inc.php');
                 <br />
                 <!-- Saisie du MDP -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="mdp">Le mot de passe</label>  
+                    <label class="col-md-4 control-label" for="mdp">Mot de passe</label>  
                     <div class="col-md-4">
                         <input size="20" type="text" id="mdp1" name="mdp1Form" required="">
                     </div>
@@ -120,7 +120,6 @@ require_once('../include/alice_dao.inc.php');
             <?php
         }
         if (isset($_POST['insertAgent']) && !isset($_POST['statutForm'])) { // Cas du bouton orange "enregistrer"
-            echo "prout";
             // var_dump($_POST);
             // exit;
             // Création d'un objet agent
