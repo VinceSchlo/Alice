@@ -168,7 +168,7 @@ class Agent
         $resu = $dao->executeRequete($sql);
         return $resu; // retourne un string contenant la ligne de commande SQL
     }
-    
+
     // Fonction pour vérifier si les identifiant existe dans la bdd.
     public function connexionAgent(){
 

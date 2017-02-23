@@ -8,36 +8,33 @@ require_once('class/PlanStd.php');
 require_once('class/PlanReel.php');
 require_once('class/Ferie.php');
 require_once('class/horaire.php');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/alice.css" rel="stylesheet">
+    <script src="include/alice.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+    <title>ALICE</title>
+</head>
+
+<?php
 
 $plan = new PlanStd();
 $user = $plan->selectUser();
 $poste = $plan->selectPlanStd();
 $compte = 0;
 $t = 10;
-
-// Verification connexion Agent
-if(isset($_POST['login']) && isset($_POST['mdp'])) {
-// Création objet $connection de la class Agent
-    $connexion = new Agent();
-
-// On résupère le login et le mdp saisie pas l'agent
-    $connexion->setLogin($_POST["login"]);
-    $connexion->setMdp($_POST["mdp"]);
-
-// On éxécute la fonction pour vérifier si l'agent a rentré les bonnes informations
-    $agent = $connexion->connexionAgent();
-// Si l'utlisateur n'éxiste pas retour a l'index
-    if (!isset($agent)) {
-        //Si idientifiant ou mdp faux alert JAVAscript
-        ?>
-        <script>alert('Mauvais login ou mdp')</script> <?php
-    } else {
-        // Si l'utilisateur existe garnir la varriable $_SESSION
-        $_SESSION = $agent;
-
-        header("Location:vues/mod_Agent.php");
-    }
-}
 
 if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
     $_SESSION['weekNumber'] = date("W");
@@ -110,31 +107,37 @@ if (isset($planReel) || isset($jourFerie)) {
 
 $oHoraire = new Horaire();
 $time = $oHoraire->selectHoraire();
+
+// Verification connexion Agent
+if (isset($_POST['login']) && isset($_POST['mdp'])) {
+// Création objet $connection de la class Agent
+    $connexion = new Agent();
+
+// On résupère le login et le mdp saisie pas l'agent
+    $connexion->setLogin($_POST["login"]);
+    $connexion->setMdp($_POST["mdp"]);
+
+// On éxécute la fonction pour vérifier si l'agent a rentré les bonnes informations
+    $agent = $connexion->connexionAgent();
+// Si l'utlisateur n'éxiste pas retour a l'index
+    if (!isset($agent)) {
+        //Si idientifiant ou mdp faux alert JAVAscript
+        ?>
+        <script>alert('Mauvais login ou mdp')</script> <?php
+    } else {
+        // Si l'utilisateur existe garnir la variable $_SESSION
+        $_SESSION = $agent;
+
+        header("Location:vues/mod_Agent.php");
+    }
+} else
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/alice.css" rel="stylesheet">
-    <script src="include/alice.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-            crossorigin="anonymous"></script>
-    <title>ALICE</title>
-</head>
 <body>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2">
-<!--            <img class="logo" src="images/logo_sna_quadri.png"/>-->
+            <img class="logo" src="images/logo_sna_quadri.png"/>
         </div>
         <div class="col-lg-8">
             <div class="row">
