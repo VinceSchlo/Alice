@@ -101,7 +101,7 @@ require_once('../include/alice_fonctions.php');
                 <th class="thCentre">Date de fin</th>
             </tr>
             <br/>
-
+            
             <?php
             for ($i = 0;
             $i < count($tabVacances);

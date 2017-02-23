@@ -181,8 +181,10 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
 <!-- Bootstrap Core JavaScript -->
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 
+
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../bootstrap/js/metisMenu.min.js"></script>
+
 
 <!-- Custom Theme JavaScript -->
 <script src="../bootstrap/js/sb-admin-2.js"></script>
