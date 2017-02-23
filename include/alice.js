@@ -16,3 +16,13 @@ function activeLoginMdpForm() {
         document.getElementById("divMdp2").style.display = "none";
     }
 }
+
+function connexion(){
+    var statut = document.getElementById("connexion").style.display;
+
+    if(statut== "none"){
+        document.getElementById("connexion").style.display="block";
+    } else {
+        document.getElementById("connexion").style.display="none";
+    }
+}

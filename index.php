@@ -15,6 +15,30 @@ $poste = $plan->selectPlanStd();
 $compte = 0;
 $t = 10;
 
+// Verification connexion Agent
+if(isset($_POST['login']) && isset($_POST['mdp'])) {
+// Création objet $connection de la class Agent
+    $connexion = new Agent();
+
+// On résupère le login et le mdp saisie pas l'agent
+    $connexion->setLogin($_POST["login"]);
+    $connexion->setMdp($_POST["mdp"]);
+
+// On éxécute la fonction pour vérifier si l'agent a rentré les bonnes informations
+    $agent = $connexion->connexionAgent();
+// Si l'utlisateur n'éxiste pas retour a l'index
+    if (!isset($agent)) {
+        //Si idientifiant ou mdp faux alert JAVAscript
+        ?>
+        <script>alert('Mauvais login ou mdp')</script> <?php
+    } else {
+        // Si l'utilisateur existe garnir la varriable $_SESSION
+        $_SESSION = $agent;
+
+        header("Location:vues/mod_Agent.php");
+    }
+}
+
 if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
     $_SESSION['weekNumber'] = date("W");
     $_SESSION['year'] = date("Y");
@@ -98,6 +122,7 @@ $time = $oHoraire->selectHoraire();
     <meta name="author" content="">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/alice.css" rel="stylesheet">
+    <script src="include/alice.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
@@ -109,9 +134,9 @@ $time = $oHoraire->selectHoraire();
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2">
-            <img class="logo" src="images/logo_sna_quadri.png"/>
+<!--            <img class="logo" src="images/logo_sna_quadri.png"/>-->
         </div>
-        <div class="col-lg-10">
+        <div class="col-lg-8">
             <div class="row">
                 <div class="col-lg-offset-5 col-lg-3">
                     <table class="table top-marge">
@@ -150,6 +175,27 @@ $time = $oHoraire->selectHoraire();
                     echo "<br />";
                     ?>
                 </h2>
+            </div>
+        </div>
+
+        <!--        Formulaire de connexion -->
+        <div class="col-lg-1">
+            <?php
+            echo "<br />";
+            ?>
+            <button class="btn btn-default btn-lg color-button" onclick="connexion()"><span
+                    class="glyphicon glyphicon-user"></span> Se
+                connecter
+            </button>
+            <div id="connexion" style="display: none">
+                <form class="form-group" action="index.php" method="POST">
+                    <label for="login">Login</label>
+                    <input class="form-control" name="login" id="login" type="text" required>
+
+                    <label for="mdp">Mot de passe</label>
+                    <input class="form-control" name="mdp" id="mdp" type="password" required>
+                    <button class="glyphicon glyphicon-off btn-warning btn pull-right" name="valider"></button>
+                </form>
             </div>
         </div>
     </div>

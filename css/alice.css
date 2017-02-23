@@ -91,3 +91,7 @@ cursor: pointer;
 .top-marge{
     margin-left: 6%;
 }
+
+.color-button{
+    background-color: rgba(179, 179, 179, 0.85);
+}
