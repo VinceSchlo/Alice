@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start(); // Utilisation des variables $_SESSION
 
 require_once('../class/agent.php');
@@ -12,9 +12,9 @@ require_once('../include/alice_dao.inc.php');
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-         <!-- Bootstrap Core CSS -->
+        <!-- Bootstrap Core CSS -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-          <!-- Alice CSS -->
+        <!-- Alice CSS -->
         <link href="../css/alice.css" rel="stylesheet">
         <!-- Chemin vers les librairies JavaScript -->
         <script src="../include/alice.js"></script>
@@ -44,83 +44,75 @@ require_once('../include/alice_dao.inc.php');
                     $agent->insertAgent();
                     // Retour à la page de modification des agents
                     header("Location: mod_Agent.php");
-                    
                 } else if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
                     // Retour à la page de modification des agents
                     die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
                 }
                 ?>
 
-                <!-- Affichage du titre de la page -->
-                <h2>Ajout d'un agent</h2>
+                <!-- Formulaire des coordonnées d'un nouvel agent -->
+                <form class="form-horizontal" action="add_Agent.php" method="POST">
+                    <fieldset>
+                        <!-- Nom de l'agent-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="nom">Nom</label>  
+                            <div class="col-md-4">
+                                <input size="20" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" required="" type="text">
+                            </div>
+                        </div>
+                        <!-- Prénom de l'agent-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="prenom">Prénom</label>  
+                            <div class="col-md-4">
+                                <input size="20" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md" required="" type="text">
+                            </div>
+                        </div>
+                        <!-- 2 Checkboxes statut -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Statut</label>
+                            <div class="col-md-4">
+                                <label class="checkbox-inline">
+                                    <input name="statutForm" id="checkboxA" value="A" type="checkbox" onclick="activeLoginMdpForm()">
+                                    Administrateur
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input name="statutForm" id="checkboxI" value="I" type="checkbox">
+                                    Inactif
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Saisie du login -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>  
+                            <div class="col-md-4" id="divLogin" style='display:none;'>
+                                <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion" class="form-control input-md" required="">
+                            </div>
+                        </div>
+                        <!-- Saisie du MDP -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>  
+                            <div class="col-md-4" id="divMdp1" style='display:none;'>
+                                <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe" class="form-control input-md" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>  
+                            <div class="col-md-4" id="divMdp2" style='display:none;'>
+                                <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe" class="form-control input-md" required="">
+                            </div>
+                        </div>
+                        <!-- Button (Double) -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8">
+                                <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span> Annuler</button>
+                                <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open" onclick="verif2MdpForm()"></span> Enregistrer</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
             </div>
         </div>
-        <!-- Affichage des agents -->
-        <div class="container-flui col-lg-8">
-
-            <!-- Formulaire des coordonnées d'un nouvel agent -->
-            <form class="form-horizontal" action="add_Agent.php" method="POST">
-                <fieldset>
-                    <!-- Nom de l'agent-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="nom">Nom</label>  
-                        <div class="col-md-4">
-                            <input size="20" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-                    <!-- Prénom de l'agent-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="prenom">Prénom</label>  
-                        <div class="col-md-4">
-                            <input size="20" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md" required="" type="text">
-                        </div>
-                    </div>
-                    <!-- 2 Checkboxes statut -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Statut</label>
-                        <div class="col-md-4">
-                            <label class="checkbox-inline">
-                                <input name="statutForm" id="checkboxA" value="A" type="checkbox" onclick="activeLoginMdpForm()">
-                                Administrateur
-                            </label>
-                            <label class="checkbox-inline">
-                                <input name="statutForm" id="checkboxI" value="I" type="checkbox">
-                                Inactif
-                            </label>
-                        </div>
-                    </div>
-                    <!-- Saisie du login -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>  
-                        <div class="col-md-4" id="divLogin" style='display:none;'>
-                            <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion" class="form-control input-md" required="">
-                        </div>
-                    </div>
-                    <!-- Saisie du MDP -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>  
-                        <div class="col-md-4" id="divMdp1" style='display:none;'>
-                            <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe" class="form-control input-md" required="">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>  
-                        <div class="col-md-4" id="divMdp2" style='display:none;'>
-                            <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe" class="form-control input-md" required="">
-                        </div>
-                    </div>
-                    <!-- Button (Double) -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label"></label>
-                        <div class="col-md-8">
-                            <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span> Annuler</button>
-                            <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open" onclick="verif2MdpForm()"></span> Enregistrer</button>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </form>
-        </div>
-
     </body>
 </html>
