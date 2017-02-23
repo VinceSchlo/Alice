@@ -41,8 +41,8 @@ require_once('../include/alice_dao.inc.php');
                     // exit;
                     for ($i = 0; $i < count($tabAgent); $i++) {
                         $agent->setIdAgent($_POST['idAgentForm' . $i]);
-                        // $agent->setNom(addslashes(detecTiret($_POST['nomForm' . $i])));
-                        // $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm' . $i])));
+                        $agent->setNom(addslashes(detecTiret($_POST['nomForm' . $i])));
+                        $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm' . $i])));
                         $agent->setLogin(addslashes(trim($_POST['loginForm' . $i])));
                         $agent->setMdp(addslashes(trim($_POST['mdpForm' . $i])));
                         // Dans le cas où le statut n'existe pas : ni A, ni I, 
@@ -101,10 +101,10 @@ require_once('../include/alice_dao.inc.php');
                         <tr>
                         <input type="hidden" name="idAgentForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['idAgent']; ?>">
                         <td>
-                            <input disabled class="form-control" type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['nom']; ?>">
+                            <input class="form-control" type="text" name="nomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['nom']; ?>">
                         </td>
                         <td>
-                            <input disabled class="form-control" type="text" name="prenomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['prenom']; ?>">
+                            <input class="form-control" type="text" name="prenomForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['prenom']; ?>">
                         </td>
                         <td>
                             <input class="form-control" type="text" name="loginForm<?php echo $i; ?>" value="<?php echo $tabAgent[$i]['login']; ?>">

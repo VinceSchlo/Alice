@@ -1,6 +1,5 @@
 <?php
 session_start(); // Utilisation des variables $_SESSION
-header('Content-Type:text/html; charset=UTF8');
 
 require_once('../class/agent.php');
 require_once('../include/alice_fonctions.php');
@@ -36,20 +35,9 @@ require_once('../include/alice_dao.inc.php');
                     $agent = new Agent();
                     $agent->setNom(addslashes(detecTiret($_POST['nomForm'])));
                     $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm'])));
-                    // Dans le cas où le statut n'existe pas : ni A, ni I, 
-                    // on passe par une autre variable vide pour remplir l'objet 
-                    /*
-                      if (!isset($_POST['statutForm'])) {
-                      $statut = " ";
-                      } else {
-                      $statut = $_POST['statutForm'];
-                      }
-                     * */
                     $agent->setStatut($_POST['statutForm']);
-                    if (trim($_POST['mdp1Form']) == trim($_POST['mdp2Form'])) {
-                        $agent->setLogin(addslashes(trim($_POST['loginForm'])));
-                        $agent->setMdp(addslashes(trim($_POST['mdp2Form'])));
-                    }
+                    $agent->setLogin(addslashes(trim($_POST['loginForm'])));
+                    $agent->setMdp(addslashes(trim($_POST['mdp2Form'])));
                     // Tous les agents appartiennent à la bibliothèque de VERNON -> A MODIFIER sur UNE MISE A JOUR
                     $agent->setIdBiblio("V");
                     // On met à jour la BDD agent
@@ -105,20 +93,20 @@ require_once('../include/alice_dao.inc.php');
                     <div class="form-group">
                         <label class="col-md-4 control-label"></label>  
                         <div class="col-md-4" id="divLogin" style='display:none;'>
-                            <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion" class="form-control input-md">
+                            <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion" class="form-control input-md" required="">
                         </div>
                     </div>
                     <!-- Saisie du MDP -->
                     <div class="form-group">
                         <label class="col-md-4 control-label"></label>  
                         <div class="col-md-4" id="divMdp1" style='display:none;'>
-                            <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe" class="form-control input-md">
+                            <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe" class="form-control input-md" required="">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label"></label>  
                         <div class="col-md-4" id="divMdp2" style='display:none;'>
-                            <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe" class="form-control input-md">
+                            <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe" class="form-control input-md" required="">
                         </div>
                     </div>
                     <!-- Button (Double) -->
@@ -126,7 +114,7 @@ require_once('../include/alice_dao.inc.php');
                         <label class="col-md-4 control-label"></label>
                         <div class="col-md-8">
                             <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span> Annuler</button>
-                            <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open"></span> Enregistrer</button>
+                            <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open" onclick="verif2MdpForm()"></span> Enregistrer</button>
                         </div>
                     </div>
 

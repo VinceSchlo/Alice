@@ -1,6 +1,6 @@
 //fonction pour activer une fenétre de suppression
 function confirmer(){
-    return confirm("Etes-vous sur de vouloir supprimer ?");
+    return confirm("Etes-vous sûr de vouloir supprimer ?");
 }
 
 function activeLoginMdpForm() {
@@ -14,6 +14,18 @@ function activeLoginMdpForm() {
         document.getElementById("divLogin").style.display = "none";
         document.getElementById("divMdp1").style.display = "none";
         document.getElementById("divMdp2").style.display = "none";
+    }
+}
+
+function verif2MdpForm() {
+    var mdp1 = document.getElementById("mdp1").value;
+    var mdp2 = document.getElementById("mdp2").value;
+
+    if (mdp1 != mdp2) {
+        var msg = confirm("Les 2 mots de passe sont différents. Si vous voulez qu'ils soient identiques, appuyez sur OK");
+        if (msg) {
+            document.getElementById("mdp2").value=document.getElementById("mdp1").value;
+        }
     }
 }
 
