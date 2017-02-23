@@ -11,7 +11,7 @@
                     <li><a href=""></i>Décomptes</a>
                     </li>
 
-                    <li><a href=""></i>Modifier le planning</a>
+                    <li><a href="../index.php"></i>Modifier le planning</a>
                     </li>
 
                     <li><a href=""></i>Modifier le planning type</a>

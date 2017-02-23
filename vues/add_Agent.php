@@ -70,20 +70,19 @@ require_once('../include/alice_dao.inc.php');
             die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
         }
         ?>
-
         <!-- Formulaire des coordonnées d'un nouvel agent -->
         <form class="form-horizontal" action="add_Agent.php" method="POST">
             <fieldset>
                 <!-- Nom de l'agent-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="nom">Nom</label>  
+                    <label class="col-md-4 control-label" for="nom">Nom</label>
                     <div class="col-md-4">
                         <input size="20" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" required="" type="text">
                     </div>
                 </div>
                 <!-- Prénom de l'agent-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="prenom">Prénom</label>  
+                    <label class="col-md-4 control-label" for="prenom">Prénom</label>
                     <div class="col-md-4">
                         <input size="20" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md" required="" type="text">
                     </div>
@@ -104,20 +103,20 @@ require_once('../include/alice_dao.inc.php');
                 </div>
                 <!-- Saisie du login -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label"></label>  
+                    <label class="col-md-4 control-label"></label>
                     <div class="col-md-4" id="divLogin" style='display:none;'>
                         <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion" class="form-control input-md">
                     </div>
                 </div>
                 <!-- Saisie du MDP -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label"></label>  
+                    <label class="col-md-4 control-label"></label>
                     <div class="col-md-4" id="divMdp1" style='display:none;'>
                         <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe" class="form-control input-md">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-4 control-label"></label>  
+                    <label class="col-md-4 control-label"></label>
                     <div class="col-md-4" id="divMdp2" style='display:none;'>
                         <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe" class="form-control input-md">
                     </div>
