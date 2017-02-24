@@ -14,7 +14,7 @@
                     <li><a href="../index.php"></i>Modifier le planning</a>
                     </li>
 
-                    <li><a href=""></i>Modifier le planning type</a>
+                    <li><a href="../vues/mod_Plan_Std.php"></i>Modifier le planning type</a>
                     </li>
 
                     <li><a href="../vues/mod_Agent.php"></i>Modifier les agents</a>

@@ -112,7 +112,7 @@ class PlanStd
                 ON a.idAgent = plan.idAgent
                 AND plan.idPoste = poste.idPoste
                 AND g.idGroupe = poste.idGroupe
-                ORDER BY a.idAgent, plan.idJour, plan.horaireDeb";
+                ORDER BY a.prenom, plan.idJour, plan.horaireDeb";
 
         $resu = $dao->executeRequete($sql);
 
@@ -126,7 +126,7 @@ class PlanStd
 
         $sql = "SELECT prenom 
                 FROM agent as a
-                ORDER BY idAgent ASC";
+                ORDER BY prenom ASC";
 
         $resu = $dao->executeRequete($sql);
 
