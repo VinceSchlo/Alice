@@ -34,8 +34,6 @@ if (isset($_POST['updateVac'])) { // Cas du bouton orange "enregistrer"
         // On met à jour la BDD vacances
         $vacances->updateVacances();
     }
-    // On rafraîchit le select pour afficher les modifs faites en BDD
-    $tabVacances = $vacances->selectAllVacances();
 }
 if (isset($_POST['updateFerie'])) { // Cas du bouton orange "enregistrer"
     // var_dump($_POST);
@@ -47,13 +45,16 @@ if (isset($_POST['updateFerie'])) { // Cas du bouton orange "enregistrer"
         // On met à jour la BDD ferie
         $ferie->updateFerie();
     }
-    // On rafraîchit le select pour afficher les modifs faites en BDD
-    $tabFerie = $ferie->selectAllFerie();
 }
 if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
     // Retour à la page d'accueil administrateur sans modification
     // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
 }
+// On rafraîchit le select pour afficher les modifs faites en BDD
+$tabVacances = $vacances->selectAllVacances();
+// On rafraîchit le select pour afficher les modifs faites en BDD
+$tabFerie = $ferie->selectAllFerie();
+//
 ?>
 <body>
     <!-- Affichage des vacances -->
@@ -131,19 +132,19 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
                         <td>
                             <input size="10" class="form-control" type="text" name="dateFinForm<?php echo $i; ?>"
                                    value="<?php
-                if (empty($tabFerie[$j]['dateFinFerie'])) {
-                    echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
-                } else {
-                    echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
-                }
-                    ?>">
+                                   if (empty($tabFerie[$j]['dateFinFerie'])) {
+                                       echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
+                                   } else {
+                                       echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
+                                   }
+                                   ?>">
 
                         </td>
                         </tr>
-    <?php
-    $j++;
-}
-?>
+                        <?php
+                        $j++;
+                    }
+                    ?>
                     <!-- Affichage de 2 boutons -->
                     <button type="submit" name="annuler" class="btn btn-success"><span
                             class="glyphicon glyphicon-ban-circle"></span> Annuler
