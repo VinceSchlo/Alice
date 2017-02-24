@@ -116,7 +116,7 @@ class PlanStd {
         $dao = new Dao();
         //Requête SQL
 
-        $sql = "UPDATE planstd SET idPoste='$this->idPoste' WHERE idAgent='$this->idAgent', idJour='$this->idJour', horaireDeb='$this->horaireDeb', horaireFin='$this->horaireFin'";
+        $sql = "UPDATE planstd SET idPoste='$this->idPoste' WHERE idAgent='$this->idAgent' AND idJour='$this->idJour' AND horaireDeb='$this->horaireDeb' AND horaireFin='$this->horaireFin'";
 
         $resu = $dao->executeRequete($sql);
         return $resu; // retourne un string contenant la ligne de commande SQL

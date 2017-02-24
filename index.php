@@ -207,7 +207,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 </div>
 <div class="container-fluid">
 
-    <div class="col-lg-offset-1 col-lg-10">
+    <div class="col-lg-12">
         <table class="table table-bordered">
             <!--            Affichage des jours-->
             <tr class="color-grey text-size">
