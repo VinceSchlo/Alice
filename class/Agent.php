@@ -169,7 +169,7 @@ class Agent {
                 INSERT INTO planstd (idAgent, idJour, horaireDeb, horaireFin, idPoste) VALUES 
                 ((SELECT MAX(idAgent) FROM agent), 1, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 1, 4, 7, 21), 
                 ((SELECT MAX(idAgent) FROM agent), 2, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 2, 4, 7, 21),
-                ((SELECT MAX(idAgent) FROM agent), 3, 1, 3, 21), ((SELECT MAX(idAgent) FROM agent), 3, 3, 4), ((SELECT MAX(idAgent) FROM agent), 3, 4, 7, 21),
+                ((SELECT MAX(idAgent) FROM agent), 3, 1, 3, 21), ((SELECT MAX(idAgent) FROM agent), 3, 3, 4, 21), ((SELECT MAX(idAgent) FROM agent), 3, 4, 7, 21),
                 ((SELECT MAX(idAgent) FROM agent), 4, 1, 3, 21), ((SELECT MAX(idAgent) FROM agent), 4, 3, 7, 21),
                 ((SELECT MAX(idAgent) FROM agent), 5, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 5, 4, 7, 21),
                 ((SELECT MAX(idAgent) FROM agent), 6, 1, 3, 21), ((SELECT MAX(idAgent) FROM agent), 6, 3, 5, 21); ";

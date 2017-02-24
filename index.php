@@ -30,8 +30,10 @@ require_once('class/horaire.php');
 
 <?php
 
+$oAgent = new Agent();
+$user = $oAgent->selectUser();
+
 $plan = new PlanStd();
-$user = $plan->selectUser();
 $poste = $plan->selectPlanStd();
 $compte = 0;
 $t = 10;
@@ -205,27 +207,11 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
 </div>
 <div class="container-fluid">
 
-    <div class="col-lg-1">
-        <table class="table table-bordered color-grey border-black">
-            <tr>
-                <th class="text-center text-size">Alice</th>
-            </tr>
-            <tr>
-                <th class="text-center poste-size">Personnel</th>
-            </tr>
-            <?php foreach ($user as $cle => $valeur) { ?>
-                <tr class="name-size">
-                    <td><?php echo $user[$cle]['prenom'] ?></td>
-                </tr>
-
-            <?php } ?>
-        </table>
-    </div>
-
-    <div class="col-lg-10 marge-two">
+    <div class="col-lg-offset-1 col-lg-10">
         <table class="table table-bordered">
             <!--            Affichage des jours-->
             <tr class="color-grey text-size">
+                <th></th>
                 <th class="text-center" colspan="2">Lundi</th>
                 <th class="text-center" colspan="2">Mardi</th>
                 <th class="text-center" colspan="3">Mercredi</th>
@@ -235,6 +221,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             </tr>
             <!--            Affichage des horraires -->
             <tr class="color-grey name-size">
+                <td>Personnel</td>
                 <?php
                 for ($i = 0; $i < 4; $i++) {
                     if ($i % 2 == 0) {
@@ -246,7 +233,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                     if ($i % 2 != 0) {
                         echo "<td class=\"text-center\">";
                         echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[5]['libHoraire'], 0, 5);
+                        echo substr($time[6]['libHoraire'], 0, 5);
                         echo "</td>";
                     }
                 }
@@ -260,7 +247,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 echo "</td>";
                 echo "<td class=\"text-center\">";
                 echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                echo substr($time[5]['libHoraire'], 0, 5);
+                echo substr($time[6]['libHoraire'], 0, 5);
                 echo "</td>";
                 for ($i = 0; $i < 4; $i++) {
                     if ($i % 2 == 0) {
@@ -272,7 +259,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                     if ($i % 2 != 0) {
                         echo "<td class=\"text-center\">";
                         echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[5]['libHoraire'], 0, 5);
+                        echo substr($time[6]['libHoraire'], 0, 5);
                         echo "</td>";
                     }
                 }
@@ -287,23 +274,24 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 ?>
             </tr>
             <!--            Affichage du planing -->
-            <tr class="poste-size">
-                <?php
-                for ($i = 0; $i < count($poste); $i++) {
-                    $couleur = $poste[$i]['coulGroupe'];
-                    echo "<td class=\"text-center\" style='background-color:$couleur'>";
-                    echo $poste[$i]['libPoste'];
-                    echo "</td>";
-                    $compte++;
-                    if ($compte == 13) {
-                        echo "</tr>";
-                        echo "<tr class='poste-size'>";
-                        $compte = 0;
-                    }
-                }
-                ?>
-            </tr>
+            <?php
+            $i = 0;
 
+            while ($i < count($poste)) { ?>
+                <tr class="poste-size">
+                    <td class="color-grey">
+                        <?php echo $poste[$i]['prenom']; ?>
+                    </td>
+                    <?php for ($j = 0; $j < 13; $j++) {
+
+                        $couleur = $poste[$i]['coulGroupe'];
+                        echo "<td class=\"text-center\" style='background-color:$couleur'>";
+                        echo $poste[$i]['libPoste'];
+                        echo "</td>";
+                        $i++;
+                    } ?>
+                </tr>
+            <?php } ?>
         </table>
     </div>
 
