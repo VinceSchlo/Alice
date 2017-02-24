@@ -110,26 +110,14 @@ class PlanStd {
 
         return $ligne;
     }
-
-    public function selectUser() {
-        $dao = new Dao();
-
-        $sql = "SELECT prenom 
-                FROM agent as a
-                ORDER BY prenom ASC";
-
-        $resu = $dao->executeRequete($sql);
-
-        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
-
-        return $ligne;
-    }
     
     function insertPlanStd() {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL
-        $sql = "UPDATE planstd SET idPoste='$this->idPoste' WHERE idAgent='$this->idAgent' AND idJour='$this->idJour' AND horaireDeb='$this->horaireDeb' AND horaireFin='$this->horaireFin'";
+
+        $sql = "UPDATE planstd SET idPoste='$this->idPoste' WHERE idAgent='$this->idAgent', idJour='$this->idJour', horaireDeb='$this->horaireDeb', horaireFin='$this->horaireFin'";
+
         $resu = $dao->executeRequete($sql);
         return $resu; // retourne un string contenant la ligne de commande SQL
     }
