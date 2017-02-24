@@ -39,7 +39,7 @@ require_once('../include/alice_dao.inc.php');
                 <img class="logo" src="../images/logo_sna_quadri.png"/>
             </div>
             <!-- Affichage du titre de la page -->
-            <div class="col-lg-offset-2 col-lg-3">
+            <div class="col-lg-offset-2 col-md-4">
                 <h2>Modification des agents</h2>
             </div>
             <?php include("../include/header_admin.php"); ?>
@@ -159,7 +159,7 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
             </tr>
             <?php } ?>
             <!-- Affichage de 4 boutons -->
-            <div class="col-lg-3 col-lg-offset-4">
+            <div class="col-md-5 col-lg-offset-4">
                 <button type="submit" name="annuler" class="btn btn-success"><span
                         class="glyphicon glyphicon-ban-circle"></span> Annuler
                 </button>

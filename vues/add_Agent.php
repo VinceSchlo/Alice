@@ -71,7 +71,7 @@ require_once('../include/alice_dao.inc.php');
         }
         ?>
         <!-- Formulaire des coordonnées d'un nouvel agent -->
-        <form class="form-horizontal" action="add_Agent.php" method="POST">
+        <form class="form-horizontal" action="add_Agent.php" onsubmit="return verif2MdpForm()" method="POST">
             <fieldset>
                 <!-- Nom de l'agent-->
                 <div class="form-group">
@@ -126,7 +126,7 @@ require_once('../include/alice_dao.inc.php');
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-8">
                         <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span> Annuler</button>
-                        <button name="insertAgent" class="btn btn-warning" onclick="return verif2MdpForm()"><span class="glyphicon glyphicon-floppy-open"></span> Enregistrer</button>
+                        <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open"></span> Enregistrer</button>
                     </div>
                 </div>
 

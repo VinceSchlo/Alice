@@ -18,15 +18,25 @@ function activeLoginMdpForm() {
 }
 
 function verif2MdpForm() {
+    var login = document.getElementById("login").value;
     var mdp1 = document.getElementById("mdp1").value;
     var mdp2 = document.getElementById("mdp2").value;
 
-    if (mdp1 != mdp2) {
-        var msg = confirm("Les 2 mots de passe sont différents.\nSi vous voulez qu'il soit identique au second, appuyez sur OK,\nsinon annulez ");
+    if (login == "") {
+        alert("Veuillez saisir un identifiant de connexion"); 
+        return false;
+    }
+    else if (mdp1 != mdp2) {
+        alert("Les 2 mots de passe sont différents"); 
+        return false;
+    }  else {
+        return true;
+        /* var msg = confirm("Les 2 mots de passe sont différents.");
         return msg;
         if (msg) {
             document.getElementById("mdp2").value=document.getElementById("mdp1").value;
         }
+        */
     }
 }
 
