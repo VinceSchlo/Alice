@@ -1,7 +1,10 @@
 <?php
 session_start(); // Utilisation des variables $_SESSION
 
-require_once('../class/agent.php');
+require_once('../class/Agent.php');
+require_once('../class/Poste.php');
+require_once('../class/PlanStd.php');
+require_once('../class/Horaire.php');
 require_once('../include/alice_fonctions.php');
 require_once('../include/alice_dao.inc.php');
 ?>
@@ -10,55 +13,159 @@ require_once('../include/alice_dao.inc.php');
 
 <!-- Affichage du titre de la page -->
 <div class="col-lg-offset-2 col-lg-3">
-    <h2>Modification planing standard</h2>
+    <h2>Modification planning standard</h2>
 </div>
 <?php include("../include/header_admin.php"); ?>
 
 <body>
 <div class="container-fluid">
     <table class="table table-bordered">
+        <!--            Affichage des jours-->
+        <tr class="color-grey text-size">
+            <th></th>
+            <th class="text-center" colspan="2">Lundi</th>
+            <th class="text-center" colspan="2">Mardi</th>
+            <th class="text-center" colspan="3">Mercredi</th>
+            <th class="text-center" colspan="2">Jeudi</th>
+            <th class="text-center" colspan="2">Vendredi</th>
+            <th class="text-center" colspan="2">Samedi</th>
+        </tr>
+        <!--            Affichage des horraires -->
+        <tr class="color-grey name-size">
+            <td>Personnel</td>
+            <?php
+
+            $oHoraire = new Horaire();
+            $time = $oHoraire->selectHoraire();
+
+            for ($i = 0; $i < 4; $i++) {
+                if ($i % 2 == 0) {
+                    echo "<td class=\"text-center\">";
+                    echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[3]['libHoraire'], 0, 5);
+                    echo "</td>";
+                }
+                if ($i % 2 != 0) {
+                    echo "<td class=\"text-center\">";
+                    echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[6]['libHoraire'], 0, 5);
+                    echo "</td>";
+                }
+            }
+            echo "<td class=\"text-center\">";
+            echo substr($time[0]['libHoraire'], 0, 5), " - ";
+            echo substr($time[2]['libHoraire'], 0, 5);
+            echo "</td>";
+            echo "<td class=\"text-center\">";
+            echo substr($time[2]['libHoraire'], 0, 5), " - ";
+            echo substr($time[3]['libHoraire'], 0, 5);
+            echo "</td>";
+            echo "<td class=\"text-center\">";
+            echo substr($time[3]['libHoraire'], 0, 5), " - ";
+            echo substr($time[6]['libHoraire'], 0, 5);
+            echo "</td>";
+            for ($i = 0; $i < 4; $i++) {
+                if ($i % 2 == 0) {
+                    echo "<td class=\"text-center\">";
+                    echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[3]['libHoraire'], 0, 5);
+                    echo "</td>";
+                }
+                if ($i % 2 != 0) {
+                    echo "<td class=\"text-center\">";
+                    echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[6]['libHoraire'], 0, 5);
+                    echo "</td>";
+                }
+            }
+            echo "<td class=\"text-center\">";
+            echo substr($time[0]['libHoraire'], 0, 5), " - ";
+            echo substr($time[2]['libHoraire'], 0, 5);
+            echo "</td>";
+            echo "<td class=\"text-center\">";
+            echo substr($time[2]['libHoraire'], 0, 5), " - ";
+            echo substr($time[4]['libHoraire'], 0, 5);
+            echo "</td>";
+            ?>
+        </tr>
         <form class="form-horizontal" action="mod_Plan_Std.php" method="post">
             <?php
+
+            $oPlanStd = new PlanStd();
+            $tabPlanStd = $oPlanStd->selectPlanStd();
+
+            $oPoste = new Poste();
+            $poste = $oPoste->selectAllPoste();
+
+            if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
+                // var_dump($_POST);
+                // exit;
+                for ($i = 0; $i < count($tabPlanStd); $i++) {
+                    $oplanStd->setIdAgent($_POST['idAgentForm' . $i]);
+                    $oplanStd->setIdJour($_POST['idJourForm' . $i]);
+		            $oplanStd->setHoraireDeb($_POST['horaireDebForm' . $i]);
+		            $oplanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
+		            $oplanStd->setIdPoste($_POST['idPosteForm' . $i]);
+                    // On met à jour la BDD planstd
+                    $oplanStd->insertPlanStd();
+                }
+            }
+            
+            // On rafraîchit le select pour afficher les modifs faites en BDD
+            $tabPlanStd = $oPlanStd->selectPlanStd();
+
             $i = 0;
             $l = 0;
-            while ($i < count($planStd)) { ?>
+
+            while ($i < count($tabPlanStd)) { ?>
                 <tr>
                     <td>
-                        <?php echo $planStd[$i]['prenom']; ?>
+                        <?php echo $tabPlanStd[$i]['prenom']; ?>
                     </td>
                     <?php for ($j = 0; $j < 13; $j++) { ?>
                         <td>
-                            <input type="hidden" name="idAgent<?php echo $l; ?>"
-                                   value="<?php echo $planStd[$i]['idAgent']; ?>">
-                            <input type="hidden" name="idJour<?php echo $l; ?>"
-                                   value="<?php echo $planStd[$i]['idJour']; ?>">
-                            <input type="hidden" name="horaireDeb<?php echo $l; ?>"
-                                   value="<?php echo $planStd[$i]['horaireDeb']; ?>">
-                            <input type="hidden" name="horaireFin<?php echo $l; ?>"
-                                   value="<?php echo $planStd[$i]['horaireFin']; ?>">
+                            <input type="hidden" name="idAgentForm<?php echo $l; ?>"
+                                   value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
+                            <input type="hidden" name="idJourForm<?php echo $l; ?>"
+                                   value="<?php echo $tabPlanStd[$i]['idJour']; ?>">
+                            <input type="hidden" name="horaireDebForm<?php echo $l; ?>"
+                                   value="<?php echo $tabPlanStd[$i]['horaireDeb']; ?>">
+                            <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
+                                   value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                            <select name="idPoste<?php echo $l; ?>" class="form-control">
+                            <select name="idPosteForm<?php echo $l; ?>" class="form-control">
                                 <?php for ($k = 0; $k < count($poste); $k++) {
-                                    if ($poste[$k]['idPoste'] == $planStd[$i]['idPoste']) { ?>
+                                    if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) { ?>
 
                                         <option value="<?php echo $poste[$k]['idPoste']; ?>"
-                                                selected=""><?php echo $poste[$k]['libPoste']; ?></option>
+                                                selected=""
+                                                style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
                                     <?php } else { ?>
 
                                         <option
-                                            value="<?php echo $poste[$k]['idPoste']; ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+                                            value="<?php echo $poste[$k]['idPoste']; ?>"
+                                            style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
                                     <?php }
                                 } ?>
                             </select>
-                            <?php $i++ ?>
+                            <?php $i++;
+                            $l++; ?>
                         </td>
-                    <?php }
-                    $i++;
-                    $l++; ?>
+                    <?php } ?>
                 </tr>
             <?php } ?>
+            <div class="col-lg-offset-10 col-lg-2">
+                <!-- Affichage de 2 boutons -->
+                <button type="submit" name="annuler" class="btn btn-success"
+                        class="glyphicon glyphicon-ban-circle"><span
+                        class="glyphicon glyphicon-ban-circle"></span> Annuler
+                </button>
+                <button type="submit" name="enregistrer" class="btn btn-warning"><span
+                        class="glyphicon glyphicon-floppy-open"></span> Enregistrer
+                </button>
+            </div>
         </form>
     </table>
 </div>
