@@ -124,5 +124,15 @@ class PlanStd {
 
         return $ligne;
     }
+    
+    function insertPlanStd() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL
+        $sql = "INSERT INTO planstd (idAgent, idJour, horaireDeb, horaireFin, idPoste) VALUES
+                ('" . $this->idAgent . "',  '" . $this->idJour . "',  '" . $this->horaireDeb . "',  '" . $this->horaireFin . "',  '" . $this->idPoste . "' ); ";
+        $resu = $dao->executeRequete($sql);
+        return $resu; // retourne un string contenant la ligne de commande SQL
+    }
 
 }

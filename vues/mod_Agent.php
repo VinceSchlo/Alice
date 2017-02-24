@@ -41,8 +41,6 @@ if (isset($_POST['updateAgent'])) { // Cas du bouton orange "enregistrer"
         $agent->setStatut($statut);
         // On met à jour la BDD agent
         $agent->updateAgent();
-        // On rafraîchit le select pour afficher les mdifs faites en BDD
-        $tabAgent = $agent->selectAllAgent();
     }
 }
 
@@ -50,7 +48,7 @@ if (isset($_POST['deleteAgent'])) {
     $agent->setIdAgent($_POST['deleteAgent']);
     // On met à jour la BDD agent
     $agent->deleteAgent();
-    // On rafraîchit le select pour afficher les mdifs faites en BDD
+    // On rafraîchit le select pour afficher les modifs faites en BDD
     $tabAgent = $agent->selectAllAgent();
 }
 
@@ -62,98 +60,99 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
     // Retour à la page d'accueil administrateur sans modification
     // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
 }
+// On rafraîchit le select pour afficher les modifs faites en BDD
+$tabAgent = $agent->selectAllAgent();
+//
 ?>
 <body>
-<!-- Affichage des agents -->
-<div class="container-flui col-lg-offset-1 col-lg-10">
-    <table class="table table-bordered">
-        <tr class="color-grey">
-            <th class="thCentre">Nom</th>
-            <th class="thCentre">Prénom</th>
-            <th class="thCentre">Login</th>
-            <th class="thCentre">Mot de passe</th>
-            <th class="thCentre">Statut</th>
-            <th class="thCentre">Supprimer</th>
-        </tr>
-        <br/>
-
-        <?php
-        for ($i = 0;
-        $i < count($tabAgent);
-        $i++) {
-        ?>
-        <form class="form-horizontal" method="POST" action="mod_Agent.php">
-            <tr>
-                <input type="hidden" name="idAgentForm<?php echo $i; ?>"
-                       value="<?php echo $tabAgent[$i]['idAgent']; ?>">
-                <td>
-                    <input class="form-control" type="text" name="nomForm<?php echo $i; ?>"
-                           value="<?php echo $tabAgent[$i]['nom']; ?>">
-                </td>
-                <td>
-                    <input class="form-control" type="text" name="prenomForm<?php echo $i; ?>"
-                           value="<?php echo $tabAgent[$i]['prenom']; ?>">
-                </td>
-                <td>
-                    <input class="form-control" type="text" name="loginForm<?php echo $i; ?>"
-                           value="<?php echo $tabAgent[$i]['login']; ?>">
-                </td>
-                <td>
-                    <input class="form-control" type="password" name="mdpForm<?php echo $i; ?>"
-                           value="<?php echo $tabAgent[$i]['mdp']; ?>">
-                </td>
-                <td>
-                    <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A"
-                        <?php
-                        if ($tabAgent[$i]['statut'] == "A") {
-                            echo " checked";
-                        }
-                        ?>>Administrateur
-                    <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxI" value="I"
-                        <?php
-                        if ($tabAgent[$i]['statut'] == "I") {
-                            echo " checked";
-                        }
-                        ?>>Inactif
-                </td>
-                <td>
-                    <!-- Bouton Supprimer -->
-                    <button type="submit" name="deleteAgent" class="btn btn-danger"
-                            value="<?php echo $tabAgent[$i]['idAgent']; ?>"
-                            onclick="return confirmer()"><span class="glyphicon glyphicon-trash"></span> Supprimer
-                    </button>
-                </td>
+    <!-- Affichage des agents -->
+    <div class="container-flui col-lg-offset-1 col-lg-10">
+        <table class="table table-bordered">
+            <tr class="color-grey">
+                <th class="thCentre">Nom</th>
+                <th class="thCentre">Prénom</th>
+                <th class="thCentre">Login</th>
+                <th class="thCentre">Mot de passe</th>
+                <th class="thCentre">Statut</th>
+                <th class="thCentre">Supprimer</th>
             </tr>
-            <?php } ?>
-            <!-- Affichage de 4 boutons -->
-            <div class="col-md-5 col-lg-offset-4">
-                <button type="submit" name="annuler" class="btn btn-success"><span
-                        class="glyphicon glyphicon-ban-circle"></span> Annuler
-                </button>
-                <button type="submit" name="updateAgent" class="btn btn-warning"><span
-                        class="glyphicon glyphicon-floppy-open"></span> Enregistrer
-                </button>
-                <button type="submit" name="insertAgent" class="btn btn-primary"><span
-                        class="glyphicon glyphicon-user"></span> Nouvel Agent
-                </button>
-            </div>
-            </td>
-        </form>
-    </table>
-</div>
+            <br/>
 
-<!-- jQuery -->
-<script src="../bootstrap/js/jquery.min.js"></script>
+            <?php
+            for ($i = 0; $i < count($tabAgent); $i++) {
+                ?>
+                <form class="form-horizontal" method="POST" action="mod_Agent.php">
+                    <tr>
+                    <input type="hidden" name="idAgentForm<?php echo $i; ?>"
+                           value="<?php echo $tabAgent[$i]['idAgent']; ?>">
+                    <td>
+                        <input class="form-control" type="text" name="nomForm<?php echo $i; ?>"
+                               value="<?php echo $tabAgent[$i]['nom']; ?>">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="prenomForm<?php echo $i; ?>"
+                               value="<?php echo $tabAgent[$i]['prenom']; ?>">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="loginForm<?php echo $i; ?>"
+                               value="<?php echo $tabAgent[$i]['login']; ?>">
+                    </td>
+                    <td>
+                        <input class="form-control" type="password" name="mdpForm<?php echo $i; ?>"
+                               value="<?php echo $tabAgent[$i]['mdp']; ?>">
+                    </td>
+                    <td>
+                        <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A"
+    <?php
+    if ($tabAgent[$i]['statut'] == "A") {
+        echo " checked";
+    }
+    ?>>Administrateur
+                        <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxI" value="I"
+                               <?php
+                               if ($tabAgent[$i]['statut'] == "I") {
+                                   echo " checked";
+                               }
+                               ?>>Inactif
+                    </td>
+                    <td>
+                        <!-- Bouton Supprimer -->
+                        <button type="submit" name="deleteAgent" class="btn btn-danger"
+                                value="<?php echo $tabAgent[$i]['idAgent']; ?>"
+                                onclick="return confirmer()"><span class="glyphicon glyphicon-trash"></span> Supprimer
+                        </button>
+                    </td>
+                    </tr>
+<?php } ?>
+                <!-- Affichage de 4 boutons -->
+                <div class="col-md-5 col-lg-offset-4">
+                    <button type="submit" name="annuler" class="btn btn-success"><span
+                            class="glyphicon glyphicon-ban-circle"></span> Annuler
+                    </button>
+                    <button type="submit" name="updateAgent" class="btn btn-warning"><span
+                            class="glyphicon glyphicon-floppy-open"></span> Enregistrer
+                    </button>
+                    <button type="submit" name="insertAgent" class="btn btn-primary"><span
+                            class="glyphicon glyphicon-user"></span> Nouvel Agent
+                    </button>
+                </div>
+                </td>
+            </form>
+        </table>
+    </div>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../bootstrap/js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bootstrap/js/metisMenu.min.js"></script>
 
 
-<!-- Custom Theme JavaScript -->
-<script src="../bootstrap/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>

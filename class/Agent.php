@@ -1,5 +1,7 @@
 <?php
 
+require_once ('../include/alice_dao.inc.php');
+
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -119,6 +121,20 @@ class Agent {
      */
     public function setIdBiblio($idBiblio) {
         $this->idBiblio = $idBiblio;
+    }
+
+    public function selectUser() {
+        $dao = new Dao();
+
+        $sql = "SELECT prenom 
+                FROM agent as a
+                ORDER BY prenom ASC";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
     }
 
     function selectAllAgent() {
