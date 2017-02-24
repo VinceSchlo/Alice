@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -16,15 +17,15 @@ class Ferie {
      * Ferie constructor.
      */
     public function __construct() {
- 
+        
     }
 
     // Génération des Getters
-    
+
     function getIdFerie() {
         return $this->idFerie;
     }
-    
+
     function getNomFerie() {
         return $this->nomFerie;
     }
@@ -41,7 +42,7 @@ class Ferie {
     function setIdFerie($idFerie) {
         $this->idFerie = $idFerie;
     }
-    
+
     function setNomFerie($nomFerie) {
         $this->nomFerie = $nomFerie;
     }
@@ -54,7 +55,6 @@ class Ferie {
         $this->dateFinFerie = $dateFinFerie;
     }
 
-    
     function selectAllFerie() {
         // Connexion à la base de données
         $dao = new Dao();
@@ -72,7 +72,7 @@ class Ferie {
         $resu = $dao->executeRequete($sql);
     }
 
-    public function selectFerie($debutSemaine, $finSemaine){
+    public function selectFerie($debutSemaine, $finSemaine) {
         $dao = new Dao();
 
         $sql = "SELECT * FROM ferie WHERE dateDebFerie BETWEEN '$debutSemaine' AND '$finSemaine'";
@@ -81,7 +81,5 @@ class Ferie {
 
         return $resu->fetchAll(PDO::FETCH_ASSOC);
     }
-
-
 
 }

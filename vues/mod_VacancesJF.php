@@ -11,9 +11,8 @@ require_once('../include/alice_fonctions.php');
     <!-- Affichage du titre de la page -->
     <h2>Modification des dates des vacances scolaires et des jours fériés</h2>
 </div>
-<?php include("../include/header_admin.php"); ?>
+<?php include("../include/header_admin.php");
 
-<?php
 // Création des objets jours fériés et Vacances
 $ferie = new Ferie();
 $vacances = new Vacances();
