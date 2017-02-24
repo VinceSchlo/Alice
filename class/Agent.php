@@ -1,7 +1,4 @@
 <?php
-
-require_once ('../include/alice_dao.inc.php');
-
 /**
  * Created by PhpStorm.
  * User: svinc

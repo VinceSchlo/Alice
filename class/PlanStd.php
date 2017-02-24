@@ -129,8 +129,7 @@ class PlanStd {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL
-        $sql = "INSERT INTO planstd (idAgent, idJour, horaireDeb, horaireFin, idPoste) VALUES
-                ('" . $this->idAgent . "',  '" . $this->idJour . "',  '" . $this->horaireDeb . "',  '" . $this->horaireFin . "',  '" . $this->idPoste . "' ); ";
+        $sql = "UPDATE planstd SET idPoste='$this->idPoste' WHERE idAgent='$this->idAgent' AND idJour='$this->idJour' AND horaireDeb='$this->horaireDeb' AND horaireFin='$this->horaireFin'";
         $resu = $dao->executeRequete($sql);
         return $resu; // retourne un string contenant la ligne de commande SQL
     }

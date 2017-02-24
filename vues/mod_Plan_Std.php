@@ -98,17 +98,22 @@ require_once('../include/alice_dao.inc.php');
             $poste = $oPoste->selectAllPoste();
 
             if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
-                // var_dump($_POST);
-                // exit;
+//                 var_dump($_POST);
+//                 exit;
                 for ($i = 0; $i < count($tabPlanStd); $i++) {
-                    $oplanStd->setIdAgent($_POST['idAgentForm' . $i]);
-                    $oplanStd->setIdJour($_POST['idJourForm' . $i]);
-		            $oplanStd->setHoraireDeb($_POST['horaireDebForm' . $i]);
-		            $oplanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
-		            $oplanStd->setIdPoste($_POST['idPosteForm' . $i]);
+                    $oPlanStd->setIdAgent($_POST['idAgentForm' . $i]);
+                    $oPlanStd->setIdJour($_POST['idJourForm' . $i]);
+		            $oPlanStd->setHoraireDeb($_POST['horaireDebForm' . $i]);
+		            $oPlanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
+		            $oPlanStd->setIdPoste($_POST['idPosteForm' . $i]);
                     // On met à jour la BDD planstd
-                    $oplanStd->insertPlanStd();
+                    $oPlanStd->insertPlanStd();
                 }
+            }
+
+            if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
+                // Retour à la page d'accueil administrateur sans modification
+                // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
             }
             
             // On rafraîchit le select pour afficher les modifs faites en BDD
