@@ -34,7 +34,7 @@ $oAgent = new Agent();
 $user = $oAgent->selectUser();
 
 $plan = new PlanStd();
-$poste = $plan->selectPlanStd();
+$tabPlanStd = $plan->selectPlanStd();
 $compte = 0;
 $t = 10;
 
@@ -81,25 +81,25 @@ if (isset($planReel) || isset($jourFerie)) {
     }
 
 //    Je remplace les données du planing standard par le planing réél (coulGroupe, idPoste, libPoste)
-    for ($j = 0; $j < count($poste); $j++) {
+    for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($planReel); $k++) {
-            if ($poste[$j]['idAgent'] == $planReel[$k]['idAgent'] && $poste[$j]['idJour'] == $planReel[$k]['dateReel'] && $poste[$j]['horaireDeb'] == $planReel[$k]['horaireDeb'] && $poste[$j]['horaireFin'] == $planReel[$k]['horaireFin']) {
+            if ($tabPlanStd[$j]['idAgent'] == $planReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $planReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $planReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $planReel[$k]['horaireFin']) {
 
-                $poste[$j]['libPoste'] = $planReel[$k]['libPoste'];
-                $poste[$j]['idPoste'] = $planReel[$k]['idPoste'];
-                $poste[$j]['coulGroupe'] = $planReel[$k]['coulGroupe'];
+                $tabPlanStd[$j]['libPoste'] = $planReel[$k]['libPoste'];
+                $tabPlanStd[$j]['idPoste'] = $planReel[$k]['idPoste'];
+                $tabPlanStd[$j]['coulGroupe'] = $planReel[$k]['coulGroupe'];
 
                 $k = count($planReel);
             }
         }
     }
-    for ($j = 0; $j < count($poste); $j++) {
+    for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($jourFerie); $k++) {
-            if ($poste[$j]['idJour'] == $jourFerie[$k]['dateDebFerie']) {
-
-                $poste[$j]['libPoste'] = "Férié";
-                $poste[$j]['coulGroupe'] = null;
-                $poste[$j]['idPoste'] = null;
+            if ($tabPlanStd[$j]['idJour'] == $jourFerie[$k]['dateDebFerie']) {
+                
+                $tabPlanStd[$j]['libPoste'] = "Ferie";
+                $tabPlanStd[$j]['coulGroupe'] = null;
+                $tabPlanStd[$j]['idPoste'] = null;
 
                 $k = count($planReel);
             }
@@ -277,16 +277,16 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             <?php
             $i = 0;
 
-            while ($i < count($poste)) { ?>
+            while ($i < count($tabPlanStd)) { ?>
                 <tr class="poste-size">
                     <td class="color-grey">
-                        <?php echo $poste[$i]['prenom']; ?>
+                        <?php echo $tabPlanStd[$i]['prenom']; ?>
                     </td>
                     <?php for ($j = 0; $j < 13; $j++) {
 
-                        $couleur = $poste[$i]['coulGroupe'];
+                        $couleur = $tabPlanStd[$i]['coulGroupe'];
                         echo "<td class=\"text-center\" style='background-color:$couleur'>";
-                        echo $poste[$i]['libPoste'];
+                        echo $tabPlanStd[$i]['libPoste'];
                         echo "</td>";
                         $i++;
                     } ?>

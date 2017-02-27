@@ -1,3 +1,11 @@
+<?php
+
+if(!isset($_SESSION['idAgent'])){
+    header("Location:../index.php");
+}
+
+?>
+
 <div class="col-lg-offset-2 col-lg-2">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -11,7 +19,7 @@
                     <li><a href=""></i>Décomptes</a>
                     </li>
 
-                    <li><a href="../index.php"></i>Modifier le planning</a>
+                    <li><a href="../vues/mod_Plan_Reel.php"></i>Modifier le planning</a>
                     </li>
 
                     <li><a href="../vues/mod_Plan_Std.php"></i>Modifier le planning type</a>

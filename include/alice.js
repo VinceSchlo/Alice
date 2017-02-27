@@ -109,3 +109,7 @@ function connexion() {
         document.getElementById("connexion").style.display = "none";
     }
 }
+
+function changeColor(){
+    var selectPlan = document.getElementById("selectPlan").style.backgroundColor;
+}

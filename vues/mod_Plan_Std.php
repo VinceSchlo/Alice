@@ -139,7 +139,7 @@ require_once('../include/alice_dao.inc.php');
                             <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
                                    value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                            <select name="idPosteForm<?php echo $l; ?>" class="form-control">
+                            <select id="selectPlan" name="idPosteForm<?php echo $l; ?>" class="form-control" onchange="changeColor()">
                                 <?php for ($k = 0; $k < count($poste); $k++) {
                                     if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) { ?>
 

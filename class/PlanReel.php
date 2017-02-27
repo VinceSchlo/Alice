@@ -6,7 +6,8 @@
  * Date: 15/02/2017
  * Time: 15:59
  */
-class PlanReel {
+class PlanReel
+{
 
     private $idAgent;
     private $dateReel;
@@ -17,81 +18,93 @@ class PlanReel {
     /**
      * PlanReel constructor.
      */
-    public function __construct() {
-        
+    public function __construct()
+    {
+
     }
 
     /**
      * @return mixed
      */
-    public function getIdAgent() {
+    public function getIdAgent()
+    {
         return $this->idAgent;
     }
 
     /**
      * @param mixed $idAgent
      */
-    public function setIdAgent($idAgent) {
+    public function setIdAgent($idAgent)
+    {
         $this->idAgent = $idAgent;
     }
 
     /**
      * @return mixed
      */
-    public function getDateReel() {
+    public function getDateReel()
+    {
         return $this->dateReel;
     }
 
     /**
      * @param mixed $dateReel
      */
-    public function setDateReel($dateReel) {
+    public function setDateReel($dateReel)
+    {
         $this->dateReel = $dateReel;
     }
 
     /**
      * @return mixed
      */
-    public function getHoraireDeb() {
+    public function getHoraireDeb()
+    {
         return $this->horaireDeb;
     }
 
     /**
      * @param mixed $horaireDeb
      */
-    public function setHoraireDeb($horaireDeb) {
+    public function setHoraireDeb($horaireDeb)
+    {
         $this->horaireDeb = $horaireDeb;
     }
 
     /**
      * @return mixed
      */
-    public function getHoraireFin() {
+    public function getHoraireFin()
+    {
         return $this->horaireFin;
     }
 
     /**
      * @param mixed $horaireFin
      */
-    public function setHoraireFin($horaireFin) {
+    public function setHoraireFin($horaireFin)
+    {
         $this->horaireFin = $horaireFin;
     }
 
     /**
      * @return mixed
      */
-    public function getIdPoste() {
+    public function getIdPoste()
+    {
         return $this->idPoste;
     }
 
     /**
      * @param mixed $idPoste
      */
-    public function setIdPoste($idPoste) {
+    public function setIdPoste($idPoste)
+    {
         $this->idPoste = $idPoste;
     }
 
-    public function selectReel($dateDebut, $dateFin) {
+    public function selectReel($dateDebut, $dateFin)
+    {
         $dao = new Dao();
 
         $sql = "SELECT plan.idAgent , plan.dateReel, plan.horaireDeb, plan.horaireFin, plan.idPoste, pos.libPoste, grp.coulGroupe
@@ -107,6 +120,37 @@ class PlanReel {
         $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
 
         return $ligne;
+    }
+
+    public function insertPlanReel()
+    {
+        $dao = new Dao();
+
+        $sql = "INSERT INTO planreel (idAgent, dateReel, horaireDeb, horaireFin, idPoste) VALUES ('" . $this->idAgent . "',  '" . $this->dateReel . "',  '" . $this->horaireDeb . "',  '" . $this->horaireFin . "',  '" . $this->idPoste . "')";
+
+        $dao->executeRequete($sql);
+    }
+
+    public function preUpdatePlanReel()
+    {
+        $dao = new Dao();
+
+        $sql = "SELECT * FROM planreel WHERE idAgent = '$this->idAgent' AND horaireDeb = '$this->horaireDeb' AND horaireFin = '$this->horaireFin' AND dateReel = '$this->dateReel'";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+    }
+
+    public function updatePlanReel()
+    {
+        $dao = new Dao();
+
+        $sql = "UPDATE planreel SET idPoste='$this->idPoste' WHERE idAgent='$this->idAgent' AND horaireDeb = '$this->horaireDeb' AND horaireFin = '$this->horaireFin' AND dateReel = '$this->dateReel'";
+
+        $dao->executeRequete($sql);
     }
 
 }
