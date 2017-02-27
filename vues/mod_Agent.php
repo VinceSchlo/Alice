@@ -103,17 +103,17 @@ $tabAgent = $agent->selectAllAgent();
                     </td>
                     <td>
                         <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A"
-    <?php
-    if ($tabAgent[$i]['statut'] == "A") {
-        echo " checked";
-    }
-    ?>>Administrateur
+                        <?php
+                        if ($tabAgent[$i]['statut'] == "A") {
+                            echo " checked";
+                        }
+                        ?>>Administrateur
                         <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxI" value="I"
-                               <?php
-                               if ($tabAgent[$i]['statut'] == "I") {
-                                   echo " checked";
-                               }
-                               ?>>Inactif
+                        <?php
+                        if ($tabAgent[$i]['statut'] == "I") {
+                            echo " checked";
+                        }
+                        ?>>Inactif
                     </td>
                     <td>
                         <!-- Bouton Supprimer -->
@@ -123,7 +123,7 @@ $tabAgent = $agent->selectAllAgent();
                         </button>
                     </td>
                     </tr>
-<?php } ?>
+                <?php } ?>
                 <!-- Affichage de 4 boutons -->
                 <div class="col-md-5 col-lg-offset-4">
                     <button type="submit" name="annuler" class="btn btn-success"><span

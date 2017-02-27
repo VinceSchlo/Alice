@@ -71,7 +71,7 @@ $tabFerie = $ferie->selectAllFerie();
                 <?php
                 for ($i = 0; $i < count($tabVacances); $i++) {
                     ?>
-                    <form class="form-horizontal" method="POST" action="mod_VacancesJF.php">
+                    <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDates(this)">
                         <tr>
                         <input type="hidden" name="idVacForm<?php echo $i; ?>"
                                value="<?php echo $tabVacances[$i]['idVac']; ?>">
@@ -80,12 +80,12 @@ $tabFerie = $ferie->selectAllFerie();
                                    value="<?php echo $tabVacances[$i]['nomVac']; ?>">
                         </td>
                         <td>
-                            <input size="10" class="form-control" type="text" name="dateDebForm<?php echo $i; ?>"
+                            <input size="10" class="form-control" id ="dateDeb" type="text" name="dateDebForm<?php echo $i; ?>"
                                    value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>">
                         </td>
                         <td>
-                            <input size="10" class="form-control" type="text" name="dateFinForm<?php echo $i; ?>"
-                                   value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>">
+                            <input size="10" class="form-control" id ="dateFin" type="text" name="dateFinForm<?php echo $i; ?>"
+                                   value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>" onblur="verifDate(this)" >
                         </td>
                         </tr>
                     <?php } ?>
@@ -117,7 +117,7 @@ $tabFerie = $ferie->selectAllFerie();
                 $j = 0;
                 for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
                     ?>
-                    <form class="form-horizontal" method="POST" action="mod_VacancesJF.php">
+                    <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDates(this)">
                         <tr>
                         <input type="hidden" name="idFerieForm<?php echo $i; ?>"
                                value="<?php echo $tabFerie[$j]['idFerie']; ?>">

@@ -39,91 +39,93 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
     //
 } else if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
     // Retour à la page de modification des agents
-    die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
+    // die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
+    header("Location: mod_Agent.php");
 }
 ?>
 <body>
-<!-- Formulaire des coordonnées d'un nouvel agent -->
-<form class="form-horizontal" action="add_Agent.php" onsubmit="return verif2MdpForm()" method="POST">
-    <fieldset>
-        <!-- Nom de l'agent-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="nom">Nom</label>
-            <div class="col-md-4">
-                <input size="20" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" required=""
-                       type="text">
+    <!-- Formulaire des coordonnées d'un nouvel agent -->
+    <form class="form-horizontal" action="add_Agent.php" method="POST" onsubmit="return verifAddAgentForm(this)">
+        <fieldset>
+            <!-- Nom de l'agent-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="nom">Nom</label>
+                <div class="col-md-4">
+                    <input size="20" type="text" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" 
+                           onblur="verifNom(this)"/>
+                </div>
             </div>
-        </div>
-        <!-- Prénom de l'agent-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="prenom">Prénom</label>
-            <div class="col-md-4">
-                <input size="20" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md"
-                       required="" type="text">
+            <!-- Prénom de l'agent-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="prenom">Prénom</label>
+                <div class="col-md-4">
+                    <input size="20" type="text" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md"
+                           onblur="verifNom(this)"/>
+                </div>
             </div>
-        </div>
-        <!-- 2 Checkboxes statut -->
-        <div class="form-group">
-            <label class="col-md-4 control-label">Statut</label>
-            <div class="col-md-4">
-                <label class="checkbox-inline">
-                    <input name="statutForm" id="checkboxA" value="A" type="checkbox" onclick="activeLoginMdpForm()">
-                    Administrateur
-                </label>
-                <label class="checkbox-inline">
-                    <input name="statutForm" id="checkboxI" value="I" type="checkbox">
-                    Inactif
-                </label>
+            <!-- 2 Checkboxes statut -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Statut</label>
+                <div class="col-md-4">
+                    <label class="checkbox-inline">
+                        <input name="statutForm" id="checkboxA" value="A" type="checkbox" onclick="activeLoginMdpForm()"/>
+                        Administrateur
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="statutForm" id="checkboxI" value="I" type="checkbox">
+                        Inactif
+                    </label>
+                </div>
             </div>
-        </div>
-        <!-- Saisie du login -->
-        <div class="form-group">
-            <label class="col-md-4 control-label"></label>
-            <div class="col-md-4" id="divLogin" style='display:none;'>
-                <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion"
-                       class="form-control input-md">
+            <!-- Saisie du login -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4" id="divLogin" style='display:none;'>
+                    <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion"
+                           class="form-control input-md" onblur="verifNom(this)"/>
+                </div>
             </div>
-        </div>
-        <!-- Saisie du MDP -->
-        <div class="form-group">
-            <label class="col-md-4 control-label"></label>
-            <div class="col-md-4" id="divMdp1" style='display:none;'>
-                <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe"
-                       class="form-control input-md">
+            <!-- Saisie du MDP1 -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4" id="divMdp1" style='display:none;'>
+                    <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe"
+                           class="form-control input-md">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-4 control-label"></label>
-            <div class="col-md-4" id="divMdp2" style='display:none;'>
-                <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe"
-                       class="form-control input-md">
+            <!-- Saisie du MDP2 -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4" id="divMdp2" style='display:none;'>
+                    <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe"
+                           class="form-control input-md">
+                </div>
             </div>
-        </div>
-        <!-- Button (Double) -->
-        <div class="form-group">
-            <label class="col-md-4 control-label"></label>
-            <div class="col-md-8">
-                <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span>
-                    Annuler
-                </button>
-                <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open"></span>
-                    Enregistrer
-                </button>
+            <!-- Button (Double) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-8">
+                    <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span>
+                        Annuler
+                    </button>
+                    <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open"></span>
+                        Enregistrer
+                    </button>
+                </div>
             </div>
-        </div>
 
-    </fieldset>
-</form>
-<!-- jQuery -->
-<script src="../bootstrap/js/jquery.min.js"></script>
+        </fieldset>
+    </form>
+    <!-- jQuery -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../bootstrap/js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bootstrap/js/metisMenu.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="../bootstrap/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>
