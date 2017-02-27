@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -161,18 +162,27 @@ class Agent {
         $dao->executeRequete($sql);
     }
 
+    function getMaxIdAgent() { // Retourne la valeur MAX de l'idAgent
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL 
+        $sql = "SELECT MAX(idAgent) FROM agent";
+        $resu = $dao->executeRequete($sql);
+        return $resu->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function insertAgent() {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL
-        $sql = "INSERT INTO agent (nom, prenom, login, mdp, statut, idBiblio) VALUES ('" . $this->nom . "',  '" . $this->prenom . "',  '" . $this->login . "',  '" . $this->mdp . "',  '" . $this->statut . "',  '" . $this->idBiblio . "' );
+        $sql = "INSERT INTO agent (idAgent, nom, prenom, login, mdp, statut, idBiblio) VALUES ('" . $this->idAgent . "', '" . $this->nom . "',  '" . $this->prenom . "',  '" . $this->login . "',  '" . $this->mdp . "',  '" . $this->statut . "',  '" . $this->idBiblio . "' );
                 INSERT INTO planstd (idAgent, idJour, horaireDeb, horaireFin, idPoste) VALUES 
-                ((SELECT MAX(idAgent) FROM agent), 1, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 1, 4, 7, 21), 
-                ((SELECT MAX(idAgent) FROM agent), 2, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 2, 4, 7, 21),
-                ((SELECT MAX(idAgent) FROM agent), 3, 1, 3, 21), ((SELECT MAX(idAgent) FROM agent), 3, 3, 4, 21), ((SELECT MAX(idAgent) FROM agent), 3, 4, 7, 21),
-                ((SELECT MAX(idAgent) FROM agent), 4, 1, 3, 21), ((SELECT MAX(idAgent) FROM agent), 4, 3, 7, 21),
-                ((SELECT MAX(idAgent) FROM agent), 5, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 5, 4, 7, 21),
-                ((SELECT MAX(idAgent) FROM agent), 6, 1, 3, 21), ((SELECT MAX(idAgent) FROM agent), 6, 3, 5, 21); ";
+                ('" . $this->idAgent . "', 1, 2, 4, 21), ('" . $this->idAgent . "', 1, 4, 7, 21), 
+                ('" . $this->idAgent . "', 2, 2, 4, 21), ('" . $this->idAgent . "', 2, 4, 7, 21),
+                ('" . $this->idAgent . "', 3, 1, 3, 21), ('" . $this->idAgent . "', 3, 3, 4, 21), ('" . $this->idAgent . "', 3, 4, 7, 21),
+                ('" . $this->idAgent . "', 4, 1, 3, 21), ('" . $this->idAgent . "', 4, 3, 7, 21),
+                ('" . $this->idAgent . "', 5, 2, 4, 21), ('" . $this->idAgent . "', 5, 4, 7, 21),
+                ('" . $this->idAgent . "', 6, 1, 3, 21), ('" . $this->idAgent . "', 6, 3, 5, 21); ";
         $resu = $dao->executeRequete($sql);
         return $resu; // retourne un string contenant la ligne de commande SQL
     }

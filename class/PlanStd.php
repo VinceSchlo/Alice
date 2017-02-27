@@ -111,7 +111,7 @@ class PlanStd {
         return $ligne;
     }
     
-    function insertPlanStd() {
+    function updatePlanStd() {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL

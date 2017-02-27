@@ -20,6 +20,11 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
     // exit;
     // Création d'un objet agent
     $agent = new Agent();
+    // On va rechercher le dernier idAgent enregistré
+    $getMaxIdAgent = $agent->getMaxIdAgent();
+    // Enregistrement dans une variable du dernier idAgent enregistré incrémenté de 1
+    $idNewAgent = $getMaxIdAgent[0]['MAX(idAgent)'] + 1;
+    $agent->setIdAgent($idNewAgent);
     $agent->setNom(addslashes(detecTiret($_POST['nomForm'])));
     $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm'])));
     $agent->setStatut($_POST['statutForm']);
