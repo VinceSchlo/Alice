@@ -13,7 +13,7 @@ require_once('../include/alice_dao.inc.php');
 
 <!-- Affichage du titre de la page -->
 <div class="col-lg-offset-2 col-lg-3">
-    <h2>Modification planning standard</h2>
+    <h2>Modification du planning standard</h2>
 </div>
 <?php include("../include/header_admin.php"); ?>
 
@@ -138,7 +138,7 @@ require_once('../include/alice_dao.inc.php');
                             <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
                                    value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                            <select name="idPosteForm<?php echo $l; ?>" class="form-control">
+                            <select id="selectPlan" name="idPosteForm<?php echo $l; ?>" class="form-control" onchange="changeColor()">
                                 <?php for ($k = 0; $k < count($poste); $k++) {
                                     if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) { ?>
 
