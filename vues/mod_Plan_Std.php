@@ -15,6 +15,7 @@ require_once('../include/alice_dao.inc.php');
 <div class="col-lg-offset-2 col-lg-3">
     <h2>Modification du planning standard</h2>
 </div>
+
 <?php include("../include/header_admin.php"); ?>
 
 <body>
@@ -107,7 +108,7 @@ require_once('../include/alice_dao.inc.php');
 		            $oPlanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
 		            $oPlanStd->setIdPoste($_POST['idPosteForm' . $i]);
                     // On met à jour la BDD planstd
-                    $oPlanStd->insertPlanStd();
+                    $oPlanStd->updatePlanStd();
                 }
             }
 

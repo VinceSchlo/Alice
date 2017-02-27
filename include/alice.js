@@ -20,7 +20,7 @@ function activeLoginMdpForm() {
 function verif2MdpForm() {
     var statut = document.getElementById("divLogin").style.display;
     
-    if (statut== "block") {
+    if (statut == "block") {
         var login = document.getElementById("login").value;
         var mdp1 = document.getElementById("mdp1").value;
         var mdp2 = document.getElementById("mdp2").value;
