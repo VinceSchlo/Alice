@@ -13,7 +13,7 @@ require_once('../include/alice_dao.inc.php');
 
 <!-- Affichage du titre de la page -->
 <div class="col-lg-offset-2 col-lg-3">
-    <h2>Modification planning standard</h2>
+    <h2>Modification du planning standard</h2>
 </div>
 <?php include("../include/header_admin.php"); ?>
 

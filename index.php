@@ -97,7 +97,7 @@ if (isset($planReel) || isset($jourFerie)) {
         for ($k = 0; $k < count($jourFerie); $k++) {
             if ($poste[$j]['idJour'] == $jourFerie[$k]['dateDebFerie']) {
 
-                $poste[$j]['libPoste'] = "Ferie";
+                $poste[$j]['libPoste'] = "Férié";
                 $poste[$j]['coulGroupe'] = null;
                 $poste[$j]['idPoste'] = null;
 

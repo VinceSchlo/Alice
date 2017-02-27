@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -161,11 +162,20 @@ class Agent {
         $dao->executeRequete($sql);
     }
 
+    function getMaxIdAgent() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        //Requête SQL 
+        $sql = "SELECT MAX(idAgent) FROM agent";
+        $resu = $dao->executeRequete($sql);
+        return $resu->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function insertAgent() {
         // Connexion à la base de données
         $dao = new Dao();
         //Requête SQL
-        $sql = "INSERT INTO agent (nom, prenom, login, mdp, statut, idBiblio) VALUES ('" . $this->nom . "',  '" . $this->prenom . "',  '" . $this->login . "',  '" . $this->mdp . "',  '" . $this->statut . "',  '" . $this->idBiblio . "' );
+        $sql = "INSERT INTO agent (idAgent, nom, prenom, login, mdp, statut, idBiblio) VALUES ('" . $this->idAgent . "', '" . $this->nom . "',  '" . $this->prenom . "',  '" . $this->login . "',  '" . $this->mdp . "',  '" . $this->statut . "',  '" . $this->idBiblio . "' );
                 INSERT INTO planstd (idAgent, idJour, horaireDeb, horaireFin, idPoste) VALUES 
                 ((SELECT MAX(idAgent) FROM agent), 1, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 1, 4, 7, 21), 
                 ((SELECT MAX(idAgent) FROM agent), 2, 2, 4, 21), ((SELECT MAX(idAgent) FROM agent), 2, 4, 7, 21),
