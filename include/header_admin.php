@@ -8,7 +8,7 @@ if(!isset($_SESSION['idAgent'])){
 
 <div class="col-lg-offset-2 col-lg-2">
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-static-top background-color-admin" role="navigation">
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
