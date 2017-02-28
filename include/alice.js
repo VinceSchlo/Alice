@@ -45,7 +45,6 @@ function verifAddAgentForm(f) {
     } else {
         if (statut === "block") {
             /* var login = document.getElementById("login").value; */
-
             var loginOK = verifNom(f.loginForm);
 
             if (!loginOK) {

@@ -19,132 +19,132 @@ require_once('../include/alice_dao.inc.php');
 <?php include("../include/header_admin.php"); ?>
 
 <body>
-<div class="container-fluid">
-    <table class="table border-table">
-        <!--            Affichage des jours-->
-        <tr class="color-grey text-size">
-            <th class="border-right"></th>
-            <th class="text-center border-right" colspan="2">Lundi</th>
-            <th class="text-center border-right" colspan="2">Mardi</th>
-            <th class="text-center border-right" colspan="3">Mercredi</th>
-            <th class="text-center border-right" colspan="2">Jeudi</th>
-            <th class="text-center border-right" colspan="2">Vendredi</th>
-            <th class="text-center border-right" colspan="2">Samedi</th>
-        </tr>
-        <!--            Affichage des horraires -->
-        <tr class="color-grey name-size border-right">
-            <td class="border-right">Personnel</td>
-            <?php
+    <div class="container-fluid">
+        <table class="table border-table">
+            <!-- Affichage des jours -->
+            <tr class="color-grey text-size">
+                <th class="border-right"></th>
+                <th class="text-center border-right" colspan="2">Lundi</th>
+                <th class="text-center border-right" colspan="2">Mardi</th>
+                <th class="text-center border-right" colspan="3">Mercredi</th>
+                <th class="text-center border-right" colspan="2">Jeudi</th>
+                <th class="text-center border-right" colspan="2">Vendredi</th>
+                <th class="text-center border-right" colspan="2">Samedi</th>
+            </tr>
+            <!-- Affichage des horaires -->
+            <tr class="color-grey name-size border-right">
+                <td class="border-right">Personnel</td>
+                <?php
+                $oHoraire = new Horaire();
+                $time = $oHoraire->selectHoraire();
 
-            $oHoraire = new Horaire();
-            $time = $oHoraire->selectHoraire();
-
-            for ($i = 0; $i < 4; $i++) {
-                if ($i % 2 == 0) {
-                    echo "<td class=\"text-center border-top-bot\">";
-                    echo substr($time[1]['libHoraire'], 0, 5), " - ";
-                    echo substr($time[3]['libHoraire'], 0, 5);
-                    echo "</td>";
+                for ($i = 0; $i < 4; $i++) {
+                    if ($i % 2 == 0) {
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[3]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                    if ($i % 2 != 0) {
+                        echo "<td class=\"text-center border-right\">";
+                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[6]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
                 }
-                if ($i % 2 != 0) {
-                    echo "<td class=\"text-center border-right\">";
-                    echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                    echo substr($time[6]['libHoraire'], 0, 5);
-                    echo "</td>";
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                echo substr($time[2]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                echo substr($time[3]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-right\">";
+                echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                echo substr($time[6]['libHoraire'], 0, 5);
+                echo "</td>";
+                for ($i = 0; $i < 4; $i++) {
+                    if ($i % 2 == 0) {
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[3]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                    if ($i % 2 != 0) {
+                        echo "<td class=\"text-center border-right\">";
+                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[6]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
                 }
-            }
-            echo "<td class=\"text-center border-top-bot\">";
-            echo substr($time[0]['libHoraire'], 0, 5), " - ";
-            echo substr($time[2]['libHoraire'], 0, 5);
-            echo "</td>";
-            echo "<td class=\"text-center border-top-bot\">";
-            echo substr($time[2]['libHoraire'], 0, 5), " - ";
-            echo substr($time[3]['libHoraire'], 0, 5);
-            echo "</td>";
-            echo "<td class=\"text-center border-right\">";
-            echo substr($time[3]['libHoraire'], 0, 5), " - ";
-            echo substr($time[6]['libHoraire'], 0, 5);
-            echo "</td>";
-            for ($i = 0; $i < 4; $i++) {
-                if ($i % 2 == 0) {
-                    echo "<td class=\"text-center border-top-bot\">";
-                    echo substr($time[1]['libHoraire'], 0, 5), " - ";
-                    echo substr($time[3]['libHoraire'], 0, 5);
-                    echo "</td>";
-                }
-                if ($i % 2 != 0) {
-                    echo "<td class=\"text-center border-right\">";
-                    echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                    echo substr($time[6]['libHoraire'], 0, 5);
-                    echo "</td>";
-                }
-            }
-            echo "<td class=\"text-center border-top-bot\">";
-            echo substr($time[0]['libHoraire'], 0, 5), " - ";
-            echo substr($time[2]['libHoraire'], 0, 5);
-            echo "</td>";
-            echo "<td class=\"text-center border-top-bot\">";
-            echo substr($time[2]['libHoraire'], 0, 5), " - ";
-            echo substr($time[4]['libHoraire'], 0, 5);
-            echo "</td>";
-            ?>
-        </tr>
-        <form class="form-horizontal" action="mod_Plan_Std.php" method="post">
-            <?php
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                echo substr($time[2]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                echo substr($time[4]['libHoraire'], 0, 5);
+                echo "</td>";
+                ?>
+            </tr>
+            <form class="form-horizontal" action="mod_Plan_Std.php" method="post">
+                <?php
+                $oPlanStd = new PlanStd();
+                $tabPlanStd = $oPlanStd->selectPlanStd();
 
-            $oPlanStd = new PlanStd();
-            $tabPlanStd = $oPlanStd->selectPlanStd();
+                $oPoste = new Poste();
+                $poste = $oPoste->selectAllPoste();
 
-            $oPoste = new Poste();
-            $poste = $oPoste->selectAllPoste();
-
-            if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
+                if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
 //                 var_dump($_POST);
 //                 exit;
-                for ($i = 0; $i < count($tabPlanStd); $i++) {
-                    $oPlanStd->setIdAgent($_POST['idAgentForm' . $i]);
-                    $oPlanStd->setIdJour($_POST['idJourForm' . $i]);
-                    $oPlanStd->setHoraireDeb($_POST['horaireDebForm' . $i]);
-                    $oPlanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
-                    $oPlanStd->setIdPoste($_POST['idPosteForm' . $i]);
-                    // On met à jour la BDD planstd
-                    $oPlanStd->updatePlanStd();
+                    for ($i = 0; $i < count($tabPlanStd); $i++) {
+                        $oPlanStd->setIdAgent($_POST['idAgentForm' . $i]);
+                        $oPlanStd->setIdJour($_POST['idJourForm' . $i]);
+                        $oPlanStd->setHoraireDeb($_POST['horaireDebForm' . $i]);
+                        $oPlanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
+                        $oPlanStd->setIdPoste($_POST['idPosteForm' . $i]);
+                        // On met à jour la BDD planstd
+                        $oPlanStd->updatePlanStd();
+                    }
                 }
-            }
 
-            if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
-                // Retour à la page d'accueil administrateur sans modification
-                // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
-            }
+                if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
+                    // Retour à la page d'accueil administrateur sans modification
+                    // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
+                }
 
-            // On rafraîchit le select pour afficher les modifs faites en BDD
-            $tabPlanStd = $oPlanStd->selectPlanStd();
+                // On rafraîchit le select pour afficher les modifs faites en BDD
+                $tabPlanStd = $oPlanStd->selectPlanStd();
 
-            $i = 0;
-            $l = 0;
+                $i = 0;
+                $l = 0;
 
-            while ($i < count($tabPlanStd)) { ?>
-                <tr>
-                    <td class="border-right color-grey">
-                        <?php echo $tabPlanStd[$i]['prenom']; ?>
-                    </td>
-                    <?php for ($j = 0; $j < 13; $j++) {
-                        switch ($j) {
-                            case 1:
-                            case 3:
-                            case 6:
-                            case 8:
-                            case 10:
-                            case 12:
-                                echo "<td class='text-center border-right'>";
-                                break;
-                            default:
-                                echo "<td class='text-center border-top-bot'>";
-                                break;
-                        }
-                        ?>
+                while ($i < count($tabPlanStd)) {
+                    ?>
+                    <tr>
+                        <td class="border-right color-grey">
+                            <?php echo $tabPlanStd[$i]['prenom']; ?>
+                        </td>
+                        <?php
+                        for ($j = 0; $j < 13; $j++) {
+                            switch ($j) {
+                                case 1:
+                                case 3:
+                                case 6:
+                                case 8:
+                                case 10:
+                                case 12:
+                                    echo "<td class='text-center border-right'>";
+                                    break;
+                                default:
+                                    echo "<td class='text-center border-top-bot'>";
+                                    break;
+                            }
+                            ?>
 
-                        <!-- Ajout des champ nécessaire pour l'enrefistrement : non visibles -->
+                            <!-- Ajout des champ nécessaire pour l'enregistrement : non visibles -->
                         <input type="hidden" name="idAgentForm<?php echo $l; ?>"
                                value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
                         <input type="hidden" name="idJourForm<?php echo $l; ?>"
@@ -154,11 +154,13 @@ require_once('../include/alice_dao.inc.php');
                         <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
                                value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                        <?php for ($k = 0; $k < count($poste); $k++) {
+                        <?php
+                        for ($k = 0; $k < count($poste); $k++) {
                             if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
                                 $couleur = $tabPlanStd[$i]['coulGroupe'];
                             }
-                        } ?>
+                        }
+                        ?>
 
                         <!-- Liste contenant tout les postes -->
                         <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
@@ -174,30 +176,36 @@ require_once('../include/alice_dao.inc.php');
                             </script>
 
                             <!-- Pour mettre le poste attribué en "selected" -->
-                            <?php for ($k = 0; $k < count($poste); $k++) {
-                                if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) { ?>
+                            <?php
+                            for ($k = 0; $k < count($poste); $k++) {
+                                if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                    ?>
 
                                     <option value="<?php echo $poste[$k]['idPoste']; ?>"
                                             selected=""
                                             style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-                                <?php } else { ?>
+                        <?php } else { ?>
 
                                     <option
                                         value="<?php echo $poste[$k]['idPoste']; ?>"
                                         style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-                                <?php }
-                            } ?>
+                                <?php
+                                }
+                            }
+                            ?>
                         </select>
-                        <?php $i++;
-                        $l++; ?>
+                        <?php
+                        $i++;
+                        $l++;
+                        ?>
                         </td>
-                    <?php } ?>
-                </tr>
-            <?php } ?>
+    <?php } ?>
+                    </tr>
+<?php } ?>
 
-                <!--            Affichage des horraires -->
+                <!-- Affichage des horaires -->
                 <tr class="color-grey name-size border-right">
                     <td class="border-right"></td>
                     <?php
@@ -254,7 +262,7 @@ require_once('../include/alice_dao.inc.php');
                     echo "</td>";
                     ?>
                 </tr>
-                <!--            Affichage des jours-->
+                <!-- Affichage des jours -->
                 <tr class="color-grey text-size">
                     <th class="border-right"></th>
                     <th class="text-center border-right" colspan="2">Lundi</th>

@@ -19,37 +19,27 @@ h2, h3, h4, p, .thCentre
    
 }
 
-.croixRouge {
-background:url(../images/Supprimer24x24.png);
-border:none;
-width: 24px; /* largeur à spécifier */
-height: 24px; /* longueur à spécifier */
-display: block;
-margin: auto;
-cursor: pointer;
-}
-
 .leftArrow {
-background:url(../images/back.png);
+background:url(../images/back48x48.png);
 border:none;
-width: 64px; /* largeur à spécifier */
-height: 64px; /* longueur à spécifier */
+width: 48px; /* largeur à spécifier */
+height: 48px; /* longueur à spécifier */
 cursor: pointer;
 }
 
 .rightArrow {
-background:url(../images/next.png);
+background:url(../images/next48x48.png);
 border:none;
-width: 64px; /* largeur à spécifier */
-height: 64px; /* longueur à spécifier */
+width:48px; /* largeur à spécifier */
+height: 48px; /* longueur à spécifier */
 cursor: pointer;
 }
 
 .house {
-background:url(../images/house.png);
+background:url(../images/house48x48.png);
 border:none;
-width: 64px; /* largeur à spécifier */
-height: 64px; /* longueur à spécifier */
+width: 48px; /* largeur à spécifier */
+height: 48px; /* longueur à spécifier */
 cursor: pointer;
 }
 
