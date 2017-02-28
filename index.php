@@ -129,8 +129,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     } else {
         // Si l'utilisateur existe garnir la variable $_SESSION
         $_SESSION = $agent;
-
-        header("Location:vues/mod_Agent.php");
+        header("Location:vues/mod_Plan_Reel.php");
     }
 } else
 ?>
