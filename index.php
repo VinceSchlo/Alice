@@ -164,7 +164,6 @@ require_once('include/alice_fonctions.php');
                                 </tr>
                             </table>
                         </div>
-
                         <h2 class="col-lg-2">
                             <br />
                             <?php

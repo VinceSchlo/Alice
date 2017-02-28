@@ -10,15 +10,7 @@ require_once('../include/alice_dao.inc.php');
 require_once('../include/alice_fonctions.php');
 //
 ?>
-<?php include("../include/doctype.php"); ?>
-
-<!-- Affichage du titre de la page -->
-<div class="col-lg-offset-2 col-lg-4">
-    <h2>Temps de service public et samedis travaillés</h2>
-</div>
-
-<?php
-include("../include/header_admin.php");
+<?php include("../include/doctype.php");
 
 $oAgent = new Agent();
 $tabAgent = $oAgent->selectUser();
@@ -102,72 +94,65 @@ $oHoraire = new Horaire();
 $time = $oHoraire->selectHoraire();
 ?>
 
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-2">
-                <img class="logo" src="images/logo_sna_quadri.png"/>
-            </div>
-            <div class="col-lg-8">
-                <div class="row">
-                    <div class="col-lg-offset-4 col-lg-3">
-                        <table class="table top-marge">
-                            <tr>
-                                <td>
-                                    <form action="" method="post">
-                                        <input type="submit" value=" " name="precedente" class="leftArrow">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="" method="post">
-                                        <input type="submit" value=" " name="home" class="house">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="" method="post">
-                                        <input type="submit" value=" " name="suivante" class="rightArrow">
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h2 class="col-lg-2">
-                        <?php
-                        echo "<br />";
-                        if ($_SESSION['weekNumber'] < 10) {
-                            echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
-                        } else {
-                            echo "Semaine n°" . $_SESSION['weekNumber'];
-                        }
-                        ?>
-                    </h2>
-                </div>
-                <div class="row">
-                    <h2 class="col-lg-offset-4 col-md-4">
-                        <?php
-                        echo "<br />";
-                        echo "<br />";
-                        echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-                        echo "<br />";
-                        ?>
-                    </h2>
-                </div>
-            </div>
+<div class="col-lg-6">
+    <div class="row">
+        <div class="col-lg-offset-4 col-lg-4">
+            <table class="table top-marge">
+                <tr>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="precedente" class="leftArrow">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="home" class="house">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="suivante" class="rightArrow">
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
+        <h2 class="col-lg-offset-1 col-lg-3">         
+            <?php        
+            if ($_SESSION['weekNumber'] < 10) {
+                echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
+            } else {
+                echo "Semaine n°" . $_SESSION['weekNumber'];
+            }
+            ?>
+        </h2>
     </div>
-  
+    <div class="row">
+        <h2 class="col-lg-offset-3 col-lg-10">
+            <?php
+            echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+            ?>
+        </h2>
+    </div>
+</div>
+<?php include("../include/header_admin.php"); ?>
+<!-- Affichage du titre de la page -->
+<div class="col-lg-offset-3 col-lg-6">
+    <h2>Temps de service public et samedis travaillés</h2>
+</div>
+
 <!-- jQuery -->
-    <script src="../bootstrap/js/jquery.min.js"></script>
+<script src="../bootstrap/js/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
-
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bootstrap/js/metisMenu.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../bootstrap/js/sb-admin-2.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../bootstrap/js/metisMenu.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>
