@@ -1,13 +1,14 @@
 <?php
 session_start(); // Utilisation des variables $_SESSION
 
-require_once('include/alice_dao.inc.php');
-require_once('include/alice_fonctions.php');
 require_once('class/Agent.php');
 require_once('class/PlanStd.php');
 require_once('class/PlanReel.php');
 require_once('class/Ferie.php');
-require_once('class/horaire.php');
+require_once('class/Horaire.php');
+require_once('include/alice_dao.inc.php');
+require_once('include/alice_fonctions.php');
+//
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,8 +32,8 @@ require_once('class/horaire.php');
     <?php
     $oAgent = new Agent();
     $user = $oAgent->selectUser();
-    $plan = new PlanStd();
-    $tabPlanStd = $plan->selectPlanStd();
+    $oPlanStd = new PlanStd();
+    $tabPlanStd = $oPlanStd->selectPlanStd();
     $compte = 0;
     $t = 10;
 
@@ -64,13 +65,13 @@ require_once('class/horaire.php');
 // Tableau des dates réelles du dimanche au samedi au format américain
     $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
 
-// Selection des plannings réél de la semaine
+// Selection des plannings réels de la semaine
     $oPlanReel = new PlanReel();
-    $planReel = $oPlanReel->selectReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
+    $planReel = $oPlanReel->selectPlanReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
     $oFerie = new Ferie();
     $jourFerie = $oFerie->selectFerie($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
 
-// Si $planReel contient un résultat, je remplace la date pas le numéro du jour de la semaine
+// Si $planReel contient un résultat, je remplace la date par le numéro du jour de la semaine
     if (isset($planReel) || isset($jourFerie)) {
         for ($i = 0; $i < count($planReel); $i++) {
             $planReel[$i]['dateReel'] = array_search($planReel[$i]['dateReel'], $tabDatesJoursSemaines);
@@ -79,7 +80,7 @@ require_once('class/horaire.php');
             $jourFerie[$i]['dateDebFerie'] = array_search($jourFerie[$i]['dateDebFerie'], $tabDatesJoursSemaines);
         }
 
-// Je remplace les données du planing standard par le planing réel (coulGroupe, idPoste, libPoste)
+// Je remplace les données du planning standard par le planing réel (coulGroupe, idPoste, libPoste)
         for ($j = 0; $j < count($tabPlanStd); $j++) {
             for ($k = 0; $k < count($planReel); $k++) {
                 if ($tabPlanStd[$j]['idAgent'] == $planReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $planReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $planReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $planReel[$k]['horaireFin']) {
@@ -163,9 +164,10 @@ require_once('class/horaire.php');
                                 </tr>
                             </table>
                         </div>
+
                         <h2 class="col-lg-2">
+                            <br />
                             <?php
-                            echo "<br />";
                             if ($_SESSION['weekNumber'] < 10) {
                                 echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
                             } else {
@@ -173,33 +175,29 @@ require_once('class/horaire.php');
                             }
                             ?>
                         </h2>
+                        <br />
                     </div>
                     <div class="row">
                         <h2 class="col-lg-offset-4 col-md-4">
                             <?php
-                            echo "<br />";
-                            echo "<br />";
                             echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-                            echo "<br />";
                             ?>
+                            <br />
                         </h2>
                     </div>
                 </div>
-
-                <!--        Formulaire de connexion -->
+                <!-- Formulaire de connexion -->
                 <div class="col-lg-1">
                     <?php
                     echo "<br />";
                     ?>
                     <button class="btn btn-default btn-lg color-button" onclick="connexion()"><span
-                            class="glyphicon glyphicon-user"></span> Se
-                        connecter
+                            class="glyphicon glyphicon-user"></span> Se connecter
                     </button>
                     <div id="connexion" style="display: none">
                         <form class="form-group" action="index.php" method="POST">
                             <label for="login">Login</label>
                             <input class="form-control" name="login" id="login" type="text" required>
-
                             <label for="mdp">Mot de passe</label>
                             <input class="form-control" name="mdp" id="mdp" type="password" required>
                             <button class="glyphicon glyphicon-off btn-warning btn pull-right" name="valider"></button>
@@ -209,10 +207,9 @@ require_once('class/horaire.php');
             </div>
         </div>
         <div class="container-fluid">
-
             <div class="col-lg-12">
                 <table class="table border-table">
-                    <!--            Affichage des jours-->
+                    <!-- Affichage des jours -->
                     <tr class="color-grey text-size">
                         <th class="border-right"></th>
                         <th class="text-center border-right" colspan="2">Lundi</th>
@@ -222,7 +219,7 @@ require_once('class/horaire.php');
                         <th class="text-center border-right" colspan="2">Vendredi</th>
                         <th class="text-center border-right" colspan="2">Samedi</th>
                     </tr>
-                    <!--            Affichage des horraires -->
+                    <!-- Affichage des horaires -->
                     <tr class="color-grey name-size border-right">
                         <td class="border-right">Personnel</td>
                         <?php
@@ -276,7 +273,7 @@ require_once('class/horaire.php');
                         echo "</td>";
                         ?>
                     </tr>
-                    <!--  Affichage du planing -->
+                    <!-- Affichage du planning -->
                     <?php
                     $i = 0;
 
@@ -312,8 +309,6 @@ require_once('class/horaire.php');
                     <?php } ?>
                 </table>
             </div>
-
         </div>
-
     </body>
 </html>

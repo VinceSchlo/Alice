@@ -10,12 +10,10 @@ require_once('../include/alice_dao.inc.php');
 ?>
 
 <?php include("../include/doctype.php"); ?>
-
 <!-- Affichage du titre de la page -->
 <div class="col-lg-offset-2 col-lg-4">
     <h2>Modification du planning standard</h2>
 </div>
-
 <?php include("../include/header_admin.php"); ?>
 
 <body>
@@ -286,8 +284,6 @@ require_once('../include/alice_dao.inc.php');
         </table>
     </div>
 
-
-</body>
 <!-- jQuery -->
 <script src="../bootstrap/js/jquery.min.js"></script>
 

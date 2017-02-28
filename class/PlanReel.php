@@ -103,7 +103,7 @@ class PlanReel
         $this->idPoste = $idPoste;
     }
 
-    public function selectReel($dateDebut, $dateFin)
+    public function selectPlanReel($dateDebut, $dateFin)
     {
         $dao = new Dao();
 

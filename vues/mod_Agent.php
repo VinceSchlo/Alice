@@ -1,6 +1,5 @@
 <?php
 session_start(); // Utilisation des variables $_SESSION
-header('Content-Type:text/html; charset=UTF8');
 
 require_once('../class/agent.php');
 require_once('../include/alice_fonctions.php');
@@ -12,9 +11,9 @@ require_once('../include/alice_dao.inc.php');
 <div class="col-lg-offset-2 col-md-4">
     <h2>Modification des agents</h2>
 </div>
-<?php include("../include/header_admin.php"); ?>
+<?php 
+include("../include/header_admin.php");
 
-<?php
 // Création d'un objet agent
 $agent = new Agent();
 // Création d'un tableau issu du select en BDD pour l'affichage
@@ -65,7 +64,7 @@ $tabAgent = $agent->selectAgentByName();
 ?>
 <body>
     <!-- Affichage des agents -->
-    <div class="container-flui col-lg-offset-1 col-lg-10">
+    <div class="container-fluid col-lg-offset-1 col-lg-10">
         <table class="table table-bordered">
             <tr class="color-grey">
                 <th class="thCentre">Nom</th>

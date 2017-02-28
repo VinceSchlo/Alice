@@ -16,20 +16,19 @@ if(!isset($_SESSION['idAgent'])){
                     <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href=""></i>Décomptes</a>
+                    <li><a href="../vues/decomptes.php">Décomptes</a>
                     </li>
 
-                    <li><a href="../vues/mod_Plan_Reel.php"></i>Modifier le planning</a>
+                    <li><a href="../vues/mod_Plan_Reel.php">Modifier le planning</a>
                     </li>
 
-                    <li><a href="../vues/mod_Plan_Std.php"></i>Modifier le planning type</a>
+                    <li><a href="../vues/mod_Plan_Std.php">Modifier le planning type</a>
                     </li>
 
-                    <li><a href="../vues/mod_Agent.php"></i>Modifier les agents</a>
+                    <li><a href="../vues/mod_Agent.php">Modifier les agents</a>
                     </li>
 
-                    <li><a href="../vues/mod_VacancesJF.php"></i>Modifier les horaires des vacances et des
-                            jours fériés</a>
+                    <li><a href="../vues/mod_VacancesJF.php">Modifier les horaires des vacances et des jours fériés</a>
                     </li>
 
                     <li class="divider"></li>

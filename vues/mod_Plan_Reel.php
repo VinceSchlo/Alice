@@ -97,12 +97,12 @@ if (isset($_POST['suivante'])) {
 // Tableau des dates réelles du dimanche au samedi au format américain
 $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
 
-// Selection des plannings réél de la semaine
-$planReel = $oPlanReel->selectReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
+// Selection des plannings réels de la semaine
+$planReel = $oPlanReel->selectPlanReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
 $oFerie = new Ferie();
 $jourFerie = $oFerie->selectFerie($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
 
-// Si $planReel contient un résultat, je remplace la date pas le numéro du jour de la semaine
+// Si $planReel contient un résultat, je remplace la date par le numéro du jour de la semaine
 if (isset($planReel) || isset($jourFerie)) {
     for ($i = 0; $i < count($planReel); $i++) {
         $planReel[$i]['dateReel'] = array_search($planReel[$i]['dateReel'], $tabDatesJoursSemaines);
@@ -111,7 +111,7 @@ if (isset($planReel) || isset($jourFerie)) {
         $jourFerie[$i]['dateDebFerie'] = array_search($jourFerie[$i]['dateDebFerie'], $tabDatesJoursSemaines);
     }
 
-//    Je remplace les données du planing standard par le planing réél (coulGroupe, idPoste, libPoste)
+// Je remplace les données du planing standard par le planing réel (coulGroupe, idPoste, libPoste)
     for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($planReel); $k++) {
             if ($tabPlanStd[$j]['idAgent'] == $planReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $planReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $planReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $planReel[$k]['horaireFin']) {
@@ -165,9 +165,9 @@ $time = $oHoraire->selectHoraire();
                 </tr>
             </table>
         </div>
-        <h2 class=" col-lg-offset-1 col-lg-3">
+        <h2 class="col-lg-offset-1 col-lg-3">
+            <br />
             <?php
-            echo "<br />";
             if ($_SESSION['weekNumber'] < 10) {
                 echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
             } else {
@@ -175,15 +175,13 @@ $time = $oHoraire->selectHoraire();
             }
             ?>
         </h2>
+          <br />
     </div>
     <div class="row">
-        <h2 class="col-lg-offset-4 col-md-5">
-            <?php
-            echo "<br />";
-            echo "<br />";
-            echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-            echo "<br />";
-            ?>
+        <h2 class="col-lg-offset-4 col-md-4">
+            <br />
+            <?php echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]); ?>
+          <br />
         </h2>
     </div>
 </div>
@@ -377,13 +375,13 @@ $time = $oHoraire->selectHoraire();
                                             selected=""
                                             style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-            <?php } else { ?>
+                                <?php } else { ?>
 
                                     <option
                                         value="<?php echo $poste[$k]['idPoste']; ?>"
                                         style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-                                <?php
+                                    <?php
                                 }
                             }
                             ?>
@@ -393,9 +391,9 @@ $time = $oHoraire->selectHoraire();
                         $l++;
                         ?>
                         </td>
-    <?php } ?>
-                    </tr>
                     <?php } ?>
+                    </tr>
+                <?php } ?>
                 <!--            Affichage des horraires -->
                 <tr class="color-grey name-size border-right">
                     <td class="border-right"></td>

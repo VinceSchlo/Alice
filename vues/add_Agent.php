@@ -12,9 +12,9 @@ require_once('../include/alice_dao.inc.php');
 <div class="col-lg-offset-2 col-lg-3">
     <h2>Ajout d'un agent</h2>
 </div>
-<?php include("../include/header_admin.php"); ?>
-
-<?php
+<?php 
+include("../include/header_admin.php");
+//
 if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['insertAgent'])) { // Cas du bouton orange "enregistrer"
     // var_dump($_POST);
     // exit;
