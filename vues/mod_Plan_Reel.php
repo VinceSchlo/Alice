@@ -269,7 +269,7 @@ $time = $oHoraire->selectHoraire();
 
             while ($i < count($tabPlanStd)) { ?>
                 <tr>
-                    <td class="border-right">
+                    <td class="border-right color-grey">
                         <?php echo $tabPlanStd[$i]['prenom']; ?>
                     </td>
                     <?php for ($j = 0;
@@ -359,6 +359,74 @@ $time = $oHoraire->selectHoraire();
                     <?php } ?>
                 </tr>
             <?php } ?>
+            <!--            Affichage des horraires -->
+            <tr class="color-grey name-size border-right">
+                <td class="border-right"></td>
+                <?php
+
+                $oHoraire = new Horaire();
+                $time = $oHoraire->selectHoraire();
+
+                for ($i = 0; $i < 4; $i++) {
+                    if ($i % 2 == 0) {
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[3]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                    if ($i % 2 != 0) {
+                        echo "<td class=\"text-center border-right\">";
+                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[6]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                }
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                echo substr($time[2]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                echo substr($time[3]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-right\">";
+                echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                echo substr($time[6]['libHoraire'], 0, 5);
+                echo "</td>";
+                for ($i = 0; $i < 4; $i++) {
+                    if ($i % 2 == 0) {
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[3]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                    if ($i % 2 != 0) {
+                        echo "<td class=\"text-center border-right\">";
+                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[6]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                }
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                echo substr($time[2]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                echo substr($time[4]['libHoraire'], 0, 5);
+                echo "</td>";
+                ?>
+            </tr>
+            <!--            Affichage des jours-->
+            <tr class="color-grey text-size">
+                <th class="border-right"></th>
+                <th class="text-center border-right" colspan="2">Lundi</th>
+                <th class="text-center border-right" colspan="2">Mardi</th>
+                <th class="text-center border-right" colspan="3">Mercredi</th>
+                <th class="text-center border-right" colspan="2">Jeudi</th>
+                <th class="text-center border-right" colspan="2">Vendredi</th>
+                <th class="text-center border-right" colspan="2">Samedi</th>
+            </tr>
             <div class="col-lg-offset-10 col-lg-2">
                 <!-- Affichage de 2 boutons -->
                 <button type="submit" name="annuler" class="btn btn-success"

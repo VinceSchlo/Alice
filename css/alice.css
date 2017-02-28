@@ -59,7 +59,7 @@ cursor: pointer;
 }
 
 .color-grey{
-    background-color: rgba(116, 116, 116, 0.87);
+    background-color: rgba(146, 146, 146, 0.87);
 }
 
 .text-size{
@@ -113,4 +113,8 @@ cursor: pointer;
     border-top: 2px solid #000000;
     border-right: 2px solid #000000;
     border-left: 2px solid #000000;
+}
+
+.background-color-admin{
+    background-color: #ffffcc ;
 }
