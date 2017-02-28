@@ -335,8 +335,26 @@ $time = $oHoraire->selectHoraire();
                         <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
                                value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                        <select id="selectPlan" name="idPosteForm<?php echo $l; ?>" class="form-control"
-                                onchange="changeColor()">
+                        <?php for ($k = 0; $k < count($poste); $k++) {
+                            if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                $couleur = $tabPlanStd[$i]['coulGroupe'];
+                            }
+                        } ?>
+
+                        <!-- Liste contenant tout les postes -->
+                        <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
+                                class="form-control" onchange="changeColor<?php echo $l; ?>()"
+                                style="background-color: <?php echo $couleur ?>">
+
+                            <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
+                            <script type="text/javascript">
+                                function changeColor<?php echo $l; ?>() {
+                                    var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
+                                    selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
+                                }
+                            </script>
+
+                            <!-- Pour mettre le poste attribué en "selected" -->
                             <?php for ($k = 0; $k < count($poste); $k++) {
                                 if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) { ?>
 

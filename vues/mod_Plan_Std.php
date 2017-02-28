@@ -104,9 +104,9 @@ require_once('../include/alice_dao.inc.php');
                 for ($i = 0; $i < count($tabPlanStd); $i++) {
                     $oPlanStd->setIdAgent($_POST['idAgentForm' . $i]);
                     $oPlanStd->setIdJour($_POST['idJourForm' . $i]);
-		            $oPlanStd->setHoraireDeb($_POST['horaireDebForm' . $i]);
-		            $oPlanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
-		            $oPlanStd->setIdPoste($_POST['idPosteForm' . $i]);
+                    $oPlanStd->setHoraireDeb($_POST['horaireDebForm' . $i]);
+                    $oPlanStd->setHoraireFin($_POST['horaireFinForm' . $i]);
+                    $oPlanStd->setIdPoste($_POST['idPosteForm' . $i]);
                     // On met à jour la BDD planstd
                     $oPlanStd->updatePlanStd();
                 }
@@ -116,7 +116,7 @@ require_once('../include/alice_dao.inc.php');
                 // Retour à la page d'accueil administrateur sans modification
                 // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
             }
-            
+
             // On rafraîchit le select pour afficher les modifs faites en BDD
             $tabPlanStd = $oPlanStd->selectPlanStd();
 
@@ -130,47 +130,68 @@ require_once('../include/alice_dao.inc.php');
                     </td>
                     <?php for ($j = 0; $j < 13; $j++) {
                         switch ($j) {
-                        case 1:
-                        case 3:
-                        case 6:
-                        case 8:
-                        case 10:
-                        case 12:
-                        echo "<td class='text-center border-right'>";
-                            break;
+                            case 1:
+                            case 3:
+                            case 6:
+                            case 8:
+                            case 10:
+                            case 12:
+                                echo "<td class='text-center border-right'>";
+                                break;
                             default:
-                            echo "<td class='text-center border-top-bot'>";
-                            break;
-                            }
+                                echo "<td class='text-center border-top-bot'>";
+                                break;
+                        }
                         ?>
-                            <input type="hidden" name="idAgentForm<?php echo $l; ?>"
-                                   value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
-                            <input type="hidden" name="idJourForm<?php echo $l; ?>"
-                                   value="<?php echo $tabPlanStd[$i]['idJour']; ?>">
-                            <input type="hidden" name="horaireDebForm<?php echo $l; ?>"
-                                   value="<?php echo $tabPlanStd[$i]['horaireDeb']; ?>">
-                            <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
-                                   value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                            <select id="selectPlan" name="idPosteForm<?php echo $l; ?>" class="form-control" onchange="changeColor()">
-                                <?php for ($k = 0; $k < count($poste); $k++) {
-                                    if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) { ?>
+                        <!-- Ajout des champ nécessaire pour l'enrefistrement : non visibles -->
+                        <input type="hidden" name="idAgentForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
+                        <input type="hidden" name="idJourForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['idJour']; ?>">
+                        <input type="hidden" name="horaireDebForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['horaireDeb']; ?>">
+                        <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                                        <option value="<?php echo $poste[$k]['idPoste']; ?>"
-                                                selected=""
-                                                style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+                        <?php for ($k = 0; $k < count($poste); $k++) {
+                            if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                $couleur = $tabPlanStd[$i]['coulGroupe'];
+                            }
+                        } ?>
 
-                                    <?php } else { ?>
+                        <!-- Liste contenant tout les postes -->
+                        <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
+                                class="form-control" onchange="changeColor<?php echo $l; ?>()"
+                                style="background-color: <?php echo $couleur ?>">
 
-                                        <option
-                                            value="<?php echo $poste[$k]['idPoste']; ?>"
+                            <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
+                            <script type="text/javascript">
+                                function changeColor<?php echo $l; ?>() {
+                                    var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
+                                    selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
+                                }
+                            </script>
+
+                            <!-- Pour mettre le poste attribué en "selected" -->
+                            <?php for ($k = 0; $k < count($poste); $k++) {
+                                if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) { ?>
+
+                                    <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                            selected=""
                                             style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-                                    <?php }
-                                } ?>
-                            </select>
-                            <?php $i++;
-                            $l++; ?>
+                                <?php } else { ?>
+
+                                    <option
+                                        value="<?php echo $poste[$k]['idPoste']; ?>"
+                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+
+                                <?php }
+                            } ?>
+                        </select>
+                        <?php $i++;
+                        $l++; ?>
                         </td>
                     <?php } ?>
                 </tr>
