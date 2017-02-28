@@ -25,7 +25,7 @@ function activeLoginMdpForm() {
 }
 
 function verifNom(champ) {
-    if (champ.value.length < 2 || champ.value.length > 20) {
+    if (champ.value.length < 3 || champ.value.length > 20) {
         surligne(champ, true);
         return false;
     } else {
