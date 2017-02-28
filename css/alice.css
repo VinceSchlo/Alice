@@ -95,3 +95,22 @@ cursor: pointer;
 .color-button{
     background-color: rgba(179, 179, 179, 0.85);
 }
+
+.border-right{
+    border-right: 3px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+}
+
+.border-top-bot{
+    border-bottom: 1px solid #000000;
+    border-top: 1px solid #000000;
+    border-right: 1px solid #000000;
+}
+
+.border-table{
+    border-bottom: 2px solid #000000;
+    border-top: 2px solid #000000;
+    border-right: 2px solid #000000;
+    border-left: 2px solid #000000;
+}
