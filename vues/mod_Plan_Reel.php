@@ -69,10 +69,9 @@ $compte = 0;
 $t = 10;
 
 if (!isset($_POST['precedente']) && !isset($_POST['suivante']) && !isset($_POST['enregistrer']) && !isset($_POST['annuler'])) {
-    $_SESSION['weekNumber'] = date("W");
+    $_SESSION['weekNumber'] = ltrim(date("W"), "0");
     $_SESSION['year'] = date("Y");
 }
-
 
 if (isset($_POST['precedente'])) {
     $_SESSION['weekNumber'] --;
@@ -81,9 +80,11 @@ if (isset($_POST['precedente'])) {
         $_SESSION['year'] --;
     }
 }
+
 if (isset($_POST['home'])) {
-    $_SESSION['weekNumber'] = date("W");
+    $_SESSION['weekNumber'] = ltrim(date("W"), "0");
 }
+
 if (isset($_POST['suivante'])) {
     $_SESSION['weekNumber'] ++;
     if ($_SESSION['weekNumber'] > 52) {
@@ -165,24 +166,24 @@ $time = $oHoraire->selectHoraire();
             </table>
         </div>
         <h2 class=" col-lg-offset-1 col-lg-3">
-<?php
-echo "<br />";
-if ($_SESSION['weekNumber'] < 10) {
-    echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
-} else {
-    echo "Semaine n°" . $_SESSION['weekNumber'];
-}
-?>
+            <?php
+            echo "<br />";
+            if ($_SESSION['weekNumber'] < 10) {
+                echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
+            } else {
+                echo "Semaine n°" . $_SESSION['weekNumber'];
+            }
+            ?>
         </h2>
     </div>
     <div class="row">
         <h2 class="col-lg-offset-4 col-md-5">
-<?php
-echo "<br />";
-echo "<br />";
-echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-echo "<br />";
-?>
+            <?php
+            echo "<br />";
+            echo "<br />";
+            echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+            echo "<br />";
+            ?>
         </h2>
     </div>
 </div>
@@ -205,59 +206,59 @@ echo "<br />";
             <!--            Affichage des horraires -->
             <tr class="color-grey name-size border-right">
                 <td class="border-right">Personnel</td>
-<?php
-$oHoraire = new Horaire();
-$time = $oHoraire->selectHoraire();
+                <?php
+                $oHoraire = new Horaire();
+                $time = $oHoraire->selectHoraire();
 
-for ($i = 0; $i < 4; $i++) {
-    if ($i % 2 == 0) {
-        echo "<td class=\"text-center border-top-bot\">";
-        echo substr($time[1]['libHoraire'], 0, 5), " - ";
-        echo substr($time[3]['libHoraire'], 0, 5);
-        echo "</td>";
-    }
-    if ($i % 2 != 0) {
-        echo "<td class=\"text-center border-right\">";
-        echo substr($time[3]['libHoraire'], 0, 5), " - ";
-        echo substr($time[6]['libHoraire'], 0, 5);
-        echo "</td>";
-    }
-}
-echo "<td class=\"text-center border-top-bot\">";
-echo substr($time[0]['libHoraire'], 0, 5), " - ";
-echo substr($time[2]['libHoraire'], 0, 5);
-echo "</td>";
-echo "<td class=\"text-center border-top-bot\">";
-echo substr($time[2]['libHoraire'], 0, 5), " - ";
-echo substr($time[3]['libHoraire'], 0, 5);
-echo "</td>";
-echo "<td class=\"text-center border-right\">";
-echo substr($time[3]['libHoraire'], 0, 5), " - ";
-echo substr($time[6]['libHoraire'], 0, 5);
-echo "</td>";
-for ($i = 0; $i < 4; $i++) {
-    if ($i % 2 == 0) {
-        echo "<td class=\"text-center border-top-bot\">";
-        echo substr($time[1]['libHoraire'], 0, 5), " - ";
-        echo substr($time[3]['libHoraire'], 0, 5);
-        echo "</td>";
-    }
-    if ($i % 2 != 0) {
-        echo "<td class=\"text-center border-right\">";
-        echo substr($time[3]['libHoraire'], 0, 5), " - ";
-        echo substr($time[6]['libHoraire'], 0, 5);
-        echo "</td>";
-    }
-}
-echo "<td class=\"text-center border-top-bot\">";
-echo substr($time[0]['libHoraire'], 0, 5), " - ";
-echo substr($time[2]['libHoraire'], 0, 5);
-echo "</td>";
-echo "<td class=\"text-center border-top-bot\">";
-echo substr($time[2]['libHoraire'], 0, 5), " - ";
-echo substr($time[4]['libHoraire'], 0, 5);
-echo "</td>";
-?>
+                for ($i = 0; $i < 4; $i++) {
+                    if ($i % 2 == 0) {
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[3]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                    if ($i % 2 != 0) {
+                        echo "<td class=\"text-center border-right\">";
+                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[6]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                }
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                echo substr($time[2]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                echo substr($time[3]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-right\">";
+                echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                echo substr($time[6]['libHoraire'], 0, 5);
+                echo "</td>";
+                for ($i = 0; $i < 4; $i++) {
+                    if ($i % 2 == 0) {
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[3]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                    if ($i % 2 != 0) {
+                        echo "<td class=\"text-center border-right\">";
+                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[6]['libHoraire'], 0, 5);
+                        echo "</td>";
+                    }
+                }
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                echo substr($time[2]['libHoraire'], 0, 5);
+                echo "</td>";
+                echo "<td class=\"text-center border-top-bot\">";
+                echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                echo substr($time[4]['libHoraire'], 0, 5);
+                echo "</td>";
+                ?>
             </tr>
             <form class="form-horizontal" action="mod_Plan_Reel.php" method="post">
                 <?php
@@ -271,36 +272,36 @@ echo "</td>";
                     ?>
                     <tr>
                         <td class="border-right color-grey">
-                    <?php echo $tabPlanStd[$i]['prenom']; ?>
+                            <?php echo $tabPlanStd[$i]['prenom']; ?>
                         </td>
-                            <?php
-                            for ($j = 0; $j < 13; $j++) {
-                                switch ($j) {
-                                    case 1:
-                                    case 3:
-                                    case 6:
-                                    case 8:
-                                    case 10:
-                                    case 12:
-                                        echo "<td class='text-center border-right'>";
-                                        break;
-                                    default:
-                                        echo "<td class='text-center border-top-bot'>";
-                                        break;
-                                }
+                        <?php
+                        for ($j = 0; $j < 13; $j++) {
+                            switch ($j) {
+                                case 1:
+                                case 3:
+                                case 6:
+                                case 8:
+                                case 10:
+                                case 12:
+                                    echo "<td class='text-center border-right'>";
+                                    break;
+                                default:
+                                    echo "<td class='text-center border-top-bot'>";
+                                    break;
+                            }
 
-                                switch ($j) {
+                            switch ($j) {
 
-                                    case 0:
-                                    case 1:
-                                        ?>
+                                case 0:
+                                case 1:
+                                    ?>
                                 <input type="hidden" name="dateReelForm<?php echo $l; ?>"
                                        value="<?php echo $tabDatesJoursSemaines[1]; ?>">
-                                    <?php
-                                    break;
-                                case 2:
-                                case 3:
-                                    ?>
+                                       <?php
+                                       break;
+                                   case 2:
+                                   case 3:
+                                       ?>
                                 <input type="hidden" name="dateReelForm<?php echo $l; ?>"
                                        value="<?php echo $tabDatesJoursSemaines[2]; ?>">
                                        <?php
@@ -325,16 +326,17 @@ echo "</td>";
                                        ?>
                                 <input type="hidden" name="dateReelForm<?php echo $l; ?>"
                                        value="<?php echo $tabDatesJoursSemaines[5]; ?>">
-                <?php
-                break;
-            case 11:
-            case 12:
-                ?>
+                                       <?php
+                                       break;
+                                   case 11:
+                                   case 12:
+                                       ?>
                                 <input type="hidden" name="dateReelForm<?php echo $l; ?>"
                                        value="<?php echo $tabDatesJoursSemaines[6]; ?>">
-                <?php break;
-        }
-        ?>
+                                       <?php
+                                       break;
+                               }
+                               ?>
 
                         <input type="hidden" name="idAgentForm<?php echo $l; ?>"
                                value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
@@ -345,14 +347,13 @@ echo "</td>";
                         <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
                                value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-        <?php
-        for ($k = 0; $k < count($poste); $k++) {
-            if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                $couleur = $tabPlanStd[$i]['coulGroupe'];
-            }
-        }
-        ?>
-
+                        <?php
+                        for ($k = 0; $k < count($poste); $k++) {
+                            if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                $couleur = $tabPlanStd[$i]['coulGroupe'];
+                            }
+                        }
+                        ?>
                         <!-- Liste contenant tout les postes -->
                         <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
                                 class="form-control" onchange="changeColor<?php echo $l; ?>()"
@@ -367,29 +368,32 @@ echo "</td>";
                             </script>
 
                             <!-- Pour mettre le poste attribué en "selected" -->
-        <?php for ($k = 0; $k < count($poste); $k++) {
-            if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                ?>
+                            <?php
+                            for ($k = 0; $k < count($poste); $k++) {
+                                if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                    ?>
 
                                     <option value="<?php echo $poste[$k]['idPoste']; ?>"
                                             selected=""
                                             style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-                            <?php } else { ?>
+            <?php } else { ?>
 
                                     <option
                                         value="<?php echo $poste[$k]['idPoste']; ?>"
                                         style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-            <?php }
-        }
-        ?>
-                        </select>
-                            <?php $i++;
-                            $l++;
+                                <?php
+                                }
+                            }
                             ?>
+                        </select>
+                        <?php
+                        $i++;
+                        $l++;
+                        ?>
                         </td>
-                        <?php } ?>
+    <?php } ?>
                     </tr>
                     <?php } ?>
                 <!--            Affichage des horraires -->

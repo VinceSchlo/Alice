@@ -18,7 +18,7 @@ require_once('../include/alice_dao.inc.php');
 // Création d'un objet agent
 $agent = new Agent();
 // Création d'un tableau issu du select en BDD pour l'affichage
-$tabAgent = $agent->selectAllAgent();
+$tabAgent = $agent->selectAgentByName();
 // var_dump($tabAgent);
 // exit;
 
@@ -49,7 +49,6 @@ if (isset($_POST['deleteAgent'])) {
     // On met à jour la BDD agent
     $agent->deleteAgent();
     // On rafraîchit le select pour afficher les modifs faites en BDD
-    $tabAgent = $agent->selectAllAgent();
 }
 
 if (isset($_POST['insertAgent'])) {
@@ -61,7 +60,7 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
     // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
 }
 // On rafraîchit le select pour afficher les modifs faites en BDD
-$tabAgent = $agent->selectAllAgent();
+$tabAgent = $agent->selectAgentByName();
 //
 ?>
 <body>
@@ -124,7 +123,7 @@ $tabAgent = $agent->selectAllAgent();
                     </td>
                     </tr>
                 <?php } ?>
-                <!-- Affichage de 4 boutons -->
+                <!-- Affichage de 3 boutons -->
                 <div class="col-md-5 col-lg-offset-4">
                     <button type="submit" name="annuler" class="btn btn-success"><span
                             class="glyphicon glyphicon-ban-circle"></span> Annuler

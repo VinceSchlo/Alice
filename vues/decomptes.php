@@ -37,7 +37,7 @@ require_once('class/horaire.php');
     $t = 10;
 
     if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
-        $_SESSION['weekNumber'] = ltrim(date("W"), "0");
+        $_SESSION['weekNumber'] = date("W");
         $_SESSION['year'] = date("Y");
     }
 
@@ -50,7 +50,7 @@ require_once('class/horaire.php');
     }
 
     if (isset($_POST['home'])) {
-        $_SESSION['weekNumber'] = ltrim(date("W"), "0");
+        $_SESSION['weekNumber'] = date("W");
     }
 
     if (isset($_POST['suivante'])) {
@@ -125,13 +125,13 @@ require_once('class/horaire.php');
             //Si idientifiant ou mdp faux alert JAVAscript
             ?>
             <script>alert('Mauvais login ou mdp')</script> <?php
-        } else {
-            // Si l'utilisateur existe garnir la variable $_SESSION
-            $_SESSION = $agent;
-            header("Location:vues/mod_Plan_Reel.php");
-        }
-    } else
-        
+    } else {
+        // Si l'utilisateur existe garnir la variable $_SESSION
+        $_SESSION = $agent;
+        header("Location:vues/mod_Plan_Reel.php");
+    }
+} else
+    
         ?>
 
     <body>
@@ -166,7 +166,7 @@ require_once('class/horaire.php');
                         <h2 class="col-lg-2">
                             <?php
                             echo "<br />";
-                            if ($_SESSION['weekNumber'] < 10) {
+                            if ($_SESSION['weekNumber'] < 10){
                                 echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
                             } else {
                                 echo "Semaine n°" . $_SESSION['weekNumber'];
@@ -284,7 +284,7 @@ require_once('class/horaire.php');
                         ?>
                         <tr class="poste-size border-right">
                             <td class="color-grey border-right">
-                                <?php echo $tabPlanStd[$i]['prenom']; ?>
+                            <?php echo $tabPlanStd[$i]['prenom']; ?>
                             </td>
                             <?php
                             for ($j = 0; $j < 13; $j++) {
@@ -309,7 +309,7 @@ require_once('class/horaire.php');
                             }
                             ?>
                         </tr>
-                    <?php } ?>
+<?php } ?>
                 </table>
             </div>
 
