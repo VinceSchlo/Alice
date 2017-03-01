@@ -62,7 +62,6 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
 
 $oAgent = new Agent();
 $user = $oAgent->selectUser();
-
 $plan = new PlanStd();
 $tabPlanStd = $plan->selectPlanStd();
 $compte = 0;
@@ -195,7 +194,7 @@ $time = $oHoraire->selectHoraire();
             <th class="text-center border-right" colspan="2">Vendredi</th>
             <th class="text-center border-right" colspan="2">Samedi</th>
         </tr>
-        <!--            Affichage des horraires -->
+        <!--            Affichage des horaires -->
         <tr class="color-grey name-size border-right">
             <td class="border-right">Personnel</td>
             <?php
@@ -388,7 +387,7 @@ $time = $oHoraire->selectHoraire();
                 <?php } ?>
                 </tr>
             <?php } ?>
-            <!--            Affichage des horraires -->
+            <!--            Affichage des horaires -->
             <tr class="color-grey name-size border-right">
                 <td class="border-right"></td>
                 <?php

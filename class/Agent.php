@@ -176,7 +176,7 @@ class Agent {
                 ('" . $this->idAgent . "', 1, 2, 4, 21), ('" . $this->idAgent . "', 1, 4, 7, 21), 
                 ('" . $this->idAgent . "', 2, 2, 4, 21), ('" . $this->idAgent . "', 2, 4, 7, 21),
                 ('" . $this->idAgent . "', 3, 1, 3, 21), ('" . $this->idAgent . "', 3, 3, 4, 21), ('" . $this->idAgent . "', 3, 4, 7, 21),
-                ('" . $this->idAgent . "', 4, 1, 3, 21), ('" . $this->idAgent . "', 4, 3, 7, 21),
+                ('" . $this->idAgent . "', 4, 2, 4, 21), ('" . $this->idAgent . "', 4, 4, 7, 21),
                 ('" . $this->idAgent . "', 5, 2, 4, 21), ('" . $this->idAgent . "', 5, 4, 7, 21),
                 ('" . $this->idAgent . "', 6, 1, 3, 21), ('" . $this->idAgent . "', 6, 3, 5, 21); ";
         $resu = $dao->executeRequete($sql);

@@ -30,13 +30,6 @@ require_once('include/alice_fonctions.php');
     </head>
 
     <?php
-    $oAgent = new Agent();
-    $user = $oAgent->selectUser();
-    $oPlanStd = new PlanStd();
-    $tabPlanStd = $oPlanStd->selectPlanStd();
-    $compte = 0;
-    $t = 10;
-
     if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
         $_SESSION['weekNumber'] = ltrim(date("W"), "0");
         $_SESSION['year'] = date("Y");
@@ -65,6 +58,10 @@ require_once('include/alice_fonctions.php');
 // Tableau des dates réelles du dimanche au samedi au format américain
     $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
 
+    $oAgent = new Agent();
+    $user = $oAgent->selectUser();
+    $oPlanStd = new PlanStd();
+    $tabPlanStd = $oPlanStd->selectPlanStd();
 // Selection des plannings réels de la semaine
     $oPlanReel = new PlanReel();
     $planReel = $oPlanReel->selectPlanReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
@@ -80,7 +77,7 @@ require_once('include/alice_fonctions.php');
             $jourFerie[$i]['dateDebFerie'] = array_search($jourFerie[$i]['dateDebFerie'], $tabDatesJoursSemaines);
         }
 
-// Je remplace les données du planning standard par le planing réel (coulGroupe, idPoste, libPoste)
+// Je remplace les données du planning standard par le planning réel (coulGroupe, idPoste, libPoste)
         for ($j = 0; $j < count($tabPlanStd); $j++) {
             for ($k = 0; $k < count($planReel); $k++) {
                 if ($tabPlanStd[$j]['idAgent'] == $planReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $planReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $planReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $planReel[$k]['horaireFin']) {
@@ -106,7 +103,7 @@ require_once('include/alice_fonctions.php');
             }
         }
     }
-
+    
     $oHoraire = new Horaire();
     $time = $oHoraire->selectHoraire();
 
@@ -284,7 +281,6 @@ require_once('include/alice_fonctions.php');
                             </td>
                             <?php
                             for ($j = 0; $j < 13; $j++) {
-
                                 $couleur = $tabPlanStd[$i]['coulGroupe'];
                                 switch ($j) {
                                     case 1:

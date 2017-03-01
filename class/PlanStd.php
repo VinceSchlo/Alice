@@ -92,8 +92,9 @@ class PlanStd {
     }
 
     public function selectPlanStd() {
+        // Connexion à la base de données
         $dao = new Dao();
-
+        // Requête SQL
         $sql = "SELECT a.idAgent, prenom, idJour, libPoste, poste.idPoste, g.coulGroupe, plan.horaireDeb, plan.horaireFin
                 FROM agent as a
                 JOIN planstd as plan
@@ -110,15 +111,35 @@ class PlanStd {
 
         return $ligne;
     }
-    
+
+    public function selectDecPlanStd() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        // Requête SQL
+        $sql = "SELECT a.idAgent, prenom, idJour, poste.idPoste, poste.idGroupe, plan.horaireDeb, plan.horaireFin
+                FROM agent as a
+                JOIN planstd as plan
+                JOIN poste as poste
+                ON a.idAgent = plan.idAgent
+                AND plan.idPoste = poste.idPoste
+                WHERE poste.idGroupe=1 OR poste.idGroupe=2
+                ORDER BY a.prenom, plan.idJour, plan.horaireDeb";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+    }
+
     function updatePlanStd() {
         // Connexion à la base de données
         $dao = new Dao();
-        //Requête SQL
-
+        // Requête SQL
         $sql = "UPDATE planstd SET idPoste='$this->idPoste' WHERE idAgent='$this->idAgent' AND idJour='$this->idJour' AND horaireDeb='$this->horaireDeb' AND horaireFin='$this->horaireFin'";
 
         $resu = $dao->executeRequete($sql);
+
         return $resu; // retourne un string contenant la ligne de commande SQL
     }
 

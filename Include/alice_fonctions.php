@@ -20,7 +20,7 @@ function arrondi2virguleBDD($unNombre) {
 
 // Fonction pour formater une chaine de caractère : enlever les espaces et la convertir en lowercase
 function formatChaine($uneChaine) {
-    $uneChaine = mb_strtolower(trim($uneChaine),'UTF-8');
+    $uneChaine = mb_strtolower(trim($uneChaine), 'UTF-8');
 
     return $uneChaine;
 }
@@ -35,7 +35,7 @@ function detecTiret($uneChaine) {
             $uneChaine[$i + 1] = ucfirst($uneChaine[$i + 1]);
         }
     }
-   return $uneChaine;
+    return $uneChaine;
 }
 
 // Fonction pour fabriquer un login avec les premières lettres du prénom + le nom,
@@ -74,21 +74,34 @@ function convertDateUsFr($uneDate) {
 }
 
 // Fonction pour retourner la date exacte des jours du dimanche au samedi en fonction de la semaine et de l'année
-function datesJourSemaine($week, $year)
-{
-	$tabDatesJoursSemaines = array();
-	$firstDayInYear=date("N",mktime(0,0,0,1,1,$year));
-	if ($firstDayInYear<5)
-		$shift=-($firstDayInYear-1)*86400;
-	else
-		$shift=(8-$firstDayInYear)*86400;
-	if ($week>1) $weekInSeconds=($week-1)*604800; else $weekInSeconds=0;
-	for ($i=0; $i<=6; $i++) {
-		$timestamp = mktime(0,0,0,1,$i,$year)+$weekInSeconds+$shift;
-		$tabDatesJoursSemaines[$i] = date("Y-m-d",$timestamp);
-	}
-	
+function datesJourSemaine($week, $year) {
+    
+    $tabDatesJoursSemaines = array();
+    $firstDayInYear = date("N", mktime(0, 0, 0, 1, 1, $year));
+    if ($firstDayInYear < 5)
+        $shift = -($firstDayInYear - 1) * 86400;
+    else
+        $shift = (8 - $firstDayInYear) * 86400;
+    if ($week > 1)
+        $weekInSeconds = ($week - 1) * 604800;
+    else
+        $weekInSeconds = 0;
+    for ($i = 0; $i <= 6; $i++) {
+        $timestamp = mktime(0, 0, 0, 1, $i, $year) + $weekInSeconds + $shift;
+        $tabDatesJoursSemaines[$i] = date("Y-m-d", $timestamp);
+    }
+
     return $tabDatesJoursSemaines;
+}
+
+function convertTimeStringToNumber($timeString) {
+    
+    $timeNumber = floatval(substr($timeString, 0, 5));
+    if (substr($timeString, 3, 2) == "30") {
+        $timeNumber += 0.5;
+    }
+
+    return $timeNumber;
 }
 
 function lireDonnee($nomDonnee, $valDefaut = "") {

@@ -111,9 +111,24 @@ class PlanReel
                 FROM planreel as plan
                 JOIN poste as pos
                 JOIN groupe as grp
-                ON plan.idPoste = pos.idPoste
-                AND pos.idGroupe = grp.idGroupe
+                ON plan.idPoste = pos.idPoste AND pos.idGroupe = grp.idGroupe
                 WHERE dateReel BETWEEN '$dateDebut' AND '$dateFin'";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+    }
+    public function selectDecPlanReel($dateDebut, $dateFin)
+    {
+        $dao = new Dao();
+
+        $sql = "SELECT plan.idAgent , plan.dateReel, plan.idPoste, poste.idGroupe, plan.horaireDeb, plan.horaireFin
+                FROM planreel as plan
+                JOIN poste as poste
+                ON plan.idPoste = poste.idPoste
+                WHERE dateReel BETWEEN '$dateDebut' AND '$dateFin' AND poste.idGroupe=1 OR poste.idGroupe=2";
 
         $resu = $dao->executeRequete($sql);
 
