@@ -121,11 +121,21 @@ class Agent {
         $this->idBiblio = $idBiblio;
     }
 
-    public function selectUser() {
+    public function selectPrenomAgent() {
         // Connexion à la base de données
         $dao = new Dao();
         // Requête SQL 
         $sql = "SELECT prenom FROM agent";
+        $resu = $dao->executeRequete($sql);
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+        return $ligne;
+    }
+    
+    public function selectIdPrenomAgent() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        // Requête SQL 
+        $sql = "SELECT idAgent, prenom FROM agent";
         $resu = $dao->executeRequete($sql);
         $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
         return $ligne;
