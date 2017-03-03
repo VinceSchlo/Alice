@@ -111,7 +111,8 @@ class PlanStd {
 
         return $ligne;
     }
-public function selectPlanStdInactif() {
+
+    public function selectPlanStdInactif() {
         // Connexion à la base de données
         $dao = new Dao();
         // Requête SQL
@@ -132,7 +133,7 @@ public function selectPlanStdInactif() {
 
         return $ligne;
     }
-    
+
     public function selectDecPlanStd() {
         // Connexion à la base de données
         $dao = new Dao();
@@ -152,7 +153,7 @@ public function selectPlanStdInactif() {
 
         return $ligne;
     }
-    
+
     public function selectSamedisPlanStd() {
         // Connexion à la base de données
         $dao = new Dao();

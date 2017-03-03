@@ -22,13 +22,13 @@ if(!isset($_SESSION['idAgent'])){
                     <li><a href="../vues/mod_Plan_Reel.php">Modifier le planning</a>
                     </li>
 
-                    <li><a href="../vues/mod_Plan_Std.php">Modifier le planning type</a>
+                    <li><a href="../vues/mod_Plan_Std.php">Modifier le planning standard</a>
                     </li>
 
                     <li><a href="../vues/mod_Agent.php">Modifier les agents</a>
                     </li>
 
-                    <li><a href="../vues/mod_VacancesJF.php">Modifier les horaires des vacances et des jours fériés</a>
+                    <li><a href="../vues/mod_VacancesJF.php">Modifier dates vacances et jours fériés</a>
                     </li>
 
                     <li class="divider"></li>
@@ -36,7 +36,7 @@ if(!isset($_SESSION['idAgent'])){
                             déconnecter</a>
                     </li>
                 </ul>
-            </li>
+            </li> 
         </ul>
     </nav>
 </div>
