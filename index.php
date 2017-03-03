@@ -61,7 +61,7 @@ require_once('include/alice_fonctions.php');
     $oAgent = new Agent();
     $user = $oAgent->selectPrenomAgent();
     $oPlanStd = new PlanStd();
-    $tabPlanStd = $oPlanStd->selectPlanStd();
+    $tabPlanStd = $oPlanStd->selectPlanStdInactif();
 // Selection des plannings réels de la semaine
     $oPlanReel = new PlanReel();
     $planReel = $oPlanReel->selectPlanReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);

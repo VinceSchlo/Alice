@@ -71,20 +71,18 @@ if (!empty($tabPlanReel)) {
         }
     }
 
-    // On remplace les données du planning standard par le planning réel (idPoste, idGroupe)
+    // On remplace les données du planning standard par le planning réel (idPoste)
     for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($tabPlanReel); $k++) {
             // On vérifie si les jours sont non compris dans les jours fériés (cas des ponts)
             if ($tabPlanReel[$k]['dateReel'] < $jourDebFerie || $tabPlanReel[$k]['dateReel'] > $jourFinFerie) {
                 if ($tabPlanStd[$j]['idAgent'] == $tabPlanReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $tabPlanReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $tabPlanReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $tabPlanReel[$k]['horaireFin']) {
                     $tabPlanStd[$i]['idPoste'] = $tabPlanReel[$k]['idPoste'];
-                    $tabPlanStd[$i]['idGroupe'] = $tabPlanReel[$k]['idGroupe'];
                     $k = count($tabPlanReel);
                 } else { // On enregistre dans un nouveau tableau, le planning réel qui n'a pas été reporté dans le std
                     $tabPlanSum[$k]['idAgent'] = $tabPlanReel[$k]['idAgent'];
                     $tabPlanSum[$k]['idJour'] = $tabPlanReel[$k]['dateReel'];
                     $tabPlanSum[$k]['idPoste'] = $tabPlanReel[$k]['idPoste'];
-                    $tabPlanSum[$k]['idGroupe'] = $tabPlanReel[$k]['idGroupe'];
                     $tabPlanSum[$k]['horaireDeb'] = $tabPlanReel[$k]['horaireDeb'];
                     $tabPlanSum[$k]['horaireFin'] = $tabPlanReel[$k]['horaireFin'];
                 }
@@ -92,6 +90,7 @@ if (!empty($tabPlanReel)) {
         }
     }
 }
+
 // On regarde s'il existe des plannings réels reportés
 if (empty($tabPlanSum)) { // Cas où il n'y a pas de planning réel non reporté
     $k = 0;
@@ -106,13 +105,11 @@ for ($j = 0; $j < count($tabPlanStd); $j++) {
         // $tabPlanSum[$k]['prenom'] = $tabPlanStd[$j]['prenom'];
         $tabPlanSum[$k]['idJour'] = $tabPlanStd[$j]['idJour'];
         $tabPlanSum[$k]['idPoste'] = $tabPlanStd[$j]['idPoste'];
-        $tabPlanSum[$k]['idGroupe'] = $tabPlanStd[$j]['idGroupe'];
         $tabPlanSum[$k]['horaireDeb'] = $tabPlanStd[$j]['horaireDeb'];
         $tabPlanSum[$k]['horaireFin'] = $tabPlanStd[$j]['horaireFin'];
         $k++;
     }
 }
-
 // On remplace dans $tabPlanSum, les idHoraires par les vrais horaires de la table horaire en les convertissant en float
 // 13:30 devient 13.5 via la fonction convertTimeStringToNumber pour faciliter les calculs entre HoraireDebut et HoraireFin 
 $oHoraire = new Horaire();
@@ -161,11 +158,17 @@ foreach ($tabPlanSum as $key => $value) {
         }
     }
 }
-// Tri du tableau en fonction des prénoms pour l'affcihage
+// Tri du tableau en fonction des prénoms pour l'affichage
 asort($tabDecHeuresSp);
 // var_dump($tabPlanSum);
-var_dump($tabDecHeuresSp);
-exit(); 
+// var_dump($tabDecHeuresSp);
+
+// DECOMPTE DES SAMEDIS TRAVAILLES DEPUIS LE DEBUT DE L'ANNEE
+$oSamedisPlanStd = new PlanStd();
+$tabSamedisPlanStd = $oSamedisPlanStd->selectSamedisPlanStd();
+
+var_dump($tabSamedisPlanStd);
+exit();
 //
 ?>
 
@@ -222,10 +225,8 @@ exit();
 <!-- Bootstrap Core JavaScript -->
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../bootstrap/js/metisMenu.min.js"></script>
-
 
 <!-- Custom Theme JavaScript -->
 <script src="../bootstrap/js/sb-admin-2.js"></script>

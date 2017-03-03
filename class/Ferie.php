@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: svinc
@@ -57,7 +58,7 @@ class Ferie {
     function selectAllFerie() {
         // Connexion à la base de données
         $dao = new Dao();
-        //Requête SQL 
+        // Requête SQL 
         $sql = "SELECT * FROM ferie";
         $resu = $dao->executeRequete($sql);
         return $resu->fetchAll(PDO::FETCH_ASSOC);
@@ -66,18 +67,17 @@ class Ferie {
     function updateFerie() {
         // Connexion à la base de données
         $dao = new Dao();
-        //Requête SQL
+        // Requête SQL
         $sql = "UPDATE ferie SET dateDebFerie='$this->dateDebFerie', dateFinFerie='$this->dateFinFerie' WHERE idFerie='$this->idFerie'";
         $resu = $dao->executeRequete($sql);
     }
 
     public function selectFerie($debutSemaine, $finSemaine) {
+        // Connexion à la base de données
         $dao = new Dao();
-
+        // Requête SQL
         $sql = "SELECT * FROM ferie WHERE dateDebFerie BETWEEN '$debutSemaine' AND '$finSemaine'";
-
         $resu = $dao->executeRequete($sql);
-
         return $resu->fetchAll(PDO::FETCH_ASSOC);
     }
 
