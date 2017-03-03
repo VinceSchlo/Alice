@@ -168,4 +168,12 @@ class PlanReel
         $dao->executeRequete($sql);
     }
 
+    public function deletePlanReel(){
+        $dao = new Dao();
+
+        $sql = "DELETE FROM planreel WHERE idAgent='$this->idAgent' AND horaireDeb = '$this->horaireDeb' AND horaireFin = '$this->horaireFin' AND dateReel = '$this->dateReel'";
+
+        $dao->executeRequete($sql);
+    }
+
 }

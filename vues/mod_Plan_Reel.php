@@ -27,10 +27,10 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
         $j = 0;
         while ($j < count($tabPlanStd)) {
             if ($_POST['idAgentForm' . $i] == $tabPlanStd[$j]['idAgent'] &&
-                    $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
-                    $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
-                    $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
-                    $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste']
+                $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
+                $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
+                $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
+                $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste']
             ) {
                 $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
                 $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
@@ -47,6 +47,20 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
                     // On met à jour la BDD planReel
                     $oPlanReel->insertPlanReel();
                 }
+                $j = count($tabPlanStd);
+            } else if ($_POST['idAgentForm' . $i] == $tabPlanStd[$j]['idAgent'] &&
+                $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
+                $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
+                $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
+                $_POST['idPosteForm' . $i] == $tabPlanStd[$j]['idPoste']
+            ) {
+                $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
+                $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
+                $oPlanReel->setHoraireDeb($_POST['horaireDebForm' . $i]);
+                $oPlanReel->setHoraireFin($_POST['horaireFinForm' . $i]);
+                $oPlanReel->setIdPoste($_POST['idPosteForm' . $i]);
+
+                $oPlanReel->deletePlanReel();
                 $j = count($tabPlanStd);
             }
             $j++;
@@ -73,10 +87,10 @@ if (!isset($_POST['precedente']) && !isset($_POST['suivante']) && !isset($_POST[
 }
 
 if (isset($_POST['precedente'])) {
-    $_SESSION['weekNumber'] --;
+    $_SESSION['weekNumber']--;
     if ($_SESSION['weekNumber'] < 1) {
         $_SESSION['weekNumber'] = 52;
-        $_SESSION['year'] --;
+        $_SESSION['year']--;
     }
 }
 
@@ -85,10 +99,10 @@ if (isset($_POST['home'])) {
 }
 
 if (isset($_POST['suivante'])) {
-    $_SESSION['weekNumber'] ++;
+    $_SESSION['weekNumber']++;
     if ($_SESSION['weekNumber'] > 52) {
         $_SESSION['weekNumber'] = 1;
-        $_SESSION['year'] ++;
+        $_SESSION['year']++;
     }
 }
 
@@ -286,105 +300,105 @@ $time = $oHoraire->selectHoraire();
                             case 0:
                             case 1:
                                 ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[1]; ?>">
-                                   <?php
-                                   break;
-                               case 2:
-                               case 3:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[2]; ?>">
-                                   <?php
-                                   break;
-                               case 4:
-                               case 5:
-                               case 6:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[3]; ?>">
-                                   <?php
-                                   break;
-                               case 7:
-                               case 8:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[4]; ?>">
-                                   <?php
-                                   break;
-                               case 9:
-                               case 10:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[5]; ?>">
-                                   <?php
-                                   break;
-                               case 11:
-                               case 12:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[6]; ?>">
-                                   <?php
-                                   break;
-                           }
-                           ?>
-
-                    <input type="hidden" name="idAgentForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
-                    <input type="hidden" name="idJourForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['idJour']; ?>">
-                    <input type="hidden" name="horaireDebForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['horaireDeb']; ?>">
-                    <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
-
-                    <?php
-                    for ($k = 0; $k < count($poste); $k++) {
-                        if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                            $couleur = $tabPlanStd[$i]['coulGroupe'];
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[1]; ?>">
+                                <?php
+                                break;
+                            case 2:
+                            case 3:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[2]; ?>">
+                                <?php
+                                break;
+                            case 4:
+                            case 5:
+                            case 6:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[3]; ?>">
+                                <?php
+                                break;
+                            case 7:
+                            case 8:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[4]; ?>">
+                                <?php
+                                break;
+                            case 9:
+                            case 10:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[5]; ?>">
+                                <?php
+                                break;
+                            case 11:
+                            case 12:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[6]; ?>">
+                                <?php
+                                break;
                         }
-                    }
-                    ?>
-                    <!-- Liste contenant tout les postes -->
-                    <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
-                            class="form-control" onchange="changeColor<?php echo $l; ?>()"
-                            style="background-color: <?php echo $couleur ?>">
+                        ?>
 
-                        <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
-                        <script type="text/javascript">
-                            function changeColor<?php echo $l; ?>() {
-                                var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
-                                selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
-                            }
-                        </script>
+                        <input type="hidden" name="idAgentForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
+                        <input type="hidden" name="idJourForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['idJour']; ?>">
+                        <input type="hidden" name="horaireDebForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['horaireDeb']; ?>">
+                        <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
-                        <!-- Pour mettre le poste attribué en "selected" -->
                         <?php
                         for ($k = 0; $k < count($poste); $k++) {
                             if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                                ?>
-
-                                <option value="<?php echo $poste[$k]['idPoste']; ?>"
-                                        selected=""
-                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
-
-                            <?php } else { ?>
-
-                                <option
-                                    value="<?php echo $poste[$k]['idPoste']; ?>"
-                                    style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
-
-                                <?php
+                                $couleur = $tabPlanStd[$i]['coulGroupe'];
                             }
                         }
                         ?>
-                    </select>
-                    <?php
-                    $i++;
-                    $l++;
-                    ?>
-                    </td>
-                <?php } ?>
+                        <!-- Liste contenant tout les postes -->
+                        <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
+                                class="form-control" onchange="changeColor<?php echo $l; ?>()"
+                                style="background-color: <?php echo $couleur ?>">
+
+                            <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
+                            <script type="text/javascript">
+                                function changeColor<?php echo $l; ?>() {
+                                    var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
+                                    selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
+                                }
+                            </script>
+
+                            <!-- Pour mettre le poste attribué en "selected" -->
+                            <?php
+                            for ($k = 0; $k < count($poste); $k++) {
+                                if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                    ?>
+
+                                    <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                            selected=""
+                                            style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+
+                                <?php } else { ?>
+
+                                    <option
+                                        value="<?php echo $poste[$k]['idPoste']; ?>"
+                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                        <?php
+                        $i++;
+                        $l++;
+                        ?>
+                        </td>
+                    <?php } ?>
                 </tr>
             <?php } ?>
             <!--            Affichage des horaires -->
