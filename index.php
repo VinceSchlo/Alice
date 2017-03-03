@@ -59,7 +59,7 @@ require_once('include/alice_fonctions.php');
     $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
 
     $oAgent = new Agent();
-    $user = $oAgent->selectUser();
+    $user = $oAgent->selectPrenomAgent();
     $oPlanStd = new PlanStd();
     $tabPlanStd = $oPlanStd->selectPlanStd();
 // Selection des plannings réels de la semaine

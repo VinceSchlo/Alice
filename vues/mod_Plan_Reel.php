@@ -75,7 +75,7 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
 }
 
 $oAgent = new Agent();
-$user = $oAgent->selectUser();
+$user = $oAgent->selectPrenomAgent();
 $plan = new PlanStd();
 $tabPlanStd = $plan->selectPlanStd();
 $compte = 0;

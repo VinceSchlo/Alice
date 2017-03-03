@@ -41,8 +41,7 @@ if (isset($_POST['suivante'])) {
 // Tableau des dates réelles du dimanche au samedi au format américain
 $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
 
-$oAgent = new Agent();
-$tabAgent = $oAgent->selectUser();
+// Sélection des plannings stardards de la semaine
 $oPlanStd = new PlanStd();
 $tabPlanStd = $oPlanStd->selectDecPlanStd();
 
@@ -52,105 +51,122 @@ $tabPlanReel = $oPlanReel->selectDecPlanReel($tabDatesJoursSemaines[1], $tabDate
 
 // Sélection des jours fériés
 $oFerie = new Ferie();
-$jourFerie = $oFerie->selectFerie($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
+$tabJourFerie = $oFerie->selectFerie($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
 
 // Si $tabPlanReel contient un résultat, je remplace la date par le numéro du jour de la semaine
-if (isset($tabPlanReel) || isset($jourFerie)) {
+if (!empty($tabPlanReel)) {
     for ($i = 0; $i < count($tabPlanReel); $i++) {
         $tabPlanReel[$i]['dateReel'] = array_search($tabPlanReel[$i]['dateReel'], $tabDatesJoursSemaines);
     }
-    for ($i = 0; $i < count($jourFerie); $i++) {
-        $jourFerie[$i]['dateDebFerie'] = array_search($jourFerie[$i]['dateDebFerie'], $tabDatesJoursSemaines);
+    // On prévoit le cas où il n'y a pas de jours fériés pour initialiser certaines variables qui vont ensuite servir dans les tests
+    if (empty($tabJourFerie)) {
+        $jourDebFerie = 7;
+        $jourFinFerie = 0;
+    } else {
+        for ($i = 0; $i < count($tabJourFerie); $i++) {
+            $tabJourFerie[$i]['dateDebFerie'] = array_search($tabJourFerie[$i]['dateDebFerie'], $tabDatesJoursSemaines);
+            $tabJourFerie[$i]['dateFinFerie'] = array_search($tabJourFerie[$i]['dateFinFerie'], $tabDatesJoursSemaines);
+            $jourDebFerie = $tabJourFerie[$i]['dateDebFerie'];
+            $jourFinFerie = $tabJourFerie[$i]['dateFinFerie'];
+        }
     }
 
-    /* Je remplace les données du planning standard par le planning réel (idPoste, idGroupe)
-      for ($j = 0; $j < count($tabPlanStd); $j++) {
-      for ($k = 0; $k < count($tabPlanReel); $k++) {
-      if ($tabPlanStd[$j]['idAgent'] == $tabPlanReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $tabPlanReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $tabPlanReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $tabPlanReel[$k]['horaireFin']) {
-
-      $tabPlanStd[$j]['idPoste'] = $tabPlanReel[$k]['idPoste'];
-      $tabPlanStd[$j]['idGroupe'] = $tabPlanReel[$k]['idGroupe'];
-
-      $k = count($tabPlanReel);
-      }
-      }
-      }
-     */
-
-    // Je remplace les données du planning standard par le planning réel (idPoste, idGroupe)
-    $i = 0;
+    // On remplace les données du planning standard par le planning réel (idPoste, idGroupe)
     for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($tabPlanReel); $k++) {
-            if ($tabPlanStd[$j]['idAgent'] == $tabPlanReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $tabPlanReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $tabPlanReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $tabPlanReel[$k]['horaireFin']) {
-
-                $tabPlanStd[$i]['idPoste'] = $tabPlanReel[$k]['idPoste'];
-                $tabPlanStd[$i]['idGroupe'] = $tabPlanReel[$k]['idGroupe'];
-                $k = count($tabPlanReel);
-            } else {
-                $tabPlanSum[$i]['idAgent'] = $tabPlanReel[$k]['idAgent'];
-                $tabPlanSum[$i]['idJour'] = $tabPlanReel[$k]['dateReel'];
-                $tabPlanSum[$i]['idPoste'] = $tabPlanReel[$k]['idPoste'];
-                $tabPlanSum[$i]['idGroupe'] = $tabPlanReel[$k]['idGroupe'];
-                $tabPlanSum[$i]['horaireDeb'] = $tabPlanReel[$k]['horaireDeb'];
-                $tabPlanSum[$i]['horaireFin'] = $tabPlanReel[$k]['horaireDeb'];
-               
-            }
-        }
-        $i++;
-    }
-
-    for ($j = 0; $j < count($tabPlanStd); $j++) { // Cas des jours fériés
-        for ($k = 0; $k < count($jourFerie); $k++) {
-            if ($tabPlanStd[$j]['idJour'] == $jourFerie[$k]['dateDebFerie']) {
-
-                $tabPlanStd[$j]['idPoste'] = null;
-                $tabPlanStd[$j]['idGroupe'] = null;
-
-                $k = count($tabPlanReel);
+            // On vérifie si les jours sont non compris dans les jours fériés (cas des ponts)
+            if ($tabPlanReel[$k]['dateReel'] < $jourDebFerie || $tabPlanReel[$k]['dateReel'] > $jourFinFerie) {
+                if ($tabPlanStd[$j]['idAgent'] == $tabPlanReel[$k]['idAgent'] && $tabPlanStd[$j]['idJour'] == $tabPlanReel[$k]['dateReel'] && $tabPlanStd[$j]['horaireDeb'] == $tabPlanReel[$k]['horaireDeb'] && $tabPlanStd[$j]['horaireFin'] == $tabPlanReel[$k]['horaireFin']) {
+                    $tabPlanStd[$i]['idPoste'] = $tabPlanReel[$k]['idPoste'];
+                    $tabPlanStd[$i]['idGroupe'] = $tabPlanReel[$k]['idGroupe'];
+                    $k = count($tabPlanReel);
+                } else { // On enregistre dans un nouveau tableau, le planning réel qui n'a pas été reporté dans le std
+                    $tabPlanSum[$k]['idAgent'] = $tabPlanReel[$k]['idAgent'];
+                    $tabPlanSum[$k]['idJour'] = $tabPlanReel[$k]['dateReel'];
+                    $tabPlanSum[$k]['idPoste'] = $tabPlanReel[$k]['idPoste'];
+                    $tabPlanSum[$k]['idGroupe'] = $tabPlanReel[$k]['idGroupe'];
+                    $tabPlanSum[$k]['horaireDeb'] = $tabPlanReel[$k]['horaireDeb'];
+                    $tabPlanSum[$k]['horaireFin'] = $tabPlanReel[$k]['horaireFin'];
+                }
             }
         }
     }
 }
-var_dump($tabPlanSum);
-exit();
-// On remplace dans $tabPlanStd, les idHoraires par les vrais horaires de la table horaire en les convertissant en float
-// 13:30 devient 13.5 pour faciliter les calculs entre HoraireDebut et HoraireFin
+// On regarde s'il existe des plannings réels reportés
+if (empty($tabPlanSum)) { // Cas où il n'y a pas de planning réel non reporté
+    $k = 0;
+} else { // Cas où il y a pas du planning réel non reporté, on l'enregistre dans le nouveau tableau
+    $k = count($tabPlanSum);
+}
+// On réunit dans un même tableau le planning std et le nouveau planning réel en supprimant les jours fériés
+for ($j = 0; $j < count($tabPlanStd); $j++) {
+    // On vérifie si les jours sont non compris dans les jours fériés (cas des ponts)
+    if ($tabPlanStd[$j]['idJour'] < $jourDebFerie || $tabPlanStd[$j]['idJour'] > $jourFinFerie) {
+        $tabPlanSum[$k]['idAgent'] = $tabPlanStd[$j]['idAgent'];
+        // $tabPlanSum[$k]['prenom'] = $tabPlanStd[$j]['prenom'];
+        $tabPlanSum[$k]['idJour'] = $tabPlanStd[$j]['idJour'];
+        $tabPlanSum[$k]['idPoste'] = $tabPlanStd[$j]['idPoste'];
+        $tabPlanSum[$k]['idGroupe'] = $tabPlanStd[$j]['idGroupe'];
+        $tabPlanSum[$k]['horaireDeb'] = $tabPlanStd[$j]['horaireDeb'];
+        $tabPlanSum[$k]['horaireFin'] = $tabPlanStd[$j]['horaireFin'];
+        $k++;
+    }
+}
+
+// On remplace dans $tabPlanSum, les idHoraires par les vrais horaires de la table horaire en les convertissant en float
+// 13:30 devient 13.5 via la fonction convertTimeStringToNumber pour faciliter les calculs entre HoraireDebut et HoraireFin 
 $oHoraire = new Horaire();
 $tabHoraires = $oHoraire->selectHoraire();
 
-foreach ($tabPlanStd as $key => $value) {
-    $posHoraireDeb = array_search($tabPlanStd[$key]['horaireDeb'], array_column($tabHoraires, 'idHoraire'), true);
-    $posHoraireFin = array_search($tabPlanStd[$key]['horaireFin'], array_column($tabHoraires, 'idHoraire'), true);
-    $tabPlanStd[$key]['horaireDeb'] = convertTimeStringToNumber($tabHoraires[$posHoraireDeb]['libHoraire']);
-    $tabPlanStd[$key]['horaireFin'] = convertTimeStringToNumber($tabHoraires[$posHoraireFin]['libHoraire']);
+foreach ($tabPlanSum as $key => $value) {
+    $posHoraireDeb = array_search($tabPlanSum[$key]['horaireDeb'], array_column($tabHoraires, 'idHoraire'), true);
+    $posHoraireFin = array_search($tabPlanSum[$key]['horaireFin'], array_column($tabHoraires, 'idHoraire'), true);
+    $tabPlanSum[$key]['horaireDeb'] = convertTimeStringToNumber($tabHoraires[$posHoraireDeb]['libHoraire']);
+    $tabPlanSum[$key]['horaireFin'] = convertTimeStringToNumber($tabHoraires[$posHoraireFin]['libHoraire']);
 }
 
-// Calcul des heures de service public à partir du tableau $tabPlanStd
-$i = 0;
-$nbHeuresSp = 0;
-$tabDecHeuresSp = array();
+// Tri du tableau en fonction des idAgent
+asort($tabPlanSum);
 
-foreach ($tabPlanStd as $key => $value) {
-    $tabDecHeuresSp[$i]['idAgent'] = $tabPlanStd[$key]['idAgent'];
-    $tabDecHeuresSp[$i]['prenom'] = $tabPlanStd[$key]['prenom'];
-    if ($tabPlanStd[$key]['idGroupe'] != null) {
-        $nbHeuresSp = $tabPlanStd[$key]['horaireFin'] - $tabPlanStd[$key]['horaireDeb'];
-        $tabDecHeuresSp[$i]['nbHeuresSP'] = $nbHeuresSp;
-        // Cas de l'annexe qui finit à 18h au lieu de 18h30
-        if ($tabPlanStd[$key]['idPoste'] == "17" && $tabPlanStd[$key]['horaireFin'] == 18.5) {
-            $tabDecHeuresSp[$i]['nbHeuresSP'] -= 0.5;
+// Calcul des heures de service public à partir du tableau $tabPlanSum, 
+// on les enregistre dans un nouveau tableau $tabDecHeuresSp en les regroupant par idAgent 
+// On insère également les prénoms en vue de l'affichage
+$oAgent = new Agent();
+$tabAgent = $oAgent->selectIdPrenomAgent();
+$i = 0;
+$tabDecHeuresSp = array(array("prenom" => " ", "idAgent" => " ", "nbHeuresSp" => 0));
+
+foreach ($tabPlanSum as $key => $value) {
+    // Calcul du du nb d'heures du service public pour la semaine
+    $nbHeuresSp = $tabPlanSum[$key]['horaireFin'] - $tabPlanSum[$key]['horaireDeb'];
+    // Cas de l'annexe qui finit à 18h au lieu de 18h30
+    if ($tabPlanSum[$key]['idPoste'] == "17" && $tabPlanSum[$key]['horaireFin'] == 18.5) {
+        $nbHeuresSp -= 0.5;
+    }
+    for ($j = 0; $j < count($tabPlanSum); $j++) {
+        if ($tabPlanSum[$j]['idAgent'] != $tabPlanSum[$key]['idAgent']) { // Si l'agent change lors du balayage
+            // On vérifie si l'agent existe dans $tabDecHeuresSp
+            $posTabDecHeuresSp = array_search($tabPlanSum[$key]['idAgent'], array_column($tabDecHeuresSp, 'idAgent'), true);
+            if (empty($posTabDecHeuresSp)) { // On crée une nouvelle entrée dans le tableau de décompte
+                // On enregistre le prénom dans le tableau
+                $posPrenom = array_search($tabPlanSum[$key]['idAgent'], array_column($tabAgent, 'idAgent'), true);
+                $tabDecHeuresSp[$i]['prenom'] = $tabAgent[$posPrenom]['prenom'];
+                $tabDecHeuresSp[$i]['idAgent'] = $tabPlanSum[$key]['idAgent'];
+                $tabDecHeuresSp[$i]['nbHeuresSp'] = $nbHeuresSp;
+                $i++;
+            } else {
+                $tabDecHeuresSp[$posTabDecHeuresSp]['nbHeuresSp'] += $nbHeuresSp;
+            }
+            $j = count($tabPlanSum);
         }
     }
-    $i++;
 }
-//var_dump($tabDecHeuresSp);
-//exit();
-
-/*
-  for ($i = 0; $i < count($tabPlanStd); $i++) {
-
-  }
- */
+// Tri du tableau en fonction des prénoms pour l'affcihage
+asort($tabDecHeuresSp);
+// var_dump($tabPlanSum);
+var_dump($tabDecHeuresSp);
+exit(); 
+//
 ?>
 
 <div class="col-lg-6">
@@ -177,20 +193,20 @@ foreach ($tabPlanStd as $key => $value) {
             </table>
         </div>
         <h2 class="col-lg-offset-1 col-lg-3">         
-<?php
-if ($_SESSION['weekNumber'] < 10) {
-    echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
-} else {
-    echo "Semaine n°" . $_SESSION['weekNumber'];
-}
-?>
+            <?php
+            if ($_SESSION['weekNumber'] < 10) {
+                echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
+            } else {
+                echo "Semaine n°" . $_SESSION['weekNumber'];
+            }
+            ?>
         </h2>
     </div>
     <div class="row">
         <h2 class="col-lg-offset-3 col-lg-10">
-<?php
-echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-?>
+            <?php
+            echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+            ?>
         </h2>
     </div>
 </div>
