@@ -32,14 +32,14 @@ require_once('include/alice_fonctions.php');
     <?php
     if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
         $_SESSION['weekNumber'] = ltrim(date("W"), "0");
-        $_SESSION['year'] = date("Y");
+        $_SESSION['year'] = date("Y"); // L'année est au format "2017"
     }
 
     if (isset($_POST['precedente'])) {
         $_SESSION['weekNumber'] --;
         if ($_SESSION['weekNumber'] < 1) {
             $_SESSION['weekNumber'] = 52;
-            $_SESSION['year'] --;
+            $_SESSION['year'] --; // L'année est au format "2017"
         }
     }
 
@@ -51,7 +51,7 @@ require_once('include/alice_fonctions.php');
         $_SESSION['weekNumber'] ++;
         if ($_SESSION['weekNumber'] > 52) {
             $_SESSION['weekNumber'] = 1;
-            $_SESSION['year'] ++;
+            $_SESSION['year'] ++; // L'année est au format "2017"
         }
     }
 

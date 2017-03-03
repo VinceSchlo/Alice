@@ -108,7 +108,7 @@ class PlanReel {
         return $ligne;
     }
 
-    public function selectDecPlanReel($dateDebut, $dateFin) {
+    public function selectPlanReelDecSp($dateDebut, $dateFin) {
         $dao = new Dao();
 
         $sql = "SELECT plan.idAgent , plan.dateReel, plan.idPoste, plan.horaireDeb, plan.horaireFin
@@ -127,13 +127,13 @@ class PlanReel {
         return $ligne;
     }
     
-    public function selectSamedisPlanReel($dateDebut, $dateFin) {
+    public function selectPlanReelSamedi($dateDebut, $dateFin) {
         $dao = new Dao();
 
-        $sql = "SELECT plan.idAgent , plan.dateReel
+        $sql = "SELECT DISTINCT plan.dateReel, plan.idAgent, p.idGroupe
                 FROM planreel as plan
-                JOIN agent as a
-                ON plan.idAgent = a.idAgent
+                JOIN agent as a ON plan.idAgent = a.idAgent
+                JOIN poste as p ON plan.idPoste = p.idPoste
                 WHERE a.statut != 'I' AND dateReel BETWEEN '$dateDebut' AND '$dateFin'
                 ORDER BY plan.idAgent, plan.dateReel";
 

@@ -134,7 +134,7 @@ class PlanStd {
         return $ligne;
     }
 
-    public function selectDecPlanStd() {
+    public function selectPlanStdDecSp() {
         // Connexion à la base de données
         $dao = new Dao();
         // Requête SQL
@@ -154,16 +154,17 @@ class PlanStd {
         return $ligne;
     }
 
-    public function selectSamedisPlanStd() {
+    public function selectPlanStdSamedi() {
         // Connexion à la base de données
         $dao = new Dao();
         // Requête SQL
-        $sql = "SELECT a.idAgent, COUNT(idJour)
+        $sql = "SELECT DISTINCT plan.idAgent, p.idGroupe
                 FROM planstd as plan
-                JOIN agent as a
-                ON plan.idAgent = a.idAgent
-                WHERE a.statut != 'I' AND plan.idJour=6
-                GROUP BY a.idAgent";
+                JOIN agent as a ON plan.idAgent = a.idAgent
+                JOIN poste as p ON plan.idPoste = p.idPoste
+                JOIN groupe as g ON p.idGroupe = g.idGroupe
+                WHERE a.statut != 'I' AND plan.idJour=6 AND g.idGroupe !=4
+                ORDER BY plan.idAgent";
 
         $resu = $dao->executeRequete($sql);
 
