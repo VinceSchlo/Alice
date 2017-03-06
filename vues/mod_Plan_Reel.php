@@ -47,7 +47,8 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
                 $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
                 $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
                 $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
-                $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste']
+                $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste'] &&
+                $_POST['idPosteForm' . $i] != "Férié"
             ) {
                 $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
                 $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
@@ -69,7 +70,8 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
                 $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
                 $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
                 $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
-                $_POST['idPosteForm' . $i] == $tabPlanStd[$j]['idPoste']
+                $_POST['idPosteForm' . $i] == $tabPlanStd[$j]['idPoste'] &&
+                $_POST['idPosteForm' . $i] != "Férié"
             ) {
                 $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
                 $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
@@ -375,8 +377,17 @@ $time = $oHoraire->selectHoraire();
                         <?php
                         switch ($tabPlanStd[$i]['libPoste']) {
                             case "Férié":
-                                echo $tabPlanStd[$i]['libPoste'];
-                                break;
+                                ?>
+                                <input type="hidden" name="idPosteForm<?php echo $l; ?>"
+                                       value="<?php echo $tabPlanStd[$i]['libPoste']; ?>">
+
+                                <select disabled style="width: 120px" class="form-control">
+
+                                    <option value="<?php echo $tabPlanStd[$i]['libPoste']; ?>"
+                                            selected=""><?php echo $tabPlanStd[$i]['libPoste']; ?></option>
+
+                                </select>
+                                <?php break;
                             default:
                                 for ($k = 0; $k < count($poste); $k++) {
                                     if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
