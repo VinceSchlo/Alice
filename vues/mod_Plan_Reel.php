@@ -7,6 +7,7 @@ require_once('../class/PlanStd.php');
 require_once('../class/Horaire.php');
 require_once('../class/PlanReel.php');
 require_once('../class/Ferie.php');
+require_once('../class/Vacances.php');
 require_once('../include/alice_fonctions.php');
 require_once('../include/alice_dao.inc.php');
 ?>
@@ -17,8 +18,24 @@ include("../include/doctype.php");
 $oPlanStd = new PlanStd();
 $tabPlanStd = $oPlanStd->selectPlanStd();
 
-$oPlanReel = new PlanReel();
+$oVacances = new Vacances();
+$listeVacances = $oVacances->selectAllVacances();
 
+$oFerie = new Ferie();
+$listeFerie = $oFerie->selectAllFerie();
+
+$anneeVac = substr($listeVacances[0]['dateDebVac'], 0, 4);
+$anneeFerie = substr($listeFerie[0]['dateDebFerie'], 0, 4);
+
+$annee = date('Y');
+
+if ($anneeVac < $annee || $anneeFerie < $annee) {
+    ?>
+    <script>alert("Pensez à mettre à jour les dates des Vacances et des jours Férié pour l'année <?php echo $annee ?>")</script>
+    <?php
+}
+
+$oPlanReel = new PlanReel();
 if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
 // var_dump($_POST);
 // die();
