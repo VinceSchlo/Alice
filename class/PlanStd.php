@@ -112,18 +112,59 @@ class PlanStd {
         return $ligne;
     }
 
-    public function selectDecPlanStd() {
+    public function selectPlanStdInactif() {
         // Connexion à la base de données
         $dao = new Dao();
         // Requête SQL
-        $sql = "SELECT a.idAgent, idJour, poste.idPoste, poste.idGroupe, plan.horaireDeb, plan.horaireFin
+        $sql = "SELECT a.idAgent, prenom, idJour, libPoste, poste.idPoste, g.coulGroupe, plan.horaireDeb, plan.horaireFin
+                FROM agent as a
+                JOIN planstd as plan
+                JOIN poste as poste
+                JOIN groupe as g
+                ON a.idAgent = plan.idAgent
+                AND plan.idPoste = poste.idPoste
+                AND g.idGroupe = poste.idGroupe
+                WHERE a.statut != 'I'
+                ORDER BY a.prenom, plan.idJour, plan.horaireDeb";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+    }
+
+    public function selectPlanStdDecSp() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        // Requête SQL
+        $sql = "SELECT a.idAgent, idJour, poste.idPoste, plan.horaireDeb, plan.horaireFin
                 FROM agent as a
                 JOIN planstd as plan
                 JOIN poste as poste
                 ON a.idAgent = plan.idAgent
                 AND plan.idPoste = poste.idPoste
-                WHERE poste.idGroupe=1 OR poste.idGroupe=2
-                ORDER BY a.prenom, plan.idJour, plan.horaireDeb";
+                WHERE a.statut != 'I' AND poste.idGroupe=1 OR poste.idGroupe=2
+                ORDER BY plan.idJour, plan.horaireDeb";
+
+        $resu = $dao->executeRequete($sql);
+
+        $ligne = $resu->fetchall(PDO::FETCH_ASSOC);
+
+        return $ligne;
+    }
+
+    public function selectPlanStdSamedi() {
+        // Connexion à la base de données
+        $dao = new Dao();
+        // Requête SQL
+        $sql = "SELECT DISTINCT plan.idAgent, p.idGroupe
+                FROM planstd as plan
+                JOIN agent as a ON plan.idAgent = a.idAgent
+                JOIN poste as p ON plan.idPoste = p.idPoste
+                JOIN groupe as g ON p.idGroupe = g.idGroupe
+                WHERE a.statut != 'I' AND plan.idJour=6 AND g.idGroupe !=4
+                ORDER BY plan.idAgent";
 
         $resu = $dao->executeRequete($sql);
 

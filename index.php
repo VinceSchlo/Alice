@@ -23,7 +23,8 @@ require_once('include/alice_dao.inc.php');
     <link href="css/alice.css" rel="stylesheet">
     <script src="include/alice.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+          crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
@@ -33,26 +34,29 @@ require_once('include/alice_dao.inc.php');
 <?php
 if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
     $_SESSION['weekNumber'] = ltrim(date("W"), "0");
-    $_SESSION['year'] = date("Y");
+    $_SESSION['year'] = date("Y"); // L'année est au format "2017"
 }
 
 if (isset($_POST['precedente'])) {
     $_SESSION['weekNumber']--;
     if ($_SESSION['weekNumber'] < 1) {
         $_SESSION['weekNumber'] = 52;
-        $_SESSION['year']--;
+        $_SESSION['year']--; // L'année est au format "2017"
     }
+
 }
+
 
 if (isset($_POST['home'])) {
     $_SESSION['weekNumber'] = ltrim(date("W"), "0");
 }
 
+
 if (isset($_POST['suivante'])) {
     $_SESSION['weekNumber']++;
     if ($_SESSION['weekNumber'] > 52) {
         $_SESSION['weekNumber'] = 1;
-        $_SESSION['year']++;
+        $_SESSION['year']++; // L'année est au format "2017"
     }
 }
 
@@ -62,7 +66,8 @@ $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['ye
 $oAgent = new Agent();
 $user = $oAgent->selectPrenomAgent();
 $oPlanStd = new PlanStd();
-$tabPlanStd = $oPlanStd->selectPlanStd();
+$tabPlanStd = $oPlanStd->selectPlanStdInactif();
+
 // Selection des plannings réels de la semaine
 $oPlanReel = new PlanReel();
 $planReel = $oPlanReel->selectPlanReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
