@@ -74,6 +74,8 @@ $planReel = $oPlanReel->selectPlanReel($tabDatesJoursSemaines[1], $tabDatesJours
 $oFerie = new Ferie();
 $jourFerie = $oFerie->selectFerie($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
 
+var_dump($jourFerie, $tabDatesJoursSemaines);
+
 // Si $planReel contient un résultat, je remplace la date par le numéro du jour de la semaine
 if (isset($planReel) || isset($jourFerie)) {
     for ($i = 0; $i < count($planReel); $i++) {
@@ -81,8 +83,9 @@ if (isset($planReel) || isset($jourFerie)) {
     }
     for ($i = 0; $i < count($jourFerie); $i++) {
         $jourFerie[$i]['dateDebFerie'] = array_search($jourFerie[$i]['dateDebFerie'], $tabDatesJoursSemaines);
+        $jourFerie[$i]['dateFinFerie'] = array_search($jourFerie[$i]['dateFinFerie'], $tabDatesJoursSemaines);
     }
-
+    var_dump($jourFerie, $tabDatesJoursSemaines, $planReel);
 // Je remplace les données du planning standard par le planning réel (coulGroupe, idPoste, libPoste)
     for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($planReel); $k++) {
@@ -98,7 +101,7 @@ if (isset($planReel) || isset($jourFerie)) {
     }
     for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($jourFerie); $k++) {
-            if ($tabPlanStd[$j]['idJour'] == $jourFerie[$k]['dateDebFerie']) {
+            if ($tabPlanStd[$j]['idJour'] >= $jourFerie[$k]['dateDebFerie'] && $tabPlanStd[$j]['idJour'] <= $jourFerie[$k]['dateFinFerie']) {
 
                 $tabPlanStd[$j]['libPoste'] = "Férié";
                 $tabPlanStd[$j]['coulGroupe'] = null;

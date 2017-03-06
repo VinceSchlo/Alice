@@ -138,6 +138,7 @@ if (isset($planReel) || isset($jourFerie)) {
     }
     for ($i = 0; $i < count($jourFerie); $i++) {
         $jourFerie[$i]['dateDebFerie'] = array_search($jourFerie[$i]['dateDebFerie'], $tabDatesJoursSemaines);
+        $jourFerie[$i]['dateFinFerie'] = array_search($jourFerie[$i]['dateFinFerie'], $tabDatesJoursSemaines);
     }
 
 // Je remplace les données du planing standard par le planing réel (coulGroupe, idPoste, libPoste)
@@ -155,11 +156,11 @@ if (isset($planReel) || isset($jourFerie)) {
     }
     for ($j = 0; $j < count($tabPlanStd); $j++) {
         for ($k = 0; $k < count($jourFerie); $k++) {
-            if ($tabPlanStd[$j]['idJour'] == $jourFerie[$k]['dateDebFerie']) {
+            if ($tabPlanStd[$j]['idJour'] >= $jourFerie[$k]['dateDebFerie'] && $tabPlanStd[$j]['idJour'] <= $jourFerie[$k]['dateFinFerie']) {
 
-                $tabPlanStd[$j]['libPoste'] = "Ferie";
+                $tabPlanStd[$j]['libPoste'] = "Férié";
                 $tabPlanStd[$j]['coulGroupe'] = null;
-                $tabPlanStd[$j]['idPoste'] = null;
+                $tabPlanStd[$j]['idPoste'] = 22;
 
                 $k = count($planReel);
             }
@@ -297,7 +298,9 @@ $time = $oHoraire->selectHoraire();
                         <?php echo $tabPlanStd[$i]['prenom']; ?>
                     </td>
                     <?php
-                    for ($j = 0; $j < 13; $j++) {
+                    for ($j = 0;
+                         $j < 13;
+                         $j++) {
                         switch ($j) {
                             case 1:
                             case 3:
@@ -370,47 +373,54 @@ $time = $oHoraire->selectHoraire();
                                value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
                         <?php
-                        for ($k = 0; $k < count($poste); $k++) {
-                            if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                                $couleur = $tabPlanStd[$i]['coulGroupe'];
-                            }
-                        }
-                        ?>
-                        <!-- Liste contenant tout les postes -->
-                        <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
-                                class="form-control" onchange="changeColor<?php echo $l; ?>()"
-                                style="background-color: <?php echo $couleur ?>">
-
-                            <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
-                            <script type="text/javascript">
-                                function changeColor<?php echo $l; ?>() {
-                                    var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
-                                    selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
+                        switch ($tabPlanStd[$i]['libPoste']) {
+                            case "Férié":
+                                echo $tabPlanStd[$i]['libPoste'];
+                                break;
+                            default:
+                                for ($k = 0; $k < count($poste); $k++) {
+                                    if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                        $couleur = $tabPlanStd[$i]['coulGroupe'];
+                                    }
                                 }
-                            </script>
+                                ?>
+                                <!-- Liste contenant tout les postes -->
+                                <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
+                                        class="form-control" onchange="changeColor<?php echo $l; ?>()"
+                                        style="background-color: <?php echo $couleur ?>">
 
-                            <!-- Pour mettre le poste attribué en "selected" -->
-                            <?php
-                            for ($k = 0; $k < count($poste); $k++) {
-                                if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                                    ?>
+                                    <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
+                                    <script type="text/javascript">
+                                        function changeColor<?php echo $l; ?>() {
+                                            var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
+                                            selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
+                                        }
+                                    </script>
 
-                                    <option value="<?php echo $poste[$k]['idPoste']; ?>"
-                                            selected=""
-                                            style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
-
-                                <?php } else { ?>
-
-                                    <option
-                                        value="<?php echo $poste[$k]['idPoste']; ?>"
-                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
-
+                                    <!-- Pour mettre le poste attribué en "selected" -->
                                     <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                        <?php
+                                    for ($k = 0; $k < count($poste); $k++) {
+                                        if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                            ?>
+
+                                            <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                                    selected=""
+                                                    style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+
+                                        <?php } else { ?>
+
+                                            <option
+                                                value="<?php echo $poste[$k]['idPoste']; ?>"
+                                                style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <?php
+                                break;
+                        }
                         $i++;
                         $l++;
                         ?>
