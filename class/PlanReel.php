@@ -111,13 +111,13 @@ class PlanReel {
     public function selectPlanReelDecSp($dateDebut, $dateFin) {
         $dao = new Dao();
 
-        $sql = "SELECT plan.idAgent , plan.dateReel, plan.idPoste, plan.horaireDeb, plan.horaireFin
+        $sql = "SELECT plan.idAgent , plan.dateReel, plan.idPoste, poste.idGroupe, plan.horaireDeb, plan.horaireFin
                 FROM planreel as plan
                 JOIN poste as poste
                 ON plan.idPoste = poste.idPoste
                 JOIN agent as a
                 ON plan.idAgent = a.idAgent
-                WHERE a.statut != 'I' AND dateReel BETWEEN '$dateDebut' AND '$dateFin' AND poste.idGroupe=1 OR poste.idGroupe=2
+                WHERE a.statut != 'I' AND dateReel BETWEEN '$dateDebut' AND '$dateFin'
                 ORDER BY plan.dateReel, plan.horaireDeb";
 
         $resu = $dao->executeRequete($sql);
