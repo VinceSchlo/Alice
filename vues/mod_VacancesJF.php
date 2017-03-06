@@ -4,6 +4,7 @@ session_start(); // Utilisation des variables $_SESSION
 require_once('../class/ferie.php');
 require_once('../class/vacances.php');
 require_once('../include/alice_fonctions.php');
+require_once('../include/alice_dao.inc.php');
 ?>
 
 <?php include("../include/doctype.php"); ?>
