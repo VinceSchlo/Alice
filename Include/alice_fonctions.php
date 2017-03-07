@@ -73,7 +73,7 @@ function convertDateUsFr($uneDate) {
     return $uneDate;
 }
 
-// Fonction pour retourner la date exacte des jours du dimanche au samedi en fonction de la semaine et de l'année
+// Fonction qui retourne un tableau des dates des jours du dimanche au samedi en fonction de la semaine et de l'année
 function datesJourSemaine($week, $year) {
 
     $tabDatesJoursSemaines = array();
@@ -102,6 +102,7 @@ function convertDateNumJour($uneDate) {
     return $numJour;
 }
 
+// Fonction qui convertit un horaire time en float pour faire des calculs. Ex : 10:00:00 devient 10, 13:30:00 devient 13.5
 function convertTimeStringToNumber($timeString) {
 
     $timeNumber = floatval(substr($timeString, 0, 5));
