@@ -73,7 +73,7 @@ if (!empty($tabJFSemaine)) { // S'il y a des jours fériés la semaine concerné
             }
         }
     }
-    // On réindexe les tableaux car à cause des unsets, il y a des trous dans les index
+    // On réindexe les tableaux car il y a des trous dans les index à cause des unsets
     $tabPlanReel = array_values($tabPlanReel);
     $tabPlanStd = array_values($tabPlanStd);
 }
@@ -105,21 +105,14 @@ if (!empty($tabPlanReel)) { // S'il y a du planning réel
         }
     }
 }
-// On trie le planning standard et on le réindexe
-// asort($tabPlanStd);
-// $tabPlanStd = array_values($tabPlanStd);
-var_dump($tabPlanStd);
 //
 $oHoraire = new Horaire();
 $tabHoraires = $oHoraire->selectHoraire();
-// var_dump($tabHoraires);
 //
 // Calcul des heures de service public à partir du tableau $tabPlanStd, 
 // on les enregistre dans un nouveau tableau $tabDecHeureSp en les regroupant par idAgent 
-$i = 0;
 $tabDecHeureSp = array(array("idAgent" => " ", "nbHeureSp" => " "));
 foreach ($tabPlanStd as $key1 => $value1) {
-    $compteur = 0;
     // On remplace dans $tabPlanStd, les idHoraires par les vrais horaires de la table horaire en les convertissant en float
     // via la fonction convertTimeStringToNumber pour faciliter les calculs entre HoraireDebut et HoraireFin. 13:30:00 devient 13.5 
     foreach ($tabHoraires as $key3 => $value3) {
@@ -130,30 +123,31 @@ foreach ($tabPlanStd as $key1 => $value1) {
             $tabPlanStd[$key1]['horaireFin'] = convertTimeStringToNumber($tabHoraires[$key3]['libHoraire']);
         }
     }
-    // Calcul du du nb d'heures du service public pour la semaine
+    // Calcul du nb d'heures du service public pour la semaine
     $nbHeureSp = $tabPlanStd[$key1]['horaireFin'] - $tabPlanStd[$key1]['horaireDeb'];
     // Cas de l'annexe qui finit à 18h au lieu de 18h30
     if ($tabPlanStd[$key1]['idPoste'] == "17" && $tabPlanStd[$key1]['horaireFin'] == 18.5) {
         $nbHeureSp -= 0.5;
     }
-    // on les enregistre dans un nouveau tableau $tabDecHeureSp en les regroupant par idAgent 
-    for ($j = 0; $j < count($tabPlanStd); $j++) {
-        if ($tabPlanStd[$j]['idAgent'] != $tabPlanStd[$key1]['idAgent']) { // Si l'agent change lors du balayage
-            // On vérifie si l'agent existe dans $tabDecHeureSp
-            $posTabDecHeuresSp = array_search($tabPlanStd[$key1]['idAgent'], array_column($tabDecHeureSp, 'idAgent'), true);
-            if (empty($posTabDecHeuresSp)) { // On crée une nouvelle entrée dans le tableau de décompte
-                $tabDecHeureSp[$i]['idAgent'] = $tabPlanStd[$key1]['idAgent'];
-                $tabDecHeureSp[$i]['nbHeureSp'] = $nbHeureSp;
-                $i++;
-            } else {
-                $tabDecHeureSp[$posTabDecHeuresSp]['nbHeureSp'] += $nbHeureSp;
-            }
-            $j = count($tabPlanStd);
+    // on les enregistre dans un nouveau tableau $tabDecHeureSp, les heures de SP en les regroupant par idAgent 
+    $compteur = 0;
+    foreach ($tabDecHeureSp as $key2 => $value2) {
+        if (empty(array_search($tabPlanStd[$key1]['idAgent'], array_column($tabDecHeureSp, 'idAgent'))) && ($key1 == $key2 ||
+                !isset($tabDecHeureSp[$key1 + 1]))) {
+            $compteur++;
         }
+        if ($tabDecHeureSp[$key2]['idAgent'] == $tabPlanStd[$key1]['idAgent']) {
+            $tabDecHeureSp[$key2]['nbHeureSp'] += $nbHeureSp;
+            $compteur--;
+        }
+    }
+    if ($compteur == count($tabDecHeureSp)) {
+        $tabDecHeureSp[$key1]['idAgent'] = $tabPlanStd[$key1]['idAgent'];
+        $tabDecHeureSp[$key1]['nbHeureSp'] = $nbHeureSp;
     }
 }
 // var_dump($tabPlanStd);
-var_dump($tabDecHeureSp);
+// var_dump($tabDecHeureSp);
 // exit();
 // 
 ///////////////////////////////////////////// DECOMPTE DES SAMEDIS TRAVAILLES DEPUIS LE DEBUT DE L'ANNEE ///////////////////////////////////////////////////////
@@ -222,8 +216,7 @@ if (!empty($tabPlanStdSamedi)) {
     foreach ($tabPlanStdSamedi as $key1 => $value1) {
         foreach ($tabPlanStdSamedi as $key2 => $value2) {
             if (isset($tabPlanStdSamedi[$key2]) && isset($tabPlanStdSamedi[$key1]) &&
-                    $key2 != $key1 &&
-                    $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanStdSamedi[$key2]['idAgent']) {
+                    $key2 != $key1 && $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanStdSamedi[$key2]['idAgent']) {
                 unset($tabPlanStdSamedi[$key2]);
             }
         }
@@ -234,11 +227,9 @@ if (!empty($tabPlanStdSamedi)) {
 $i = 0;
 // On recopie dans ce tableau, les calculs issus des samedis standards et réels
 foreach ($tabPlanStdSamedi as $key => $value) {
-    if (isset($tabPlanStdSamedi[$key])) {
-        $tabSamediAgent[$i]['idAgent'] = $tabPlanStdSamedi[$key]['idAgent'];
-        $tabSamediAgent[$i]['nbSamedi'] = $_SESSION['weekNumber'] - $nbSamediFerie;
-        $i++;
-    }
+    $tabSamediAgent[$i]['idAgent'] = $tabPlanStdSamedi[$key]['idAgent'];
+    $tabSamediAgent[$i]['nbSamedi'] = $_SESSION['weekNumber'] - $nbSamediFerie;
+    $i++;
 }
 // On décrémente le nb de samedis travaillés si dans le réel, on a des samedis du groupe 4 
 // cas d'absence de samedis dans le réel alors que l'agent travaille habituellement le samedi
@@ -252,7 +243,7 @@ foreach ($tabPlanReelSamedi as $key1 => $value1) {
                 $tabSamediAgent[$key2]['nbSamedi'] --;
             } else { // Sinon, on rajoute un samedi
                 $tabSamediAgent[$key2]['nbSamedi'] ++;
-            }
+            }           
         } else {
             $compteur++;
         }
@@ -264,8 +255,6 @@ foreach ($tabPlanReelSamedi as $key1 => $value1) {
         $i++;
     }
 }
-// var_dump($tabSamediAgent);
-// var_dump($tabDecHeureSp);
 // On fusionne le tableau de calcul des heures de service public $tabDecHeureSp
 // avec le tableau des samedis travaillés $tabSamediAgent
 $i = 0;
@@ -287,7 +276,7 @@ foreach ($tabSamediAgent as $key1 => $value1) {
             $compteur++;
         }
     }
-    if ($compteur == count($tabSamediAgent)) {
+    if ($compteur == count($tabDecTotal)) {
         $tabDecTotal[$i]['prenom'] = "";
         $tabDecTotal[$i]['idAgent'] = $tabSamediAgent[$key1]['idAgent'];
         $tabDecTotal[$i]['nbHeureSp'] = 0;
@@ -307,13 +296,12 @@ foreach ($tabDecTotal as $key1 => $value1) {
 }
 // Tri du tableau dans l'ordre alphabétique des prénoms pour l'affichage
 asort($tabDecTotal);
-//
 // var_dump($tabDecTotal);
 // var_dump($tabAgent);
 // var_dump($tabDecHeureSp);
-// var_dump($tabSamediAgent);
+var_dump($tabSamediAgent);
 // var_dump($tabPlanStdSamedi);
-// var_dump($tabPlanReelSamedi);
+var_dump($tabPlanReelSamedi);
 exit();
 //
 ?>
@@ -360,6 +348,7 @@ exit();
     </div>
 </div>
 <?php include("../include/header_admin.php"); ?>
+
 <!-- Affichage du titre de la page -->
 <div class="col-lg-offset-3 col-lg-6">
     <h2>Temps de service public et samedis travaillés</h2>

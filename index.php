@@ -279,7 +279,6 @@ require_once('include/alice_dao.inc.php');
                     <!-- Affichage du planning -->
                     <?php
                     $i = 0;
-
                     while ($i < count($tabPlanStd)) {
                         ?>
                         <tr class="poste-size border-right">
@@ -366,7 +365,7 @@ require_once('include/alice_dao.inc.php');
                         echo "</td>";
                         ?>
                     </tr>
-                    <!--            Affichage des jours-->
+                    <!-- Affichage des jours en bas -->
                     <tr class="color-grey text-size">
                         <th class="border-right"></th>
                         <th class="text-center border-right" colspan="2">Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
@@ -376,9 +375,9 @@ require_once('include/alice_dao.inc.php');
                         <th class="text-center border-right" colspan="2">Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
                         <th class="text-center border-right" colspan="2">Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
                     </tr>
-                    </div>
-                </table>
             </div>
-        </div>
-    </body>
+        </table>
+    </div>
+</div>
+</body>
 </html>
