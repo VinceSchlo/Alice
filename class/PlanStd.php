@@ -138,7 +138,7 @@ class PlanStd {
         // Connexion à la base de données
         $dao = new Dao();
         // Requête SQL
-        $sql = "SELECT a.idAgent, idJour, poste.idPoste, plan.horaireDeb, plan.horaireFin
+        $sql = "SELECT a.idAgent, idJour, plan.idPoste, poste.idGroupe, plan.horaireDeb, plan.horaireFin
                 FROM agent as a
                 JOIN planstd as plan
                 JOIN poste as poste
