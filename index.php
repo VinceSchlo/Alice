@@ -215,12 +215,12 @@ require_once('include/alice_dao.inc.php');
                     <!-- Affichage des jours -->
                     <tr class="color-grey text-size">
                         <th class="border-right"></th>
-                        <th class="text-center border-right" colspan="2">Lundi</th>
-                        <th class="text-center border-right" colspan="2">Mardi</th>
-                        <th class="text-center border-right" colspan="3">Mercredi</th>
-                        <th class="text-center border-right" colspan="2">Jeudi</th>
-                        <th class="text-center border-right" colspan="2">Vendredi</th>
-                        <th class="text-center border-right" colspan="2">Samedi</th>
+                        <th class="text-center border-right" colspan="2">Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="3">Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
                     </tr>
                     <!-- Affichage des horaires -->
                     <tr class="color-grey name-size border-right">
@@ -309,6 +309,74 @@ require_once('include/alice_dao.inc.php');
                             ?>
                         </tr>
                     <?php } ?>
+                    <!--            Affichage des horaires -->
+                    <tr class="color-grey name-size border-right">
+                        <td class="border-right"></td>
+                        <?php
+                        $oHoraire = new Horaire();
+                        $time = $oHoraire->selectHoraire();
+
+                        for ($i = 0; $i < 4; $i++) {
+                            if ($i % 2 == 0) {
+                                echo "<td class=\"text-center border-top-bot\">";
+                                echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                                echo substr($time[3]['libHoraire'], 0, 5);
+                                echo "</td>";
+                            }
+                            if ($i % 2 != 0) {
+                                echo "<td class=\"text-center border-right\">";
+                                echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                                echo substr($time[6]['libHoraire'], 0, 5);
+                                echo "</td>";
+                            }
+                        }
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[2]['libHoraire'], 0, 5);
+                        echo "</td>";
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[3]['libHoraire'], 0, 5);
+                        echo "</td>";
+                        echo "<td class=\"text-center border-right\">";
+                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[6]['libHoraire'], 0, 5);
+                        echo "</td>";
+                        for ($i = 0; $i < 4; $i++) {
+                            if ($i % 2 == 0) {
+                                echo "<td class=\"text-center border-top-bot\">";
+                                echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                                echo substr($time[3]['libHoraire'], 0, 5);
+                                echo "</td>";
+                            }
+                            if ($i % 2 != 0) {
+                                echo "<td class=\"text-center border-right\">";
+                                echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                                echo substr($time[6]['libHoraire'], 0, 5);
+                                echo "</td>";
+                            }
+                        }
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[0]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[2]['libHoraire'], 0, 5);
+                        echo "</td>";
+                        echo "<td class=\"text-center border-top-bot\">";
+                        echo substr($time[2]['libHoraire'], 0, 5), " - ";
+                        echo substr($time[4]['libHoraire'], 0, 5);
+                        echo "</td>";
+                        ?>
+                    </tr>
+                    <!--            Affichage des jours-->
+                    <tr class="color-grey text-size">
+                        <th class="border-right"></th>
+                        <th class="text-center border-right" colspan="2">Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="3">Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
+                        <th class="text-center border-right" colspan="2">Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
+                    </tr>
+                    </div>
                 </table>
             </div>
         </div>

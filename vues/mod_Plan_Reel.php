@@ -221,12 +221,12 @@ $time = $oHoraire->selectHoraire();
         <!--            Affichage des jours-->
         <tr class="color-grey text-size">
             <th class=" border-right"></th>
-            <th class="text-center border-right" colspan="2">Lundi</th>
-            <th class="text-center border-right" colspan="2">Mardi</th>
-            <th class="text-center border-right" colspan="3">Mercredi</th>
-            <th class="text-center border-right" colspan="2">Jeudi</th>
-            <th class="text-center border-right" colspan="2">Vendredi</th>
-            <th class="text-center border-right" colspan="2">Samedi</th>
+            <th class="text-center border-right" colspan="2">Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="3">Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
         </tr>
         <!--            Affichage des horaires -->
         <tr class="color-grey name-size border-right">
@@ -499,12 +499,12 @@ $time = $oHoraire->selectHoraire();
             <!--            Affichage des jours-->
             <tr class="color-grey text-size">
                 <th class="border-right"></th>
-                <th class="text-center border-right" colspan="2">Lundi</th>
-                <th class="text-center border-right" colspan="2">Mardi</th>
-                <th class="text-center border-right" colspan="3">Mercredi</th>
-                <th class="text-center border-right" colspan="2">Jeudi</th>
-                <th class="text-center border-right" colspan="2">Vendredi</th>
-                <th class="text-center border-right" colspan="2">Samedi</th>
+                <th class="text-center border-right" colspan="2">Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="3">Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
             </tr>
             <div class="col-lg-offset-10 col-lg-2">
                 <!-- Affichage de 2 boutons -->
