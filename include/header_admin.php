@@ -1,11 +1,8 @@
 <?php
-
-if(!isset($_SESSION['idAgent'])){
+if (!isset($_SESSION['idAgent'])) {
     header("Location:../index.php");
 }
-
 ?>
-
 <div class="col-lg-offset-2 col-lg-2">
     <!-- Navigation -->
     <nav class="navbar navbar-static-top background-color-admin" role="navigation">

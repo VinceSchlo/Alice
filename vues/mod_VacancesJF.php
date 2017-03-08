@@ -113,7 +113,6 @@ $tabFerie = $ferie->selectAllFerie();
                     <th class="thCentre">Date de fin</th>
                 </tr>
                 <br/>
-
                 <?php
                 $j = 0;
                 for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
@@ -139,13 +138,10 @@ $tabFerie = $ferie->selectAllFerie();
                                        echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
                                    }
                                    ?>">
-
                         </td>
                         </tr>
-                        <?php
-                        $j++;
-                    }
-                    ?>
+                        <?php $j++;
+                    } ?>
                     <!-- Affichage de 2 boutons -->
                     <button type="submit" name="annuler" class="btn btn-success"><span
                             class="glyphicon glyphicon-ban-circle"></span> Annuler

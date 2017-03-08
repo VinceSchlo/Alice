@@ -243,7 +243,7 @@ foreach ($tabPlanReelSamedi as $key1 => $value1) {
                 $tabSamediAgent[$key2]['nbSamedi'] --;
             } else { // Sinon, on rajoute un samedi
                 $tabSamediAgent[$key2]['nbSamedi'] ++;
-            }           
+            }
         } else {
             $compteur++;
         }
@@ -295,75 +295,95 @@ foreach ($tabDecTotal as $key1 => $value1) {
     }
 }
 // Tri du tableau dans l'ordre alphabétique des prénoms pour l'affichage
-asort($tabDecTotal);
+sort($tabDecTotal);
 // var_dump($tabDecTotal);
 // var_dump($tabAgent);
 // var_dump($tabDecHeureSp);
-var_dump($tabSamediAgent);
+// var_dump($tabSamediAgent);
 // var_dump($tabPlanStdSamedi);
-var_dump($tabPlanReelSamedi);
-exit();
+// var_dump($tabPlanReelSamedi);
+// exit();
 //
 ?>
-
-<div class="col-lg-6">
-    <div class="row">
-        <div class="col-lg-offset-4 col-lg-4">
-            <table class="table top-marge">
-                <tr>
-                    <td>
-                        <form action="" method="post">
-                            <input type="submit" value=" " name="precedente" class="leftArrow">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="post">
-                            <input type="submit" value=" " name="home" class="house">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="post">
-                            <input type="submit" value=" " name="suivante" class="rightArrow">
-                        </form>
-                    </td>
+<body>
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-offset-4 col-lg-4">
+                <table class="table top-marge">
+                    <tr>
+                        <td>
+                            <form action="" method="post">
+                                <input type="submit" value=" " name="precedente" class="leftArrow">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="submit" value=" " name="home" class="house">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="submit" value=" " name="suivante" class="rightArrow">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <h2 class="col-lg-offset-1 col-lg-3">         
+                <?php
+                if ($_SESSION['weekNumber'] < 10) {
+                    echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
+                } else {
+                    echo "Semaine n°" . $_SESSION['weekNumber'];
+                }
+                ?>
+            </h2>
+        </div>
+        <div class="row">
+            <h2 class="col-lg-offset-3 col-lg-10">
+                <?php
+                echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+                ?>
+            </h2>
+        </div>
+    </div>
+    <?php include("../include/header_admin.php"); ?>
+    <!-- Affichage du titre de la page -->
+    <div class="col-lg-offset-3 col-lg-6">
+        <h2>Temps de service public et samedis travaillés</h2>
+    </div>
+    <!-- Affichage des heures de service public et des samedis -->
+    <div class="container-fluid col-lg-offset-2">
+        <div class="col-lg-7">
+            <table class="table table-bordered">
+                <tr class="color-grey">
+                    <th class="thCentre">Personnel</th>
+                    <th class="thCentre">Nombre d'heures de service public cette semaine</th>
+                    <th class="thCentre">Nombre de samedis travaillés depuis le début de l'année</th>
                 </tr>
+                <br/>
+                <?php foreach ($tabDecTotal as $key => $value) {
+                    ?>
+                    <tr>
+                        <td> <?php echo $tabDecTotal[$key]['prenom']; ?> </td>
+                        <td> <?php echo $tabDecTotal[$key]['nbHeureSp'] . " h"; ?> </td>
+                        <td> <?php echo $tabDecTotal[$key]['nbSamedi'] . " samedis"; ?> </td>
+                    </tr>
+                <?php } ?>
             </table>
         </div>
-        <h2 class="col-lg-offset-1 col-lg-3">         
-            <?php
-            if ($_SESSION['weekNumber'] < 10) {
-                echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
-            } else {
-                echo "Semaine n°" . $_SESSION['weekNumber'];
-            }
-            ?>
-        </h2>
     </div>
-    <div class="row">
-        <h2 class="col-lg-offset-3 col-lg-10">
-            <?php
-            echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-            ?>
-        </h2>
-    </div>
-</div>
-<?php include("../include/header_admin.php"); ?>
 
-<!-- Affichage du titre de la page -->
-<div class="col-lg-offset-3 col-lg-6">
-    <h2>Temps de service public et samedis travaillés</h2>
-</div>
+    <!-- jQuery -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
 
-<!-- jQuery -->
-<script src="../bootstrap/js/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bootstrap/js/metisMenu.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../bootstrap/js/metisMenu.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="../bootstrap/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>

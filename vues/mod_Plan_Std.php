@@ -183,13 +183,13 @@ require_once('../include/alice_dao.inc.php');
                                             selected=""
                                             style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-                        <?php } else { ?>
+                                <?php } else { ?>
 
                                     <option
                                         value="<?php echo $poste[$k]['idPoste']; ?>"
                                         style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
 
-                                <?php
+                                    <?php
                                 }
                             }
                             ?>
@@ -199,9 +199,9 @@ require_once('../include/alice_dao.inc.php');
                         $l++;
                         ?>
                         </td>
-    <?php } ?>
+                    <?php } ?>
                     </tr>
-<?php } ?>
+                <?php } ?>
 
                 <!-- Affichage des horaires -->
                 <tr class="color-grey name-size border-right">
@@ -284,16 +284,16 @@ require_once('../include/alice_dao.inc.php');
         </table>
     </div>
 
-<!-- jQuery -->
-<script src="../bootstrap/js/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../bootstrap/js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bootstrap/js/metisMenu.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="../bootstrap/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>
