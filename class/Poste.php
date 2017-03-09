@@ -81,7 +81,8 @@ class Poste {
         //Requête SQL 
         $sql = "SELECT p.idPoste, p.libPoste, g.coulGroupe
                 FROM poste as p JOIN groupe as g
-                ON p.idGroupe = g.idGroupe";
+                ON p.idGroupe = g.idGroupe
+                AND p.idposte !='21'";
         $resu = $dao->executeRequete($sql);
         return $resu->fetchAll(PDO::FETCH_ASSOC);
     }

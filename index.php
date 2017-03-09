@@ -138,7 +138,6 @@ require_once('include/alice_dao.inc.php');
     } else
         
         ?>
-
     <body>
         <div class="container-fluid">
             <div class="row">
@@ -283,7 +282,7 @@ require_once('include/alice_dao.inc.php');
                         ?>
                         <tr class="poste-size border-right">
                             <td class="color-grey border-right">
-                                <?php echo $tabPlanStd[$i]['prenom']; ?>
+                            <?php echo $tabPlanStd[$i]['prenom']; ?>
                             </td>
                             <?php
                             for ($j = 0; $j < 13; $j++) {
@@ -307,10 +306,10 @@ require_once('include/alice_dao.inc.php');
                             }
                             ?>
                         </tr>
-                    <?php } ?>
+<?php } ?>
                     <!--            Affichage des horaires -->
                     <tr class="color-grey name-size border-right">
-                        <td class="border-right"></td>
+                        <td class="border-right">Personnel</td>
                         <?php
                         $oHoraire = new Horaire();
                         $time = $oHoraire->selectHoraire();

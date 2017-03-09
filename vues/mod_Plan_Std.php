@@ -205,7 +205,7 @@ require_once('../include/alice_dao.inc.php');
 
                 <!-- Affichage des horaires -->
                 <tr class="color-grey name-size border-right">
-                    <td class="border-right"></td>
+                    <td class="border-right">Personnel</td>
                     <?php
                     $oHoraire = new Horaire();
                     $time = $oHoraire->selectHoraire();
