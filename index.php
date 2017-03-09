@@ -129,6 +129,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     if (!isset($agent)) {
         //Si idientifiant ou mdp faux alert JAVAscript
         ?>
+        <<<<<<< HEAD
         <script>alert('Mauvais login ou mdp')</script> <?php
     } else {
 // Si l'utilisateur existe garnir la variable $_SESSION
@@ -214,6 +215,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             </div>
         </div>
     </div>
+</div>
 </div>
 <div class="container-fluid">
     <div class="col-lg-12">
@@ -312,6 +314,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                             default:
                                 echo "<td class='text-center border-top-bot' style='background-color:$couleur'>";
                                 break;
+
                         }
                         echo $tabPlanStd[$i]['libPoste'];
                         echo "</td>";

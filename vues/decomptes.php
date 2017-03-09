@@ -367,7 +367,13 @@ sort($tabDecTotal);
                     <tr>
                         <td> <?php echo $tabDecTotal[$key]['prenom']; ?> </td>
                         <td> <?php echo $tabDecTotal[$key]['nbHeureSp'] . " h"; ?> </td>
-                        <td> <?php echo $tabDecTotal[$key]['nbSamedi'] . " samedis"; ?> </td>
+                        <td> <?php
+                            if ($tabDecTotal[$key]['nbSamedi'] <= 1) {
+                                echo $tabDecTotal[$key]['nbSamedi'] . " samedi";
+                            } else {
+                                echo $tabDecTotal[$key]['nbSamedi'] . " samedis";
+                            }
+                            ?> </td>
                     </tr>
                 <?php } ?>
             </table>
