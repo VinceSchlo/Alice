@@ -45,11 +45,9 @@ if (isset($_POST['precedente'])) {
     }
 }
 
-
 if (isset($_POST['home'])) {
     $_SESSION['weekNumber'] = ltrim(date("W"), "0");
 }
-
 
 if (isset($_POST['suivante'])) {
     $_SESSION['weekNumber']++;
@@ -186,7 +184,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 <br/>
             </div>
             <div class="row">
-                <h2 class="col-md-offset-4 col-md-5 center-block">
+                <h2 class="col-md-offset-3 col-md-6 center-block">
                     <?php
                     echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
                     ?>
@@ -210,7 +208,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                     <input class="form-control" name="login" id="login" type="text" required>
                     <label for="mdp">Mot de passe</label>
                     <input class="form-control" name="mdp" id="mdp" type="password" required>
-                    <button class="glyphicon glyphicon-off btn-warning btn pull-right" name="valider"></button>
+                    <button class="glyphicon glyphicon-off btn-warning btn" name="valider"></button>
                 </form>
             </div>
         </div>

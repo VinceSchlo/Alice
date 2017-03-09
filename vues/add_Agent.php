@@ -39,8 +39,8 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
     //
 } else if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
     // Retour à la page de modification des agents
-    // die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
-    header("Location: mod_Agent.php");
+    die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
+    // header("Location: mod_Agent.php");
 }
 ?>
 <body>

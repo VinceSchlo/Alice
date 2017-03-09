@@ -108,3 +108,20 @@ function connexion() {
         document.getElementById("connexion").style.display = "none";
     }
 }
+
+function toastRec() {
+    var options = {
+        style: {
+            main: {
+                background: "#ec971f",
+                color: "white",
+                height: '10%',
+                width: '15%'
+            }
+        },
+        settings: {
+            duration: 10000
+        }
+    };
+    iqwerty.toast.Toast("Enregistrement en cours,\nveuillez patienter", options);
+}
