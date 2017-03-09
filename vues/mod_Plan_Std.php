@@ -284,7 +284,7 @@ require_once('../include/alice_dao.inc.php');
                             class="glyphicon glyphicon-ban-circle"><span
                             class="glyphicon glyphicon-ban-circle"></span> Annuler
                     </button>
-                    <button type="submit" name="enregistrer" class="btn btn-warning"><span
+                    <button type="submit" name="enregistrer" onclick="toastRec()" class="btn btn-warning" ><span
                             class="glyphicon glyphicon-floppy-open"></span> Enregistrer
                     </button>
                 </div>

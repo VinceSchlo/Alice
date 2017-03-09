@@ -64,124 +64,129 @@ $tabFerie = $ferie->selectAllFerie();
 //
 ?>
 <body class="background-color-admin">
-<!-- Affichage des vacances -->
-<div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
-    <div class="col-lg-7">
-        <table class="table table-bordered">
-            <tr class="color-grey">
-                <th class="thCentre">Vacances</th>
-                <th class="thCentre">Date de début</th>
-                <th class="thCentre">Date de fin</th>
-            </tr>
-            <br/>
-
-            <?php
-            for ($i = 0;
-            $i < count($tabVacances);
-            $i++) {
-            ?>
-            <form class="form-horizontal" method="POST" action="mod_VacancesJF.php"
-                  onsubmit="return verifFormDates(this)">
-                <tr>
-                    <input type="hidden" name="idVacForm<?php echo $i; ?>"
-                           value="<?php echo $tabVacances[$i]['idVac']; ?>">
-                    <td class="name-size-admin">
-                        <input size="10" class="form-control" disabled type="text" name="nomForm<?php echo $i; ?>"
-                               value="<?php echo $tabVacances[$i]['nomVac']; ?>">
-                    </td>
-                    <td class="name-size-admin">
-                        <input size="10" class="form-control" id="dateDeb" type="text"
-                               name="dateDebForm<?php echo $i; ?>"
-                               value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>">
-                    </td>
-                    <td class="name-size-admin">
-                        <input size="10" class="form-control" id="dateFin" type="text"
-                               name="dateFinForm<?php echo $i; ?>"
-                               value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>"
-                               onblur="verifDate(this)">
-                    </td>
+    <!-- Affichage des vacances -->
+    <div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
+        <div class="col-lg-7">
+            <table class="table table-bordered">
+                <tr class="color-grey">
+                    <th class="thCentre">Vacances</th>
+                    <th class="thCentre">Date de début</th>
+                    <th class="thCentre">Date de fin</th>
                 </tr>
-                <?php } ?>
-                <div class="pull-right text-right">
-                    <!-- Affichage de 2 boutons -->
-                    <button type="submit" name="annuler" class="btn btn-success"
-                            class="glyphicon glyphicon-ban-circle"><span
-                            class="glyphicon glyphicon-ban-circle"></span> Annuler
-                    </button>
-                    <button type="submit" name="updateVac" class="btn btn-warning"><span
-                            class="glyphicon glyphicon-floppy-open"></span> Enregistrer
-                    </button>
-                </div>
-            </form>
-        </table>
-    </div>
-</div>
+                <br/>
 
-<!-- Affichage des jours fériés -->
-<div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
-    <div class="col-lg-7">
-        <table class="table table-bordered">
-            <tr class="color-grey">
-                <th class="thCentre">Jours fériés</th>
-                <th class="thCentre">Date de début</th>
-                <th class="thCentre">Date de fin</th>
-            </tr>
-            <br/>
-            <?php
-            $j = 0;
-            for ($i = count($tabVacances);
-            $i < (count($tabVacances) + count($tabFerie));
-            $i++) {
-            ?>
-            <form class="form-horizontal" method="POST" action="mod_VacancesJF.php"
-                  onsubmit="return verifFormDates(this)">
-                <tr>
-                    <input type="hidden" name="idFerieForm<?php echo $i; ?>"
-                           value="<?php echo $tabFerie[$j]['idFerie']; ?>">
-                    <td class="name-size-admin">
-                        <input size="10" class="form-control" disabled type="text" name="nomForm<?php echo $i; ?>"
-                               value="<?php echo $tabFerie[$j]['nomFerie']; ?>">
-                    </td>
-                    <td class="name-size-admin">
-                        <input size="10" class="form-control" type="text" name="dateDebForm<?php echo $i; ?>"
-                               value="<?php echo convertDateUsFr($tabFerie[$j]['dateDebFerie']); ?>">
-                    </td>
-                    <td class="name-size-admin">
-                        <input size="10" class="form-control" type="text" name="dateFinForm<?php echo $i; ?>"
-                               value="<?php
-                               if (empty($tabFerie[$j]['dateFinFerie'])) {
-                                   echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
-                               } else {
-                                   echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
-                               }
-                               ?>">
-                    </td>
+                <?php
+                for ($i = 0; $i < count($tabVacances); $i++) {
+                    ?>
+                    <form class="form-horizontal" method="POST" action="mod_VacancesJF.php"
+                          onsubmit="return verifFormDates(this)">
+                        <tr>
+                        <div class="form-group has-error has-feedback">
+                            <input type="hidden" name="idVacForm<?php echo $i; ?>"
+                                   value="<?php echo $tabVacances[$i]['idVac']; ?>">
+                            <td class="name-size-admin">
+                                <input size="10" class="form-control" disabled type="text" name="nomForm<?php echo $i; ?>"
+                                       value="<?php echo $tabVacances[$i]['nomVac']; ?>">
+                            </td>
+                            <td class="name-size-admin">
+                                <input size="10" class="form-control" id="dateDeb" type="text"
+                                       name="dateDebForm<?php echo $i; ?>"
+                                       value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>">
+                            </td>
+                            <td class="name-size-admin">
+                                <div class="form-group has-error has-feedback">
+                                    <input size="10" class="form-control" id="dateFin" type="text"
+                                           name="dateFinForm<?php echo $i; ?>"
+                                           value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>">
+                                    <span class="help-block">La date de fin doit être supérieure à la date de début</span>
+                                </div>
+                            </td>
+                        </div>
+                        </tr>
+                    <?php } ?>
+                    <div class="pull-right text-right">
+                        <!-- Affichage de 2 boutons -->
+                        <button type="submit" name="annuler" class="btn btn-success"
+                                class="glyphicon glyphicon-ban-circle"><span
+                                class="glyphicon glyphicon-ban-circle"></span> Annuler
+                        </button>
+                        <button type="submit" name="updateVac" class="btn btn-warning"><span
+                                class="glyphicon glyphicon-floppy-open"></span> Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </table>
+        </div>
+    </div>
+
+    <!-- Affichage des jours fériés -->
+    <div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
+        <div class="col-lg-7">
+            <table class="table table-bordered">
+                <tr class="color-grey">
+                    <th class="thCentre">Jours fériés</th>
+                    <th class="thCentre">Date de début</th>
+                    <th class="thCentre">Date de fin</th>
                 </tr>
-                <?php $j++;
-                } ?>
-                <div class="pull-right text-right">
-                    <!-- Affichage de 2 boutons -->
-                    <button type="submit" name="annuler" class="btn btn-success"><span
-                            class="glyphicon glyphicon-ban-circle"></span> Annuler
-                    </button>
-                    <button type="submit" name="updateFerie" class="btn btn-warning"><span
-                            class="glyphicon glyphicon-floppy-open"></span> Enregistrer
-                    </button>
-                </div>
-            </form>
-        </table>
+                <br/>
+                <?php
+                $j = 0;
+                for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
+                    ?>
+                    <form class="form-horizontal" method="POST" action="mod_VacancesJF.php"
+                          onsubmit="return verifFormDates(this)">
+                        <tr>
+                        <input type="hidden" name="idFerieForm<?php echo $i; ?>"
+                               value="<?php echo $tabFerie[$j]['idFerie']; ?>">
+                        <td class="name-size-admin">
+                            <input size="10" class="form-control" disabled type="text" name="nomForm<?php echo $i; ?>"
+                                   value="<?php echo $tabFerie[$j]['nomFerie']; ?>">
+                        </td>
+                        <td class="name-size-admin">
+                            <input size="10" class="form-control" type="text" name="dateDebForm<?php echo $i; ?>"
+                                   value="<?php echo convertDateUsFr($tabFerie[$j]['dateDebFerie']); ?>">
+                        </td>
+                        <td class="name-size-admin">
+                            <div class="form-group has-error has-feedback">
+                                <input size="10" class="form-control" type="text" name="dateFinForm<?php echo $i; ?>"
+                                       value="<?php
+                                       if (empty($tabFerie[$j]['dateFinFerie'])) {
+                                           echo convertDateUsFr($tabFerie[$j]['dateDebFerie']);
+                                       } else {
+                                           echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
+                                       }
+                                       ?>">
+                                <span class="help-block">La date de fin doit être supérieure à la date de début</span>
+                            </div>
+                        </td>
+                        </tr>
+                        <?php
+                        $j++;
+                    }
+                    ?>
+                    <div class="pull-right text-right">
+                        <!-- Affichage de 2 boutons -->
+                        <button type="submit" name="annuler" class="btn btn-success"><span
+                                class="glyphicon glyphicon-ban-circle"></span> Annuler
+                        </button>
+                        <button type="submit" name="updateFerie" class="btn btn-warning"><span
+                                class="glyphicon glyphicon-floppy-open"></span> Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </table>
+        </div>
     </div>
-</div>
-<!-- jQuery -->
-<script src="../bootstrap/js/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../bootstrap/js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bootstrap/js/metisMenu.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="../bootstrap/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>
