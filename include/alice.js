@@ -120,8 +120,27 @@ function toastRec() {
             }
         },
         settings: {
-            duration: 5000
+            duration: 6000
         }
     };
     iqwerty.toast.Toast("Enregistrement en cours,\nveuillez patienter", options);
+}
+
+function saisieDate() {
+var Masker = require('maskerjs');
+var dateMask = new Masker(
+    ['__/__/____'],
+    /^[0-9]$/ // allowed chars
+);
+
+var dateDebInput = document.getElementById('dateDeb');
+var dateFinInput = document.getElementById('dateFin');
+
+dateMask.bind(dateDebInput);
+dateMask.unbind(dateDebInput);
+dateMask.bind(dateFinInput);
+// telMask.unbind(telInput);
+
+var val1 = dateMask.unmask(dateDebInput.value).text;
+var val2 = dateMask.unmask(dateFinInput.value).text;
 }
