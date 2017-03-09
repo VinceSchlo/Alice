@@ -24,14 +24,14 @@ $listeVacances = $oVacances->selectAllVacances();
 $oFerie = new Ferie();
 $listeFerie = $oFerie->selectAllFerie();
 
-$anneeVac = substr($listeVacances[0]['dateDebVac'], 0, 4);
+$anneeVac = substr($listeVacances[1]['dateDebVac'], 0, 4);
 $anneeFerie = substr($listeFerie[0]['dateDebFerie'], 0, 4);
 
 $annee = date('Y');
 
 if ($anneeVac < $annee || $anneeFerie < $annee) {
     ?>
-    <script>alert("Pensez à mettre à jour les dates des Vacances et des jours Férié pour l'année <?php echo $annee ?>")</script>
+    <script>alert("Pensez à mettre à jour les dates des vacances et des jours fériés pour l'année <?php echo $annee ?>")</script>
     <?php
 }
 
@@ -381,7 +381,7 @@ $time = $oHoraire->selectHoraire();
                                 <input type="hidden" name="idPosteForm<?php echo $l; ?>"
                                        value="<?php echo $tabPlanStd[$i]['libPoste']; ?>">
 
-                                <select disabled style="width: 120px" class="form-control">
+                                <select disabled style="width: 100%" class="form-control">
 
                                     <option value="<?php echo $tabPlanStd[$i]['libPoste']; ?>"
                                             selected=""><?php echo $tabPlanStd[$i]['libPoste']; ?></option>
@@ -441,7 +441,7 @@ $time = $oHoraire->selectHoraire();
             <?php } ?>
             <!--            Affichage des horaires -->
             <tr class="color-grey name-size border-right">
-                <td class="border-right"></td>
+                <td class="border-right">Personnel</td>
                 <?php
                 $oHoraire = new Horaire();
                 $time = $oHoraire->selectHoraire();
