@@ -1,71 +1,67 @@
-.logo
-{
-    float:left;
-    height:50%;
-    width:50%;
-    padding:0px;
+.logo {
+    float: left;
+    height: 50%;
+    width: 50%;
+    padding: 0px;
 }
 
-
-h2, h3, h4, p, .thCentre
-{
+h2, h3, h4, p, .thCentre {
     text-align: center;
 }
 
-.checkBox
-{
+.checkBox {
     padding: 10px 10px 10px 10px;
-    text-align:center;
-   
+    text-align: center;
+
 }
 
 .leftArrow {
-background:url(../images/back48x48.png);
-border:none;
-width: 48px; /* largeur à spécifier */
-height: 48px; /* longueur à spécifier */
-cursor: pointer;
+    background: url(../images/back48x48.png);
+    border: none;
+    width: 48px; /* largeur à spécifier */
+    height: 48px; /* longueur à spécifier */
+    cursor: pointer;
 }
 
 .rightArrow {
-background:url(../images/next48x48.png);
-border:none;
-width:48px; /* largeur à spécifier */
-height: 48px; /* longueur à spécifier */
-cursor: pointer;
+    background: url(../images/next48x48.png);
+    border: none;
+    width: 48px; /* largeur à spécifier */
+    height: 48px; /* longueur à spécifier */
+    cursor: pointer;
 }
 
 .house {
-background:url(../images/house48x48.png);
-border:none;
-width: 48px; /* largeur à spécifier */
-height: 48px; /* longueur à spécifier */
-cursor: pointer;
+    background: url(../images/house48x48.png);
+    border: none;
+    width: 48px; /* largeur à spécifier */
+    height: 48px; /* longueur à spécifier */
+    cursor: pointer;
 }
 
-.marge-two{
+.marge-two {
     padding: 0 !important;
     margin: 0 !important;
 }
 
-.color-grey{
+.color-grey {
     background-color: rgba(146, 146, 146, 0.87);
 }
 
-.text-size{
+.text-size {
     font-size: 1.7em;
 }
 
-.poste-size{
+.poste-size {
     font-size: 1.2em;
 }
 
-.name-size{
+.name-size {
     font-size: 1.2em;
     font-weight: bold;
 }
 
-.border-black{
+.border-black {
     border-color: black;
 }
 
@@ -78,33 +74,29 @@ cursor: pointer;
     border: 0.8px solid #000000;
 }
 
-.top-marge{
-    margin-left: 6%;
-}
-
-.color-button{
+.color-button {
     background-color: rgba(179, 179, 179, 0.85);
 }
 
-.border-right{
+.border-right {
     border-right: 3px solid #000000;
     border-bottom: 1px solid #000000;
     border-top: 1px solid #000000;
 }
 
-.border-top-bot{
+.border-top-bot {
     border-bottom: 1px solid #000000;
     border-top: 1px solid #000000;
     border-right: 1px solid #000000;
 }
 
-.border-table{
+.border-table {
     border-bottom: 2px solid #000000;
     border-top: 2px solid #000000;
     border-right: 2px solid #000000;
     border-left: 2px solid #000000;
 }
 
-.background-color-admin{
-    background-color: #ffffcc ;
+.background-color-admin {
+    background-color: #ffffcc;
 }
