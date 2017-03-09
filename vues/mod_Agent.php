@@ -11,7 +11,7 @@ require_once('../include/alice_dao.inc.php');
 <div class="col-lg-offset-2 col-md-4">
     <h2>Modification des agents</h2>
 </div>
-<?php 
+<?php
 include("../include/header_admin.php");
 
 // Création d'un objet agent
@@ -117,8 +117,13 @@ $tabAgent = $agent->selectAgentByName();
                         <!-- Bouton Supprimer -->
                         <button type="submit" name="deleteAgent" class="btn btn-danger"
                                 value="<?php echo $tabAgent[$i]['idAgent']; ?>"
-                                onclick="return confirmer()"><span class="glyphicon glyphicon-trash"></span> Supprimer
+                                onclick="return confirmDeleteAgent<?php echo $i; ?>()"><span class="glyphicon glyphicon-trash"></span> Supprimer
                         </button>
+                        <script type="text/javascript">
+                            function confirmDeleteAgent<?php echo $i; ?>() {
+                                return confirm("Etes-vous sûr de vouloir supprimer <?php echo $tabAgent[$i]['prenom'] . " " . $tabAgent[$i]['nom']; ?> ?");
+                            }
+                        </script>
                     </td>
                     </tr>
                 <?php } ?>

@@ -145,7 +145,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             <div class="row">
             </div>
             <div class="row">
-                <img class="logo" src="images/logo_sna_quadri.png"/>
+                <img class="logo" src="images/logo_sna_Alice.png"/>
             </div>
         </div>
         <div class="col-md-8">

@@ -1,5 +1,5 @@
 //fonction pour activer une fenétre de suppression
-function confirmer() {
+function confirmDeleteAgent() {
     return confirm("Etes-vous sûr de vouloir supprimer ?");
 }
 
@@ -120,7 +120,7 @@ function toastRec() {
             }
         },
         settings: {
-            duration: 10000
+            duration: 5000
         }
     };
     iqwerty.toast.Toast("Enregistrement en cours,\nveuillez patienter", options);

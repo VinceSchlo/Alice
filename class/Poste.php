@@ -81,8 +81,7 @@ class Poste {
         //Requête SQL 
         $sql = "SELECT p.idPoste, p.libPoste, g.coulGroupe
                 FROM poste as p JOIN groupe as g
-                ON p.idGroupe = g.idGroupe
-                AND p.idposte !='21'"; // On ne prend pas le poste "vacant" qui sert uniquement lors de la création d'un nouvel agent
+                ON p.idGroupe = g.idGroupe";
         $resu = $dao->executeRequete($sql);
         return $resu->fetchAll(PDO::FETCH_ASSOC);
     }
