@@ -359,8 +359,8 @@ sort($tabDecTotal);
 <?php include("../include/header_admin.php"); ?>
 
 <!-- Affichage des heures de service public et des samedis -->
-<div class="container-fluid col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-8">
-    <div class="col-lg-7">
+<div class="container">
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-7">
         <table class="table table-bordered">
             <tr class="color-grey">
                 <th class="thCentre">Personnel</th>
