@@ -178,8 +178,8 @@ $oPlanReelSamedi = new PlanReel();
 $tabPlanReelSamedi = $oPlanReelSamedi->selectPlanReelSamedi($dateDebutAnnee, $tabDatesJoursSemaines[6]);
 //
 // On supprime du planning réel tous les evts hors samedis et jours fériés et les doublons dûs à un chgt de groupe dans un même samedi
-if (!empty($tabJFdebutAnnee)) {
-    if (!empty($oPlanReelSamedi)) {
+if (!empty($oPlanReelSamedi)) { // S'il y a du planning réel
+    if (!empty($tabJFdebutAnnee)) { // S'il y a des jours fériés
         foreach ($tabJFdebutAnnee as $key1 => $value1) {
             foreach ($tabPlanReelSamedi as $key2 => $value2) {
                 if (isset($tabPlanReelSamedi[$key2]) && convertDateNumJour($tabPlanReelSamedi[$key2]['dateReel']) != 6) {
@@ -302,6 +302,7 @@ foreach ($tabDecTotal as $key1 => $value1) {
 }
 // Tri du tableau dans l'ordre alphabétique des prénoms pour l'affichage
 sort($tabDecTotal);
+// array_multisort($tabDecTotal['prenom'], SORT_ASC, SORT_STRING);
 // var_dump($tabDecTotal);
 // var_dump($tabAgent);
 // var_dump($tabDecHeureSp);

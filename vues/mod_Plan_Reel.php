@@ -44,11 +44,11 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
         $j = 0;
         while ($j < count($tabPlanStd)) {
             if ($_POST['idAgentForm' . $i] == $tabPlanStd[$j]['idAgent'] &&
-                $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
-                $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
-                $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
-                $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste'] &&
-                $_POST['idPosteForm' . $i] != "Férié"
+                    $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
+                    $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
+                    $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
+                    $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste'] &&
+                    $_POST['idPosteForm' . $i] != "Férié"
             ) {
                 $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
                 $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
@@ -67,11 +67,11 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
                 }
                 $j = count($tabPlanStd);
             } else if ($_POST['idAgentForm' . $i] == $tabPlanStd[$j]['idAgent'] &&
-                $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
-                $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
-                $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
-                $_POST['idPosteForm' . $i] == $tabPlanStd[$j]['idPoste'] &&
-                $_POST['idPosteForm' . $i] != "Férié"
+                    $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
+                    $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
+                    $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
+                    $_POST['idPosteForm' . $i] == $tabPlanStd[$j]['idPoste'] &&
+                    $_POST['idPosteForm' . $i] != "Férié"
             ) {
                 $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
                 $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
@@ -106,10 +106,10 @@ if (!isset($_POST['precedente']) && !isset($_POST['suivante']) && !isset($_POST[
 }
 
 if (isset($_POST['precedente'])) {
-    $_SESSION['weekNumber']--;
+    $_SESSION['weekNumber'] --;
     if ($_SESSION['weekNumber'] < 1) {
         $_SESSION['weekNumber'] = 52;
-        $_SESSION['year']--; // L'année est au format "2017"
+        $_SESSION['year'] --; // L'année est au format "2017"
     }
 }
 
@@ -118,10 +118,10 @@ if (isset($_POST['home'])) {
 }
 
 if (isset($_POST['suivante'])) {
-    $_SESSION['weekNumber']++;
+    $_SESSION['weekNumber'] ++;
     if ($_SESSION['weekNumber'] > 52) {
         $_SESSION['weekNumber'] = 1;
-        $_SESSION['year']++; // L'année est au format "2017"
+        $_SESSION['year'] ++; // L'année est au format "2017"
     }
 }
 
@@ -528,7 +528,7 @@ $time = $oHoraire->selectHoraire();
                         class="glyphicon glyphicon-ban-circle"><span
                         class="glyphicon glyphicon-ban-circle"></span> Annuler
                 </button>
-                <button type="submit" name="enregistrer" class="btn btn-warning"><span
+                <button type="submit" name="enregistrer" class="btn btn-warning" onclick="toastRec()"><span
                         class="glyphicon glyphicon-floppy-open"></span> Enregistrer
                 </button>
             </div>

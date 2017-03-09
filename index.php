@@ -45,11 +45,9 @@ if (isset($_POST['precedente'])) {
     }
 }
 
-
 if (isset($_POST['home'])) {
     $_SESSION['weekNumber'] = ltrim(date("W"), "0");
 }
-
 
 if (isset($_POST['suivante'])) {
     $_SESSION['weekNumber']++;
@@ -147,7 +145,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             <div class="row">
             </div>
             <div class="row">
-                <img class="logo" src="images/logo_sna_quadri.png"/>
+                <img class="logo" src="images/logo_sna_Alice.png"/>
             </div>
         </div>
         <div class="col-md-8">
@@ -210,8 +208,8 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                     <input class="form-control" name="login" id="login" type="text" required>
                     <label for="mdp">Mot de passe</label>
                     <div class="form-group">
-                    <input class="form-control" name="mdp" id="mdp" type="password" required>
-                    <button class="glyphicon glyphicon-off btn-warning btn" name="valider"></button>
+                        <input class="form-control" name="mdp" id="mdp" type="password" required>
+                        <button class="glyphicon glyphicon-off btn-warning btn" name="valider"></button>
                     </div>
                 </form>
             </div>

@@ -32,7 +32,11 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
     $agent->setIdAgent($idNewAgent);
     $agent->setNom(addslashes(detecTiret($_POST['nomForm'])));
     $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm'])));
-    $agent->setStatut($_POST['statutForm']);
+    if (!isset($_POST['statutForm'])) {
+        $agent->setStatut(" ");
+    } else {
+        $agent->setStatut($_POST['statutForm']);
+    }
     $agent->setLogin(addslashes(trim($_POST['loginForm'])));
     $agent->setMdp(addslashes(trim($_POST['mdp2Form'])));
     // Tous les agents appartiennent à la bibliothèque de VERNON -> A MODIFIER sur UNE MISE A JOUR
@@ -42,10 +46,6 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
     // Retour à la page de modification des agents
     header("Location: mod_Agent.php");
     //
-} else if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
-    // Retour à la page de modification des agents
-    // die('<META HTTP-equiv="refresh" content=0;URL=mod_Agent.php>');
-    header("Location: mod_Agent.php");
 }
 ?>
 <body class="background-color-admin">
@@ -105,10 +105,8 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
             </div>
             <!-- Button (Double) -->
             <div class="form-group">
-                <div class="col-md-11 text-center">
-                    <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span>
-                        Annuler
-                    </button>
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-8">
                     <button name="insertAgent" class="btn btn-warning"><span class="glyphicon glyphicon-floppy-open"></span>
                         Enregistrer
                     </button>

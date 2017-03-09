@@ -1,5 +1,5 @@
 //fonction pour activer une fenétre de suppression
-function confirmer() {
+function confirmDeleteAgent() {
     return confirm("Etes-vous sûr de vouloir supprimer ?");
 }
 
@@ -107,4 +107,21 @@ function connexion() {
     } else {
         document.getElementById("connexion").style.display = "none";
     }
+}
+
+function toastRec() {
+    var options = {
+        style: {
+            main: {
+                background: "#ec971f",
+                color: "white",
+                height: '10%',
+                width: '15%'
+            }
+        },
+        settings: {
+            duration: 5000
+        }
+    };
+    iqwerty.toast.Toast("Enregistrement en cours,\nveuillez patienter", options);
 }
