@@ -1,7 +1,7 @@
 .logo {
     float: left;
-    height: 50%;
-    width: 50%;
+    height: 60%;
+    width: 60%;
     padding: 0px;
 }
 
@@ -39,17 +39,26 @@ h2, h3, h4, p, .thCentre {
     cursor: pointer;
 }
 
-.marge-two {
-    padding: 0 !important;
-    margin: 0 !important;
+.marge-statut-agent {
+    padding-left: 40px;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .color-grey {
     background-color: rgba(146, 146, 146, 0.87);
 }
 
-.text-size {
-    font-size: 1.7em;
+.size-hour {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.size-day {
+    font-size: 1.6em;
+    font-weight: bold;
 }
 
 .poste-size {
@@ -57,7 +66,11 @@ h2, h3, h4, p, .thCentre {
 }
 
 .name-size {
-    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.name-size-admin {
+    font-size: 1.1em;
     font-weight: bold;
 }
 
@@ -99,4 +112,8 @@ h2, h3, h4, p, .thCentre {
 
 .background-color-admin {
     background-color: #ffffcc;
+}
+
+.width-input-agent {
+    width: 19%;
 }

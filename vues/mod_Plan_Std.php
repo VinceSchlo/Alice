@@ -10,17 +10,25 @@ require_once('../include/alice_dao.inc.php');
 ?>
 
 <?php include("../include/doctype.php"); ?>
-<!-- Affichage du titre de la page -->
-<div class="col-lg-offset-2 col-lg-4">
-    <h2>Modification du planning standard</h2>
+
+<div class="col-xs-7">
+    <div class="row">
+        <!-- Affichage du titre de la page -->
+        <div class="col-md-11">
+            <h2>Modification du planning standard</h2>
+        </div>
+    </div>
+    <div class="row">
+    </div>
 </div>
+
 <?php include("../include/header_admin.php"); ?>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid background-color-admin">
         <table class="table border-table">
             <!-- Affichage des jours -->
-            <tr class="color-grey text-size">
+            <tr class="color-grey size-hour">
                 <th class="border-right"></th>
                 <th class="text-center border-right" colspan="2">Lundi</th>
                 <th class="text-center border-right" colspan="2">Mardi</th>
@@ -30,7 +38,7 @@ require_once('../include/alice_dao.inc.php');
                 <th class="text-center border-right" colspan="2">Samedi</th>
             </tr>
             <!-- Affichage des horaires -->
-            <tr class="color-grey name-size border-right">
+            <tr class="color-grey name-size-admin border-right">
                 <td class="border-right">Personnel</td>
                 <?php
                 $oHoraire = new Horaire();
@@ -122,7 +130,7 @@ require_once('../include/alice_dao.inc.php');
                 while ($i < count($tabPlanStd)) {
                     ?>
                     <tr>
-                        <td class="border-right color-grey">
+                        <td class="border-right color-grey name-size-admin">
                             <?php echo $tabPlanStd[$i]['prenom']; ?>
                         </td>
                         <?php
@@ -163,7 +171,7 @@ require_once('../include/alice_dao.inc.php');
                         <!-- Liste contenant tout les postes -->
                         <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
                                 class="form-control" onchange="changeColor<?php echo $l; ?>()"
-                                style="background-color: <?php echo $couleur ?>">
+                                style="background-color: <?php echo $couleur ?>; ; font-weight: bold">
 
                             <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
                             <script type="text/javascript">
@@ -181,13 +189,13 @@ require_once('../include/alice_dao.inc.php');
 
                                     <option value="<?php echo $poste[$k]['idPoste']; ?>"
                                             selected=""
-                                            style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+                                            style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; ; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
 
                                 <?php } else { ?>
 
                                     <option
                                         value="<?php echo $poste[$k]['idPoste']; ?>"
-                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; ; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
 
                                     <?php
                                 }
@@ -204,7 +212,7 @@ require_once('../include/alice_dao.inc.php');
                 <?php } ?>
 
                 <!-- Affichage des horaires -->
-                <tr class="color-grey name-size border-right">
+                <tr class="color-grey name-size-admin border-right">
                     <td class="border-right">Personnel</td>
                     <?php
                     $oHoraire = new Horaire();
@@ -261,7 +269,7 @@ require_once('../include/alice_dao.inc.php');
                     ?>
                 </tr>
                 <!-- Affichage des jours -->
-                <tr class="color-grey text-size">
+                <tr class="color-grey size-hour">
                     <th class="border-right"></th>
                     <th class="text-center border-right" colspan="2">Lundi</th>
                     <th class="text-center border-right" colspan="2">Mardi</th>
@@ -270,7 +278,7 @@ require_once('../include/alice_dao.inc.php');
                     <th class="text-center border-right" colspan="2">Vendredi</th>
                     <th class="text-center border-right" colspan="2">Samedi</th>
                 </tr>
-                <div class="col-lg-offset-10 col-lg-2">
+                <div class="col-md-3 pull-right text-right">
                     <!-- Affichage de 2 boutons -->
                     <button type="submit" name="annuler" class="btn btn-success"
                             class="glyphicon glyphicon-ban-circle"><span

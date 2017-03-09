@@ -7,10 +7,15 @@ require_once('../include/alice_dao.inc.php');
 ?>
 
 <?php include("../include/doctype.php"); ?>
-
-<!-- Affichage du titre de la page -->
-<div class="col-lg-offset-2 col-lg-3">
-    <h2>Ajout d'un agent</h2>
+<div class="col-xs-7">
+    <div class="row">
+        <!-- Affichage du titre de la page -->
+        <div class="col-md-offset-1 col-md-11">
+            <h2>Ajout d'un agent</h2>
+        </div>
+    </div>
+    <div class="row">
+    </div>
 </div>
 <?php 
 include("../include/header_admin.php");
@@ -43,14 +48,14 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
     header("Location: mod_Agent.php");
 }
 ?>
-<body>
+<body class="background-color-admin">
+<div class="container">
     <!-- Formulaire des coordonnées d'un nouvel agent -->
     <form class="form-horizontal" action="add_Agent.php" method="POST" onsubmit="return verifAddAgentForm(this)">
-        <fieldset>
             <!-- Nom de l'agent-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="nom">Nom</label>
-                <div class="col-md-4">
+                <div class="col-md-4 name-size-admin">
                     <input size="20" type="text" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md" 
                            onblur="verifNom(this)"/>
                 </div>
@@ -58,7 +63,7 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
             <!-- Prénom de l'agent-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="prenom">Prénom</label>
-                <div class="col-md-4">
+                <div class="col-md-4 name-size-admin">
                     <input size="20" type="text" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md"
                            onblur="verifNom(this)"/>
                 </div>
@@ -79,32 +84,28 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
             </div>
             <!-- Saisie du login -->
             <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4" id="divLogin" style='display:none;'>
+                <div class="col-md-offset-4 col-md-4 name-size-admin" id="divLogin" style='display:none;'>
                     <input size="20" type="text" id="login" name="loginForm" placeholder="Identifiant de connexion"
                            class="form-control input-md" onblur="verifNom(this)"/>
                 </div>
             </div>
             <!-- Saisie du MDP1 -->
             <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4" id="divMdp1" style='display:none;'>
+                <div class="col-md-offset-4 col-md-4 name-size-admin" id="divMdp1" style='display:none;'>
                     <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe"
                            class="form-control input-md">
                 </div>
             </div>
             <!-- Saisie du MDP2 -->
             <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-4" id="divMdp2" style='display:none;'>
+                <div class="col-md-offset-4 col-md-4 name-size-admin" id="divMdp2" style='display:none;'>
                     <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe"
                            class="form-control input-md">
                 </div>
             </div>
             <!-- Button (Double) -->
             <div class="form-group">
-                <label class="col-md-4 control-label"></label>
-                <div class="col-md-8">
+                <div class="col-md-11 text-center">
                     <button name="annuler" class="btn btn-success"><span class="glyphicon glyphicon-ban-circle"></span>
                         Annuler
                     </button>
@@ -113,9 +114,8 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
                     </button>
                 </div>
             </div>
-
-        </fieldset>
     </form>
+</div>
     <!-- jQuery -->
     <script src="../bootstrap/js/jquery.min.js"></script>
 

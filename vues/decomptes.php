@@ -19,10 +19,10 @@ if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
 }
 
 if (isset($_POST['precedente'])) {
-    $_SESSION['weekNumber'] --;
+    $_SESSION['weekNumber']--;
     if ($_SESSION['weekNumber'] < 1) {
         $_SESSION['weekNumber'] = 52;
-        $_SESSION['year'] --; // L'année est au format "2017"
+        $_SESSION['year']--; // L'année est au format "2017"
     }
 }
 
@@ -31,10 +31,10 @@ if (isset($_POST['home'])) {
 }
 
 if (isset($_POST['suivante'])) {
-    $_SESSION['weekNumber'] ++;
+    $_SESSION['weekNumber']++;
     if ($_SESSION['weekNumber'] > 52) {
         $_SESSION['weekNumber'] = 1;
-        $_SESSION['year'] ++; // L'année est au format "2017"
+        $_SESSION['year']++; // L'année est au format "2017"
     }
 }
 //
@@ -86,8 +86,9 @@ if (!empty($tabPlanReel)) { // S'il y a du planning réel
             if (isset($tabPlanReel[$key1])) {
                 // Pour un même agent, le même jour aux même horaires, s'il y a du non SP dans le réel alors qu'il y a du SP dans le std, on supprime l'entrée du std
                 if ($tabPlanReel[$key1]['idAgent'] == $tabPlanStd[$key2]['idAgent'] && convertDateNumJour($tabPlanReel[$key1]['dateReel']) == $tabPlanStd[$key2]['idJour'] &&
-                        $tabPlanReel[$key1]['horaireDeb'] == $tabPlanStd[$key2]['horaireDeb'] && $tabPlanReel[$key1]['horaireFin'] == $tabPlanStd[$key2]['horaireFin'] &&
-                        $tabPlanReel[$key1]['idGroupe'] >= '3' && $tabPlanStd[$key2]['idGroupe'] < '3') {
+                    $tabPlanReel[$key1]['horaireDeb'] == $tabPlanStd[$key2]['horaireDeb'] && $tabPlanReel[$key1]['horaireFin'] == $tabPlanStd[$key2]['horaireFin'] &&
+                    $tabPlanReel[$key1]['idGroupe'] >= '3' && $tabPlanStd[$key2]['idGroupe'] < '3'
+                ) {
                     unset($tabPlanStd[$key2]);
                 } else {
                     $compteur++;
@@ -133,7 +134,8 @@ foreach ($tabPlanStd as $key1 => $value1) {
     $compteur = 0;
     foreach ($tabDecHeureSp as $key2 => $value2) {
         if (empty(array_search($tabPlanStd[$key1]['idAgent'], array_column($tabDecHeureSp, 'idAgent'))) && ($key1 == $key2 ||
-                !isset($tabDecHeureSp[$key1 + 1]))) {
+                !isset($tabDecHeureSp[$key1 + 1]))
+        ) {
             $compteur++;
         }
         if ($tabDecHeureSp[$key2]['idAgent'] == $tabPlanStd[$key1]['idAgent']) {
@@ -184,7 +186,8 @@ if (!empty($tabJFdebutAnnee)) {
                     unset($tabPlanReelSamedi[$key2]);
                 }
                 if (isset($tabPlanReelSamedi[$key2]) && $tabPlanReelSamedi[$key2]['dateReel'] >= $tabJFdebutAnnee[$key1]['dateDebFerie'] &&
-                        $tabPlanReelSamedi[$key2]['dateReel'] <= $tabJFdebutAnnee[$key1]['dateFinFerie']) {
+                    $tabPlanReelSamedi[$key2]['dateReel'] <= $tabJFdebutAnnee[$key1]['dateFinFerie']
+                ) {
                     unset($tabPlanReelSamedi[$key2]);
                 }
             }
@@ -194,7 +197,8 @@ if (!empty($tabJFdebutAnnee)) {
     foreach ($tabPlanStdSamedi as $key1 => $value1) {
         foreach ($tabPlanReelSamedi as $key2 => $value2) {
             if (isset($tabPlanReelSamedi[$key2]) && $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanReelSamedi[$key2]['idAgent'] &&
-                    $tabPlanReelSamedi[$key2]['idGroupe'] != '4') {
+                $tabPlanReelSamedi[$key2]['idGroupe'] != '4'
+            ) {
                 unset($tabPlanReelSamedi[$key2]);
             }
         }
@@ -203,9 +207,10 @@ if (!empty($tabJFdebutAnnee)) {
     foreach ($tabPlanReelSamedi as $key1 => $value1) {
         foreach ($tabPlanReelSamedi as $key2 => $value2) {
             if (isset($tabPlanReelSamedi[$key2]) && isset($tabPlanReelSamedi[$key1]) &&
-                    $key2 != $key1 &&
-                    $tabPlanReelSamedi[$key1]['idAgent'] == $tabPlanReelSamedi[$key2]['idAgent'] &&
-                    $tabPlanReelSamedi[$key1]['dateReel'] == $tabPlanReelSamedi[$key2]['dateReel']) {
+                $key2 != $key1 &&
+                $tabPlanReelSamedi[$key1]['idAgent'] == $tabPlanReelSamedi[$key2]['idAgent'] &&
+                $tabPlanReelSamedi[$key1]['dateReel'] == $tabPlanReelSamedi[$key2]['dateReel']
+            ) {
                 unset($tabPlanReelSamedi[$key2]);
             }
         }
@@ -216,7 +221,8 @@ if (!empty($tabPlanStdSamedi)) {
     foreach ($tabPlanStdSamedi as $key1 => $value1) {
         foreach ($tabPlanStdSamedi as $key2 => $value2) {
             if (isset($tabPlanStdSamedi[$key2]) && isset($tabPlanStdSamedi[$key1]) &&
-                    $key2 != $key1 && $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanStdSamedi[$key2]['idAgent']) {
+                $key2 != $key1 && $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanStdSamedi[$key2]['idAgent']
+            ) {
                 unset($tabPlanStdSamedi[$key2]);
             }
         }
@@ -240,9 +246,9 @@ foreach ($tabPlanReelSamedi as $key1 => $value1) {
         if ($tabSamediAgent[$key2]['idAgent'] == $tabPlanReelSamedi[$key1]['idAgent']) {
             // Si le groupe est 4 dans le planning réel, on enlève un samedi
             if ($tabPlanReelSamedi[$key1]['idGroupe'] == '4') {
-                $tabSamediAgent[$key2]['nbSamedi'] --;
+                $tabSamediAgent[$key2]['nbSamedi']--;
             } else { // Sinon, on rajoute un samedi
-                $tabSamediAgent[$key2]['nbSamedi'] ++;
+                $tabSamediAgent[$key2]['nbSamedi']++;
             }
         } else {
             $compteur++;
@@ -305,91 +311,90 @@ sort($tabDecTotal);
 // exit();
 //
 ?>
-<body>
-    <div class="col-lg-6">
-        <div class="row">
-            <div class="col-lg-offset-4 col-lg-4">
-                <table class="table top-marge">
-                    <tr>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value=" " name="precedente" class="leftArrow">
-                            </form>
-                        </td>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value=" " name="home" class="house">
-                            </form>
-                        </td>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value=" " name="suivante" class="rightArrow">
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <h2 class="col-lg-offset-1 col-lg-3">         
-                <?php
-                if ($_SESSION['weekNumber'] < 10) {
-                    echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
-                } else {
-                    echo "Semaine n°" . $_SESSION['weekNumber'];
-                }
-                ?>
-            </h2>
+<body class="background-color-admin">
+<div class="col-xs-7">
+    <div class="row">
+        <div class="col-md-5">
+            <h2>Temps de service public et samedis travaillés</h2>
         </div>
-        <div class="row">
-            <h2 class="col-lg-offset-3 col-lg-10">
-                <?php
-                echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-                ?>
-            </h2>
-        </div>
-    </div>
-    <?php include("../include/header_admin.php"); ?>
-    <!-- Affichage du titre de la page -->
-    <div class="col-lg-offset-3 col-lg-6">
-        <h2>Temps de service public et samedis travaillés</h2>
-    </div>
-    <!-- Affichage des heures de service public et des samedis -->
-    <div class="container-fluid col-lg-offset-2">
-        <div class="col-lg-7">
-            <table class="table table-bordered">
-                <tr class="color-grey">
-                    <th class="thCentre">Personnel</th>
-                    <th class="thCentre">Nombre d'heures de service public cette semaine</th>
-                    <th class="thCentre">Nombre de samedis travaillés depuis le début de l'année</th>
+        <div class="col-xs-3">
+            <table class="table">
+                <tr>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="precedente" class="leftArrow">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="home" class="house">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="suivante" class="rightArrow">
+                        </form>
+                    </td>
                 </tr>
-                <br/>
-                <?php foreach ($tabDecTotal as $key => $value) {
-                    ?>
-                    <tr>
-                        <td> <?php echo $tabDecTotal[$key]['prenom']; ?> </td>
-                        <td> <?php echo $tabDecTotal[$key]['nbHeureSp'] . " h"; ?> </td>
-                        <td> <?php
-                            if ($tabDecTotal[$key]['nbSamedi'] <= 1) {
-                                echo $tabDecTotal[$key]['nbSamedi'] . " samedi";
-                            } else {
-                                echo $tabDecTotal[$key]['nbSamedi'] . " samedis";
-                            }
-                            ?> </td>
-                    </tr>
-                <?php } ?>
             </table>
         </div>
+        <h3 class="col-xs-3 col-md-4">
+            <?php
+            if ($_SESSION['weekNumber'] < 10) {
+                echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
+            } else {
+                echo "Semaine n°" . $_SESSION['weekNumber'];
+            }
+            ?>
+        </h3>
     </div>
+    <div class="row">
+        <h3 class="col-md-offset-4 col-md-6">
+            <?php echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]); ?>
+        </h3>
+    </div>
+</div>
 
-    <!-- jQuery -->
-    <script src="../bootstrap/js/jquery.min.js"></script>
+<?php include("../include/header_admin.php"); ?>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+<!-- Affichage des heures de service public et des samedis -->
+<div class="container-fluid col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-8">
+    <div class="col-lg-7">
+        <table class="table table-bordered">
+            <tr class="color-grey">
+                <th class="thCentre">Personnel</th>
+                <th class="thCentre">Nombre d'heures de service public cette semaine</th>
+                <th class="thCentre">Nombre de samedis travaillés depuis le début de l'année</th>
+            </tr>
+            <br/>
+            <?php foreach ($tabDecTotal as $key => $value) {
+                ?>
+                <tr class="name-size-admin" style="background-color: white">
+                    <td> <?php echo $tabDecTotal[$key]['prenom']; ?> </td>
+                    <td class="thCentre"> <?php echo $tabDecTotal[$key]['nbHeureSp'] . " h"; ?> </td>
+                    <td class="thCentre"> <?php
+                        if ($tabDecTotal[$key]['nbSamedi'] <= 1) {
+                            echo $tabDecTotal[$key]['nbSamedi'] . " samedi";
+                        } else {
+                            echo $tabDecTotal[$key]['nbSamedi'] . " samedis";
+                        }
+                        ?> </td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bootstrap/js/metisMenu.min.js"></script>
+<!-- jQuery -->
+<script src="../bootstrap/js/jquery.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../bootstrap/js/sb-admin-2.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../bootstrap/js/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>

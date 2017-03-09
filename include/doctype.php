@@ -27,6 +27,6 @@
 <header>
     <div class="container-fluid background-color-admin">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-xs-2">
                 <img class="logo" src="../images/logo_sna_quadri.png"/>
             </div>

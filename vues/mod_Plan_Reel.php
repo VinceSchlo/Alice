@@ -174,10 +174,13 @@ $oHoraire = new Horaire();
 $time = $oHoraire->selectHoraire();
 ?>
 
-<div class="col-lg-6">
+<div class="col-xs-7">
     <div class="row">
-        <div class="col-lg-offset-4 col-lg-4">
-            <table class="table top-marge">
+        <div class="col-md-5">
+            <h2>Modification du planning réel</h2>
+        </div>
+        <div class="col-xs-3">
+            <table class="table">
                 <tr>
                     <td>
                         <form action="" method="post">
@@ -197,39 +200,47 @@ $time = $oHoraire->selectHoraire();
                 </tr>
             </table>
         </div>
-        <h2 class="col-lg-offset-1 col-lg-3">
-            <?php
-            if ($_SESSION['weekNumber'] < 10) {
-                echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
-            } else {
-                echo "Semaine n°" . $_SESSION['weekNumber'];
-            }
-            ?>
-        </h2>
+        <div class="col-md-3">
+            <h3>
+                <?php
+                if ($_SESSION['weekNumber'] < 10) {
+                    echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
+                } else {
+                    echo "Semaine n°" . $_SESSION['weekNumber'];
+                }
+                ?>
+            </h3>
+        </div>
     </div>
     <div class="row">
-        <h2 class="col-lg-offset-4 col-md-4">
+        <h3 class="col-md-offset-4 col-md-6">
             <?php echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]); ?>
-        </h2>
+        </h3>
     </div>
 </div>
 
 <?php include("../include/header_admin.php"); ?>
 
-<div class="container-fluid">
+<div class="container-fluid background-color-admin">
     <table class="table border-table">
         <!--            Affichage des jours-->
-        <tr class="color-grey text-size">
+        <tr class="color-grey size-hour">
             <th class=" border-right"></th>
-            <th class="text-center border-right" colspan="2">Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
-            <th class="text-center border-right" colspan="2">Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
-            <th class="text-center border-right" colspan="3">Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
-            <th class="text-center border-right" colspan="2">Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
-            <th class="text-center border-right" colspan="2">Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
-            <th class="text-center border-right" colspan="2">Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="3">
+                Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
         </tr>
         <!--            Affichage des horaires -->
-        <tr class="color-grey name-size border-right">
+        <tr class="color-grey border-right name-size-admin">
             <td class="border-right">Personnel</td>
             <?php
             $oHoraire = new Horaire();
@@ -285,7 +296,7 @@ $time = $oHoraire->selectHoraire();
             echo "</td>";
             ?>
         </tr>
-        <form class="form-horizontal" action="mod_Plan_Reel.php" method="post">
+        <form class="form-horizontal background-color-admin" action="mod_Plan_Reel.php" method="post">
             <?php
             $oPoste = new Poste();
             $poste = $oPoste->selectAllPoste();
@@ -296,7 +307,7 @@ $time = $oHoraire->selectHoraire();
             while ($i < count($tabPlanStd)) {
                 ?>
                 <tr>
-                    <td class="border-right color-grey">
+                    <td class="border-right name-size-admin color-grey">
                         <?php echo $tabPlanStd[$i]['prenom']; ?>
                     </td>
                     <?php
@@ -381,7 +392,7 @@ $time = $oHoraire->selectHoraire();
                                 <input type="hidden" name="idPosteForm<?php echo $l; ?>"
                                        value="<?php echo $tabPlanStd[$i]['libPoste']; ?>">
 
-                                <select disabled style="width: 100%" class="form-control">
+                                <select disabled style="width: 100%; font-weight: bold" class="form-control">
 
                                     <option value="<?php echo $tabPlanStd[$i]['libPoste']; ?>"
                                             selected=""><?php echo $tabPlanStd[$i]['libPoste']; ?></option>
@@ -398,7 +409,7 @@ $time = $oHoraire->selectHoraire();
                                 <!-- Liste contenant tout les postes -->
                                 <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
                                         class="form-control" onchange="changeColor<?php echo $l; ?>()"
-                                        style="background-color: <?php echo $couleur ?>">
+                                        style="background-color: <?php echo $couleur ?>; font-weight: bold">
 
                                     <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
                                     <script type="text/javascript">
@@ -416,13 +427,12 @@ $time = $oHoraire->selectHoraire();
 
                                             <option value="<?php echo $poste[$k]['idPoste']; ?>"
                                                     selected=""
-                                                    style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+                                                    style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
 
                                         <?php } else { ?>
 
-                                            <option
-                                                value="<?php echo $poste[$k]['idPoste']; ?>"
-                                                style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>"><?php echo $poste[$k]['libPoste']; ?></option>
+                                            <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                                    style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
 
                                             <?php
                                         }
@@ -440,8 +450,8 @@ $time = $oHoraire->selectHoraire();
                 </tr>
             <?php } ?>
             <!--            Affichage des horaires -->
-            <tr class="color-grey name-size border-right">
-                <td class="border-right">Personnel</td>
+            <tr class="color-grey name-size-admin border-right">
+                <td class="border-right ">Personnel</td>
                 <?php
                 $oHoraire = new Horaire();
                 $time = $oHoraire->selectHoraire();
@@ -497,16 +507,22 @@ $time = $oHoraire->selectHoraire();
                 ?>
             </tr>
             <!--            Affichage des jours-->
-            <tr class="color-grey text-size">
+            <tr class="color-grey size-hour">
                 <th class="border-right"></th>
-                <th class="text-center border-right" colspan="2">Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="3">Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">
+                    Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">
+                    Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="3">
+                    Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">
+                    Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">
+                    Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
+                <th class="text-center border-right" colspan="2">
+                    Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
             </tr>
-            <div class="col-lg-offset-10 col-lg-2">
+            <div class="col-md-3 pull-right text-right">
                 <!-- Affichage de 2 boutons -->
                 <button type="submit" name="annuler" class="btn btn-success"
                         class="glyphicon glyphicon-ban-circle"><span

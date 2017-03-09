@@ -186,7 +186,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 <br/>
             </div>
             <div class="row">
-                <h2 class="col-md-offset-4 col-md-5 center-block">
+                <h2 class="col-md-offset-3 col-md-6 center-block">
                     <?php
                     echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
                     ?>
@@ -209,8 +209,10 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                     <label for="login">Login</label>
                     <input class="form-control" name="login" id="login" type="text" required>
                     <label for="mdp">Mot de passe</label>
+                    <div class="form-group">
                     <input class="form-control" name="mdp" id="mdp" type="password" required>
-                    <button class="glyphicon glyphicon-off btn-warning btn pull-right" name="valider"></button>
+                    <button class="glyphicon glyphicon-off btn-warning btn" name="valider"></button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -221,7 +223,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     <div class="col-lg-12">
         <table class="table border-table">
             <!-- Affichage des jours -->
-            <tr class="color-grey text-size">
+            <tr class="color-grey size-day">
                 <th class="border-right"></th>
                 <th class="text-center border-right" colspan="2">
                     Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
@@ -237,7 +239,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                     Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
             </tr>
             <!-- Affichage des horaires -->
-            <tr class="color-grey name-size border-right">
+            <tr class="color-grey size-hour border-right">
                 <td class="border-right">Personnel</td>
                 <?php
                 for ($i = 0; $i < 4; $i++) {
@@ -296,7 +298,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             while ($i < count($tabPlanStd)) {
                 ?>
                 <tr class="poste-size border-right">
-                    <td class="color-grey border-right">
+                    <td class="color-grey border-right name-size">
                         <?php echo $tabPlanStd[$i]['prenom']; ?>
                     </td>
                     <?php
@@ -309,10 +311,10 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                             case 8:
                             case 10:
                             case 12:
-                                echo "<td class='text-center border-right' style='background-color:$couleur'>";
+                                echo "<td class='text-center border-right name-size' style='background-color:$couleur'>";
                                 break;
                             default:
-                                echo "<td class='text-center border-top-bot' style='background-color:$couleur'>";
+                                echo "<td class='text-center border-top-bot name-size' style='background-color:$couleur'>";
                                 break;
 
                         }
@@ -324,7 +326,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 </tr>
             <?php } ?>
             <!--            Affichage des horaires -->
-            <tr class="color-grey name-size border-right">
+            <tr class="color-grey size-hour border-right">
                 <td class="border-right">Personnel</td>
                 <?php
                 $oHoraire = new Horaire();
@@ -381,7 +383,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 ?>
             </tr>
             <!-- Affichage des jours en bas -->
-            <tr class="color-grey text-size">
+            <tr class="color-grey size-day">
                 <th class="border-right"></th>
                 <th class="text-center border-right" colspan="2">
                     Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>

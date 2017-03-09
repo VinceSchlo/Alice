@@ -7,9 +7,15 @@ require_once('../include/alice_dao.inc.php');
 ?>
 
 <?php include("../include/doctype.php"); ?>
-<!-- Affichage du titre de la page -->
-<div class="col-lg-offset-2 col-md-4">
-    <h2>Modification des agents</h2>
+<div class="col-xs-7">
+    <div class="row">
+        <!-- Affichage du titre de la page -->
+        <div class="col-md-11">
+            <h2>Modification des agents</h2>
+        </div>
+    </div>
+    <div class="row">
+    </div>
 </div>
 <?php 
 include("../include/header_admin.php");
@@ -62,16 +68,16 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
 $tabAgent = $agent->selectAgentByName();
 //
 ?>
-<body>
+<body class="background-color-admin">
     <!-- Affichage des agents -->
-    <div class="container-fluid col-lg-offset-1 col-lg-10">
+    <div class="container-fluid col-md-12 col-lg-offset-2 col-lg-8">
         <table class="table table-bordered">
             <tr class="color-grey">
                 <th class="thCentre">Nom</th>
                 <th class="thCentre">Prénom</th>
                 <th class="thCentre">Login</th>
                 <th class="thCentre">Mot de passe</th>
-                <th class="thCentre">Statut</th>
+                <th class="thCentre width-input-agent">Statut</th>
                 <th class="thCentre">Supprimer</th>
             </tr>
             <br/>
@@ -80,7 +86,7 @@ $tabAgent = $agent->selectAgentByName();
             for ($i = 0; $i < count($tabAgent); $i++) {
                 ?>
                 <form class="form-horizontal" method="POST" action="mod_Agent.php">
-                    <tr>
+                    <tr class="name-size-admin">
                     <input type="hidden" name="idAgentForm<?php echo $i; ?>"
                            value="<?php echo $tabAgent[$i]['idAgent']; ?>">
                     <td>
@@ -99,19 +105,20 @@ $tabAgent = $agent->selectAgentByName();
                         <input class="form-control" type="password" name="mdpForm<?php echo $i; ?>"
                                value="<?php echo $tabAgent[$i]['mdp']; ?>">
                     </td>
-                    <td>
-                        <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A"
+                    <td class="width-input-agent">
+                        <input type="checkbox" name="statutForm<?php echo $i; ?>" id="checkboxA" value="A"
                         <?php
                         if ($tabAgent[$i]['statut'] == "A") {
                             echo " checked";
                         }
-                        ?>>Administrateur
-                        <input type="checkbox" class="checkBox" name="statutForm<?php echo $i; ?>" id="checkboxI" value="I"
+                        ?>> Administrateur
+                        <br />
+                        <input type="checkbox" name="statutForm<?php echo $i; ?>" id="checkboxI" value="I"
                         <?php
                         if ($tabAgent[$i]['statut'] == "I") {
                             echo " checked";
                         }
-                        ?>>Inactif
+                        ?>> Inactif
                     </td>
                     <td>
                         <!-- Bouton Supprimer -->
@@ -123,7 +130,7 @@ $tabAgent = $agent->selectAgentByName();
                     </tr>
                 <?php } ?>
                 <!-- Affichage de 3 boutons -->
-                <div class="col-md-5 col-lg-offset-4">
+                <div class="col-md-6 pull-right text-right">
                     <button type="submit" name="annuler" class="btn btn-success"><span
                             class="glyphicon glyphicon-ban-circle"></span> Annuler
                     </button>
