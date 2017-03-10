@@ -112,7 +112,7 @@ class PlanStd {
         return $ligne;
     }
 
-    public function selectPlanStdInactif() {
+    public function selectPlanStdInactif() { // Sélectionne le planning standard moins les agents inactifs et les postes indéfinis (n°21)
         // Connexion à la base de données
         $dao = new Dao();
         // Requête SQL
@@ -124,7 +124,7 @@ class PlanStd {
                 ON a.idAgent = plan.idAgent
                 AND plan.idPoste = poste.idPoste
                 AND g.idGroupe = poste.idGroupe
-                WHERE a.statut != 'I'
+                WHERE a.statut != 'I' AND poste.idPoste != '21'
                 ORDER BY a.prenom, plan.idJour, plan.horaireDeb";
 
         $resu = $dao->executeRequete($sql);

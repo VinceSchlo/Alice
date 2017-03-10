@@ -109,21 +109,20 @@ function connexion() {
     }
 }
 
-function toastRec() {
+function toast(texte) {
     var options = {
         style: {
             main: {
                 background: "#ec971f",
                 color: "white",
-                height: '10%',
                 width: '15%'
             }
         },
         settings: {
-            duration: 6000
+            duration: 10000
         }
     };
-    iqwerty.toast.Toast("Enregistrement en cours,\nveuillez patienter", options);
+    iqwerty.toast.Toast(texte, options);
 }
 
 function saisieDate() {

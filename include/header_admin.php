@@ -19,7 +19,7 @@ if (!isset($_SESSION['idAgent'])) {
                     <li><a href="../vues/mod_Plan_Reel.php">Modifier le planning</a>
                     </li>
 
-                    <li><a href="../vues/mod_Plan_Std.php">Modifier le planning standard</a>
+                    <li><a href="../vues/mod_Plan_Std.php">Modifier le planning idéal</a>
                     </li>
 
                     <li><a href="../vues/mod_Agent.php">Modifier les agents</a>

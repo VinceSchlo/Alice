@@ -16,7 +16,7 @@
         <link href="../css/alice.css" rel="stylesheet">
         <!-- Chemin vers les librairies JavaScript -->
         <script src="../include/alice.js"></script>
-        <script src="../include/marker.js"></script>
+        <!-- <script src="../include/marker.js"></script> -->
         <script src="../include/toast.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -157,9 +157,9 @@ foreach ($tabPlanStd as $key1 => $value1) {
 // On recherche les jours fériés depuis le début de l'année
 $dateDebutAnnee = $_SESSION['year'] . "-01-01";
 $tabJFdebutAnnee = $oFerie->selectFerie($dateDebutAnnee, $tabDatesJoursSemaines[6]);
+$nbSamediFerie = 0;
 // S'il y a des jours fériés, on compte ceux qui tombent un samedi et on assigne le résultat dans une variable $nbSamediFerie
 if (!empty($tabJFdebutAnnee)) {
-    $nbSamediFerie = 0;
     foreach ($tabJFdebutAnnee as $key => $value) {
         $dateTest = $tabJFdebutAnnee[$key]['dateDebFerie'];
         // On compte le nombre de samedis fériés entre les dates de début et les dates de fin des jours fériés dans le cas des ponts

@@ -59,16 +59,16 @@ if (isset($_POST['suivante'])) {
 
 // Tableau des dates réelles du dimanche au samedi au format américain
 $tabDatesJoursSemaines = datesJourSemaine($_SESSION['weekNumber'], $_SESSION['year']);
-
+// // Selection des agents
 $oAgent = new Agent();
 $user = $oAgent->selectPrenomAgent();
+// Selection du planning standard de la semaine
 $oPlanStd = new PlanStd();
 $tabPlanStd = $oPlanStd->selectPlanStdInactif();
-
 // Selection des plannings réels de la semaine
-
 $oPlanReel = new PlanReel();
 $planReel = $oPlanReel->selectPlanReel($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
+// Selection des jours fériés
 $oFerie = new Ferie();
 $jourFerie = $oFerie->selectFerie($tabDatesJoursSemaines[1], $tabDatesJoursSemaines[6]);
 
