@@ -14,8 +14,11 @@
         <link href="../bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <!-- Alice CSS -->
         <link href="../css/alice.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../css/calendrier.css"/>
+
         <!-- Chemin vers les librairies JavaScript -->
         <script src="../include/alice.js"></script>
+        <script type="text/javascript" src="../include/jsSimpleDatePickr.2.1.js"></script>
         <!-- <script src="../include/marker.js"></script> -->
         <script src="../include/toast.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

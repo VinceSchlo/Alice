@@ -61,6 +61,7 @@ if (isset($_POST['suivante'])) {
 
 if(isset($_POST['btnCalendar'])) {
     $_SESSION['weekNumber'] = ltrim(date('W', strtotime($_POST['dateCalendrier'])), "0");
+    $_SESSION['year'] = date('Y', strtotime($_POST['dateCalendrier']));
 }
 
 // Tableau des dates réelles du dimanche au samedi au format américain
