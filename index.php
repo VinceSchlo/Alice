@@ -209,7 +209,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                     <label for="mdp">Mot de passe</label>
                     <div class="form-group">
                         <input class="form-control" name="mdp" id="mdp" type="password" required>
-                        <button class="glyphicon glyphicon-off btn-warning btn" name="valider"></button>
+                        <button class="glyphicon glyphicon-log-in btn-warning btn" name="valider"></button>
                     </div>
                 </form>
             </div>
