@@ -21,6 +21,8 @@ require_once('include/alice_dao.inc.php');
     <meta name="author" content="">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/alice.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/calendrier.css"/>
+    <script type="text/javascript" src="include/jsSimpleDatePickr.2.1.js"></script>
     <script src="include/alice.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
@@ -55,6 +57,10 @@ if (isset($_POST['suivante'])) {
         $_SESSION['weekNumber'] = 1;
         $_SESSION['year']++; // L'année est au format "2017"
     }
+}
+
+if(isset($_POST['btnCalendar'])) {
+    $_SESSION['weekNumber'] = ltrim(date('W', strtotime($_POST['dateCalendrier'])), "0");
 }
 
 // Tableau des dates réelles du dimanche au samedi au format américain
@@ -171,6 +177,35 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                         </tr>
                     </table>
                 </div>
+<!--                Calendrier-->
+                <div  id="calendarMain" class="calendarMain"></div>
+                <div>
+                    <form action="index.php" method="post">
+                    <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
+                        <button type="submit" class="btn-lg btn-default" name="btnCalendar"><span class="glyphicon glyphicon-fast-forward"></span> Allez à</button>
+                    </form>
+                </div>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var myCalendar = new jsSimpleDatePickr();
+                    myCalendar.CalAdd({
+                        'divId': 'calendarMain',
+                        'inputFieldId': 'dateCalendrier',
+                        'dateMask': 'AAAA-MM-JJ',
+                        'dateCentury': 20,
+                        'titleMask': 'M AAAA',
+                        'navType': '01',
+                        'classTable': 'jsCalendar',
+                        'classDay': 'day',
+                        'classDaySelected': 'selectedDay',
+                        'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                        'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                        'hideOnClick': false,
+                        'showOnLaunch': true
+                    });
+                    //]]>
+                </script>
+<!--                fin Calendrier-->
                 <h2 class="col-xs-3 center-block">
                     <br/>
                     <?php
