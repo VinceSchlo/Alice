@@ -94,11 +94,11 @@ $tabFerie = $ferie->selectAllFerie();
                                        value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>">
                             </td>
                             <td class="name-size-admin">
-                                <div class="form-group has-error has-feedback">
+                                <!-- <div class="form-group has-error has-feedback"> -->
                                     <input size="10" class="form-control" id="dateFin" type="text"
                                            name="dateFinForm<?php echo $i; ?>"
                                            value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>">
-                                    <span class="help-block">La date de fin doit être supérieure à la date de début</span>
+                                    <!-- <span class="help-block">La date de fin doit être supérieure à la date de début</span> -->
                                 </div>
                             </td>
                         </div>
@@ -147,7 +147,7 @@ $tabFerie = $ferie->selectAllFerie();
                                    value="<?php echo convertDateUsFr($tabFerie[$j]['dateDebFerie']); ?>">
                         </td>
                         <td class="name-size-admin">
-                            <div class="form-group has-error has-feedback">
+                            <!-- <div class="form-group has-error has-feedback"> -->
                                 <input size="10" class="form-control" type="text" name="dateFinForm<?php echo $i; ?>"
                                        value="<?php
                                        if (empty($tabFerie[$j]['dateFinFerie'])) {
@@ -156,7 +156,7 @@ $tabFerie = $ferie->selectAllFerie();
                                            echo convertDateUsFr($tabFerie[$j]['dateFinFerie']);
                                        }
                                        ?>">
-                                <span class="help-block">La date de fin doit être supérieure à la date de début</span>
+                                <!-- <span class="help-block">La date de fin doit être supérieure à la date de début</span> -->
                             </div>
                         </td>
                         </tr>

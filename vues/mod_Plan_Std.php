@@ -15,7 +15,7 @@ require_once('../include/alice_dao.inc.php');
     <div class="row">
         <!-- Affichage du titre de la page -->
         <div class="col-md-11">
-            <h2>Modification du planning standard</h2>
+            <h2>Modification du planning idéal</h2>
         </div>
     </div>
     <div class="row">
