@@ -73,32 +73,6 @@ function verifAddAgentForm(f) {
     }
 }
 
-function verifFormDate(f) {
-    var dateOK = verifDate(f.dateFin);
-    if (dateOK)
-        return true;
-    else
-    {
-        alert("Les dates saisies ne sont pas correctes");
-        return false;
-    }
-}
-
-function verifDate(champ) {
-
-    var dateDeb = document.getElementById("dateDeb").value;
-    var dateFin = document.getElementById("dateFin").value;
-
-    if (dateDeb > dateFin) {
-        champ.style.backgroundColor = "#fba";
-        alert("La date de fin saisie est inférieure à la date de début");
-        return false;
-    } else {
-        champ.style.backgroundColor = "";
-        return true;
-    }
-}
-
 function connexion() {
     var statut = document.getElementById("connexion").style.display;
 
