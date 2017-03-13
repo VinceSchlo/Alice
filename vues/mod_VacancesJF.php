@@ -76,7 +76,7 @@ $tabFerie = $ferie->selectAllFerie();
             </tr>
             <br/>
 
-            <form class="form-horizontal" method="POST" action="mod_VacancesJF.php">
+            <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                 <?php
                 for ($i = 0; $i < count($tabVacances); $i++) {
                     ?>
@@ -102,6 +102,7 @@ $tabFerie = $ferie->selectAllFerie();
                                 <input size="10" class="form-control" id="dateFinVac<?php echo $i; ?>" type="text"
                                        name="dateFinForm<?php echo $i; ?>"
                                        value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>"
+                                       onKeyUp="masqueSaisieDate(this.form.dateFinForm<?php echo $i; ?>)"
                                        onchange="verifDateFinVac<?php echo $i; ?>()">
                                 <span class="help-block" style="display: none" id="spanVac<?php echo $i; ?>">La date de fin doit être supérieure<br/>à la date de début</span>
                         </td>
@@ -119,7 +120,6 @@ $tabFerie = $ferie->selectAllFerie();
                                     div.classList.remove("has-error");
                                     span.style.display = "none";
                                 }
-                                return;
                             }
                         </script>
                     </tr>
@@ -151,7 +151,7 @@ $tabFerie = $ferie->selectAllFerie();
             <br/>
 
             <form class="form-horizontal" method="POST" action="mod_VacancesJF.php"
-                  onsubmit="return verifFormDates(this)">
+                  onsubmit="return verifFormDate()">
                 <?php
                 $j = 0;
                 for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
@@ -163,11 +163,14 @@ $tabFerie = $ferie->selectAllFerie();
                             <input size="10" class="form-control" disabled type="text" name="nomForm<?php echo $i; ?>"
                                    value="<?php echo $tabFerie[$j]['nomFerie']; ?>">
                         </td>
+                        <!--                            Date de début des jours fériés -->
                         <td class="name-size-admin">
                             <input size="10" class="form-control" type="text" name="dateDebForm<?php echo $i; ?>"
                                    value="<?php echo convertDateUsFr($tabFerie[$j]['dateDebFerie']); ?>"
-                                   id="dateDebFerie<?php echo $i; ?>">
+                                   id="dateDebFerie<?php echo $i; ?>"
+                                   onKeyUp="masqueSaisieDate(this.form.dateDebForm<?php echo $i; ?>)">
                         </td>
+                        <!--                            Date de fin des jours fériés -->
                         <td class="name-size-admin">
                             <div class="form-group has-feedback" id="divDateFerie<?php echo $i; ?>">
                                 <input size="6" class="form-control" type="text" name="dateFinForm<?php echo $i; ?>"
@@ -179,18 +182,17 @@ $tabFerie = $ferie->selectAllFerie();
                                        }
                                        ?>"
                                        id="dateFinFerie<?php echo $i; ?>"
+                                       onKeyUp="masqueSaisieDate(this.form.dateFinForm<?php echo $i; ?>)"
                                        onchange="verifDateFinFerie<?php echo $i; ?>()">
                                 <span class="help-block" style="display: none" id="spanFerie<?php echo $i; ?>">La date de fin doit être supérieure à la date de début</span>
                             </div>
                         </td>
                         <script type="text/javascript">
                             function verifDateFinFerie<?php echo $i; ?>() {
-
                                 var dateDebFerie = document.getElementById("dateDebFerie<?php echo $i; ?>").value;
                                 var dateFinFerie = document.getElementById("dateFinFerie<?php echo $i; ?>").value;
                                 var divFerie = document.getElementById("divDateFerie<?php echo $i; ?>");
                                 var spanFerie = document.getElementById("spanFerie<?php echo $i; ?>");
-
                                 if (dateDebFerie > dateFinFerie) {
                                     divFerie.classList.add("has-error");
                                     spanFerie.style.display = "block";

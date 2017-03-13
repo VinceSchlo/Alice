@@ -283,7 +283,7 @@ require_once('../include/alice_dao.inc.php');
                             class="glyphicon glyphicon-ban-circle"><span
                             class="glyphicon glyphicon-ban-circle"></span> Annuler
                     </button>
-                    <button type="submit" name="enregistrer" onclick="toast('Enregistrement en cours')" class="btn btn-warning" ><span
+                    <button type="submit" name="enregistrer" onclick="toast('Enregistrement en cours', '#ec971f')" class="btn btn-warning" ><span
                             class="glyphicon glyphicon-floppy-open"></span> Enregistrer
                     </button>
                 </div>

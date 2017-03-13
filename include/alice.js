@@ -78,11 +78,11 @@ function connexion() {
     }
 }
 
-function toast(texte) {
+function toast(texte, couleurFond) {
     var options = {
         style: {
             main: {
-                background: "#ec971f",
+                background: couleurFond,
                 color: "white",
                 width: '15%'
             }
@@ -119,4 +119,16 @@ function masqueSaisieDate(obj) {
         obj.value = ch_gauche + "/" + ch_droite;
     }
     return;
+}
+
+function verifFormDate() {
+    var dateDebVac = document.getElementById("dateDebVac<?php echo $i; ?>").value;
+    var dateFinVac = document.getElementById("dateFinVac<?php echo $i; ?>").value;
+    var dateDebFerie = document.getElementById("dateDebFerie<?php echo $i; ?>").value;
+    var dateFinFerie = document.getElementById("dateFinFerie<?php echo $i; ?>").value;
+    if (dateDebVac > dateFinVac || dateDebFerie > dateFinFerie) {
+        return false;
+    } else {
+        return true;
+    }
 }
