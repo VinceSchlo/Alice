@@ -8,10 +8,11 @@ require_once('../include/alice_dao.inc.php');
 ?>
 
 <?php include("../include/doctype.php"); ?>
-<div class="col-xs-7">
+<div class="col-xs-8">
+    <br />
     <div class="row">
         <!-- Affichage du titre de la page -->
-        <div class="col-md-offset-1 col-md-11">
+        <div class="col-md-12 border-table">
             <h2>Modification des dates des vacances scolaires et des jours fériés</h2>
         </div>
     </div>

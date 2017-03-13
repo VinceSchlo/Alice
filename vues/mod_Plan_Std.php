@@ -11,14 +11,13 @@ require_once('../include/alice_dao.inc.php');
 
 <?php include("../include/doctype.php"); ?>
 
-<div class="col-xs-7">
+<div class="col-xs-8">
+    <br />
     <div class="row">
         <!-- Affichage du titre de la page -->
-        <div class="col-md-11">
+        <div class="col-md-12 border-table">
             <h2>Modification du planning idéal</h2>
         </div>
-    </div>
-    <div class="row">
     </div>
 </div>
 

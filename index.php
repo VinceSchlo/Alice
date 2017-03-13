@@ -59,7 +59,7 @@ if (isset($_POST['suivante'])) {
     }
 }
 
-if(isset($_POST['btnCalendar'])) {
+if (isset($_POST['btnCalendar'])) {
     $_SESSION['weekNumber'] = ltrim(date('W', strtotime($_POST['dateCalendrier'])), "0");
     $_SESSION['year'] = date('Y', strtotime($_POST['dateCalendrier']));
 }
@@ -150,14 +150,12 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     <div class="row">
         <div class="col-md-2">
             <div class="row">
-            </div>
-            <div class="row">
                 <img class="logo" src="images/logo_sna_Alice.png"/>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-5">
             <div class="row">
-                <div class="col-xs-offset-3 col-md-3 ">
+                <div class="center-block">
                     <table class="table">
                         <tr>
                             <td>
@@ -178,58 +176,60 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                         </tr>
                     </table>
                 </div>
-<!--                Calendrier-->
-                <div  id="calendarMain" class="calendarMain"></div>
-                <div>
-                    <form action="index.php" method="post">
-                    <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
-                        <button type="submit" class="btn-lg btn-default" name="btnCalendar"><span class="glyphicon glyphicon-fast-forward"></span> Allez à</button>
-                    </form>
-                </div>
-                <script type="text/javascript">
-                    //<![CDATA[
-                    var myCalendar = new jsSimpleDatePickr();
-                    myCalendar.CalAdd({
-                        'divId': 'calendarMain',
-                        'inputFieldId': 'dateCalendrier',
-                        'dateMask': 'AAAA-MM-JJ',
-                        'dateCentury': 20,
-                        'titleMask': 'M AAAA',
-                        'navType': '01',
-                        'classTable': 'jsCalendar',
-                        'classDay': 'day',
-                        'classDaySelected': 'selectedDay',
-                        'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-                        'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                        'hideOnClick': false,
-                        'showOnLaunch': true
-                    });
-                    //]]>
-                </script>
-<!--                fin Calendrier-->
-                <h2 class="col-xs-3 center-block">
-                    <br/>
-                    <?php
-                    if ($_SESSION['weekNumber'] < 10) {
-                        echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
-                    } else {
-                        echo "Semaine n°" . $_SESSION['weekNumber'];
-                    }
-                    ?>
-                </h2>
-                <br/>
             </div>
             <div class="row">
-                <h2 class="col-md-offset-3 col-md-6 center-block">
-                    <?php
-                    echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-                    ?>
-                    <br/>
-                </h2>
-                <div class="col-md-3">
+                <div class="center-block">
+                    <h2>
+                        <?php
+                        if ($_SESSION['weekNumber'] < 10) {
+                            echo "Semaine n°" . "0" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+                        } else {
+                            echo "Semaine n°" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+                        }
+                        ?>
+                    </h2>
                 </div>
             </div>
         </div>
+        <!-- Calendrier -->
+        <div class="col-md-3">
+            <div class="row">
+                <div class="center-block">
+                    <div id="calendarMain" class="calendarMain"></div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                //<![CDATA[
+                var myCalendar = new jsSimpleDatePickr();
+                myCalendar.CalAdd({
+                    'divId': 'calendarMain',
+                    'inputFieldId': 'dateCalendrier',
+                    'dateMask': 'AAAA-MM-JJ',
+                    'dateCentury': 20,
+                    'titleMask': 'M AAAA',
+                    'navType': '01',
+                    'classTable': 'jsCalendar',
+                    'classDay': 'day',
+                    'classDaySelected': 'selectedDay',
+                    'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                    'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                    'hideOnClick': false,
+                    'showOnLaunch': true
+                });
+                //]]>
+            </script>
+            <div class="row">
+                <div class="center-block">
+                    <form action="index.php" method="post">
+                        <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
+                        <button type="submit" class="btn btn-lg btn-default btn-primary" name="btnCalendar"><span
+                                class="glyphicon glyphicon-fast-forward"></span> Allez à
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Calendrier-->
         <!-- Formulaire de connexion -->
         <div class="col-md-1">
             <?php
