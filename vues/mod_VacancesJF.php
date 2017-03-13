@@ -65,22 +65,22 @@ $tabFerie = $ferie->selectAllFerie();
 //
 ?>
 <body class="background-color-admin">
-<!-- Affichage des vacances -->
-<div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
-    <div class="col-lg-7">
-        <table class="table table-bordered">
-            <tr class="color-grey">
-                <th class="thCentre">Vacances</th>
-                <th class="thCentre">Date de début</th>
-                <th class="thCentre">Date de fin</th>
-            </tr>
-            <br/>
+    <!-- Affichage des vacances -->
+    <div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
+        <div class="col-lg-7">
+            <table class="table table-bordered">
+                <tr class="color-grey">
+                    <th class="thCentre">Vacances</th>
+                    <th class="thCentre">Date de début</th>
+                    <th class="thCentre">Date de fin</th>
+                </tr>
+                <br/>
 
-            <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
-                <?php
-                for ($i = 0; $i < count($tabVacances); $i++) {
-                    ?>
-                    <tr>
+                <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
+                    <?php
+                    for ($i = 0; $i < count($tabVacances); $i++) {
+                        ?>
+                        <tr>
                         <input type="hidden" name="idVacForm<?php echo $i; ?>"
                                value="<?php echo $tabVacances[$i]['idVac']; ?>">
                         <td class="name-size-admin">
@@ -108,55 +108,57 @@ $tabFerie = $ferie->selectAllFerie();
                         </td>
                         <script type="text/javascript">
                             function verifDateFinVac<?php echo $i; ?>() {
-                                var dateDeb = document.getElementById("dateDebVac<?php echo $i; ?>").value;
-                                var dateFin = document.getElementById("dateFinVac<?php echo $i; ?>").value;
-                                var div = document.getElementById("divDateVac<?php echo $i; ?>");
-                                var span = document.getElementById("spanVac<?php echo $i; ?>");
 
-                                if (dateDeb > dateFin) {
-                                    div.classList.add("has-error");
-                                    span.style.display = "block";
+                                var dateDebVac = stringToDate(document.getElementById("dateDebVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
+                                var dateFinVac = stringToDate(document.getElementById("dateFinVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
+                                // alert(dateDebVac);
+                                // alert(dateFinVac);
+                                var divVac = document.getElementById("divDateVac<?php echo $i; ?>");
+                                var spanVac = document.getElementById("spanVac<?php echo $i; ?>");
+
+                                if (dateDebVac > dateFinVac) {
+                                    divVac.classList.add("has-error");
+                                    spanVac.style.display = "block";
                                 } else {
-                                    div.classList.remove("has-error");
-                                    span.style.display = "none";
+                                    divVac.classList.remove("has-error");
+                                    spanVac.style.display = "none";
                                 }
                             }
                         </script>
-                    </tr>
-                <?php } ?>
-                <div class="pull-right text-right">
-                    <!-- Affichage de 2 boutons -->
-                    <button name="annuler" class="btn btn-success"
-                            class="glyphicon glyphicon-ban-circle"><span
-                            class="glyphicon glyphicon-ban-circle"></span> Annuler
-                    </button>
-                    <button type="submit" name="updateVac" class="btn btn-warning"><span
-                            class="glyphicon glyphicon-floppy-open"></span> Enregistrer
-                    </button>
-                </div>
-            </form>
-        </table>
+                        </tr>
+                    <?php } ?>
+                    <div class="pull-right text-right">
+                        <!-- Affichage de 2 boutons -->
+                        <button name="annuler" class="btn btn-success"
+                                class="glyphicon glyphicon-ban-circle"><span
+                                class="glyphicon glyphicon-ban-circle"></span> Annuler
+                        </button>
+                        <button type="submit" name="updateVac" class="btn btn-warning"><span
+                                class="glyphicon glyphicon-floppy-open"></span> Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </table>
+        </div>
     </div>
-</div>
 
-<!-- Affichage des jours fériés -->
-<div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
-    <div class="col-lg-7">
-        <table class="table table-bordered">
-            <tr class="color-grey">
-                <th class="thCentre">Jours fériés</th>
-                <th class="thCentre">Date de début</th>
-                <th class="thCentre">Date de fin</th>
-            </tr>
-            <br/>
+    <!-- Affichage des jours fériés -->
+    <div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
+        <div class="col-lg-7">
+            <table class="table table-bordered">
+                <tr class="color-grey">
+                    <th class="thCentre">Jours fériés</th>
+                    <th class="thCentre">Date de début</th>
+                    <th class="thCentre">Date de fin</th>
+                </tr>
+                <br/>
 
-            <form class="form-horizontal" method="POST" action="mod_VacancesJF.php"
-                  onsubmit="return verifFormDate()">
-                <?php
-                $j = 0;
-                for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
-                    ?>
-                    <tr>
+                <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
+                    <?php
+                    $j = 0;
+                    for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
+                        ?>
+                        <tr>
                         <input type="hidden" name="idFerieForm<?php echo $i; ?>"
                                value="<?php echo $tabFerie[$j]['idFerie']; ?>">
                         <td class="name-size-admin">
@@ -189,10 +191,12 @@ $tabFerie = $ferie->selectAllFerie();
                         </td>
                         <script type="text/javascript">
                             function verifDateFinFerie<?php echo $i; ?>() {
-                                var dateDebFerie = document.getElementById("dateDebFerie<?php echo $i; ?>").value;
-                                var dateFinFerie = document.getElementById("dateFinFerie<?php echo $i; ?>").value;
+
+                                var dateDebFerie = stringToDate(document.getElementById("dateDebFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
+                                var dateFinFerie = stringToDate(document.getElementById("dateFinFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
                                 var divFerie = document.getElementById("divDateFerie<?php echo $i; ?>");
                                 var spanFerie = document.getElementById("spanFerie<?php echo $i; ?>");
+
                                 if (dateDebFerie > dateFinFerie) {
                                     divFerie.classList.add("has-error");
                                     spanFerie.style.display = "block";
@@ -202,34 +206,34 @@ $tabFerie = $ferie->selectAllFerie();
                                 }
                             }
                         </script>
-                    </tr>
-                    <?php
-                    $j++;
-                }
-                ?>
-                <div class="pull-right text-right">
-                    <!-- Affichage de 2 boutons -->
-                    <button name="annuler" class="btn btn-success"><span
-                            class="glyphicon glyphicon-ban-circle"></span> Annuler
-                    </button>
-                    <button type="submit" name="updateFerie" class="btn btn-warning"><span
-                            class="glyphicon glyphicon-floppy-open"></span> Enregistrer
-                    </button>
-                </div>
-            </form>
-        </table>
+                        </tr>
+                        <?php
+                        $j++;
+                    }
+                    ?>
+                    <div class="pull-right text-right">
+                        <!-- Affichage de 2 boutons -->
+                        <button name="annuler" class="btn btn-success"><span
+                                class="glyphicon glyphicon-ban-circle"></span> Annuler
+                        </button>
+                        <button type="submit" name="updateFerie" class="btn btn-warning"><span
+                                class="glyphicon glyphicon-floppy-open"></span> Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </table>
+        </div>
     </div>
-</div>
-<!-- jQuery -->
-<script src="../bootstrap/js/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="../bootstrap/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../bootstrap/js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bootstrap/js/metisMenu.min.js"></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="../bootstrap/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>

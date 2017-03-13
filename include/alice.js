@@ -77,7 +77,7 @@ function connexion() {
         document.getElementById("connexion").style.display = "none";
     }
 }
-
+// Affiche un petit message à la manière de Toast d'Android
 function toast(texte, couleurFond) {
     var options = {
         style: {
@@ -93,7 +93,7 @@ function toast(texte, couleurFond) {
     };
     iqwerty.toast.Toast(texte, options);
 }
-
+// Masque de saisie pour les dates qui ajoute automatiquement des "/"
 function masqueSaisieDate(obj) {
     var ch;
     var ch_gauche, ch_droite;
@@ -122,13 +122,27 @@ function masqueSaisieDate(obj) {
 }
 
 function verifFormDate() {
-    var dateDebVac = document.getElementById("dateDebVac<?php echo $i; ?>").value;
-    var dateFinVac = document.getElementById("dateFinVac<?php echo $i; ?>").value;
-    var dateDebFerie = document.getElementById("dateDebFerie<?php echo $i; ?>").value;
-    var dateFinFerie = document.getElementById("dateFinFerie<?php echo $i; ?>").value;
+    var dateDebVac = stringToDate(document.getElementById("dateDebVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
+    var dateFinVac = stringToDate(document.getElementById("dateFinVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
+    var dateDebFerie = stringToDate(document.getElementById("dateDebFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
+    var dateFinFerie = stringToDate(document.getElementById("dateFinFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
     if (dateDebVac > dateFinVac || dateDebFerie > dateFinFerie) {
         return false;
     } else {
         return true;
     }
+}
+// Fonction pour convertir le string du formulaire date en une date au format jj/mm/aaaa
+function stringToDate(_date, _format, _delimiter)
+{
+    var formatLowerCase = _format.toLowerCase();
+    var formatItems = formatLowerCase.split(_delimiter);
+    var dateItems = _date.split(_delimiter);
+    var monthIndex = formatItems.indexOf("mm");
+    var dayIndex = formatItems.indexOf("dd");
+    var yearIndex = formatItems.indexOf("yyyy");
+    var month = parseInt(dateItems[monthIndex]);
+    month -= 1;
+    var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+    return formatedDate;
 }
