@@ -109,8 +109,19 @@ function convertTimeStringToNumber($timeString) {
     if (substr($timeString, 3, 2) == "30") {
         $timeNumber += 0.5;
     }
-
     return $timeNumber;
+}
+
+// Fonction pour remplacer tous les accents d'une chaîne de caractère
+function stripAccents($string){
+	return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ',
+'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+}
+
+// Fonction pour comparer 2 chaînes de caractères du prénom en enlevant les accents
+function compareString($a, $b)
+{
+    return strcmp(stripAccents($a['prenom']), stripAccents($b['prenom']));
 }
 
 function lireDonnee($nomDonnee, $valDefaut = "") {
