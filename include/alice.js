@@ -98,6 +98,7 @@ function masqueSaisieDate(obj) {
     var ch;
     var ch_gauche, ch_droite;
     ch = obj.value;
+    obj.value = ch.slice(0, 10);
     ch.toString();
     if (((ch.slice(2, 3)) !== ("/")) && (ch.length >= 3)) {
         if (ch.slice(0, 2) > 31) {
