@@ -76,7 +76,7 @@ $tabFerie = $ferie->selectAllFerie();
                 </tr>
                 <br/>
 
-                <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
+                <form class="form-horizontal" id="formVac" name="formVac" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                     <?php
                     for ($i = 0; $i < count($tabVacances); $i++) {
                         ?>
@@ -93,7 +93,8 @@ $tabFerie = $ferie->selectAllFerie();
                             <input size="10" class="form-control" id="dateDebVac<?php echo $i; ?>" type="text"
                                    name="dateDebForm<?php echo $i; ?>"
                                    value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>"
-                                   onKeyUp="masqueSaisieDate(this.form.dateDebForm<?php echo $i; ?>)">
+                                   onKeyUp="masqueSaisieDate(this.form.dateDebForm<?php echo $i; ?>)"
+                                   onchange="verifDateFinVac<?php echo $i; ?>()">
                         </td>
 
                         <!--                            Date de fin des vacances -->
@@ -111,12 +112,12 @@ $tabFerie = $ferie->selectAllFerie();
 
                                 var dateDebVac = stringToDate(document.getElementById("dateDebVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
                                 var dateFinVac = stringToDate(document.getElementById("dateFinVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
-                                // alert(dateDebVac);
-                                // alert(dateFinVac);
+                                var differenceDate = dateFinVac - dateDebVac;
+                                // alert(differenceDate);
                                 var divVac = document.getElementById("divDateVac<?php echo $i; ?>");
                                 var spanVac = document.getElementById("spanVac<?php echo $i; ?>");
 
-                                if (dateDebVac > dateFinVac) {
+                                if (differenceDate < 0) {
                                     divVac.classList.add("has-error");
                                     spanVac.style.display = "block";
                                 } else {
@@ -153,7 +154,7 @@ $tabFerie = $ferie->selectAllFerie();
                 </tr>
                 <br/>
 
-                <form class="form-horizontal" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
+                <form class="form-horizontal" id="formJF" name="formJF" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                     <?php
                     $j = 0;
                     for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
@@ -165,13 +166,16 @@ $tabFerie = $ferie->selectAllFerie();
                             <input size="10" class="form-control" disabled type="text" name="nomForm<?php echo $i; ?>"
                                    value="<?php echo $tabFerie[$j]['nomFerie']; ?>">
                         </td>
+                        
                         <!--                            Date de début des jours fériés -->
                         <td class="name-size-admin">
                             <input size="10" class="form-control" type="text" name="dateDebForm<?php echo $i; ?>"
                                    value="<?php echo convertDateUsFr($tabFerie[$j]['dateDebFerie']); ?>"
                                    id="dateDebFerie<?php echo $i; ?>"
-                                   onKeyUp="masqueSaisieDate(this.form.dateDebForm<?php echo $i; ?>)">
+                                   onKeyUp="masqueSaisieDate(this.form.dateDebForm<?php echo $i; ?>)"
+                                   onchange="verifDateFinFerie<?php echo $i; ?>()">
                         </td>
+                        
                         <!--                            Date de fin des jours fériés -->
                         <td class="name-size-admin">
                             <div class="form-group has-feedback" id="divDateFerie<?php echo $i; ?>">
@@ -194,10 +198,11 @@ $tabFerie = $ferie->selectAllFerie();
 
                                 var dateDebFerie = stringToDate(document.getElementById("dateDebFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
                                 var dateFinFerie = stringToDate(document.getElementById("dateFinFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
+                                var differenceDate = dateFinFerie - dateDebFerie;
                                 var divFerie = document.getElementById("divDateFerie<?php echo $i; ?>");
                                 var spanFerie = document.getElementById("spanFerie<?php echo $i; ?>");
 
-                                if (dateDebFerie > dateFinFerie) {
+                                if (differenceDate < 0) {
                                     divFerie.classList.add("has-error");
                                     spanFerie.style.display = "block";
                                 } else {

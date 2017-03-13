@@ -127,6 +127,7 @@ $tabAgent = $agent->selectAgentByName();
                                 value="<?php echo $tabAgent[$i]['idAgent']; ?>"
                                 onclick="return confirmDeleteAgent<?php echo $i; ?>()"><span class="glyphicon glyphicon-trash"></span> Supprimer
                         </button>
+                        <!-- fonction pour activer une fenétre de suppression avec le prenom et le nom -->
                         <script type="text/javascript">
                             function confirmDeleteAgent<?php echo $i; ?>() {
                                 return confirm("Etes-vous sûr de vouloir supprimer <?php echo $tabAgent[$i]['prenom'] . " " . $tabAgent[$i]['nom']; ?> ?");

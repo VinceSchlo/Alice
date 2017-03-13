@@ -1,5 +1,5 @@
 //fonction pour activer une fenétre de suppression
-function confirmDeleteAgent() {
+function confirmDelete() {
     return confirm("Etes-vous sûr de vouloir supprimer ?");
 }
 
@@ -122,15 +122,19 @@ function masqueSaisieDate(obj) {
 }
 
 function verifFormDate() {
-    var dateDebVac = stringToDate(document.getElementById("dateDebVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
-    var dateFinVac = stringToDate(document.getElementById("dateFinVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
-    var dateDebFerie = stringToDate(document.getElementById("dateDebFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
-    var dateFinFerie = stringToDate(document.getElementById("dateFinFerie<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
-    if (dateDebVac > dateFinVac || dateDebFerie > dateFinFerie) {
-        return false;
-    } else {
-        return true;
-    }
+    var formVac = document.getElementById('formVac');
+    var formJF = document.getElementById('formJF');
+    document.write(formVac.join());
+    /*
+    for (var i = 0; i < formVac.length; i++) {
+        document.write(i+" => "+ document.forms["formVac"].elements["DateDebVac"]);
+        /*
+        if (document.form["formVac"].elements["dateFinForm".i].value < document.form["formVac"].elements["dateDebForm".i].value) {
+            return false;
+        } else {
+            return true;
+        } 
+    } */
 }
 // Fonction pour convertir le string du formulaire date en une date au format jj/mm/aaaa
 function stringToDate(_date, _format, _delimiter)
