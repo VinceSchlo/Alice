@@ -113,8 +113,8 @@ function convertTimeStringToNumber($timeString) {
 }
 
 // Fonction pour remplacer tous les accents d'une chaîne de caractère
-function stripAccents($texte) {
-    $texte = str_replace(
+function stripAccents($string) {
+    $string = str_replace(
             array(
         'à', 'â', 'ä', 'á', 'ã', 'å',
         'î', 'ï', 'ì', 'í',
@@ -141,12 +141,12 @@ function stripAccents($texte) {
         'U', 'U', 'U', 'U',
         'E', 'E', 'E', 'E',
         'C', 'Y', 'N'
-            ), $texte);
-    return $texte;
+            ), $string);
+    return $string;
 }
 
 // Fonction pour comparer 2 chaînes de caractères du prénom en enlevant les accents
-function compareString($a, $b) {
+function comparePrenom($a, $b) {
     return strcmp(stripAccents($a['prenom']), stripAccents($b['prenom']));
 }
 

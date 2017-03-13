@@ -15,7 +15,6 @@
         <!-- Alice CSS -->
         <link href="../css/alice.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="../css/calendrier.css"/>
-
         <!-- Chemin vers les librairies JavaScript -->
         <script src="../include/alice.js"></script>
         <script type="text/javascript" src="../include/jsSimpleDatePickr.2.1.js"></script>

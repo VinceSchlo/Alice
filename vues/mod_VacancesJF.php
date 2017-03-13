@@ -92,13 +92,14 @@ $tabFerie = $ferie->selectAllFerie();
                         <td class="name-size-admin">
                             <input size="10" class="form-control" id="dateDebVac<?php echo $i; ?>" type="text"
                                    name="dateDebForm<?php echo $i; ?>"
-                                   value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>">
+                                   value="<?php echo convertDateUsFr($tabVacances[$i]['dateDebVac']); ?>"
+                                   onKeyUp="masqueSaisieDate(this.form.dateDebForm<?php echo $i; ?>)">
                         </td>
 
                         <!--                            Date de fin des vacances -->
                         <td class="name-size-admin">
                             <div class="form-group has-feedback" id="divDateVac<?php echo $i; ?>">
-                                <input size="6" class="form-control" id="dateFinVac<?php echo $i; ?>" type="text"
+                                <input size="10" class="form-control" id="dateFinVac<?php echo $i; ?>" type="text"
                                        name="dateFinForm<?php echo $i; ?>"
                                        value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>"
                                        onchange="verifDateFinVac<?php echo $i; ?>()">
@@ -106,7 +107,6 @@ $tabFerie = $ferie->selectAllFerie();
                         </td>
                         <script type="text/javascript">
                             function verifDateFinVac<?php echo $i; ?>() {
-
                                 var dateDeb = document.getElementById("dateDebVac<?php echo $i; ?>").value;
                                 var dateFin = document.getElementById("dateFinVac<?php echo $i; ?>").value;
                                 var div = document.getElementById("divDateVac<?php echo $i; ?>");
@@ -119,6 +119,7 @@ $tabFerie = $ferie->selectAllFerie();
                                     div.classList.remove("has-error");
                                     span.style.display = "none";
                                 }
+                                return;
                             }
                         </script>
                     </tr>

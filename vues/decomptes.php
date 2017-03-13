@@ -302,7 +302,7 @@ foreach ($tabDecTotal as $key1 => $value1) {
 }
 // Tri du tableau dans l'ordre alphabétique des prénoms pour l'affichage
 // sort($tabDecTotal);
-usort($tabDecTotal, "compareString");
+usort($tabDecTotal, "comparePrenom");
 // var_dump($tabDecTotal);
 // var_dump($tabAgent);
 // var_dump($tabDecHeureSp);
