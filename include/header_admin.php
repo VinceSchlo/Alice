@@ -3,7 +3,7 @@ if (!isset($_SESSION['idAgent'])) {
     header("Location:../index.php");
 }
 ?>
-<div class="col-xs-3">
+<div class="col-xs-2">
     <!-- Navigation -->
     <nav class="navbar navbar-static-top background-color-admin" role="navigation">
         <ul class="nav navbar-top-links navbar-right">

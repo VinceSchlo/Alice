@@ -179,12 +179,9 @@ $oHoraire = new Horaire();
 $time = $oHoraire->selectHoraire();
 ?>
 
-<div class="col-xs-7">
+<div class="col-md-6">
     <div class="row">
-        <div class="col-md-5">
-            <h2>Modification du planning réel</h2>
-        </div>
-        <div class="col-xs-3">
+        <div class="col-md-offset-4 col-md-4">
             <table class="table">
                 <tr>
                     <td>
@@ -205,57 +202,61 @@ $time = $oHoraire->selectHoraire();
                 </tr>
             </table>
         </div>
-        <div class="col-md-3">
+    </div>
+    <div class="row">
+        <div class="center-block border-table">
+            <h2>Modification du planning réel</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-block">
             <h3>
                 <?php
                 if ($_SESSION['weekNumber'] < 10) {
-                    echo "Semaine n°" . "0" . $_SESSION['weekNumber'];
+                    echo "Semaine n°" . "0" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
                 } else {
-                    echo "Semaine n°" . $_SESSION['weekNumber'];
+                    echo "Semaine n°" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
                 }
                 ?>
             </h3>
         </div>
     </div>
+</div>
+<div class="col-md-2">
     <div class="row">
-        <div class="col-lg-12">
-            <!--                Calendrier-->
-            <div>
-                <div id="calendarMain" class="calendarMain"></div>
-                <form action="mod_Plan_Reel.php" method="post">
-                    <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
-                    <button type="submit" class="btn-lg btn-default" name="btnCalendar"><span
-                            class="glyphicon glyphicon-fast-forward"></span> Allez à
-                    </button>
-                </form>
-            </div>
-            <script type="text/javascript">
-                //<![CDATA[
-                var myCalendar = new jsSimpleDatePickr();
-                myCalendar.CalAdd({
-                    'divId': 'calendarMain',
-                    'inputFieldId': 'dateCalendrier',
-                    'dateMask': 'AAAA-MM-JJ',
-                    'dateCentury': 20,
-                    'titleMask': 'M AAAA',
-                    'navType': '01',
-                    'classTable': 'jsCalendar',
-                    'classDay': 'day',
-                    'classDaySelected': 'selectedDay',
-                    'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-                    'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-                    'hideOnClick': false,
-                    'showOnLaunch': true
-                });
-                //]]>
-            </script>
-            <!--                fin Calendrier-->
+        <div class="pull-right">
+            <div id="calendarMain" class="calendarMain"></div>
         </div>
     </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        var myCalendar = new jsSimpleDatePickr();
+        myCalendar.CalAdd({
+            'divId': 'calendarMain',
+            'inputFieldId': 'dateCalendrier',
+            'dateMask': 'AAAA-MM-JJ',
+            'dateCentury': 20,
+            'titleMask': 'M AAAA',
+            'navType': '01',
+            'classTable': 'jsCalendar',
+            'classDay': 'day',
+            'classDaySelected': 'selectedDay',
+            'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            'hideOnClick': false,
+            'showOnLaunch': true
+        });
+        //]]>
+    </script>
     <div class="row">
-        <h3 class="col-md-offset-4 col-md-6">
-            <?php echo "Semaine du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]); ?>
-        </h3>
+        <div class="col-md-offset-6">
+            <form action="mod_Plan_Reel.php" method="post">
+                <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
+                <button type="submit" class="btn btn-primary" name="btnCalendar"><span
+                        class="glyphicon glyphicon-fast-forward"></span> Allez à
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
