@@ -12,15 +12,13 @@
 .calendarMain > div{
 	width: 200px;
 	padding: 5px 10px 10px 10px;
-	background-color: #2e373f;
-	background-color: #ffffcc;
 	/*background-color: #2e373f;*/
 	/*background-color: rgba(46, 55, 63, 0.95);*/
 	border-radius: 10px;
 	-moz-box-shadow: 0 0 10px #555;
 	-webkit-box-shadow: 0 0 10px #555;
 	box-shadow: 0 0 10px #555;
-	font-size: 10px;
+	font-size: 9px;
 }
 /* bouton d'affichage*/
 .calendarMain > input{
