@@ -94,6 +94,7 @@ require_once('../include/alice_dao.inc.php');
                 ?>
             </tr>
         </thead>
+        <tbody>
         <form class="form-horizontal" action="mod_Plan_Std.php" method="post">
             <?php
             $oPlanStd = new PlanStd();
@@ -220,6 +221,7 @@ require_once('../include/alice_dao.inc.php');
                 </button>
             </div>
         </form>
+        <tbody>
     </table>
 </div>
 

@@ -340,6 +340,7 @@ $time = $oHoraire->selectHoraire();
                 ?>
             </tr>
         </thead>
+        <tbody>
         <form class="form-horizontal background-color-admin" action="mod_Plan_Reel.php" method="post">
             <?php
             $oPoste = new Poste();
@@ -486,7 +487,7 @@ $time = $oHoraire->selectHoraire();
                 <?php } ?>
                 </tr>
             <?php } ?>
-                
+
             <!-- Affichage des 2 boutons -->
             <div class="col-md-3 pull-right text-right">
                 <button type="submit" name="annuler" class="btn btn-success"
@@ -499,6 +500,7 @@ $time = $oHoraire->selectHoraire();
                 </button>
             </div>
         </form>
+        <tbody>
     </table>
 </div>
 
