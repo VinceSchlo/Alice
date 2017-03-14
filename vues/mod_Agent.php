@@ -73,14 +73,16 @@ $tabAgent = $agent->selectAgentByName();
     <!-- Affichage des agents -->
     <div class="container-fluid col-md-12 col-lg-offset-2 col-lg-8">
         <table class="table table-bordered">
-            <tr class="color-grey">
-                <th class="thCentre">Nom</th>
-                <th class="thCentre">Prénom</th>
-                <th class="thCentre">Login</th>
-                <th class="thCentre">Mot de passe</th>
-                <th class="thCentre width-input-agent">Statut</th>
-                <th class="thCentre">Supprimer</th>
-            </tr>
+            <thead class="theadFH">
+                <tr class="color-grey">
+                    <th class="thCentre">Nom</th>
+                    <th class="thCentre">Prénom</th>
+                    <th class="thCentre">Login</th>
+                    <th class="thCentre">Mot de passe</th>
+                    <th class="thCentre width-input-agent">Statut</th>
+                    <th class="thCentre">Supprimer</th>
+                </tr>
+            </thead>
             <br/>
 
             <?php
@@ -153,6 +155,11 @@ $tabAgent = $agent->selectAgentByName();
         </table>
     </div>
 
+    <!-- Header flottant -->
+    <script>
+        var tables = document.getElementsByTagName('table');
+        lrStickyHeader(tables[0]);
+    </script>
     <!-- jQuery -->
     <script src="../bootstrap/js/jquery.min.js"></script>
 
