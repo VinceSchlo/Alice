@@ -108,7 +108,7 @@ $tabFerie = $ferie->selectAllFerie();
                                 <span class="help-block" style="display: none" id="spanVac<?php echo $i; ?>">La date de fin doit être supérieure<br/>à la date de début</span>
                         </td>
                         <script type="text/javascript">
-                            function verifDateFinVac<?php echo $i; ?>() {
+                            function verifDateFinVac<?php echo $i; ?>(){ 
 
                                 var dateDebVac = stringToDate(document.getElementById("dateDebVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
                                 var dateFinVac = stringToDate(document.getElementById("dateFinVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
@@ -120,9 +120,11 @@ $tabFerie = $ferie->selectAllFerie();
                                 if (differenceDate < 0) {
                                     divVac.classList.add("has-error");
                                     spanVac.style.display = "block";
+                                    erreurDate = true;
                                 } else {
                                     divVac.classList.remove("has-error");
                                     spanVac.style.display = "none";
+                                    erreurDate = false;
                                 }
                             }
                         </script>
@@ -205,9 +207,11 @@ $tabFerie = $ferie->selectAllFerie();
                                 if (differenceDate < 0) {
                                     divFerie.classList.add("has-error");
                                     spanFerie.style.display = "block";
+                                    erreurDate = true;
                                 } else {
                                     divFerie.classList.remove("has-error");
                                     spanFerie.style.display = "none";
+                                    erreurDate = false;
                                 }
                             }
                         </script>

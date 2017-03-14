@@ -1,3 +1,6 @@
+// Initialistaion d'une variable globale pour la vérification des dates dans mod_VacancesJF.php
+erreurDate = false;
+
 //fonction pour activer une fenétre de suppression
 function confirmDelete() {
     return confirm("Etes-vous sûr de vouloir supprimer ?");
@@ -22,7 +25,7 @@ function activeLoginMdpForm() {
         document.getElementById("divMdp2").style.display = "none";
     }
 }
-
+// Fonction qui vérifie que l'utilisateur rentre un nom ou un prénom de longueur comprise entre 2 et 20 caractères
 function verifNom(champ) {
     if (champ.value.length < 3 || champ.value.length > 20) {
         surligne(champ, true);
@@ -42,7 +45,6 @@ function verifAddAgentForm(f) {
         return false;
     } else {
         if (statut === "block") {
-            /* var login = document.getElementById("login").value; */
             var loginOK = verifNom(f.loginForm);
             if (!loginOK) {
                 alert("Veuillez saisir un identifiant de connexion\nde longueur supérieure à 2 caractères\net inférieure à 20 caractères");
@@ -95,9 +97,9 @@ function toast(texte, couleurFond) {
 }
 // Masque de saisie pour les dates qui ajoute automatiquement des "/"
 function masqueSaisieDate(obj) {
-    var ch;
+
+    var ch = obj.value;
     var ch_gauche, ch_droite;
-    ch = obj.value;
     obj.value = ch.slice(0, 10);
     ch.toString();
     if (((ch.slice(2, 3)) !== ("/")) && (ch.length >= 3)) {
@@ -120,25 +122,18 @@ function masqueSaisieDate(obj) {
     }
     return;
 }
-
+// Fonction qui bloque l'enregistrement dans la BDD si les dates de début et de fin ne correspondent pas
 function verifFormDate() {
-    var formVac = document.getElementById('formVac');
-    var formJF = document.getElementById('formJF');
-    document.write(formVac.join());
-    /*
-    for (var i = 0; i < formVac.length; i++) {
-        document.write(i+" => "+ document.forms["formVac"].elements["DateDebVac"]);
-        /*
-        if (document.form["formVac"].elements["dateFinForm".i].value < document.form["formVac"].elements["dateDebForm".i].value) {
-            return false;
-        } else {
-            return true;
-        } 
-    } */
+    if (erreurDate === true) {
+        alert("Certaines dates ne sont pas correctes,\nveuillez les vérifier");
+        return false;
+    } else {
+        return true;
+    }
 }
 // Fonction pour convertir le string du formulaire date en une date au format jj/mm/aaaa
-function stringToDate(_date, _format, _delimiter)
-{
+function stringToDate(_date, _format, _delimiter) {
+
     var formatLowerCase = _format.toLowerCase();
     var formatItems = formatLowerCase.split(_delimiter);
     var dateItems = _date.split(_delimiter);
