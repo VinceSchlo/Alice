@@ -225,7 +225,7 @@ $time = $oHoraire->selectHoraire();
 </div>
 <div class="col-md-2">
     <div class="row">
-        <div class="pull-right">
+        <div class="pull-right btn-calendar">
             <div id="calendarMain" class="calendarMain"></div>
         </div>
     </div>
@@ -250,7 +250,7 @@ $time = $oHoraire->selectHoraire();
         //]]>
     </script>
     <div class="row">
-        <div class="col-md-offset-6">
+        <div class="col-md-offset-6 btn-calendar">
             <form action="mod_Plan_Reel.php" method="post">
                 <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
                 <button type="submit" class="btn btn-primary" name="btnCalendar"><span
@@ -264,7 +264,7 @@ $time = $oHoraire->selectHoraire();
 <?php include("../include/header_admin.php"); ?>
 
 <div class="container-fluid background-color-admin">
-    <table class="table border-table">
+    <table class="table border-table" id="table2">
         <thead>
             <!--            Affichage des jours-->
             <tr class="color-grey size-hour">
@@ -573,11 +573,12 @@ $time = $oHoraire->selectHoraire();
                 </button>
             </div>
         </form>
+        <tfoot></tfoot>
     </table>
 </div>
 <script>
-    var tableElement = document.getElementsByTagName('table');
-    var stickyTable = lrStickyHeader(tableElement[1]);
+    var tables = document.getElementById('table2');
+    lrStickyHeader(tables);
 </script>
 <!-- jQuery -->
 <script src="../bootstrap/js/jquery.min.js"></script>
