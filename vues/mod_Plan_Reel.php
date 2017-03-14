@@ -282,8 +282,6 @@ $time = $oHoraire->selectHoraire();
                 <th class="text-center border-right" colspan="2">
                     Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
             </tr>
-        </thead>
-        <tbody>
             <!--            Affichage des horaires -->
             <tr class="color-grey border-right name-size-admin">
                 <td class="border-right">Personnel</td>
@@ -341,7 +339,7 @@ $time = $oHoraire->selectHoraire();
                 echo "</td>";
                 ?>
             </tr>
-        </tbody>
+        </thead>
         <form class="form-horizontal background-color-admin" action="mod_Plan_Reel.php" method="post">
             <?php
             $oPoste = new Poste();
@@ -488,81 +486,9 @@ $time = $oHoraire->selectHoraire();
                 <?php } ?>
                 </tr>
             <?php } ?>
-            <!--            Affichage des horaires -->
-            <tr class="color-grey name-size-admin border-right">
-                <td class="border-right ">Personnel</td>
-                <?php
-                $oHoraire = new Horaire();
-                $time = $oHoraire->selectHoraire();
-
-                for ($i = 0; $i < 4; $i++) {
-                    if ($i % 2 == 0) {
-                        echo "<td class=\"text-center border-top-bot\">";
-                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[3]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
-                    if ($i % 2 != 0) {
-                        echo "<td class=\"text-center border-right\">";
-                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[6]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
-                }
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[0]['libHoraire'], 0, 5), " - ";
-                echo substr($time[2]['libHoraire'], 0, 5);
-                echo "</td>";
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[2]['libHoraire'], 0, 5), " - ";
-                echo substr($time[3]['libHoraire'], 0, 5);
-                echo "</td>";
-                echo "<td class=\"text-center border-right\">";
-                echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                echo substr($time[6]['libHoraire'], 0, 5);
-                echo "</td>";
-                for ($i = 0; $i < 4; $i++) {
-                    if ($i % 2 == 0) {
-                        echo "<td class=\"text-center border-top-bot\">";
-                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[3]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
-                    if ($i % 2 != 0) {
-                        echo "<td class=\"text-center border-right\">";
-                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[6]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
-                }
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[0]['libHoraire'], 0, 5), " - ";
-                echo substr($time[2]['libHoraire'], 0, 5);
-                echo "</td>";
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[2]['libHoraire'], 0, 5), " - ";
-                echo substr($time[4]['libHoraire'], 0, 5);
-                echo "</td>";
-                ?>
-            </tr>
-            <!--            Affichage des jours-->
-            <tr class="color-grey size-hour">
-                <th class="border-right"></th>
-                <th class="text-center border-right" colspan="2">
-                    Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="3">
-                    Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
-            </tr>
+                
+            <!-- Affichage des 2 boutons -->
             <div class="col-md-3 pull-right text-right">
-                <!-- Affichage de 2 boutons -->
                 <button type="submit" name="annuler" class="btn btn-success"
                         class="glyphicon glyphicon-ban-circle"><span
                         class="glyphicon glyphicon-ban-circle"></span> Annuler
@@ -573,13 +499,15 @@ $time = $oHoraire->selectHoraire();
                 </button>
             </div>
         </form>
-        <tfoot></tfoot>
     </table>
 </div>
+
+<!-- Header flottant -->
 <script>
     var tables = document.getElementById('table2');
     lrStickyHeader(tables);
 </script>
+
 <!-- jQuery -->
 <script src="../bootstrap/js/jquery.min.js"></script>
 

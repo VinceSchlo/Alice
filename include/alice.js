@@ -1,4 +1,4 @@
-// Initialistaion d'une variable globale pour la vérification des dates dans mod_VacancesJF.php
+// Initialisation d'une variable globale pour la vérification des dates dans mod_VacancesJF.php
 erreurDate = false;
 
 //fonction pour activer une fenétre de suppression

@@ -23,9 +23,8 @@ require_once('../include/alice_dao.inc.php');
 
 <?php include("../include/header_admin.php"); ?>
 
-<body>
     <div class="container-fluid background-color-admin">
-        <table class="table border-table">
+        <table class="table border-table" id="table2">
             <!-- Affichage des jours -->
             <tr class="color-grey size-hour">
                 <th class="border-right"></th>
@@ -191,11 +190,9 @@ require_once('../include/alice_dao.inc.php');
                                             style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; ; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
 
                                 <?php } else { ?>
-
                                     <option
                                         value="<?php echo $poste[$k]['idPoste']; ?>"
                                         style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; ; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
-
                                     <?php
                                 }
                             }
@@ -290,6 +287,12 @@ require_once('../include/alice_dao.inc.php');
             </form>
         </table>
     </div>
+
+    <!-- Header flottant -->
+    <script>
+        var tables = document.getElementById('table2');
+        lrStickyHeader(tables);
+    </script>
 
     <!-- jQuery -->
     <script src="../bootstrap/js/jquery.min.js"></script>
