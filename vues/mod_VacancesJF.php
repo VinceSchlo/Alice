@@ -56,7 +56,7 @@ if (isset($_POST['updateFerie'])) { // Cas du bouton orange "enregistrer"
 }
 if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
     // Retour à la page d'accueil administrateur sans modification
-    // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
+    // die('<META HTTP-equiv="refresh" content=0;URL=mod_VacancesJF.php>');
 }
 // On rafraîchit le select pour afficher les modifs faites en BDD
 $tabVacances = $vacances->selectAllVacances();
@@ -75,7 +75,7 @@ $tabFerie = $ferie->selectAllFerie();
                     <th class="thCentre">Date de fin</th>
                 </tr>
                 <br/>
-
+                <!-- Début du formulaire des vacances -->
                 <form class="form-horizontal" id="formVac" name="formVac" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                     <?php
                     for ($i = 0; $i < count($tabVacances); $i++) {
@@ -108,7 +108,7 @@ $tabFerie = $ferie->selectAllFerie();
                                 <span class="help-block" style="display: none" id="spanVac<?php echo $i; ?>">La date de fin doit être supérieure<br/>à la date de début</span>
                         </td>
                         <script type="text/javascript">
-                            function verifDateFinVac<?php echo $i; ?>(){ 
+                            function verifDateFinVac<?php echo $i; ?>() {
 
                                 var dateDebVac = stringToDate(document.getElementById("dateDebVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
                                 var dateFinVac = stringToDate(document.getElementById("dateFinVac<?php echo $i; ?>").value, "dd/MM/yyyy", "/");
@@ -120,11 +120,11 @@ $tabFerie = $ferie->selectAllFerie();
                                 if (differenceDate < 0) {
                                     divVac.classList.add("has-error");
                                     spanVac.style.display = "block";
-                                    erreurDate = true;
+                                    erreurDate = true; // variable globale initialisée dans alice.js
                                 } else {
                                     divVac.classList.remove("has-error");
                                     spanVac.style.display = "none";
-                                    erreurDate = false;
+                                    erreurDate = false; // variable globale initialisée dans alice.js
                                 }
                             }
                         </script>
@@ -155,7 +155,7 @@ $tabFerie = $ferie->selectAllFerie();
                     <th class="thCentre">Date de fin</th>
                 </tr>
                 <br/>
-
+                <!-- Début du formulaire des jours fériés -->
                 <form class="form-horizontal" id="formJF" name="formJF" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                     <?php
                     $j = 0;
@@ -168,7 +168,7 @@ $tabFerie = $ferie->selectAllFerie();
                             <input size="10" class="form-control" disabled type="text" name="nomForm<?php echo $i; ?>"
                                    value="<?php echo $tabFerie[$j]['nomFerie']; ?>">
                         </td>
-                        
+
                         <!--                            Date de début des jours fériés -->
                         <td class="name-size-admin">
                             <input size="10" class="form-control" type="text" name="dateDebForm<?php echo $i; ?>"
@@ -177,7 +177,7 @@ $tabFerie = $ferie->selectAllFerie();
                                    onKeyUp="masqueSaisieDate(this.form.dateDebForm<?php echo $i; ?>)"
                                    onchange="verifDateFinFerie<?php echo $i; ?>()">
                         </td>
-                        
+
                         <!--                            Date de fin des jours fériés -->
                         <td class="name-size-admin">
                             <div class="form-group has-feedback" id="divDateFerie<?php echo $i; ?>">
@@ -207,11 +207,11 @@ $tabFerie = $ferie->selectAllFerie();
                                 if (differenceDate < 0) {
                                     divFerie.classList.add("has-error");
                                     spanFerie.style.display = "block";
-                                    erreurDate = true;
+                                    erreurDate = true; // variable globale initialisée dans alice.js
                                 } else {
                                     divFerie.classList.remove("has-error");
                                     spanFerie.style.display = "none";
-                                    erreurDate = false;
+                                    erreurDate = false; // variable globale initialisée dans alice.js
                                 }
                             }
                         </script>
@@ -220,9 +220,9 @@ $tabFerie = $ferie->selectAllFerie();
                         $j++;
                     }
                     ?>
+                    <!-- Affichage des 2 boutons -->
                     <div class="pull-right text-right">
-                        <!-- Affichage de 2 boutons -->
-                        <button name="annuler" class="btn btn-success"><span
+                        <button type="submit" name="annuler" class="btn btn-success"><span
                                 class="glyphicon glyphicon-ban-circle"></span> Annuler
                         </button>
                         <button type="submit" name="updateFerie" class="btn btn-warning"><span

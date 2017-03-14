@@ -124,7 +124,7 @@ function masqueSaisieDate(obj) {
 }
 // Fonction qui bloque l'enregistrement dans la BDD si les dates de début et de fin ne correspondent pas
 function verifFormDate() {
-    if (erreurDate === true) {
+    if (erreurDate) {
         alert("Certaines dates ne sont pas correctes,\nveuillez les vérifier");
         return false;
     } else {

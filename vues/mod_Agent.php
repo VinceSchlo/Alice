@@ -84,10 +84,10 @@ $tabAgent = $agent->selectAgentByName();
                 </tr>
             </thead>
             <br/>
-
-            <?php
-            for ($i = 0; $i < count($tabAgent); $i++) {
-                ?>
+            <tbody>
+                <?php
+                for ($i = 0; $i < count($tabAgent); $i++) {
+                    ?>
                 <form class="form-horizontal" method="POST" action="mod_Agent.php">
                     <tr class="name-size-admin">
                     <input type="hidden" name="idAgentForm<?php echo $i; ?>"
@@ -152,6 +152,7 @@ $tabAgent = $agent->selectAgentByName();
                 </div>
                 </td>
             </form>
+            </tbody>
         </table>
     </div>
 
@@ -160,6 +161,7 @@ $tabAgent = $agent->selectAgentByName();
         var tables = document.getElementsByTagName('table');
         lrStickyHeader(tables[0]);
     </script>
+
     <!-- jQuery -->
     <script src="../bootstrap/js/jquery.min.js"></script>
 

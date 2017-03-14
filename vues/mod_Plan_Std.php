@@ -25,7 +25,7 @@ require_once('../include/alice_dao.inc.php');
 
 <div class="container-fluid background-color-admin">
     <table class="table border-table" id="table2">
-        <thead class="theadFH">
+        <thead class="theadFHPlan">
             <!-- Affichage des jours -->
             <tr class="color-grey size-hour">
                 <th class="border-right"></th>
