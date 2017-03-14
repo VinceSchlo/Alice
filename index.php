@@ -194,7 +194,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
         <!-- Calendrier -->
         <div class="col-md-3">
             <div class="row">
-                <div class="center-block">
+                <div class="center-block btn-calendar">
                     <div id="calendarMain" class="calendarMain"></div>
                 </div>
             </div>
@@ -219,7 +219,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 //]]>
             </script>
             <div class="row">
-                <div class="center-block">
+                <div class="center-block btn-calendar">
                     <form action="index.php" method="post">
                         <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
                         <button type="submit" class="btn btn-lg btn-default btn-primary" name="btnCalendar"><span

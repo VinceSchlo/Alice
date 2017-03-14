@@ -117,3 +117,8 @@ h2, h3, h4, p, .thCentre {
 .width-input-agent {
     width: 19%;
 }
+
+.btn-calendar{
+    padding-top: 1%;
+    padding-bottom: 1%;
+}

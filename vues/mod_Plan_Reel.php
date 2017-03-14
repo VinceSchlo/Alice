@@ -224,7 +224,7 @@ $time = $oHoraire->selectHoraire();
 </div>
 <div class="col-md-2">
     <div class="row">
-        <div class="pull-right">
+        <div class="pull-right btn-calendar">
             <div id="calendarMain" class="calendarMain"></div>
         </div>
     </div>
@@ -249,7 +249,7 @@ $time = $oHoraire->selectHoraire();
         //]]>
     </script>
     <div class="row">
-        <div class="col-md-offset-6">
+        <div class="col-md-offset-6 btn-calendar">
             <form action="mod_Plan_Reel.php" method="post">
                 <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
                 <button type="submit" class="btn btn-primary" name="btnCalendar"><span
