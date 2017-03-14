@@ -12,7 +12,6 @@ h2, h3, h4, p, .thCentre {
 .checkBox {
     padding: 10px 10px 10px 10px;
     text-align: center;
-
 }
 
 .leftArrow {
@@ -117,3 +116,15 @@ h2, h3, h4, p, .thCentre {
 .width-input-agent {
     width: 19%;
 }
+
+/* CSS du header flottant */
+.lr-sticky-header {
+    color: white;
+    background: lightblue;
+    transition: all 0.6s;
+  }
+
+  #scrollPanel {
+    height: 500px;
+    overflow-y: auto;
+  }

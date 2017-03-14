@@ -13,7 +13,7 @@
 	width: 220px;
 	padding: 5px 10px 10px 10px;
 	background-color: #2e373f;
-	background-color: rgba(46, 55, 63, 0.95);
+	background-color: #ffffcc;
 	border-radius: 10px;
 	-moz-box-shadow: 0 0 10px #555;
 	-webkit-box-shadow: 0 0 10px #555;
@@ -72,7 +72,7 @@
 	border: none;
 	width: 30px;
 	padding: 3px 0 3px 0;
-	color: #fff;
+	color: black;
 	font-weight: bold;
 	text-decoration: none;
 	text-align: center;
