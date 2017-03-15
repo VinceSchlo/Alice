@@ -356,12 +356,11 @@ usort($tabDecTotal, "comparePrenom");
         </div>
     </div>
 </div>
-<div class="col-md-2">
+<div class="col-md-3 no-margin">
     <div class="row">
-        <div class="pull-right">
+        <div class="calendar-position pull-left">
             <div id="calendarMain" class="calendarMain"></div>
         </div>
-    </div>
     <script type="text/javascript">
         //<![CDATA[
         var myCalendar = new jsSimpleDatePickr();
@@ -382,8 +381,7 @@ usort($tabDecTotal, "comparePrenom");
         });
         //]]>
     </script>
-    <div class="row">
-        <div class="col-md-offset-6">
+        <div class="btn-calendar-position">
             <form action="mod_Plan_Reel.php" method="post">
                 <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
                 <button type="submit" class="btn btn-primary" name="btnCalendar"><span
