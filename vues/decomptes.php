@@ -110,12 +110,12 @@ if (!empty($tabPlanReel)) { // S'il y a du planning réel
 $oHoraire = new Horaire();
 $tabHoraires = $oHoraire->selectHoraire();
 //
-// Calcul des heures de service public à partir du tableau $tabPlanStd, 
-// on les enregistre dans un nouveau tableau $tabDecHeureSp en les regroupant par idAgent 
+// Calcul des heures de service public à partir du tableau $tabPlanStd,
+// on les enregistre dans un nouveau tableau $tabDecHeureSp en les regroupant par idAgent
 $tabDecHeureSp = array(array("idAgent" => " ", "nbHeureSp" => " "));
 foreach ($tabPlanStd as $key1 => $value1) {
     // On remplace dans $tabPlanStd, les idHoraires par les vrais horaires de la table horaire en les convertissant en float
-    // via la fonction convertTimeStringToNumber pour faciliter les calculs entre HoraireDebut et HoraireFin. 13:30:00 devient 13.5 
+    // via la fonction convertTimeStringToNumber pour faciliter les calculs entre HoraireDebut et HoraireFin. 13:30:00 devient 13.5
     foreach ($tabHoraires as $key3 => $value3) {
         if ($tabPlanStd[$key1]['horaireDeb'] == $tabHoraires[$key3]['idHoraire']) {
             $tabPlanStd[$key1]['horaireDeb'] = convertTimeStringToNumber($tabHoraires[$key3]['libHoraire']);
@@ -130,7 +130,7 @@ foreach ($tabPlanStd as $key1 => $value1) {
     if ($tabPlanStd[$key1]['idPoste'] == "17" && $tabPlanStd[$key1]['horaireFin'] == 18.5) {
         $nbHeureSp -= 0.5;
     }
-    // on les enregistre dans un nouveau tableau $tabDecHeureSp, les heures de SP en les regroupant par idAgent 
+    // on les enregistre dans un nouveau tableau $tabDecHeureSp, les heures de SP en les regroupant par idAgent
     $compteur = 0;
     foreach ($tabDecHeureSp as $key2 => $value2) {
         if (empty(array_search($tabPlanStd[$key1]['idAgent'], array_column($tabDecHeureSp, 'idAgent'))) && ($key1 == $key2 ||
@@ -151,7 +151,7 @@ foreach ($tabPlanStd as $key1 => $value1) {
 // var_dump($tabPlanStd);
 // var_dump($tabDecHeureSp);
 // exit();
-// 
+//
 ///////////////////////////////////////////// DECOMPTE DES SAMEDIS TRAVAILLES DEPUIS LE DEBUT DE L'ANNEE ///////////////////////////////////////////////////////
 //
 // On recherche les jours fériés depuis le début de l'année
@@ -237,7 +237,7 @@ foreach ($tabPlanStdSamedi as $key => $value) {
     $tabSamediAgent[$i]['nbSamedi'] = $_SESSION['weekNumber'] - $nbSamediFerie;
     $i++;
 }
-// On décrémente le nb de samedis travaillés si dans le réel, on a des samedis du groupe 4 
+// On décrémente le nb de samedis travaillés si dans le réel, on a des samedis du groupe 4
 // cas d'absence de samedis dans le réel alors que l'agent travaille habituellement le samedi
 $i = count($tabSamediAgent);
 foreach ($tabPlanReelSamedi as $key1 => $value1) {
@@ -361,26 +361,26 @@ usort($tabDecTotal, "comparePrenom");
         <div class="calendar-position pull-left">
             <div id="calendarMain" class="calendarMain"></div>
         </div>
-    <script type="text/javascript">
-        //<![CDATA[
-        var myCalendar = new jsSimpleDatePickr();
-        myCalendar.CalAdd({
-            'divId': 'calendarMain',
-            'inputFieldId': 'dateCalendrier',
-            'dateMask': 'AAAA-MM-JJ',
-            'dateCentury': 20,
-            'titleMask': 'M AAAA',
-            'navType': '01',
-            'classTable': 'jsCalendar',
-            'classDay': 'day',
-            'classDaySelected': 'selectedDay',
-            'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-            'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-            'hideOnClick': false,
-            'showOnLaunch': true
-        });
-        //]]>
-    </script>
+        <script type="text/javascript">
+            //<![CDATA[
+            var myCalendar = new jsSimpleDatePickr();
+            myCalendar.CalAdd({
+                'divId': 'calendarMain',
+                'inputFieldId': 'dateCalendrier',
+                'dateMask': 'AAAA-MM-JJ',
+                'dateCentury': 20,
+                'titleMask': 'M AAAA',
+                'navType': '01',
+                'classTable': 'jsCalendar',
+                'classDay': 'day',
+                'classDaySelected': 'selectedDay',
+                'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                'hideOnClick': false,
+                'showOnLaunch': true
+            });
+            //]]>
+        </script>
         <div class="btn-calendar-position">
             <form action="mod_Plan_Reel.php" method="post">
                 <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
@@ -397,13 +397,16 @@ usort($tabDecTotal, "comparePrenom");
 <!-- Affichage des heures de service public et des samedis -->
 <div class="container">
     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-7">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="tableDec">
+            <thead class="theadFH">
             <tr class="color-grey">
                 <th class="thCentre">Personnel</th>
                 <th class="thCentre">Nombre d'heures de service public cette semaine</th>
                 <th class="thCentre">Nombre de samedis travaillés depuis le début de l'année</th>
             </tr>
+            </thead>
             <br/>
+            <tbody>
             <?php foreach ($tabDecTotal as $key => $value) {
                 ?>
                 <tr class="name-size-admin" style="background-color: white">
@@ -418,9 +421,16 @@ usort($tabDecTotal, "comparePrenom");
                         ?> </td>
                 </tr>
             <?php } ?>
+            </tbody>
         </table>
     </div>
 </div>
+
+<!-- Header flottant -->
+<script type="text/javascript">
+    var tables = document.getElementById('tableDec');
+    lrStickyHeader(tables);
+</script>
 
 <!-- jQuery -->
 <script src="../bootstrap/js/jquery.min.js"></script>

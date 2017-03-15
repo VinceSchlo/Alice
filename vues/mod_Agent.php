@@ -6,7 +6,9 @@ require_once('../include/alice_fonctions.php');
 require_once('../include/alice_dao.inc.php');
 ?>
 
-<?php include("../include/doctype.php"); ?>
+<?php
+include("../include/doctype.php"); 
+?>
 <div class="col-xs-8">
     <br />
     <div class="row">
@@ -54,7 +56,6 @@ if (isset($_POST['deleteAgent'])) {
     $agent->setIdAgent($_POST['deleteAgent']);
     // On met à jour la BDD agent
     $agent->deleteAgent();
-    // On rafraîchit le select pour afficher les modifs faites en BDD
 }
 
 if (isset($_POST['insertAgent'])) {
@@ -73,19 +74,22 @@ $tabAgent = $agent->selectAgentByName();
     <!-- Affichage des agents -->
     <div class="container-fluid col-md-12 col-lg-offset-2 col-lg-8">
         <table class="table table-bordered">
-            <tr class="color-grey">
-                <th class="thCentre">Nom</th>
-                <th class="thCentre">Prénom</th>
-                <th class="thCentre">Login</th>
-                <th class="thCentre">Mot de passe</th>
-                <th class="thCentre width-input-agent">Statut</th>
-                <th class="thCentre">Supprimer</th>
-            </tr>
+            <thead class="theadFH">
+                <tr class="color-grey">
+                    <th class="thCentre">Nom</th>
+                    <th class="thCentre">Prénom</th>
+                    <th class="thCentre">Login</th>
+                    <th class="thCentre">Mot de passe</th>
+                    <th class="thCentre width-input-agent">Statut</th>
+                    <th class="thCentre">Supprimer</th>
+                </tr>
+            </thead>
             <br/>
-
-            <?php
-            for ($i = 0; $i < count($tabAgent); $i++) {
-                ?>
+            <tbody>
+                <?php
+                $tabAgentLength = count($tabAgent);
+                for ($i = 0; $i < $tabAgentLength; $i++) {
+                    ?>
                 <form class="form-horizontal" method="POST" action="mod_Agent.php">
                     <tr class="name-size-admin">
                     <input type="hidden" name="idAgentForm<?php echo $i; ?>"
@@ -150,8 +154,15 @@ $tabAgent = $agent->selectAgentByName();
                 </div>
                 </td>
             </form>
+            </tbody>
         </table>
     </div>
+
+    <!-- Header flottant -->
+    <script type="text/javascript">
+        var tables = document.getElementsByTagName('table');
+        lrStickyHeader(tables[0]);
+    </script>
 
     <!-- jQuery -->
     <script src="../bootstrap/js/jquery.min.js"></script>
