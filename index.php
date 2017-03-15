@@ -192,12 +192,12 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
             </div>
         </div>
         <!-- Calendrier -->
-        <div class="col-md-3">
+        <div class="col-md-3 btn-calendar">
             <div class="row">
-                <div class="center-block btn-calendar">
+                <div class="">
                     <div id="calendarMain" class="calendarMain"></div>
                 </div>
-            </div>
+
             <script type="text/javascript">
                 //<![CDATA[
                 var myCalendar = new jsSimpleDatePickr();
@@ -218,8 +218,8 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 });
                 //]]>
             </script>
-            <div class="row">
-                <div class="center-block btn-calendar">
+
+                <div class="">
                     <form action="index.php" method="post">
                         <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
                         <button type="submit" class="btn btn-lg btn-default btn-primary" name="btnCalendar"><span

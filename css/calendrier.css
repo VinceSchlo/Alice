@@ -26,7 +26,7 @@
 	height: 22px;
 	padding-top: 2px;
 	background-color: #2e373f;
-	/*color: #fff;*/
+	color: #fff;
 	border-radius: 5px;
 	border: none;
 }
@@ -63,7 +63,7 @@
 }
 .jsCalendar th{
 	color: #8ba7bf;
-	font-size: 16px;
+	font-size: 12px;
 	font-weight: normal;
 	text-align: center;
 }

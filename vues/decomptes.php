@@ -19,10 +19,10 @@ if (!isset($_POST['precedente']) && !isset($_POST['suivante'])) {
 }
 
 if (isset($_POST['precedente'])) {
-    $_SESSION['weekNumber'] --;
+    $_SESSION['weekNumber']--;
     if ($_SESSION['weekNumber'] < 1) {
         $_SESSION['weekNumber'] = 52;
-        $_SESSION['year'] --; // L'année est au format "2017"
+        $_SESSION['year']--; // L'année est au format "2017"
     }
 }
 
@@ -31,10 +31,10 @@ if (isset($_POST['home'])) {
 }
 
 if (isset($_POST['suivante'])) {
-    $_SESSION['weekNumber'] ++;
+    $_SESSION['weekNumber']++;
     if ($_SESSION['weekNumber'] > 52) {
         $_SESSION['weekNumber'] = 1;
-        $_SESSION['year'] ++; // L'année est au format "2017"
+        $_SESSION['year']++; // L'année est au format "2017"
     }
 }
 //
@@ -86,8 +86,8 @@ if (!empty($tabPlanReel)) { // S'il y a du planning réel
             if (isset($tabPlanReel[$key1])) {
                 // Pour un même agent, le même jour aux même horaires, s'il y a du non SP dans le réel alors qu'il y a du SP dans le std, on supprime l'entrée du std
                 if ($tabPlanReel[$key1]['idAgent'] == $tabPlanStd[$key2]['idAgent'] && convertDateNumJour($tabPlanReel[$key1]['dateReel']) == $tabPlanStd[$key2]['idJour'] &&
-                        $tabPlanReel[$key1]['horaireDeb'] == $tabPlanStd[$key2]['horaireDeb'] && $tabPlanReel[$key1]['horaireFin'] == $tabPlanStd[$key2]['horaireFin'] &&
-                        $tabPlanReel[$key1]['idGroupe'] >= '3' && $tabPlanStd[$key2]['idGroupe'] < '3'
+                    $tabPlanReel[$key1]['horaireDeb'] == $tabPlanStd[$key2]['horaireDeb'] && $tabPlanReel[$key1]['horaireFin'] == $tabPlanStd[$key2]['horaireFin'] &&
+                    $tabPlanReel[$key1]['idGroupe'] >= '3' && $tabPlanStd[$key2]['idGroupe'] < '3'
                 ) {
                     unset($tabPlanStd[$key2]);
                 } else {
@@ -110,12 +110,12 @@ if (!empty($tabPlanReel)) { // S'il y a du planning réel
 $oHoraire = new Horaire();
 $tabHoraires = $oHoraire->selectHoraire();
 //
-// Calcul des heures de service public à partir du tableau $tabPlanStd, 
-// on les enregistre dans un nouveau tableau $tabDecHeureSp en les regroupant par idAgent 
+// Calcul des heures de service public à partir du tableau $tabPlanStd,
+// on les enregistre dans un nouveau tableau $tabDecHeureSp en les regroupant par idAgent
 $tabDecHeureSp = array(array("idAgent" => " ", "nbHeureSp" => " "));
 foreach ($tabPlanStd as $key1 => $value1) {
     // On remplace dans $tabPlanStd, les idHoraires par les vrais horaires de la table horaire en les convertissant en float
-    // via la fonction convertTimeStringToNumber pour faciliter les calculs entre HoraireDebut et HoraireFin. 13:30:00 devient 13.5 
+    // via la fonction convertTimeStringToNumber pour faciliter les calculs entre HoraireDebut et HoraireFin. 13:30:00 devient 13.5
     foreach ($tabHoraires as $key3 => $value3) {
         if ($tabPlanStd[$key1]['horaireDeb'] == $tabHoraires[$key3]['idHoraire']) {
             $tabPlanStd[$key1]['horaireDeb'] = convertTimeStringToNumber($tabHoraires[$key3]['libHoraire']);
@@ -130,7 +130,7 @@ foreach ($tabPlanStd as $key1 => $value1) {
     if ($tabPlanStd[$key1]['idPoste'] == "17" && $tabPlanStd[$key1]['horaireFin'] == 18.5) {
         $nbHeureSp -= 0.5;
     }
-    // on les enregistre dans un nouveau tableau $tabDecHeureSp, les heures de SP en les regroupant par idAgent 
+    // on les enregistre dans un nouveau tableau $tabDecHeureSp, les heures de SP en les regroupant par idAgent
     $compteur = 0;
     foreach ($tabDecHeureSp as $key2 => $value2) {
         if (empty(array_search($tabPlanStd[$key1]['idAgent'], array_column($tabDecHeureSp, 'idAgent'))) && ($key1 == $key2 ||
@@ -151,7 +151,7 @@ foreach ($tabPlanStd as $key1 => $value1) {
 // var_dump($tabPlanStd);
 // var_dump($tabDecHeureSp);
 // exit();
-// 
+//
 ///////////////////////////////////////////// DECOMPTE DES SAMEDIS TRAVAILLES DEPUIS LE DEBUT DE L'ANNEE ///////////////////////////////////////////////////////
 //
 // On recherche les jours fériés depuis le début de l'année
@@ -186,7 +186,7 @@ if (!empty($oPlanReelSamedi)) { // S'il y a du planning réel
                     unset($tabPlanReelSamedi[$key2]);
                 }
                 if (isset($tabPlanReelSamedi[$key2]) && $tabPlanReelSamedi[$key2]['dateReel'] >= $tabJFdebutAnnee[$key1]['dateDebFerie'] &&
-                        $tabPlanReelSamedi[$key2]['dateReel'] <= $tabJFdebutAnnee[$key1]['dateFinFerie']
+                    $tabPlanReelSamedi[$key2]['dateReel'] <= $tabJFdebutAnnee[$key1]['dateFinFerie']
                 ) {
                     unset($tabPlanReelSamedi[$key2]);
                 }
@@ -197,7 +197,7 @@ if (!empty($oPlanReelSamedi)) { // S'il y a du planning réel
     foreach ($tabPlanStdSamedi as $key1 => $value1) {
         foreach ($tabPlanReelSamedi as $key2 => $value2) {
             if (isset($tabPlanReelSamedi[$key2]) && $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanReelSamedi[$key2]['idAgent'] &&
-                    $tabPlanReelSamedi[$key2]['idGroupe'] != '4'
+                $tabPlanReelSamedi[$key2]['idGroupe'] != '4'
             ) {
                 unset($tabPlanReelSamedi[$key2]);
             }
@@ -207,9 +207,9 @@ if (!empty($oPlanReelSamedi)) { // S'il y a du planning réel
     foreach ($tabPlanReelSamedi as $key1 => $value1) {
         foreach ($tabPlanReelSamedi as $key2 => $value2) {
             if (isset($tabPlanReelSamedi[$key2]) && isset($tabPlanReelSamedi[$key1]) &&
-                    $key2 != $key1 &&
-                    $tabPlanReelSamedi[$key1]['idAgent'] == $tabPlanReelSamedi[$key2]['idAgent'] &&
-                    $tabPlanReelSamedi[$key1]['dateReel'] == $tabPlanReelSamedi[$key2]['dateReel']
+                $key2 != $key1 &&
+                $tabPlanReelSamedi[$key1]['idAgent'] == $tabPlanReelSamedi[$key2]['idAgent'] &&
+                $tabPlanReelSamedi[$key1]['dateReel'] == $tabPlanReelSamedi[$key2]['dateReel']
             ) {
                 unset($tabPlanReelSamedi[$key2]);
             }
@@ -221,7 +221,7 @@ if (!empty($tabPlanStdSamedi)) {
     foreach ($tabPlanStdSamedi as $key1 => $value1) {
         foreach ($tabPlanStdSamedi as $key2 => $value2) {
             if (isset($tabPlanStdSamedi[$key2]) && isset($tabPlanStdSamedi[$key1]) &&
-                    $key2 != $key1 && $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanStdSamedi[$key2]['idAgent']
+                $key2 != $key1 && $tabPlanStdSamedi[$key1]['idAgent'] == $tabPlanStdSamedi[$key2]['idAgent']
             ) {
                 unset($tabPlanStdSamedi[$key2]);
             }
@@ -237,7 +237,7 @@ foreach ($tabPlanStdSamedi as $key => $value) {
     $tabSamediAgent[$i]['nbSamedi'] = $_SESSION['weekNumber'] - $nbSamediFerie;
     $i++;
 }
-// On décrémente le nb de samedis travaillés si dans le réel, on a des samedis du groupe 4 
+// On décrémente le nb de samedis travaillés si dans le réel, on a des samedis du groupe 4
 // cas d'absence de samedis dans le réel alors que l'agent travaille habituellement le samedi
 $i = count($tabSamediAgent);
 foreach ($tabPlanReelSamedi as $key1 => $value1) {
@@ -246,9 +246,9 @@ foreach ($tabPlanReelSamedi as $key1 => $value1) {
         if ($tabSamediAgent[$key2]['idAgent'] == $tabPlanReelSamedi[$key1]['idAgent']) {
             // Si le groupe est 4 dans le planning réel, on enlève un samedi
             if ($tabPlanReelSamedi[$key1]['idGroupe'] == '4') {
-                $tabSamediAgent[$key2]['nbSamedi'] --;
+                $tabSamediAgent[$key2]['nbSamedi']--;
             } else { // Sinon, on rajoute un samedi
-                $tabSamediAgent[$key2]['nbSamedi'] ++;
+                $tabSamediAgent[$key2]['nbSamedi']++;
             }
         } else {
             $compteur++;
@@ -313,54 +313,53 @@ usort($tabDecTotal, "comparePrenom");
 //
 ?>
 <body class="background-color-admin">
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-md-offset-4 col-md-4">
-                <table class="table">
-                    <tr>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value=" " name="precedente" class="leftArrow">
-                            </form>
-                        </td>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value=" " name="home" class="house">
-                            </form>
-                        </td>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value=" " name="suivante" class="rightArrow">
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="center-block border-table">
-                <h2>Temps de service public et samedis travaillés</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="center-block">
-                <h3>
-                    <?php
-                    if ($_SESSION['weekNumber'] < 10) {
-                        echo "Semaine n°" . "0" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-                    } else {
-                        echo "Semaine n°" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
-                    }
-                    ?>
-                </h3>
-            </div>
+<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4">
+            <table class="table">
+                <tr>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="precedente" class="leftArrow">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="home" class="house">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="submit" value=" " name="suivante" class="rightArrow">
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
-    <div class="col-md-2">
-        <div class="row">
-            <div class="pull-right">
-                <div id="calendarMain" class="calendarMain"></div>
-            </div>
+    <div class="row">
+        <div class="center-block border-table">
+            <h2>Temps de service public et samedis travaillés</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center-block">
+            <h3>
+                <?php
+                if ($_SESSION['weekNumber'] < 10) {
+                    echo "Semaine n°" . "0" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+                } else {
+                    echo "Semaine n°" . $_SESSION['weekNumber'] . " du " . convertDateUsFr($tabDatesJoursSemaines[1]) . " au " . convertDateUsFr($tabDatesJoursSemaines[6]);
+                }
+                ?>
+            </h3>
+        </div>
+    </div>
+</div>
+<div class="col-md-3 no-margin">
+    <div class="row">
+        <div class="calendar-position pull-left">
+            <div id="calendarMain" class="calendarMain"></div>
         </div>
         <script type="text/javascript">
             //<![CDATA[
@@ -382,68 +381,67 @@ usort($tabDecTotal, "comparePrenom");
             });
             //]]>
         </script>
-        <div class="row">
-            <div class="col-md-offset-6">
-                <form action="mod_Plan_Reel.php" method="post">
-                    <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
-                    <button type="submit" class="btn btn-primary" name="btnCalendar"><span
-                            class="glyphicon glyphicon-fast-forward"></span> Allez à
-                    </button>
-                </form>
-            </div>
+        <div class="btn-calendar-position">
+            <form action="mod_Plan_Reel.php" method="post">
+                <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
+                <button type="submit" class="btn btn-primary" name="btnCalendar"><span
+                        class="glyphicon glyphicon-fast-forward"></span> Allez à
+                </button>
+            </form>
         </div>
     </div>
+</div>
 
-    <?php include("../include/header_admin.php"); ?>
+<?php include("../include/header_admin.php"); ?>
 
-    <!-- Affichage des heures de service public et des samedis -->
-    <div class="container">
-        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-7">
-            <table class="table table-bordered" id="tableDec">
-                <thead class="theadFH">
-                    <tr class="color-grey">
-                        <th class="thCentre">Personnel</th>
-                        <th class="thCentre">Nombre d'heures de service public cette semaine</th>
-                        <th class="thCentre">Nombre de samedis travaillés depuis le début de l'année</th>
-                    </tr>
-                </thead>
-                <br/>
-                <tbody>
-                    <?php foreach ($tabDecTotal as $key => $value) {
-                        ?>
-                        <tr class="name-size-admin" style="background-color: white">
-                            <td> <?php echo $tabDecTotal[$key]['prenom']; ?> </td>
-                            <td class="thCentre"> <?php echo $tabDecTotal[$key]['nbHeureSp'] . " h"; ?> </td>
-                            <td class="thCentre"> <?php
-                                if ($tabDecTotal[$key]['nbSamedi'] <= 1) {
-                                    echo $tabDecTotal[$key]['nbSamedi'] . " samedi";
-                                } else {
-                                    echo $tabDecTotal[$key]['nbSamedi'] . " samedis";
-                                }
-                                ?> </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
+<!-- Affichage des heures de service public et des samedis -->
+<div class="container">
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-7">
+        <table class="table table-bordered" id="tableDec">
+            <thead class="theadFH">
+            <tr class="color-grey">
+                <th class="thCentre">Personnel</th>
+                <th class="thCentre">Nombre d'heures de service public cette semaine</th>
+                <th class="thCentre">Nombre de samedis travaillés depuis le début de l'année</th>
+            </tr>
+            </thead>
+            <br/>
+            <tbody>
+            <?php foreach ($tabDecTotal as $key => $value) {
+                ?>
+                <tr class="name-size-admin" style="background-color: white">
+                    <td> <?php echo $tabDecTotal[$key]['prenom']; ?> </td>
+                    <td class="thCentre"> <?php echo $tabDecTotal[$key]['nbHeureSp'] . " h"; ?> </td>
+                    <td class="thCentre"> <?php
+                        if ($tabDecTotal[$key]['nbSamedi'] <= 1) {
+                            echo $tabDecTotal[$key]['nbSamedi'] . " samedi";
+                        } else {
+                            echo $tabDecTotal[$key]['nbSamedi'] . " samedis";
+                        }
+                        ?> </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
     </div>
+</div>
 
-    <!-- Header flottant -->
-    <script type="text/javascript">
-        var tables = document.getElementById('tableDec');
-        lrStickyHeader(tables);
-    </script>
+<!-- Header flottant -->
+<script type="text/javascript">
+    var tables = document.getElementById('tableDec');
+    lrStickyHeader(tables);
+</script>
 
-    <!-- jQuery -->
-    <script src="../bootstrap/js/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="../bootstrap/js/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bootstrap/js/metisMenu.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../bootstrap/js/metisMenu.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../bootstrap/js/sb-admin-2.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="../bootstrap/js/sb-admin-2.js"></script>
 </body>
 </html>

@@ -3,9 +3,9 @@ if (!isset($_SESSION['idAgent'])) {
     header("Location:../index.php");
 }
 ?>
-<div class="col-xs-2">
+<div class="col-xs-2 navbar-fixed pull-right">
     <!-- Navigation -->
-    <nav class="navbar navbar-static-top background-color-admin" role="navigation">
+    <nav class="navbar navbar-static-top background-color-admin navbar-width pull-right" role="navigation">
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">

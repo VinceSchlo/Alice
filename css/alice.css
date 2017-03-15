@@ -129,14 +129,30 @@ h2, h3, h4, p, .thCentre {
     overflow-y: auto;
 }
 
-.theadFH {
-    /* 
-       position: relative;
-      opacity: 0.9; 
-       left: -2px; */
+
+.calendar-position {
+    position: relative;
+    margin-top: 15px;
+    margin-left: 10px;
 }
 
-.btn-calendar{
-    padding-top: 1%;
-    padding-bottom: 1%;
+
+.btn-calendar-position{
+    position: fixed;
+    margin-top: 30px;
+    margin-left: 215px;
+    margin-right: 0;
 }
+
+.navbar-fixed{
+    position: static;
+    top: 0;
+    right: 0;
+}
+
+.no-margin{
+    margin-right: -160px;
+}
+/*.navbar-width{*/
+    /*max-width: 155px;*/
+/*}*/
