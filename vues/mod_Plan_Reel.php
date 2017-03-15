@@ -505,7 +505,7 @@ $time = $oHoraire->selectHoraire();
 </div>
 
 <!-- Header flottant -->
-<script>
+<script type="text/javascript">
     var tables = document.getElementById('table2');
     lrStickyHeader(tables);
 </script>

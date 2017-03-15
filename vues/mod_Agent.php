@@ -6,7 +6,9 @@ require_once('../include/alice_fonctions.php');
 require_once('../include/alice_dao.inc.php');
 ?>
 
-<?php include("../include/doctype.php"); ?>
+<?php
+include("../include/doctype.php"); 
+?>
 <div class="col-xs-8">
     <br />
     <div class="row">
@@ -54,7 +56,6 @@ if (isset($_POST['deleteAgent'])) {
     $agent->setIdAgent($_POST['deleteAgent']);
     // On met à jour la BDD agent
     $agent->deleteAgent();
-    // On rafraîchit le select pour afficher les modifs faites en BDD
 }
 
 if (isset($_POST['insertAgent'])) {
@@ -86,7 +87,8 @@ $tabAgent = $agent->selectAgentByName();
             <br/>
             <tbody>
                 <?php
-                for ($i = 0; $i < count($tabAgent); $i++) {
+                $tabAgentLength = count($tabAgent);
+                for ($i = 0; $i < $tabAgentLength; $i++) {
                     ?>
                 <form class="form-horizontal" method="POST" action="mod_Agent.php">
                     <tr class="name-size-admin">
@@ -157,7 +159,7 @@ $tabAgent = $agent->selectAgentByName();
     </div>
 
     <!-- Header flottant -->
-    <script>
+    <script type="text/javascript">
         var tables = document.getElementsByTagName('table');
         lrStickyHeader(tables[0]);
     </script>

@@ -429,7 +429,7 @@ usort($tabDecTotal, "comparePrenom");
     </div>
 
     <!-- Header flottant -->
-    <script>
+    <script type="text/javascript">
         var tables = document.getElementById('tableDec');
         lrStickyHeader(tables);
     </script>
