@@ -132,9 +132,8 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     $agent = $connexion->connexionAgent();
 // Si l'utlisateur n'éxiste pas retour a l'index
     if (!isset($agent)) {
-        //Si idientifiant ou mdp faux alert JAVAscript
+        //Si identifiant ou mdp faux alert JAVAscript
         ?>
-        <<<<<<< HEAD
         <script>alert('Mauvais login ou mdp')</script> <?php
     } else {
 // Si l'utilisateur existe garnir la variable $_SESSION
