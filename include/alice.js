@@ -25,7 +25,7 @@ function activeLoginMdpForm() {
         document.getElementById("divMdp2").style.display = "none";
     }
 }
-// Fonction qui vérifie que l'utilisateur rentre un nom ou un prénom de longueur comprise entre 2 et 20 caractères
+// Fonction qui vérifie que l'utilisateur rentre un nom, un prénom et un login et un mdp de longueur comprise entre 2 et 20 caractères
 function verifNom(champ) {
     if (champ.value.length < 3 || champ.value.length > 20) {
         surligne(champ, true);
@@ -35,33 +35,35 @@ function verifNom(champ) {
         return true;
     }
 }
-
+// Fonction qui vérifie que le formulaire d'ajout d'un nouvel agent soit bien rempli
 function verifAddAgentForm(f) {
     var nomOK = verifNom(f.nomForm);
     var prenomOK = verifNom(f.prenomForm);
     var statut = document.getElementById("divLogin").style.display;
     if (!nomOK || !prenomOK) {
-        alert("Veuillez saisir un nom et un prénom\nde longueur supérieure à 2 caractères\net inférieure à 20 caractères");
+        alert("Veuillez saisir un nom et un prénom\nde longueur supérieure à 2 caractères\net inférieure ou égale à 20 caractères");
         return false;
     } else {
         if (statut === "block") {
             var loginOK = verifNom(f.loginForm);
             if (!loginOK) {
-                alert("Veuillez saisir un identifiant de connexion\nde longueur supérieure à 2 caractères\net inférieure à 20 caractères");
+                alert("Veuillez saisir un identifiant de connexion\nde longueur supérieure à 2 caractères\net inférieure ou égale à 20 caractères");
                 return false;
             } else {
+                var mdp1OK = verifNom(f.mdp1Form);
                 var mdp1 = document.getElementById("mdp1").value;
-                var mdp2 = document.getElementById("mdp2").value;
-                if (!mdp1 || !mdp2) {
-                    alert("Veuillez saisir un mot de passe\nde longueur supérieure à 2 caractères\net inférieure à 20 caractères");
+                var mdp2OK = verifNom(f.mdp2Form);
+                var mdp2 = document.getElementById("mdp2").value;              
+                if (!mdp1OK || !mdp2OK) {
+                    alert("Veuillez saisir un mot de passe\nde longueur supérieure à 2 caractères\net inférieure ou égale à 20 caractères");
                     return false;
                 }
-
                 if (mdp1 !== mdp2) {
                     alert("Les 2 mots de passe sont différents");
+                    surligne(f.mdp1Form, true);
+                    surligne(f.mdp2Form, true);
                     return false;
                 }
-
                 if (loginOK && mdp1 === mdp2) {
                     return true;
                 }

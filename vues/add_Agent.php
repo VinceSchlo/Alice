@@ -93,14 +93,14 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-4 name-size-admin" id="divMdp1" style='display:none;'>
                     <input size="20" type="password" id="mdp1" name="mdp1Form" placeholder="Mot de passe"
-                           class="form-control input-md">
+                           class="form-control input-md" onblur="verifNom(this)"/>
                 </div>
             </div>
             <!-- Saisie du MDP2 -->
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-4 name-size-admin" id="divMdp2" style='display:none;'>
                     <input size="20" type="password" id="mdp2" name="mdp2Form" placeholder="Confirmez le mot de passe"
-                           class="form-control input-md">
+                           class="form-control input-md" onblur="verifNom(this)"/>
                 </div>
             </div>
             <!-- Button (Double) -->
