@@ -149,14 +149,17 @@ $tabFerie = $ferie->selectAllFerie();
     <!-- Affichage des jours fériés -->
     <div class="container-fluid col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-10">
         <div class="col-lg-7">
-            <table class="table table-bordered">
-                <tr class="color-grey">
-                    <th class="thCentre">Jours fériés</th>
-                    <th class="thCentre">Date de début</th>
-                    <th class="thCentre">Date de fin</th>
-                </tr>
+            <table class="table table-bordered" id="tableJF">
+                <thead>
+                    <tr class="color-grey">
+                        <th class="thCentre">Jours fériés</th>
+                        <th class="thCentre">Date de début</th>
+                        <th class="thCentre">Date de fin</th>
+                    </tr>
+                </thead>
                 <br/>
-                <!-- Début du formulaire des jours fériés -->
+                <tbody>
+                    <!-- Début du formulaire des jours fériés -->
                 <form class="form-horizontal" id="formJF" name="formJF" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                     <?php
                     $j = 0;
@@ -232,9 +235,17 @@ $tabFerie = $ferie->selectAllFerie();
                         </button>
                     </div>
                 </form>
+                </tbody>
             </table>
         </div>
     </div>
+
+    <!-- Header flottant -->
+    <script type="text/javascript">
+        var table = document.getElementById('tableJF');
+        lrStickyHeader(table);
+    </script>
+
     <!-- jQuery -->
     <script src="../bootstrap/js/jquery.min.js"></script>
 

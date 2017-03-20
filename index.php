@@ -134,7 +134,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     if (!isset($agent)) {
         //Si identifiant ou mdp faux alert JAVAscript
         ?>
-        <script>alert('Mauvais login ou mdp')</script> <?php
+        <script>alert('Mauvais login ou mot de passe,\nveuillez réessayer')</script> <?php
     } else {
 // Si l'utilisateur existe garnir la variable $_SESSION
         $_SESSION = $agent;

@@ -29,8 +29,7 @@ if (!isset($_SESSION['idAgent'])) {
                     </li>
 
                     <li class="divider"></li>
-                    <li><a href="../vues/alice_logout.php"><i class="fa fa-sign-out fa-fw"></i> Se
-                            déconnecter</a>
+                    <li><a href="../vues/alice_logout.php"><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>
                     </li>
                 </ul>
             </li> 
