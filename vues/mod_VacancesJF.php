@@ -106,7 +106,7 @@ $tabFerie = $ferie->selectAllFerie();
                                        value="<?php echo convertDateUsFr($tabVacances[$i]['dateFinVac']); ?>"
                                        onKeyUp="masqueSaisieDate(this.form.dateFinForm<?php echo $i; ?>)"
                                        onchange="verifDateFinVac<?php echo $i; ?>()">
-                                <span class="help-block" style="display: none" id="spanVac<?php echo $i; ?>">La date de fin doit être supérieure<br/>à la date de début</span>
+                                <span class="help-block" style="display: none" id="spanVac<?php echo $i; ?>">La date de fin doit être<br/>supérieure à la date de début</span>
                         </td>
                         <script type="text/javascript">
                             function verifDateFinVac<?php echo $i; ?>() {
@@ -194,7 +194,7 @@ $tabFerie = $ferie->selectAllFerie();
                                        id="dateFinFerie<?php echo $i; ?>"
                                        onKeyUp="masqueSaisieDate(this.form.dateFinForm<?php echo $i; ?>)"
                                        onchange="verifDateFinFerie<?php echo $i; ?>()">
-                                <span class="help-block" style="display: none" id="spanFerie<?php echo $i; ?>">La date de fin doit être supérieure à la date de début</span>
+                                <span class="help-block" style="display: none" id="spanFerie<?php echo $i; ?>">La date de fin doit être<br/>supérieure à la date de début</span>
                             </div>
                         </td>
                         <script type="text/javascript">
