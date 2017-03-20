@@ -56,16 +56,16 @@ if (isset($_POST['nomForm']) && isset($_POST['prenomForm']) && isset($_POST['ins
             <div class="form-group">
                 <label class="col-md-4 control-label" for="nom">Nom</label>
                 <div class="col-md-4 name-size-admin">
-                    <input size="20" type="text" id="nom" name="nomForm" placeholder="Nom" class="form-control input-md"
-                           onblur="verifNom(this)"/>
+                    <input size="20" type="text" id="nom" name="nomForm" placeholder="Nom" 
+                           class="form-control input-md" onblur="verifNom(this)"/>
                 </div>
             </div>
             <!-- Prénom de l'agent-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="prenom">Prénom</label>
                 <div class="col-md-4 name-size-admin">
-                    <input size="20" type="text" id="prenom" name="prenomForm" placeholder="Prénom" class="form-control input-md"
-                           onblur="verifNom(this)"/>
+                    <input size="20" type="text" id="prenom" name="prenomForm" placeholder="Prénom" 
+                           class="form-control input-md" onblur="verifNom(this)"/>
                 </div>
             </div>
             <!-- 2 Checkboxes statut -->

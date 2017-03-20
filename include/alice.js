@@ -60,7 +60,6 @@ function verifAddAgentForm(f) {
                 }
                 if (mdp1 !== mdp2) {
                     alert("Les 2 mots de passe sont différents");
-                    surligne(f.mdp1Form, true);
                     surligne(f.mdp2Form, true);
                     return false;
                 }
