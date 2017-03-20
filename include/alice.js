@@ -1,18 +1,18 @@
 // Initialisation d'une variable globale pour la vérification des dates dans mod_VacancesJF.php
 erreurDate = false;
 
-//fonction pour activer une fenétre de suppression
+// Fonction pour activer une fenétre de suppression
 function confirmDelete() {
     return confirm("Etes-vous sûr de vouloir supprimer ?");
 }
-
+// Fonction qui colore en rouge le fond du champ de saisie dans le cas d'une erreur
 function surligne(champ, erreur) {
     if (erreur)
         champ.style.backgroundColor = "#fba";
     else
         champ.style.backgroundColor = "";
 }
-
+// Fonction qui active le formulaire avec le login et les mdp dans le cas d'un nouvel agent déclaré comme admin
 function activeLoginMdpForm() {
     var statut = document.getElementById("divLogin").style.display;
     if (statut === "none") {
@@ -125,7 +125,7 @@ function masqueSaisieDate(obj) {
 }
 // Fonction qui bloque l'enregistrement dans la BDD si les dates de début et de fin ne correspondent pas
 function verifFormDate() {
-    if (erreurDate) {
+    if (erreurDate) { // variable globale définie en haut
         alert("Certaines dates ne sont pas correctes,\nveuillez les vérifier");
         return false;
     } else {
@@ -134,7 +134,6 @@ function verifFormDate() {
 }
 // Fonction pour convertir le string du formulaire date en une date au format jj/mm/aaaa
 function stringToDate(_date, _format, _delimiter) {
-
     var formatLowerCase = _format.toLowerCase();
     var formatItems = formatLowerCase.split(_delimiter);
     var dateItems = _date.split(_delimiter);
