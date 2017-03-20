@@ -162,11 +162,15 @@ require_once('../include/alice_dao.inc.php');
                            value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
 
                     <?php
+                        $couleur = null;
                     for ($k = 0; $k < count($poste); $k++) {
                         if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
                             $couleur = $tabPlanStd[$i]['coulGroupe'];
                         }
                     }
+                        if($couleur == null){
+                            $couleur = "rgba(222, 39, 20, 0.8)";
+                        }
                     ?>
 
                     <!-- Liste contenant tout les postes -->

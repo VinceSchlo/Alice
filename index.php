@@ -134,7 +134,6 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
     if (!isset($agent)) {
         //Si idientifiant ou mdp faux alert JAVAscript
         ?>
-        <<<<<<< HEAD
         <script>alert('Mauvais login ou mdp')</script> <?php
     } else {
 // Si l'utilisateur existe garnir la variable $_SESSION
@@ -194,7 +193,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
         <!-- Calendrier -->
         <div class="col-md-3 btn-calendar">
             <div class="row">
-                <div class="">
+                <div class="calendar-position pull-left">
                     <div id="calendarMain" class="calendarMain"></div>
                 </div>
 
@@ -219,7 +218,7 @@ if (isset($_POST['login']) && isset($_POST['mdp'])) {
                 //]]>
             </script>
 
-                <div class="">
+                <div class="calendar-position">
                     <form action="index.php" method="post">
                         <input type="text" hidden id="dateCalendrier" name="dateCalendrier">
                         <button type="submit" class="btn btn-lg btn-default btn-primary" name="btnCalendar"><span

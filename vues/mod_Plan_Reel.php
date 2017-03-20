@@ -46,11 +46,11 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
         $j = 0;
         while ($j < count($tabPlanStd)) {
             if ($_POST['idAgentForm' . $i] == $tabPlanStd[$j]['idAgent'] &&
-                    $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
-                    $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
-                    $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
-                    $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste'] &&
-                    $_POST['idPosteForm' . $i] != "Férié"
+                $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
+                $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
+                $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
+                $_POST['idPosteForm' . $i] != $tabPlanStd[$j]['idPoste'] &&
+                $_POST['idPosteForm' . $i] != "Férié"
             ) {
                 $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
                 $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
@@ -69,11 +69,11 @@ if (isset($_POST['enregistrer'])) { // Cas du bouton orange "enregistrer"
                 }
                 $j = count($tabPlanStd);
             } else if ($_POST['idAgentForm' . $i] == $tabPlanStd[$j]['idAgent'] &&
-                    $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
-                    $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
-                    $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
-                    $_POST['idPosteForm' . $i] == $tabPlanStd[$j]['idPoste'] &&
-                    $_POST['idPosteForm' . $i] != "Férié"
+                $_POST['idJourForm' . $i] == $tabPlanStd[$j]['idJour'] &&
+                $_POST['horaireDebForm' . $i] == $tabPlanStd[$j]['horaireDeb'] &&
+                $_POST['horaireFinForm' . $i] == $tabPlanStd[$j]['horaireFin'] &&
+                $_POST['idPosteForm' . $i] == $tabPlanStd[$j]['idPoste'] &&
+                $_POST['idPosteForm' . $i] != "Férié"
             ) {
                 $oPlanReel->setIdAgent($_POST['idAgentForm' . $i]);
                 $oPlanReel->setDateReel($_POST['dateReelForm' . $i]);
@@ -95,10 +95,9 @@ if (isset($_POST['annuler'])) {// Cas du bouton vert "annuler"
     // die('<META HTTP-equiv="refresh" content=0;URL=admin_modif_plan.php>');
 }
 
-$oAgent = new Agent();
-$user = $oAgent->selectPrenomAgent();
-$plan = new PlanStd();
-$tabPlanStd = $plan->selectPlanStd();
+$oPlan = new PlanStd();
+$tabPlanStd = $oPlan->selectPlanStd();
+$listePlanStd = $oPlan->selectPlanStd();
 $compte = 0;
 $t = 10;
 
@@ -108,10 +107,10 @@ if (!isset($_POST['precedente']) && !isset($_POST['suivante']) && !isset($_POST[
 }
 
 if (isset($_POST['precedente'])) {
-    $_SESSION['weekNumber'] --;
+    $_SESSION['weekNumber']--;
     if ($_SESSION['weekNumber'] < 1) {
         $_SESSION['weekNumber'] = 52;
-        $_SESSION['year'] --; // L'année est au format "2017"
+        $_SESSION['year']--; // L'année est au format "2017"
     }
 }
 
@@ -120,10 +119,10 @@ if (isset($_POST['home'])) {
 }
 
 if (isset($_POST['suivante'])) {
-    $_SESSION['weekNumber'] ++;
+    $_SESSION['weekNumber']++;
     if ($_SESSION['weekNumber'] > 52) {
         $_SESSION['weekNumber'] = 1;
-        $_SESSION['year'] ++; // L'année est au format "2017"
+        $_SESSION['year']++; // L'année est au format "2017"
     }
 }
 
@@ -229,26 +228,26 @@ $time = $oHoraire->selectHoraire();
             <div id="calendarMain" class="calendarMain"></div>
         </div>
 
-    <script type="text/javascript">
-        //<![CDATA[
-        var myCalendar = new jsSimpleDatePickr();
-        myCalendar.CalAdd({
-            'divId': 'calendarMain',
-            'inputFieldId': 'dateCalendrier',
-            'dateMask': 'AAAA-MM-JJ',
-            'dateCentury': 20,
-            'titleMask': 'M AAAA',
-            'navType': '01',
-            'classTable': 'jsCalendar',
-            'classDay': 'day',
-            'classDaySelected': 'selectedDay',
-            'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-            'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-            'hideOnClick': false,
-            'showOnLaunch': true
-        });
-        //]]>
-    </script>
+        <script type="text/javascript">
+            //<![CDATA[
+            var myCalendar = new jsSimpleDatePickr();
+            myCalendar.CalAdd({
+                'divId': 'calendarMain',
+                'inputFieldId': 'dateCalendrier',
+                'dateMask': 'AAAA-MM-JJ',
+                'dateCentury': 20,
+                'titleMask': 'M AAAA',
+                'navType': '01',
+                'classTable': 'jsCalendar',
+                'classDay': 'day',
+                'classDaySelected': 'selectedDay',
+                'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                'hideOnClick': false,
+                'showOnLaunch': true
+            });
+            //]]>
+        </script>
 
         <div class="btn-calendar-position">
             <form action="mod_Plan_Reel.php" method="post">
@@ -266,85 +265,86 @@ $time = $oHoraire->selectHoraire();
 <div class="container-fluid background-color-admin">
     <table class="table border-table" id="table2">
         <thead class="theadFHPlan">
-            <!--            Affichage des jours-->
-            <tr class="color-grey size-hour">
-                <th class=" border-right"></th>
-                <th class="text-center border-right" colspan="2">
-                    Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="3">
-                    Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
-                <th class="text-center border-right" colspan="2">
-                    Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
-            </tr>
-            <!--            Affichage des horaires -->
-            <tr class="color-grey border-right name-size-admin">
-                <td class="border-right">Personnel</td>
-                <?php
-                $oHoraire = new Horaire();
-                $time = $oHoraire->selectHoraire();
+        <!--            Affichage des jours-->
+        <tr class="color-grey size-hour">
+            <th class=" border-right"></th>
+            <th class="text-center border-right" colspan="2">
+                Lundi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[1]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Mardi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[2]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="3">
+                Mercredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[3]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Jeudi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[4]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Vendredi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[5]), 0, 5) ?></th>
+            <th class="text-center border-right" colspan="2">
+                Samedi <?php echo substr(convertDateUsFr($tabDatesJoursSemaines[6]), 0, 5) ?></th>
+        </tr>
+        <!--            Affichage des horaires -->
+        <tr class="color-grey border-right name-size-admin">
+            <td class="border-right">Personnel</td>
+            <?php
+            $oHoraire = new Horaire();
+            $time = $oHoraire->selectHoraire();
 
-                for ($i = 0; $i < 4; $i++) {
-                    if ($i % 2 == 0) {
-                        echo "<td class=\"text-center border-top-bot\">";
-                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[3]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
-                    if ($i % 2 != 0) {
-                        echo "<td class=\"text-center border-right\">";
-                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[6]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
+            for ($i = 0; $i < 4; $i++) {
+                if ($i % 2 == 0) {
+                    echo "<td class=\"text-center border-top-bot\">";
+                    echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[3]['libHoraire'], 0, 5);
+                    echo "</td>";
                 }
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[0]['libHoraire'], 0, 5), " - ";
-                echo substr($time[2]['libHoraire'], 0, 5);
-                echo "</td>";
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[2]['libHoraire'], 0, 5), " - ";
-                echo substr($time[3]['libHoraire'], 0, 5);
-                echo "</td>";
-                echo "<td class=\"text-center border-right\">";
-                echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                echo substr($time[6]['libHoraire'], 0, 5);
-                echo "</td>";
-                for ($i = 0; $i < 4; $i++) {
-                    if ($i % 2 == 0) {
-                        echo "<td class=\"text-center border-top-bot\">";
-                        echo substr($time[1]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[3]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
-                    if ($i % 2 != 0) {
-                        echo "<td class=\"text-center border-right\">";
-                        echo substr($time[3]['libHoraire'], 0, 5), " - ";
-                        echo substr($time[6]['libHoraire'], 0, 5);
-                        echo "</td>";
-                    }
+                if ($i % 2 != 0) {
+                    echo "<td class=\"text-center border-right\">";
+                    echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[6]['libHoraire'], 0, 5);
+                    echo "</td>";
                 }
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[0]['libHoraire'], 0, 5), " - ";
-                echo substr($time[2]['libHoraire'], 0, 5);
-                echo "</td>";
-                echo "<td class=\"text-center border-top-bot\">";
-                echo substr($time[2]['libHoraire'], 0, 5), " - ";
-                echo substr($time[4]['libHoraire'], 0, 5);
-                echo "</td>";
-                ?>
-            </tr>
+            }
+            echo "<td class=\"text-center border-top-bot\">";
+            echo substr($time[0]['libHoraire'], 0, 5), " - ";
+            echo substr($time[2]['libHoraire'], 0, 5);
+            echo "</td>";
+            echo "<td class=\"text-center border-top-bot\">";
+            echo substr($time[2]['libHoraire'], 0, 5), " - ";
+            echo substr($time[3]['libHoraire'], 0, 5);
+            echo "</td>";
+            echo "<td class=\"text-center border-right\">";
+            echo substr($time[3]['libHoraire'], 0, 5), " - ";
+            echo substr($time[6]['libHoraire'], 0, 5);
+            echo "</td>";
+            for ($i = 0; $i < 4; $i++) {
+                if ($i % 2 == 0) {
+                    echo "<td class=\"text-center border-top-bot\">";
+                    echo substr($time[1]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[3]['libHoraire'], 0, 5);
+                    echo "</td>";
+                }
+                if ($i % 2 != 0) {
+                    echo "<td class=\"text-center border-right\">";
+                    echo substr($time[3]['libHoraire'], 0, 5), " - ";
+                    echo substr($time[6]['libHoraire'], 0, 5);
+                    echo "</td>";
+                }
+            }
+            echo "<td class=\"text-center border-top-bot\">";
+            echo substr($time[0]['libHoraire'], 0, 5), " - ";
+            echo substr($time[2]['libHoraire'], 0, 5);
+            echo "</td>";
+            echo "<td class=\"text-center border-top-bot\">";
+            echo substr($time[2]['libHoraire'], 0, 5), " - ";
+            echo substr($time[4]['libHoraire'], 0, 5);
+            echo "</td>";
+            ?>
+        </tr>
         </thead>
         <tbody>
         <form class="form-horizontal background-color-admin" action="mod_Plan_Reel.php" method="post">
             <?php
             $oPoste = new Poste();
             $poste = $oPoste->selectAllPoste();
+            $nbrPoste = count($poste);
             $i = 0;
             $l = 0;
             while ($i < count($tabPlanStd)) {
@@ -374,117 +374,124 @@ $time = $oHoraire->selectHoraire();
                             case 0:
                             case 1:
                                 ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[1]; ?>">
-                                   <?php
-                                   break;
-                               case 2:
-                               case 3:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[2]; ?>">
-                                   <?php
-                                   break;
-                               case 4:
-                               case 5:
-                               case 6:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[3]; ?>">
-                                   <?php
-                                   break;
-                               case 7:
-                               case 8:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[4]; ?>">
-                                   <?php
-                                   break;
-                               case 9:
-                               case 10:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[5]; ?>">
-                                   <?php
-                                   break;
-                               case 11:
-                               case 12:
-                                   ?>
-                            <input type="hidden" name="dateReelForm<?php echo $l; ?>"
-                                   value="<?php echo $tabDatesJoursSemaines[6]; ?>">
-                                   <?php
-                                   break;
-                           }
-                           ?>
-
-                    <input type="hidden" name="idAgentForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
-                    <input type="hidden" name="idJourForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['idJour']; ?>">
-                    <input type="hidden" name="horaireDebForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['horaireDeb']; ?>">
-                    <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
-                           value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
-
-                    <?php
-                    switch ($tabPlanStd[$i]['libPoste']) {
-                        case "Férié":
-                            ?>
-                            <input type="hidden" name="idPosteForm<?php echo $l; ?>"
-                                   value="<?php echo $tabPlanStd[$i]['libPoste']; ?>">
-
-                            <select disabled style="width: 100%; font-weight: bold" class="form-control">
-
-                                <option value="<?php echo $tabPlanStd[$i]['libPoste']; ?>"
-                                        selected=""><?php echo $tabPlanStd[$i]['libPoste']; ?></option>
-                            </select>
-                            <?php
-                            break;
-                        default:
-                            for ($k = 0; $k < count($poste); $k++) {
-                                if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                                    $couleur = $tabPlanStd[$i]['coulGroupe'];
-                                }
-                            }
-                            ?>
-                            <!-- Liste contenant tout les postes -->
-                            <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
-                                    class="form-control" onchange="changeColor<?php echo $l; ?>()"
-                                    style="background-color: <?php echo $couleur ?>; font-weight: bold">
-
-                                <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
-                                <script type="text/javascript">
-                                    function changeColor<?php echo $l; ?>() {
-                                        var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
-                                        selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
-                                    }
-                                </script>
-
-                                <!-- Pour mettre le poste attribué en "selected" -->
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[1]; ?>">
                                 <?php
-                                for ($k = 0; $k < count($poste); $k++) {
-                                    if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
-                                        ?>
+                                break;
+                            case 2:
+                            case 3:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[2]; ?>">
+                                <?php
+                                break;
+                            case 4:
+                            case 5:
+                            case 6:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[3]; ?>">
+                                <?php
+                                break;
+                            case 7:
+                            case 8:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[4]; ?>">
+                                <?php
+                                break;
+                            case 9:
+                            case 10:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[5]; ?>">
+                                <?php
+                                break;
+                            case 11:
+                            case 12:
+                                ?>
+                                <input type="hidden" name="dateReelForm<?php echo $l; ?>"
+                                       value="<?php echo $tabDatesJoursSemaines[6]; ?>">
+                                <?php
+                                break;
+                        }
+                        ?>
 
-                                        <option value="<?php echo $poste[$k]['idPoste']; ?>"
-                                                selected=""
-                                                style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
-                                            <?php } else { ?>
-                                        <option value="<?php echo $poste[$k]['idPoste']; ?>"
-                                                style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
-                                                <?php
-                                            }
+                        <input type="hidden" name="idAgentForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['idAgent']; ?>">
+                        <input type="hidden" name="idJourForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['idJour']; ?>">
+                        <input type="hidden" name="horaireDebForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['horaireDeb']; ?>">
+                        <input type="hidden" name="horaireFinForm<?php echo $l; ?>"
+                               value="<?php echo $tabPlanStd[$i]['horaireFin']; ?>">
+
+                        <?php
+                        switch ($tabPlanStd[$i]['libPoste']) {
+                            case "Férié":
+                                ?>
+                                <input type="hidden" name="idPosteForm<?php echo $l; ?>"
+                                       value="<?php echo $tabPlanStd[$i]['libPoste']; ?>">
+
+                                <select disabled style="width: 100%; font-weight: bold" class="form-control">
+
+                                    <option value="<?php echo $tabPlanStd[$i]['libPoste']; ?>"
+                                            selected=""><?php echo $tabPlanStd[$i]['libPoste']; ?></option>
+                                </select>
+                                <?php
+                                break;
+                            default:
+                                for ($k = 0; $k < $nbrPoste; $k++) {
+                                    if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                        $couleur = $tabPlanStd[$i]['coulGroupe'];
+                                    }
+                                }
+                                ?>
+                                <!-- Liste contenant tout les postes -->
+                                <select id="selectPlan<?php echo $l; ?>" name="idPosteForm<?php echo $l; ?>"
+                                        class="form-control" onchange="changeColor<?php echo $l; ?>()"
+                                        style="background-color: <?php echo $couleur ?>; font-weight: bold">
+
+                                    <!-- Javascript pour changer la couleur du select en fonction du poste choisi -->
+                                    <script type="text/javascript">
+                                        function changeColor<?php echo $l; ?>() {
+                                            var selectPlan = document.getElementById("selectPlan<?php echo $l; ?>");
+                                            selectPlan.style.backgroundColor = selectPlan.options[selectPlan.selectedIndex].style.backgroundColor;
                                         }
-                                        ?>
-                            </select>
-                            <?php
-                            break;
-                    }
-                    $i++;
-                    $l++;
-                    ?>
-                    </td>
-                <?php } ?>
+                                    </script>
+
+                                    <!-- Pour mettre le poste attribué en "selected" -->
+                                    <?php
+                                    for ($k = 0; $k < $nbrPoste; $k++) {
+                                        if ($poste[$k]['idPoste'] == $tabPlanStd[$i]['idPoste']) {
+                                            if ($tabPlanStd[$i]['idPoste'] == $listePlanStd[$i]['idPoste']) { ?>
+                                                <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                                        selected=""
+                                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold; border: double;"><?php echo $poste[$k]['libPoste']; ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                                        selected=""
+                                                        style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold;"><?php echo $poste[$k]['libPoste']; ?></option>
+                                            <?php }
+                                        } else if ($poste[$k]['idPoste'] == $listePlanStd[$i]['idPoste']) { ?>
+                                            <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                                    style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold; border: double;"><?php echo $poste[$k]['libPoste']; ?></option>
+                                            <?php
+                                        } else { ?>
+                                            <option value="<?php echo $poste[$k]['idPoste']; ?>"
+                                                    style="background-color: <?php echo $poste[$k]['coulGroupe'] ?>; font-weight: bold"><?php echo $poste[$k]['libPoste']; ?></option>
+                                        <?php }
+                                    }
+                                    ?>
+                                </select>
+                                <?php
+                                break;
+                        }
+                        $i++;
+                        $l++;
+                        ?>
+                        </td>
+                    <?php } ?>
                 </tr>
             <?php } ?>
 
