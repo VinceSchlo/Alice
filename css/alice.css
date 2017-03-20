@@ -138,7 +138,7 @@ h2, h3, h4, p, .thCentre {
 
 
 .btn-calendar-position{
-    position: fixed;
+    position: relative;
     margin-top: 30px;
     margin-left: 215px;
     margin-right: 0;
@@ -153,6 +153,7 @@ h2, h3, h4, p, .thCentre {
 .no-margin{
     margin-right: -160px;
 }
-/*.navbar-width{*/
-    /*max-width: 155px;*/
-/*}*/
+
+.theadFHPlan{
+    padding-right: 10px;
+}
