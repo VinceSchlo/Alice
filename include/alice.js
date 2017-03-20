@@ -1,6 +1,7 @@
 // Initialisation d'une variable globale pour la vérification des dates dans mod_VacancesJF.php
 erreurDate = false;
 
+
 // Fonction pour activer une fenétre de suppression
 function confirmDelete() {
     return confirm("Etes-vous sûr de vouloir supprimer ?");
@@ -53,7 +54,7 @@ function verifAddAgentForm(f) {
                 var mdp1OK = verifNom(f.mdp1Form);
                 var mdp1 = document.getElementById("mdp1").value;
                 var mdp2OK = verifNom(f.mdp2Form);
-                var mdp2 = document.getElementById("mdp2").value;              
+                var mdp2 = document.getElementById("mdp2").value;
                 if (!mdp1OK || !mdp2OK) {
                     alert("Veuillez saisir un mot de passe\nde longueur supérieure à 2 caractères\net inférieure ou égale à 20 caractères");
                     return false;
