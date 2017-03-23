@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION['idAgent'])) {
+    header("Location:../index.php");
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>

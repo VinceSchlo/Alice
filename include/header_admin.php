@@ -1,8 +1,3 @@
-<?php
-if (!isset($_SESSION['idAgent'])) {
-    header("Location:../index.php");
-}
-?>
 <div class="col-xs-2 navbar-fixed pull-right">
     <!-- Navigation -->
     <nav class="navbar navbar-static-top background-color-admin navbar-width pull-right" role="navigation">
