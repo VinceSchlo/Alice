@@ -28,14 +28,13 @@ $vacances = new Vacances();
 // Création des tableaux issus des select en BDD pour l'affichage
 $tabFerie = $ferie->selectAllFerie();
 $tabVacances = $vacances->selectAllVacances();
-// var_dump($tabFerie);
-// var_dump($tabVacances);
-// exit;
+// Initialisation de variables pour les for
+ $lengthTabVacances = count($tabVacances);
+ $lengthTabFerie = count($tabFerie);
 
 if (isset($_POST['updateVac'])) { // Cas du bouton orange "enregistrer"
-    // var_dump($_POST);
-    // exit;
-    for ($i = 0; $i < count($tabVacances); $i++) {
+   
+    for ($i = 0; $i < $lengthTabVacances; $i++) {
         $vacances->setIdVac($_POST['idVacForm' . $i]);
         $vacances->setDateDebVac(convertDateFrUs($_POST['dateDebForm' . $i]));
         $vacances->setDateFinVac(convertDateFrUs($_POST['dateFinForm' . $i]));
@@ -44,9 +43,8 @@ if (isset($_POST['updateVac'])) { // Cas du bouton orange "enregistrer"
     }
 }
 if (isset($_POST['updateFerie'])) { // Cas du bouton orange "enregistrer"
-    // var_dump($_POST);
-    // exit;
-    for ($i = count($tabVacances); $i < (count($tabVacances) + count($tabFerie)); $i++) {
+    
+    for ($i = count($tabVacances); $i < ($lengthTabVacances + $lengthTabFerie); $i++) {
         $ferie->setIdFerie($_POST['idFerieForm' . $i]);
         $ferie->setDateDebFerie(convertDateFrUs($_POST['dateDebForm' . $i]));
         $ferie->setDateFinFerie(convertDateFrUs($_POST['dateFinForm' . $i]));
@@ -78,8 +76,7 @@ $tabFerie = $ferie->selectAllFerie();
                 <!-- Début du formulaire des vacances -->
                 <form class="form-horizontal" id="formVac" name="formVac" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                     <?php
-                    $tabVacancesLength = count($tabVacances);
-                    for ($i = 0; $i < $tabVacancesLength; $i++) {
+                    for ($i = 0; $i < $lengthTabVacances; $i++) {
                         ?>
                         <tr>
                         <input type="hidden" name="idVacForm<?php echo $i; ?>"
@@ -163,8 +160,7 @@ $tabFerie = $ferie->selectAllFerie();
                 <form class="form-horizontal" id="formJF" name="formJF" method="POST" action="mod_VacancesJF.php" onsubmit="return verifFormDate()">
                     <?php
                     $j = 0;
-                    $tabFerieLength = count($tabFerie);
-                    for ($i = $tabVacancesLength; $i < $tabVacancesLength + $tabFerieLength; $i++) {
+                    for ($i = $lengthTabVacances; $i < ($lengthTabVacances + $lengthTabFerie); $i++) {
                         ?>
                         <tr>
                         <input type="hidden" name="idFerieForm<?php echo $i; ?>"

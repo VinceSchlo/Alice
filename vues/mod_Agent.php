@@ -27,13 +27,11 @@ include("../include/header_admin.php");
 $agent = new Agent();
 // Création d'un tableau issu du select en BDD pour l'affichage
 $tabAgent = $agent->selectAgentByName();
-// var_dump($tabAgent);
-// exit;
+// Initialisation de variables pour les for
+$lengthTabAgent = count($tabAgent);
 
 if (isset($_POST['updateAgent'])) { // Cas du bouton orange "enregistrer"
-    // var_dump($_POST);
-    // exit;
-    for ($i = 0; $i < count($tabAgent); $i++) {
+    for ($i = 0; $i < $lengthTabAgent; $i++) {
         $agent->setIdAgent($_POST['idAgentForm' . $i]);
         $agent->setNom(addslashes(detecTiret($_POST['nomForm' . $i])));
         $agent->setPrenom(addslashes(detecTiret($_POST['prenomForm' . $i])));
@@ -87,8 +85,7 @@ $tabAgent = $agent->selectAgentByName();
             <br/>
             <tbody>
                 <?php
-                $tabAgentLength = count($tabAgent);
-                for ($i = 0; $i < $tabAgentLength; $i++) {
+                for ($i = 0; $i < $lengthTabAgent; $i++) {
                     ?>
                 <form class="form-horizontal" method="POST" action="mod_Agent.php">
                     <tr class="name-size-admin">
