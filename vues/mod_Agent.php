@@ -7,7 +7,7 @@ require_once('../include/alice_dao.inc.php');
 ?>
 
 <?php
-include("../include/doctype.php"); 
+include("../include/doctype.php");
 ?>
 <div class="col-xs-8">
     <br />
@@ -29,6 +29,7 @@ $agent = new Agent();
 $tabAgent = $agent->selectAgentByName();
 
 if (isset($_POST['updateAgent'])) { // Cas du bouton orange "enregistrer"
+    $lengthTabAgent = count($tabAgent);
     for ($i = 0; $i < $lengthTabAgent; $i++) {
         $agent->setIdAgent($_POST['idAgentForm' . $i]);
         $agent->setNom(addslashes(detecTiret($_POST['nomForm' . $i])));

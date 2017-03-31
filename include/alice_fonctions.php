@@ -21,6 +21,7 @@ function arrondi2virguleBDD($unNombre) {
 // Fonction pour formater une chaine de caractère : enlever les espaces et la convertir en lowercase
 function formatChaine($uneChaine) {
     $uneChaine = mb_strtolower(trim($uneChaine), 'UTF-8');
+    // $uneChaine = strtolower(trim($uneChaine));
 
     return $uneChaine;
 }
