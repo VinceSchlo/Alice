@@ -198,7 +198,7 @@ class Agent {
 
         $dao = new Dao();
         $user = null;
-// Requête SQL
+    // Requête SQL
         $sql = "SELECT * FROM agent WHERE login='$this->login' AND mdp='$this->mdp'";
         $resu = $dao->executeRequete($sql);
         $ligne = $resu->fetch(PDO::FETCH_ASSOC);
